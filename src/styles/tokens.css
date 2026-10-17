@@ -1,0 +1,29 @@
+@theme {
+  --color-canvas: #e6e9e0;
+  --color-surface: #f4f6ef;
+  --color-ink: #20271e;
+  --color-ink-soft: #4a5346;
+  --color-ink-faint: #556050;
+  --color-brand: #4f5f43;
+  --color-on-brand: #f4f6ef;
+  --color-accent: #c8d0b2;
+  --color-border-strong: #6f7c66;
+  --color-focus: #2b5a6e;
+  --color-danger: #a8453d;
+  --color-on-danger: #f4f6ef;
+  --color-success: #356b43;
+  --font-display: var(--font-hedvig), Georgia, serif;
+  --font-text: var(--font-albert), system-ui, sans-serif;
+  --font-mono: var(--font-spline-mono), ui-monospace, monospace;
+}
+
+@theme {
+  --color-moss-deep: #36422e;
+  --color-river: #8da1a6;
+  --r-pebble: 58% 42% 55% 45% / 48% 58% 42% 52%;
+  --r-pebble-2: 46% 54% 40% 60% / 38% 42% 58% 62%;
+  --r-pebble-3: 60% 40% 52% 48% / 50% 60% 40% 50%;
+  --r-arch: 999px 999px 34px 34px;
+  --r-leaf: 36px 120px 36px 120px;
+  --r-soft: 44px 64px 48px 60px;
+}
