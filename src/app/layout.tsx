@@ -36,8 +36,22 @@ export const metadata: Metadata = {
 }
 
 export default function RootLayout({ children }: LayoutProps<'/'>) {
+  const orgJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: brand.name,
+    url: env.siteUrl,
+    description: brand.description,
+  }
+
   return (
     <html lang="en" className={`${display.variable} ${text.variable} ${mono.variable}`}>
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }}
+        />
+      </head>
       <body className="bg-canvas font-text text-ink antialiased">
         <SkipLink />
         <MirrorTryHost>
