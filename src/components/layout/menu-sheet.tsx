@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { Leaf, X } from '@/components/icons'
+import { Leaf } from '@/components/icons'
 import { Dialog } from '@/components/ui'
 
 export interface MenuSheetProps {
