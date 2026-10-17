@@ -161,7 +161,7 @@ export function CentredHeader({
               <button
                 type="button"
                 onClick={onOpenBasket}
-                aria-label="Basket"
+                aria-label={cartCount > 0 ? `Basket, ${cartCount} items` : 'Basket'}
                 className="pebble relative flex h-10 w-10 items-center justify-center border border-border-strong/30 bg-surface/70 text-ink transition-all hover:bg-surface focus-visible:outline-2 focus-visible:outline-focus"
               >
                 <ShoppingBag size={18} aria-hidden="true" />
@@ -174,7 +174,7 @@ export function CentredHeader({
             ) : (
               <Link
                 href="/cart"
-                aria-label="Basket"
+                aria-label={cartCount > 0 ? `Basket, ${cartCount} items` : 'Basket'}
                 className="pebble relative flex h-10 w-10 items-center justify-center border border-border-strong/30 bg-surface/70 text-ink transition-all hover:bg-surface focus-visible:outline-2 focus-visible:outline-focus"
               >
                 <ShoppingBag size={18} aria-hidden="true" />

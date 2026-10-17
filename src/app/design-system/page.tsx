@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Button, Price, Tabs, TextField } from '@/components/ui'
+import { Button, Tabs, TextField } from '@/components/ui'
 import {
   ArrowLeft,
   ArrowRight,
@@ -20,7 +20,7 @@ import {
   User,
   X,
 } from '@/components/icons'
-import { WavyDivider, Vine } from '@/components/layout'
+import { WavyDivider } from '@/components/layout'
 import {
   FeedbackDemos,
   MotionDemos,

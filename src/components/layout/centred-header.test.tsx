@@ -21,7 +21,7 @@ describe('CentredHeader', () => {
     expect(screen.getByRole('link', { name: 'About' })).toHaveAttribute('href', '/about')
     expect(screen.getByRole('link', { name: 'Search' })).toHaveAttribute('href', '/search')
     expect(screen.getByRole('link', { name: 'Wishlist' })).toHaveAttribute('href', '/wishlist')
-    expect(screen.getByRole('link', { name: 'Basket' })).toHaveAttribute('href', '/cart')
+    expect(screen.getByRole('link', { name: 'Basket, 2 items' })).toHaveAttribute('href', '/cart')
   })
 
   it('displays badge counts for cart and wishlist', () => {

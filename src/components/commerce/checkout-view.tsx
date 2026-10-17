@@ -1,9 +1,10 @@
 'use client'
 
+import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
-import { ArrowRight, Check, Leaf, Sparkle } from '@/components/icons'
+import { ArrowRight, Check, Leaf } from '@/components/icons'
 import { Button } from '@/components/ui'
 import { brand } from '@/config/brand'
 import { routes } from '@/config/routes'
@@ -91,9 +92,11 @@ export function CheckoutView() {
   if (!hydrated) {
     return (
       <div className="mx-auto min-h-[50vh] max-w-4xl py-20 text-center">
-        <div className="soft-panel mx-auto max-w-sm rounded-[32px] bg-surface/90 border border-river/30 p-8">
+        <div className="soft-panel mx-auto max-w-sm rounded-[32px] border border-river/30 bg-surface/90 p-8">
           <div className="mx-auto h-8 w-8 animate-spin rounded-full border-2 border-ink border-t-transparent" />
-          <p className="mt-4 font-mono text-xs uppercase tracking-widest text-ink-soft">Preparing Checkout...</p>
+          <p className="mt-4 font-mono text-xs tracking-widest text-ink-soft uppercase">
+            Preparing Checkout...
+          </p>
         </div>
       </div>
     )
@@ -102,9 +105,11 @@ export function CheckoutView() {
   if (lines.length === 0) {
     return (
       <div className="mx-auto min-h-[50vh] max-w-2xl px-4 py-20 text-center">
-        <div className="soft-panel rounded-[36px] bg-surface/90 border border-river/30 p-10">
+        <div className="soft-panel rounded-[36px] border border-river/30 bg-surface/90 p-10">
           <h1 className="font-display text-2xl font-normal text-ink">Your basket is empty</h1>
-          <p className="mt-2 text-sm text-ink-soft">Add items to your basket before proceeding to checkout.</p>
+          <p className="mt-2 text-sm text-ink-soft">
+            Add items to your basket before proceeding to checkout.
+          </p>
           <div className="mt-6">
             <Button asChild>
               <Link href={routes.shop}>Return to Collection</Link>
@@ -170,13 +175,11 @@ export function CheckoutView() {
       <div className="mb-8">
         <div className="flex items-center gap-2">
           <Leaf size={16} className="text-brand" />
-          <span className="font-mono text-xs uppercase tracking-widest text-ink-soft">
+          <span className="font-mono text-xs tracking-widest text-ink-soft uppercase">
             MOSSEN QUIET CHECKOUT &middot; ENCRYPTED FULFILLMENT
           </span>
         </div>
-        <h1 className="mt-2 font-display text-3xl font-normal text-ink">
-          Order Finalization
-        </h1>
+        <h1 className="mt-2 font-display text-3xl font-normal text-ink">Order Finalization</h1>
       </div>
 
       {error ? (
@@ -190,16 +193,19 @@ export function CheckoutView() {
         <div className="lg:col-span-7">
           <form onSubmit={handleSubmit} className="space-y-8">
             {/* Step 1: Contact Details */}
-            <div className="soft-panel rounded-[32px] bg-surface/90 border border-river/30 p-6 sm:p-8">
+            <div className="soft-panel rounded-[32px] border border-river/30 bg-surface/90 p-6 sm:p-8">
               <div className="flex items-center justify-between border-b border-river/30 pb-4">
                 <div className="flex items-center gap-3">
-                  <span className="flex h-7 w-7 items-center justify-center rounded-full bg-canvas border border-river/40 font-mono text-xs font-semibold text-ink">
+                  <span className="flex h-7 w-7 items-center justify-center rounded-full border border-river/40 bg-canvas font-mono text-xs font-semibold text-ink">
                     01
                   </span>
                   <h2 className="font-display text-xl font-normal text-ink">Contact Details</h2>
                 </div>
                 {!customer ? (
-                  <Link href={routes.login} className="font-mono text-xs text-brand hover:underline uppercase">
+                  <Link
+                    href={routes.login}
+                    className="font-mono text-xs text-brand uppercase hover:underline"
+                  >
                     Customer Login &rarr;
                   </Link>
                 ) : null}
@@ -207,7 +213,10 @@ export function CheckoutView() {
 
               <div className="mt-6 space-y-4">
                 <div>
-                  <label htmlFor="email" className="mb-1 block font-mono text-xs uppercase tracking-wider text-ink-soft">
+                  <label
+                    htmlFor="email"
+                    className="mb-1 block font-mono text-xs tracking-wider text-ink-soft uppercase"
+                  >
                     Email Address *
                   </label>
                   <input
@@ -217,7 +226,7 @@ export function CheckoutView() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="patron@mossen.studios"
-                    className="w-full rounded-[18px] bg-canvas border border-river/40 p-3 font-text text-sm text-ink placeholder:text-ink-faint focus:border-ink focus:outline-none"
+                    className="w-full rounded-[18px] border border-river/40 bg-canvas p-3 font-text text-sm text-ink placeholder:text-ink-faint focus:border-ink focus:outline-none"
                   />
                 </div>
 
@@ -229,7 +238,10 @@ export function CheckoutView() {
                     onChange={(e) => setNewsletterOptIn(e.target.checked)}
                     className="h-4 w-4 rounded accent-brand"
                   />
-                  <label htmlFor="newsletter" className="font-mono text-xs text-ink-soft uppercase cursor-pointer">
+                  <label
+                    htmlFor="newsletter"
+                    className="cursor-pointer font-mono text-xs text-ink-soft uppercase"
+                  >
                     Subscribe to quiet seasonal botanical essays & releases
                   </label>
                 </div>
@@ -237,9 +249,9 @@ export function CheckoutView() {
             </div>
 
             {/* Step 2: Shipping Destination */}
-            <div className="soft-panel rounded-[32px] bg-surface/90 border border-river/30 p-6 sm:p-8">
+            <div className="soft-panel rounded-[32px] border border-river/30 bg-surface/90 p-6 sm:p-8">
               <div className="flex items-center gap-3 border-b border-river/30 pb-4">
-                <span className="flex h-7 w-7 items-center justify-center rounded-full bg-canvas border border-river/40 font-mono text-xs font-semibold text-ink">
+                <span className="flex h-7 w-7 items-center justify-center rounded-full border border-river/40 bg-canvas font-mono text-xs font-semibold text-ink">
                   02
                 </span>
                 <h2 className="font-display text-xl font-normal text-ink">Delivery Destination</h2>
@@ -247,7 +259,10 @@ export function CheckoutView() {
 
               <div className="mt-6 space-y-4">
                 <div>
-                  <label htmlFor="name" className="mb-1 block font-mono text-xs uppercase tracking-wider text-ink-soft">
+                  <label
+                    htmlFor="name"
+                    className="mb-1 block font-mono text-xs tracking-wider text-ink-soft uppercase"
+                  >
                     Recipient Full Name *
                   </label>
                   <input
@@ -257,12 +272,15 @@ export function CheckoutView() {
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     placeholder="e.g. Astrid Lindgren"
-                    className="w-full rounded-[18px] bg-canvas border border-river/40 p-3 font-text text-sm text-ink placeholder:text-ink-faint focus:border-ink focus:outline-none"
+                    className="w-full rounded-[18px] border border-river/40 bg-canvas p-3 font-text text-sm text-ink placeholder:text-ink-faint focus:border-ink focus:outline-none"
                   />
                 </div>
 
                 <div>
-                  <label htmlFor="line1" className="mb-1 block font-mono text-xs uppercase tracking-wider text-ink-soft">
+                  <label
+                    htmlFor="line1"
+                    className="mb-1 block font-mono text-xs tracking-wider text-ink-soft uppercase"
+                  >
                     Street Address *
                   </label>
                   <input
@@ -272,12 +290,15 @@ export function CheckoutView() {
                     value={line1}
                     onChange={(e) => setLine1(e.target.value)}
                     placeholder="e.g. Fjordvej 42"
-                    className="w-full rounded-[18px] bg-canvas border border-river/40 p-3 font-text text-sm text-ink placeholder:text-ink-faint focus:border-ink focus:outline-none"
+                    className="w-full rounded-[18px] border border-river/40 bg-canvas p-3 font-text text-sm text-ink placeholder:text-ink-faint focus:border-ink focus:outline-none"
                   />
                 </div>
 
                 <div>
-                  <label htmlFor="line2" className="mb-1 block font-mono text-xs uppercase tracking-wider text-ink-soft">
+                  <label
+                    htmlFor="line2"
+                    className="mb-1 block font-mono text-xs tracking-wider text-ink-soft uppercase"
+                  >
                     Apartment, Suite or Cottage (Optional)
                   </label>
                   <input
@@ -286,13 +307,16 @@ export function CheckoutView() {
                     value={line2}
                     onChange={(e) => setLine2(e.target.value)}
                     placeholder="e.g. 2nd Floor, Garden Wing"
-                    className="w-full rounded-[18px] bg-canvas border border-river/40 p-3 font-text text-sm text-ink placeholder:text-ink-faint focus:border-ink focus:outline-none"
+                    className="w-full rounded-[18px] border border-river/40 bg-canvas p-3 font-text text-sm text-ink placeholder:text-ink-faint focus:border-ink focus:outline-none"
                   />
                 </div>
 
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                   <div>
-                    <label htmlFor="city" className="mb-1 block font-mono text-xs uppercase tracking-wider text-ink-soft">
+                    <label
+                      htmlFor="city"
+                      className="mb-1 block font-mono text-xs tracking-wider text-ink-soft uppercase"
+                    >
                       City *
                     </label>
                     <input
@@ -302,11 +326,14 @@ export function CheckoutView() {
                       value={city}
                       onChange={(e) => setCity(e.target.value)}
                       placeholder="e.g. Copenhagen"
-                      className="w-full rounded-[18px] bg-canvas border border-river/40 p-3 font-text text-sm text-ink placeholder:text-ink-faint focus:border-ink focus:outline-none"
+                      className="w-full rounded-[18px] border border-river/40 bg-canvas p-3 font-text text-sm text-ink placeholder:text-ink-faint focus:border-ink focus:outline-none"
                     />
                   </div>
                   <div>
-                    <label htmlFor="region" className="mb-1 block font-mono text-xs uppercase tracking-wider text-ink-soft">
+                    <label
+                      htmlFor="region"
+                      className="mb-1 block font-mono text-xs tracking-wider text-ink-soft uppercase"
+                    >
                       State / Region *
                     </label>
                     <input
@@ -316,14 +343,17 @@ export function CheckoutView() {
                       value={region}
                       onChange={(e) => setRegion(e.target.value)}
                       placeholder="e.g. Capital Region"
-                      className="w-full rounded-[18px] bg-canvas border border-river/40 p-3 font-text text-sm text-ink placeholder:text-ink-faint focus:border-ink focus:outline-none"
+                      className="w-full rounded-[18px] border border-river/40 bg-canvas p-3 font-text text-sm text-ink placeholder:text-ink-faint focus:border-ink focus:outline-none"
                     />
                   </div>
                 </div>
 
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                   <div>
-                    <label htmlFor="postcode" className="mb-1 block font-mono text-xs uppercase tracking-wider text-ink-soft">
+                    <label
+                      htmlFor="postcode"
+                      className="mb-1 block font-mono text-xs tracking-wider text-ink-soft uppercase"
+                    >
                       Postal Code *
                     </label>
                     <input
@@ -333,18 +363,21 @@ export function CheckoutView() {
                       value={postcode}
                       onChange={(e) => setPostcode(e.target.value)}
                       placeholder="e.g. 1050"
-                      className="w-full rounded-[18px] bg-canvas border border-river/40 p-3 font-text text-sm text-ink placeholder:text-ink-faint focus:border-ink focus:outline-none"
+                      className="w-full rounded-[18px] border border-river/40 bg-canvas p-3 font-text text-sm text-ink placeholder:text-ink-faint focus:border-ink focus:outline-none"
                     />
                   </div>
                   <div>
-                    <label htmlFor="country" className="mb-1 block font-mono text-xs uppercase tracking-wider text-ink-soft">
+                    <label
+                      htmlFor="country"
+                      className="mb-1 block font-mono text-xs tracking-wider text-ink-soft uppercase"
+                    >
                       Country *
                     </label>
                     <select
                       id="country"
                       value={country}
                       onChange={(e) => setCountry(e.target.value)}
-                      className="w-full rounded-[18px] bg-canvas border border-river/40 p-3 font-text text-sm text-ink focus:border-ink focus:outline-none"
+                      className="w-full rounded-[18px] border border-river/40 bg-canvas p-3 font-text text-sm text-ink focus:border-ink focus:outline-none"
                     >
                       <option value="Denmark">Denmark</option>
                       <option value="Sweden">Sweden</option>
@@ -358,7 +391,10 @@ export function CheckoutView() {
                 </div>
 
                 <div>
-                  <label htmlFor="phone" className="mb-1 block font-mono text-xs uppercase tracking-wider text-ink-soft">
+                  <label
+                    htmlFor="phone"
+                    className="mb-1 block font-mono text-xs tracking-wider text-ink-soft uppercase"
+                  >
                     Phone (For Sustainable Courier Updates)
                   </label>
                   <input
@@ -367,16 +403,16 @@ export function CheckoutView() {
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
                     placeholder="+45 20 12 34 56"
-                    className="w-full rounded-[18px] bg-canvas border border-river/40 p-3 font-text text-sm text-ink placeholder:text-ink-faint focus:border-ink focus:outline-none"
+                    className="w-full rounded-[18px] border border-river/40 bg-canvas p-3 font-text text-sm text-ink placeholder:text-ink-faint focus:border-ink focus:outline-none"
                   />
                 </div>
               </div>
             </div>
 
             {/* Step 3: Carbon-Neutral Courier */}
-            <div className="soft-panel rounded-[32px] bg-surface/90 border border-river/30 p-6 sm:p-8">
+            <div className="soft-panel rounded-[32px] border border-river/30 bg-surface/90 p-6 sm:p-8">
               <div className="flex items-center gap-3 border-b border-river/30 pb-4">
-                <span className="flex h-7 w-7 items-center justify-center rounded-full bg-canvas border border-river/40 font-mono text-xs font-semibold text-ink">
+                <span className="flex h-7 w-7 items-center justify-center rounded-full border border-river/40 bg-canvas font-mono text-xs font-semibold text-ink">
                   03
                 </span>
                 <h2 className="font-display text-xl font-normal text-ink">Fulfillment Velocity</h2>
@@ -387,7 +423,7 @@ export function CheckoutView() {
                   onClick={() => setShippingMethodId('standard')}
                   className={`flex cursor-pointer items-center justify-between rounded-[24px] p-4 transition-all ${
                     shippingMethodId === 'standard'
-                      ? 'bg-canvas border-2 border-brand shadow-sm'
+                      ? 'border-2 border-brand bg-canvas shadow-sm'
                       : 'border border-river/30'
                   }`}
                 >
@@ -400,8 +436,12 @@ export function CheckoutView() {
                       className="accent-brand"
                     />
                     <div>
-                      <p className="font-display text-sm font-medium text-ink">Standard Quiet Climate Courier</p>
-                      <p className="font-mono text-[11px] text-ink-soft">3–5 business days zero-emission electric van</p>
+                      <p className="font-display text-sm font-medium text-ink">
+                        Standard Quiet Climate Courier
+                      </p>
+                      <p className="font-mono text-[11px] text-ink-soft">
+                        3–5 business days zero-emission electric van
+                      </p>
                     </div>
                   </div>
                   <span className="font-mono text-xs font-semibold text-ink">
@@ -413,7 +453,7 @@ export function CheckoutView() {
                   onClick={() => setShippingMethodId('express')}
                   className={`flex cursor-pointer items-center justify-between rounded-[24px] p-4 transition-all ${
                     shippingMethodId === 'express'
-                      ? 'bg-canvas border-2 border-brand shadow-sm'
+                      ? 'border-2 border-brand bg-canvas shadow-sm'
                       : 'border border-river/30'
                   }`}
                 >
@@ -426,30 +466,41 @@ export function CheckoutView() {
                       className="accent-brand"
                     />
                     <div>
-                      <p className="font-display text-sm font-medium text-ink">Priority Botanical Express</p>
-                      <p className="font-mono text-[11px] text-ink-soft">1–2 business days direct routing</p>
+                      <p className="font-display text-sm font-medium text-ink">
+                        Priority Botanical Express
+                      </p>
+                      <p className="font-mono text-[11px] text-ink-soft">
+                        1–2 business days direct routing
+                      </p>
                     </div>
                   </div>
-                  <span className="font-mono text-xs font-semibold text-ink">{formatMoney(3500, MONEY)}</span>
+                  <span className="font-mono text-xs font-semibold text-ink">
+                    {formatMoney(3500, MONEY)}
+                  </span>
                 </label>
               </div>
             </div>
 
             {/* Step 4: Encrypted Payment */}
-            <div className="soft-panel rounded-[32px] bg-surface/90 border border-river/30 p-6 sm:p-8">
+            <div className="soft-panel rounded-[32px] border border-river/30 bg-surface/90 p-6 sm:p-8">
               <div className="flex items-center justify-between border-b border-river/30 pb-4">
                 <div className="flex items-center gap-3">
-                  <span className="flex h-7 w-7 items-center justify-center rounded-full bg-canvas border border-river/40 font-mono text-xs font-semibold text-ink">
+                  <span className="flex h-7 w-7 items-center justify-center rounded-full border border-river/40 bg-canvas font-mono text-xs font-semibold text-ink">
                     04
                   </span>
                   <h2 className="font-display text-xl font-normal text-ink">Payment Method</h2>
                 </div>
-                <span className="font-mono text-[10px] text-ink-soft uppercase">256-BIT ENCRYPTED</span>
+                <span className="font-mono text-[10px] text-ink-soft uppercase">
+                  256-BIT ENCRYPTED
+                </span>
               </div>
 
               <div className="mt-6 space-y-4">
                 <div>
-                  <label htmlFor="cardholder" className="mb-1 block font-mono text-xs uppercase tracking-wider text-ink-soft">
+                  <label
+                    htmlFor="cardholder"
+                    className="mb-1 block font-mono text-xs tracking-wider text-ink-soft uppercase"
+                  >
                     Cardholder Name *
                   </label>
                   <input
@@ -459,12 +510,15 @@ export function CheckoutView() {
                     value={cardholderName}
                     onChange={(e) => setCardholderName(e.target.value)}
                     placeholder="Name as printed on card"
-                    className="w-full rounded-[18px] bg-canvas border border-river/40 p-3 font-text text-sm text-ink placeholder:text-ink-faint focus:border-ink focus:outline-none"
+                    className="w-full rounded-[18px] border border-river/40 bg-canvas p-3 font-text text-sm text-ink placeholder:text-ink-faint focus:border-ink focus:outline-none"
                   />
                 </div>
 
                 <div>
-                  <label htmlFor="cardnum" className="mb-1 block font-mono text-xs uppercase tracking-wider text-ink-soft">
+                  <label
+                    htmlFor="cardnum"
+                    className="mb-1 block font-mono text-xs tracking-wider text-ink-soft uppercase"
+                  >
                     Card Number *
                   </label>
                   <input
@@ -474,13 +528,16 @@ export function CheckoutView() {
                     value={cardNumber}
                     onChange={(e) => setCardNumber(e.target.value)}
                     placeholder="4242 4242 4242 4242"
-                    className="w-full rounded-[18px] bg-canvas border border-river/40 p-3 font-mono text-xs uppercase text-ink placeholder:text-ink-faint focus:border-ink focus:outline-none"
+                    className="w-full rounded-[18px] border border-river/40 bg-canvas p-3 font-mono text-xs text-ink uppercase placeholder:text-ink-faint focus:border-ink focus:outline-none"
                   />
                 </div>
 
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label htmlFor="exp" className="mb-1 block font-mono text-xs uppercase tracking-wider text-ink-soft">
+                    <label
+                      htmlFor="exp"
+                      className="mb-1 block font-mono text-xs tracking-wider text-ink-soft uppercase"
+                    >
                       Expiry Date *
                     </label>
                     <input
@@ -490,12 +547,15 @@ export function CheckoutView() {
                       value={expDate}
                       onChange={(e) => setExpDate(e.target.value)}
                       placeholder="MM/YY"
-                      className="w-full rounded-[18px] bg-canvas border border-river/40 p-3 font-mono text-xs uppercase text-ink placeholder:text-ink-faint focus:border-ink focus:outline-none"
+                      className="w-full rounded-[18px] border border-river/40 bg-canvas p-3 font-mono text-xs text-ink uppercase placeholder:text-ink-faint focus:border-ink focus:outline-none"
                     />
                   </div>
 
                   <div>
-                    <label htmlFor="cvv" className="mb-1 block font-mono text-xs uppercase tracking-wider text-ink-soft">
+                    <label
+                      htmlFor="cvv"
+                      className="mb-1 block font-mono text-xs tracking-wider text-ink-soft uppercase"
+                    >
                       Security Code (CVV) *
                     </label>
                     <input
@@ -505,7 +565,7 @@ export function CheckoutView() {
                       value={cvv}
                       onChange={(e) => setCvv(e.target.value)}
                       placeholder="123"
-                      className="w-full rounded-[18px] bg-canvas border border-river/40 p-3 font-mono text-xs uppercase text-ink placeholder:text-ink-faint focus:border-ink focus:outline-none"
+                      className="w-full rounded-[18px] border border-river/40 bg-canvas p-3 font-mono text-xs text-ink uppercase placeholder:text-ink-faint focus:border-ink focus:outline-none"
                     />
                   </div>
                 </div>
@@ -521,9 +581,11 @@ export function CheckoutView() {
 
         {/* Sidebar Summary */}
         <div className="lg:col-span-5">
-          <div className="soft-panel sticky top-24 rounded-[32px] bg-surface/90 border border-river/30 p-6 space-y-6">
+          <div className="soft-panel sticky top-24 space-y-6 rounded-[32px] border border-river/30 bg-surface/90 p-6">
             <div className="border-b border-river/30 pb-4">
-              <span className="font-mono text-[11px] uppercase tracking-wider text-ink-soft">ORDER REVIEW</span>
+              <span className="font-mono text-[11px] tracking-wider text-ink-soft uppercase">
+                ORDER REVIEW
+              </span>
               <h2 className="mt-1 font-display text-2xl font-normal text-ink">
                 Summary ({lines.reduce((a, b) => a + b.quantity, 0)} Items)
               </h2>
@@ -532,12 +594,23 @@ export function CheckoutView() {
             {/* Line items preview */}
             <div className="max-h-72 space-y-3 overflow-y-auto pr-1">
               {quote?.lines.map((line) => (
-                <div key={line.variantId} className="flex items-center gap-3 rounded-[20px] bg-canvas/70 border border-river/20 p-2.5">
-                  <div className="h-14 w-12 shrink-0 overflow-hidden rounded-[12px] bg-surface">
-                    <img src={line.image.src} alt={line.image.alt} className="h-full w-full object-cover" />
+                <div
+                  key={line.variantId}
+                  className="flex items-center gap-3 rounded-[20px] border border-river/20 bg-canvas/70 p-2.5"
+                >
+                  <div className="relative h-14 w-12 shrink-0 overflow-hidden rounded-[12px] bg-surface">
+                    <Image
+                      src={line.image.src}
+                      alt={line.image.alt}
+                      fill
+                      sizes="64px"
+                      className="h-full w-full object-cover"
+                    />
                   </div>
-                  <div className="flex-1 min-w-0">
-                    <p className="line-clamp-1 font-display text-sm font-medium text-ink">{line.name}</p>
+                  <div className="min-w-0 flex-1">
+                    <p className="line-clamp-1 font-display text-sm font-medium text-ink">
+                      {line.name}
+                    </p>
                     <p className="font-mono text-[10px] text-ink-soft uppercase">
                       Qty {line.quantity} • {Object.values(line.options).join(' / ')}
                     </p>
@@ -558,7 +631,9 @@ export function CheckoutView() {
               <div className="flex justify-between text-ink-soft">
                 <span>Freight</span>
                 <span className="text-ink">
-                  {quote?.totals.shipping === 0 ? 'FREE' : formatMoney(quote?.totals.shipping ?? 0, MONEY)}
+                  {quote?.totals.shipping === 0
+                    ? 'FREE'
+                    : formatMoney(quote?.totals.shipping ?? 0, MONEY)}
                 </span>
               </div>
               {quote?.totals.discount ? (
@@ -573,12 +648,14 @@ export function CheckoutView() {
               </div>
               <div className="flex justify-between border-t border-river/30 pt-3 text-base font-semibold text-ink">
                 <span>Total Due</span>
-                <span className="font-display text-2xl font-normal">{formatMoney(quote?.totals.total ?? 0, MONEY)}</span>
+                <span className="font-display text-2xl font-normal">
+                  {formatMoney(quote?.totals.total ?? 0, MONEY)}
+                </span>
               </div>
             </div>
 
             {/* Sustainability Guarantee */}
-            <div className="rounded-[20px] bg-canvas/70 border border-river/30 p-4 font-mono text-[11px] text-ink-soft uppercase space-y-1">
+            <div className="space-y-1 rounded-[20px] border border-river/30 bg-canvas/70 p-4 font-mono text-[11px] text-ink-soft uppercase">
               <div className="flex items-center gap-1.5 font-semibold text-ink">
                 <Check size={14} className="text-brand" />
                 <span>MOSSEN SUSTAINABLE PLEDGE</span>

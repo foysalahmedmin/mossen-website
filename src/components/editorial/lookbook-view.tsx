@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import { useState } from 'react'
 import Link from 'next/link'
 import { ConnectedProductCard } from '@/components/commerce/connected-product-card'
@@ -28,14 +29,14 @@ export function LookbookView({
     <div className="mx-auto max-w-7xl px-4 py-12 md:py-16">
       {/* Editorial Header */}
       <div className="mb-12 text-center">
-        <span className="inline-flex items-center gap-1.5 rounded-full bg-brand/10 px-3 py-1 font-mono text-xs font-semibold uppercase tracking-wider text-brand">
+        <span className="inline-flex items-center gap-1.5 rounded-full bg-brand/10 px-3 py-1 font-mono text-xs font-semibold tracking-wider text-brand uppercase">
           <Sparkle size={12} />
           {lookbook.season} Collection
         </span>
-        <h1 className="mt-3 font-display text-4xl md:text-6xl font-normal tracking-tight text-ink">
+        <h1 className="mt-3 font-display text-4xl font-normal tracking-tight text-ink md:text-6xl">
           {lookbook.title}
         </h1>
-        <p className="mx-auto mt-4 max-w-2xl font-text text-base md:text-lg text-ink-soft">
+        <p className="mx-auto mt-4 max-w-2xl font-text text-base text-ink-soft md:text-lg">
           {lookbook.description}
         </p>
 
@@ -45,10 +46,10 @@ export function LookbookView({
             <button
               key={look.id}
               onClick={() => setActiveLookIndex(idx)}
-              className={`rounded-full px-5 py-2 font-mono text-xs font-semibold uppercase tracking-wider transition ${
+              className={`rounded-full px-5 py-2 font-mono text-xs font-semibold tracking-wider uppercase transition ${
                 activeLookIndex === idx
                   ? 'bg-brand text-on-brand shadow-sm'
-                  : 'bg-[#fcfbf7] text-ink-soft hover:bg-white hover:text-ink border border-stone-200/70'
+                  : 'border border-stone-200/70 bg-[#fcfbf7] text-ink-soft hover:bg-white hover:text-ink'
               }`}
             >
               Look {String(idx + 1).padStart(2, '0')}
@@ -59,25 +60,27 @@ export function LookbookView({
 
       {/* Featured Active Look */}
       {currentLook && (
-        <section className="mb-20 grid gap-8 lg:grid-cols-12 items-start">
+        <section className="mb-20 grid items-start gap-8 lg:grid-cols-12">
           {/* Main Visual with Arch Frame */}
           <div className="relative overflow-hidden rounded-[32px] border border-stone-200/80 bg-[#fbf9f5] p-3 shadow-sm lg:col-span-7">
             <div className="relative aspect-[3/4] overflow-hidden rounded-[24px] bg-stone-100">
-              <img
+              <Image
                 src={currentLook.media.src}
                 alt={currentLook.media.alt}
+                fill
+                sizes="(min-width: 1024px) 33vw, 100vw"
                 className="h-full w-full object-cover transition duration-700 hover:scale-105"
               />
 
               {/* Floating Look Note */}
-              <div className="absolute bottom-6 left-6 rounded-[20px] border border-stone-200/80 bg-white/90 p-4 shadow-sm backdrop-blur-md max-w-xs">
-                <span className="font-mono text-xs font-semibold uppercase tracking-wider text-brand">
+              <div className="absolute bottom-6 left-6 max-w-xs rounded-[20px] border border-stone-200/80 bg-white/90 p-4 shadow-sm backdrop-blur-md">
+                <span className="font-mono text-xs font-semibold tracking-wider text-brand uppercase">
                   Active Look
                 </span>
                 <p className="mt-1 font-display text-sm font-normal text-ink">
                   {currentLook.title}
                 </p>
-                <p className="mt-1 font-text text-xs text-ink-soft line-clamp-2">
+                <p className="mt-1 line-clamp-2 font-text text-xs text-ink-soft">
                   {currentLook.description}
                 </p>
               </div>
@@ -89,16 +92,15 @@ export function LookbookView({
             <div className="rounded-[32px] border border-stone-200/80 bg-[#fbf9f5] p-6 shadow-sm">
               <div className="flex items-center justify-between border-b border-stone-200/60 pb-4">
                 <div>
-                  <h2 className="font-display text-xl font-normal text-ink">
-                    Pieces in This Look
-                  </h2>
+                  <h2 className="font-display text-xl font-normal text-ink">Pieces in This Look</h2>
                   <p className="font-text text-xs text-ink-soft">
-                    {currentProducts.length} botanical piece{currentProducts.length === 1 ? '' : 's'}
+                    {currentProducts.length} botanical piece
+                    {currentProducts.length === 1 ? '' : 's'}
                   </p>
                 </div>
                 <Link
                   href={routes.shop}
-                  className="font-text text-xs font-medium text-brand hover:underline inline-flex items-center gap-1"
+                  className="inline-flex items-center gap-1 font-text text-xs font-medium text-brand hover:underline"
                 >
                   All Pieces <ArrowRight size={12} />
                 </Link>
@@ -116,7 +118,7 @@ export function LookbookView({
                 ))}
 
                 {currentProducts.length === 0 && (
-                  <div className="py-8 text-center text-sm text-ink-soft font-text">
+                  <div className="py-8 text-center font-text text-sm text-ink-soft">
                     Choose a look above to explore its living fibers.
                   </div>
                 )}
@@ -128,7 +130,7 @@ export function LookbookView({
 
       {/* Complete Overview Grid */}
       <section className="border-t border-stone-200/80 pt-16">
-        <h2 className="font-display text-2xl md:text-3xl font-normal text-ink mb-8 text-center">
+        <h2 className="mb-8 text-center font-display text-2xl font-normal text-ink md:text-3xl">
           Seasonal Wardrobe Looks
         </h2>
         <div className="grid gap-8 md:grid-cols-3">
@@ -139,28 +141,30 @@ export function LookbookView({
                 setActiveLookIndex(idx)
                 window.scrollTo({ top: 0, behavior: 'smooth' })
               }}
-              className="group cursor-pointer flex flex-col justify-between overflow-hidden rounded-[28px] border border-stone-200/70 bg-[#fcfbf7] p-4 shadow-sm transition hover:-translate-y-1 hover:shadow-md"
+              className="group flex cursor-pointer flex-col justify-between overflow-hidden rounded-[28px] border border-stone-200/70 bg-[#fcfbf7] p-4 shadow-sm transition hover:-translate-y-1 hover:shadow-md"
             >
               <div>
-                <div className="aspect-[3/4] overflow-hidden rounded-[20px] bg-stone-100 mb-4">
-                  <img
+                <div className="relative mb-4 aspect-[3/4] overflow-hidden rounded-[20px] bg-stone-100">
+                  <Image
                     src={look.media.src}
                     alt={look.media.alt}
+                    fill
+                    sizes="(min-width: 1024px) 33vw, 100vw"
                     className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
                   />
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="font-mono text-xs uppercase font-semibold text-brand">
+                  <span className="font-mono text-xs font-semibold text-brand uppercase">
                     Look {String(idx + 1).padStart(2, '0')}
                   </span>
                   <span className="font-text text-xs text-ink-faint">
                     {look.productSlugs.length} piece{look.productSlugs.length === 1 ? '' : 's'}
                   </span>
                 </div>
-                <h3 className="mt-2 font-display text-base font-normal text-ink group-hover:text-brand transition">
+                <h3 className="mt-2 font-display text-base font-normal text-ink transition group-hover:text-brand">
                   {look.title}
                 </h3>
-                <p className="mt-1 font-text text-xs text-ink-soft line-clamp-2">
+                <p className="mt-1 line-clamp-2 font-text text-xs text-ink-soft">
                   {look.description}
                 </p>
               </div>

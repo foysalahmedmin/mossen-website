@@ -132,7 +132,7 @@ export function ProductDetailView({
     : []
 
   return (
-    <div className="space-y-16 md:space-y-24 pb-16">
+    <div className="page-container space-y-16 pb-16 md:space-y-24">
       {/* Breadcrumb Navigation */}
       <nav aria-label="Breadcrumb" className="font-serif text-xs text-ink-soft">
         <ol className="flex items-center gap-2">
@@ -149,31 +149,29 @@ export function ProductDetailView({
           </li>
           <li aria-hidden="true">/</li>
           <li>
-            <Link href={`/shop/${product.category}`} className="hover:text-ink capitalize">
+            <Link href={`/shop/${product.category}`} className="capitalize hover:text-ink">
               {product.category}
             </Link>
           </li>
           <li aria-hidden="true">/</li>
-          <li className="font-semibold text-ink line-clamp-1">{product.name}</li>
+          <li className="line-clamp-1 font-semibold text-ink">{product.name}</li>
         </ol>
       </nav>
 
       {/* Main Two-Column PDP Section */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-start">
+      <div className="grid grid-cols-1 items-start gap-8 lg:grid-cols-12 lg:gap-14">
         {/* Left Column: Gallery */}
-        <div className="lg:col-span-7 sticky top-24">
-          <div className="rounded-[36px] border border-border bg-surface p-4 shadow-sm">
+        <div className="sticky top-24 lg:col-span-7">
+          <div className="border-border rounded-[36px] border bg-surface p-4 shadow-sm">
             <Gallery media={product.media} labels={galleryLabels} />
           </div>
         </div>
 
         {/* Right Column: Product Info & Actions */}
-        <div className="lg:col-span-5 space-y-6">
+        <div className="space-y-6 lg:col-span-5">
           {/* Badges & Subcategory */}
           <div className="flex flex-wrap items-center gap-2">
-            <span className="font-serif text-xs text-brand">
-              {product.subcategory}
-            </span>
+            <span className="font-serif text-xs text-brand">{product.subcategory}</span>
             {product.badges.map((badge) => (
               <span
                 key={badge}
@@ -181,7 +179,7 @@ export function ProductDetailView({
                   'rounded-full px-3 py-0.5 font-serif text-[11px] tracking-wide',
                   badge === 'sale'
                     ? 'bg-danger text-on-danger'
-                    : 'border border-border bg-canvas text-ink',
+                    : 'border-border border bg-canvas text-ink',
                 )}
               >
                 {badge}
@@ -190,12 +188,12 @@ export function ProductDetailView({
           </div>
 
           {/* Title */}
-          <h1 className="font-display text-3xl md:text-4xl font-extrabold tracking-tight text-ink">
+          <h1 className="font-display text-3xl font-extrabold tracking-tight text-ink md:text-4xl">
             {product.name}
           </h1>
 
           {/* Price & Reviews Anchor */}
-          <div className="flex items-center justify-between border-b border-border pb-4">
+          <div className="border-border flex items-center justify-between border-b pb-4">
             <Price
               amount={effectivePrice}
               compareAt={product.compareAtPrice}
@@ -208,7 +206,7 @@ export function ProductDetailView({
             {product.rating ? (
               <a
                 href="#reviews"
-                className="flex items-center gap-1.5 font-serif text-xs text-ink-soft hover:text-ink transition"
+                className="flex items-center gap-1.5 font-serif text-xs text-ink-soft transition hover:text-ink"
               >
                 <div className="flex text-brand">
                   <Star weight="regular" size={14} />
@@ -220,7 +218,7 @@ export function ProductDetailView({
           </div>
 
           {/* Summary */}
-          <p className="font-text text-sm md:text-base text-ink-soft leading-relaxed">
+          <p className="font-text text-sm leading-relaxed text-ink-soft md:text-base">
             {product.summary}
           </p>
 
@@ -234,7 +232,8 @@ export function ProductDetailView({
                 <div key={optGroup.key} className="space-y-2">
                   <div className="flex items-center justify-between font-serif text-xs">
                     <span className="font-semibold text-ink">
-                      {optGroup.label}: <span className="font-normal text-ink-soft">{currentValue}</span>
+                      {optGroup.label}:{' '}
+                      <span className="font-normal text-ink-soft">{currentValue}</span>
                     </span>
                     {optGroup.kind === 'size' ? (
                       <Link href="/size-guide" className="text-ink-soft underline hover:text-ink">
@@ -255,7 +254,7 @@ export function ProductDetailView({
                           className={cn(
                             'h-10 min-w-10 rounded-full border px-4 font-serif text-xs transition-all duration-200 focus-visible:outline-2 focus-visible:outline-focus',
                             isSelected
-                              ? 'border-brand bg-brand text-on-brand shadow-sm scale-102'
+                              ? 'scale-102 border-brand bg-brand text-on-brand shadow-sm'
                               : 'border-border bg-canvas text-ink hover:border-brand',
                           )}
                         >
@@ -270,17 +269,17 @@ export function ProductDetailView({
           </div>
 
           {/* Quantity & Actions */}
-          <div className="space-y-4 pt-4 border-t border-border">
+          <div className="border-border space-y-4 border-t pt-4">
             <div className="flex items-center gap-3">
               <label htmlFor="pdp-quantity" className="font-serif text-xs font-semibold text-ink">
                 Quantity:
               </label>
-              <div className="flex items-center rounded-full border border-border bg-surface p-1">
+              <div className="border-border flex items-center rounded-full border bg-surface p-1">
                 <button
                   type="button"
                   disabled={quantity <= 1}
                   onClick={() => setQuantity((q) => Math.max(1, q - 1))}
-                  className="h-7 w-7 rounded-full text-ink flex items-center justify-center disabled:opacity-30 hover:bg-ink/10"
+                  className="flex h-7 w-7 items-center justify-center rounded-full text-ink hover:bg-ink/10 disabled:opacity-30"
                 >
                   -
                 </button>
@@ -291,7 +290,7 @@ export function ProductDetailView({
                   type="button"
                   disabled={quantity >= 10}
                   onClick={() => setQuantity((q) => Math.min(10, q + 1))}
-                  className="h-7 w-7 rounded-full text-ink flex items-center justify-center disabled:opacity-30 hover:bg-ink/10"
+                  className="flex h-7 w-7 items-center justify-center rounded-full text-ink hover:bg-ink/10 disabled:opacity-30"
                 >
                   +
                 </button>
@@ -305,7 +304,7 @@ export function ProductDetailView({
                 size="lg"
                 disabled={isOutOfStock}
                 onClick={handleAddToBasket}
-                className="flex-1 rounded-full shadow-sm text-sm font-serif"
+                className="flex-1 rounded-full font-serif text-sm shadow-sm"
               >
                 {justAdded ? (
                   <span className="flex items-center justify-center gap-2">
@@ -323,7 +322,7 @@ export function ProductDetailView({
                 product={product}
                 variantId={selectedVariant.id}
                 source="pdp"
-                className="rounded-full border border-border bg-surface px-5 py-3 text-xs font-serif shadow-sm hover:scale-102 transition"
+                className="border-border rounded-full border bg-surface px-5 py-3 font-serif text-xs shadow-sm transition hover:scale-102"
               />
 
               {/* Wishlist Button */}
@@ -332,7 +331,7 @@ export function ProductDetailView({
                 aria-label={saved ? 'Remove from collection' : 'Save to collection'}
                 onClick={() => toggleWishlist(product.id)}
                 className={cn(
-                  'h-12 w-12 rounded-full border border-border bg-surface flex items-center justify-center text-ink transition hover:scale-105 focus-visible:outline-2 focus-visible:outline-focus',
+                  'border-border flex h-12 w-12 items-center justify-center rounded-full border bg-surface text-ink transition hover:scale-105 focus-visible:outline-2 focus-visible:outline-focus',
                   isHydrated && saved && 'text-danger',
                 )}
               >
@@ -344,25 +343,25 @@ export function ProductDetailView({
           {/* Service assurances */}
           <div className="grid grid-cols-2 gap-3 pt-4 font-serif text-xs text-ink-soft">
             <div className="flex items-center gap-2">
-              <Leaf size={14} className="text-brand shrink-0" />
+              <Leaf size={14} className="shrink-0 text-brand" />
               <span>Free Nordic delivery over $150</span>
             </div>
             <div className="flex items-center gap-2">
-              <Leaf size={14} className="text-brand shrink-0" />
+              <Leaf size={14} className="shrink-0 text-brand" />
               <span>Complimentary mending guarantee</span>
             </div>
           </div>
 
           {/* Tabs Section */}
-          <div className="rounded-[28px] border border-border bg-surface p-6 space-y-4">
-            <div className="flex gap-4 border-b border-border pb-2">
+          <div className="border-border space-y-4 rounded-[28px] border bg-surface p-6">
+            <div className="border-border flex gap-4 border-b pb-2">
               {(['details', 'materials', 'shipping'] as const).map((tab) => (
                 <button
                   key={tab}
                   type="button"
                   onClick={() => setActiveTab(tab)}
                   className={cn(
-                    'font-serif text-xs font-semibold transition pb-1',
+                    'pb-1 font-serif text-xs font-semibold transition',
                     activeTab === tab
                       ? 'border-b-2 border-brand text-ink'
                       : 'text-ink-soft hover:text-ink',
@@ -377,11 +376,11 @@ export function ProductDetailView({
               ))}
             </div>
 
-            <div className="font-text text-sm text-ink-soft leading-relaxed min-h-[100px]">
+            <div className="min-h-[100px] font-text text-sm leading-relaxed text-ink-soft">
               {activeTab === 'details' ? (
                 <div className="space-y-3">
                   <p>{product.description}</p>
-                  <ul className="list-disc pl-5 space-y-1 font-serif text-xs">
+                  <ul className="list-disc space-y-1 pl-5 font-serif text-xs">
                     {product.details.map((item, idx) => (
                       <li key={idx}>{item}</li>
                     ))}
@@ -389,8 +388,10 @@ export function ProductDetailView({
                 </div>
               ) : activeTab === 'materials' ? (
                 <div className="space-y-3">
-                  <p className="font-semibold text-ink font-serif text-xs">Botanical & Fiber Origin: {product.materials}</p>
-                  <ul className="list-disc pl-5 space-y-1 font-serif text-xs">
+                  <p className="font-serif text-xs font-semibold text-ink">
+                    Botanical & Fiber Origin: {product.materials}
+                  </p>
+                  <ul className="list-disc space-y-1 pl-5 font-serif text-xs">
                     {product.care.map((item, idx) => (
                       <li key={idx}>{item}</li>
                     ))}
@@ -398,7 +399,9 @@ export function ProductDetailView({
                 </div>
               ) : (
                 <div className="space-y-2 font-serif text-xs">
-                  <p>• Dispatched from Copenhagen atelier in 100% plastic-free seed paper packaging.</p>
+                  <p>
+                    • Dispatched from Copenhagen atelier in 100% plastic-free seed paper packaging.
+                  </p>
                   <p>• Climate priority delivery: 3–5 business days ($8, free over $150).</p>
                   <p>• Express courier: 1–2 business days ($18 flat rate).</p>
                   <p>• Lifetime complimentary mending service at all MOSSEN workshops.</p>
@@ -410,13 +413,20 @@ export function ProductDetailView({
       </div>
 
       {/* Customer Reviews Section */}
-      <section id="reviews" aria-labelledby="reviews-heading" className="space-y-8 pt-8 border-t border-border">
-        <h2 id="reviews-heading" className="font-display text-2xl md:text-3xl font-bold tracking-tight text-ink">
+      <section
+        id="reviews"
+        aria-labelledby="reviews-heading"
+        className="border-border space-y-8 border-t pt-8"
+      >
+        <h2
+          id="reviews-heading"
+          className="font-display text-2xl font-bold tracking-tight text-ink md:text-3xl"
+        >
           Quiet Notes from Wearers
         </h2>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          <div className="lg:col-span-5 rounded-[28px] border border-border bg-surface p-6 sticky top-24">
+        <div className="grid grid-cols-1 items-start gap-8 lg:grid-cols-12">
+          <div className="border-border sticky top-24 rounded-[28px] border bg-surface p-6 lg:col-span-5">
             <ReviewSummary
               rating={product.rating ?? { average: 5, count: reviews.length }}
               distribution={distribution}
@@ -429,9 +439,12 @@ export function ProductDetailView({
             />
           </div>
 
-          <div className="lg:col-span-7 space-y-4">
+          <div className="space-y-4 lg:col-span-7">
             {reviews.map((rev) => (
-              <div key={rev.id} className="rounded-[24px] border border-border bg-surface p-5 space-y-2.5">
+              <div
+                key={rev.id}
+                className="border-border space-y-2.5 rounded-[24px] border bg-surface p-5"
+              >
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <span className="font-serif text-xs font-bold text-ink">{rev.author}</span>
@@ -456,13 +469,13 @@ export function ProductDetailView({
                       key={idx}
                       size={12}
                       weight={idx < rev.rating ? 'fill' : 'regular'}
-                      className={idx < rev.rating ? 'text-brand fill-brand' : 'text-ink/20'}
+                      className={idx < rev.rating ? 'fill-brand text-brand' : 'text-ink/20'}
                     />
                   ))}
                 </div>
 
                 <h3 className="font-display text-sm font-bold text-ink">{rev.title}</h3>
-                <p className="font-text text-xs text-ink-soft leading-relaxed">{rev.body}</p>
+                <p className="font-text text-xs leading-relaxed text-ink-soft">{rev.body}</p>
               </div>
             ))}
           </div>
@@ -471,10 +484,16 @@ export function ProductDetailView({
 
       {/* Related Products Rail */}
       {relatedProducts.length > 0 ? (
-        <section aria-labelledby="related-heading" className="space-y-8 pt-8 border-t border-border">
+        <section
+          aria-labelledby="related-heading"
+          className="border-border space-y-8 border-t pt-8"
+        >
           <div className="flex items-center justify-between">
             <div>
-              <h2 id="related-heading" className="font-display text-2xl md:text-3xl font-bold tracking-tight text-ink">
+              <h2
+                id="related-heading"
+                className="font-display text-2xl font-bold tracking-tight text-ink md:text-3xl"
+              >
                 Harmonious Pieces
               </h2>
               <p className="mt-1 font-text text-sm text-ink-soft">
@@ -489,7 +508,7 @@ export function ProductDetailView({
             </Link>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+          <div className="grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-6">
             {relatedProducts.map((rel) => (
               <ConnectedProductCard key={rel.id} product={rel} />
             ))}
@@ -499,12 +518,15 @@ export function ProductDetailView({
 
       {/* Recently Viewed Rail */}
       {recentlyViewedProducts.length > 0 ? (
-        <section aria-labelledby="recent-heading" className="space-y-8 pt-8 border-t border-border">
-          <h2 id="recent-heading" className="font-display text-2xl md:text-3xl font-bold tracking-tight text-ink">
+        <section aria-labelledby="recent-heading" className="border-border space-y-8 border-t pt-8">
+          <h2
+            id="recent-heading"
+            className="font-display text-2xl font-bold tracking-tight text-ink md:text-3xl"
+          >
             Recently Contemplated
           </h2>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+          <div className="grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-6">
             {recentlyViewedProducts.map((rec) => (
               <ConnectedProductCard key={rec.id} product={rec} />
             ))}

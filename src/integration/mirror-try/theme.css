@@ -73,8 +73,12 @@
 }
 
 @keyframes mt-linen-fade {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 /* 3. Modal Panel ("The Window" Sanctuary) */
@@ -90,7 +94,9 @@
   border-radius: var(--mt-radius-window);
   background: var(--mt-surface-card);
   border: 1px solid rgb(36 56 37 / 0.1);
-  box-shadow: 0 24px 60px -12px rgb(29 46 30 / 0.22), 0 0 0 1px rgb(255 255 255 / 0.8);
+  box-shadow:
+    0 24px 60px -12px rgb(29 46 30 / 0.22),
+    0 0 0 1px rgb(255 255 255 / 0.8);
   padding: 2rem;
   display: flex;
   flex-direction: column;
@@ -173,7 +179,9 @@
   overflow: hidden;
   background: linear-gradient(180deg, #e7ebd9 0%, #edf1e4 40%, #f4f7ed 100%);
   border: 2px solid rgb(255 255 255 / 0.9);
-  box-shadow: inset 0 4px 16px rgb(36 56 37 / 0.06), 0 8px 24px -6px rgb(36 56 37 / 0.1);
+  box-shadow:
+    inset 0 4px 16px rgb(36 56 37 / 0.06),
+    0 8px 24px -6px rgb(36 56 37 / 0.1);
 }
 
 /* Serene Bloom Flash */
@@ -187,8 +195,12 @@
 }
 
 @keyframes mt-bloom-flash {
-  0% { opacity: 0.95; }
-  100% { opacity: 0; }
+  0% {
+    opacity: 0.95;
+  }
+  100% {
+    opacity: 0;
+  }
 }
 
 /* Gentle Bloom Outline Sweep */
@@ -197,7 +209,14 @@
   left: 0;
   right: 0;
   height: 4px;
-  background: linear-gradient(90deg, transparent 0%, #a4bd94 30%, #c5d4b8 50%, #8ea87d 70%, transparent 100%);
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    #a4bd94 30%,
+    #c5d4b8 50%,
+    #8ea87d 70%,
+    transparent 100%
+  );
   box-shadow: 0 0 16px 3px rgb(197 212 184 / 0.7);
   z-index: 10;
   pointer-events: none;
@@ -205,10 +224,20 @@
 }
 
 @keyframes mt-bloom-sweep {
-  0% { top: 8%; opacity: 0; }
-  25% { opacity: 0.9; }
-  75% { opacity: 0.9; }
-  100% { top: 92%; opacity: 0; }
+  0% {
+    top: 8%;
+    opacity: 0;
+  }
+  25% {
+    opacity: 0.9;
+  }
+  75% {
+    opacity: 0.9;
+  }
+  100% {
+    top: 92%;
+    opacity: 0;
+  }
 }
 
 /* 7. Controls Panel */

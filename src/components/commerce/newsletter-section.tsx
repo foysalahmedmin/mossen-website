@@ -36,27 +36,35 @@ export function NewsletterSection({
     <section
       aria-labelledby="newsletter-heading"
       className={cn(
-        'relative overflow-hidden rounded-[36px] border border-border bg-surface p-8 md:p-14 text-center space-y-4',
+        'border-border relative space-y-4 overflow-hidden rounded-[36px] border bg-surface p-8 text-center md:p-14',
         className,
       )}
     >
       <div className="mx-auto max-w-2xl space-y-3">
-        <div className="inline-flex items-center gap-2 rounded-full border border-border px-4 py-1 text-xs font-serif text-brand">
+        <div className="border-border inline-flex items-center gap-2 rounded-full border px-4 py-1 font-serif text-xs text-brand">
           <Leaf size={14} className="text-brand" />
           <span>Seasonal Correspondence</span>
         </div>
-        <h2 id="newsletter-heading" className="font-display text-2xl md:text-3xl font-bold tracking-tight text-ink">
+        <h2
+          id="newsletter-heading"
+          className="font-display text-2xl font-bold tracking-tight text-ink md:text-3xl"
+        >
           {title}
         </h2>
-        <p className="font-text text-sm md:text-base text-ink-soft leading-relaxed">{description}</p>
+        <p className="font-text text-sm leading-relaxed text-ink-soft md:text-base">
+          {description}
+        </p>
 
         {status === 'success' ? (
-          <div className="inline-flex items-center gap-2 rounded-full border border-border bg-canvas px-5 py-2.5 text-sm font-serif text-ink">
+          <div className="border-border inline-flex items-center gap-2 rounded-full border bg-canvas px-5 py-2.5 font-serif text-sm text-ink">
             <Check size={16} className="text-brand" />
             <span>Thank you. Our seasonal reflection has been reserved for you.</span>
           </div>
         ) : (
-          <form onSubmit={handleSubmit} className="mx-auto mt-6 flex max-w-md flex-col sm:flex-row gap-3">
+          <form
+            onSubmit={handleSubmit}
+            className="mx-auto mt-6 flex max-w-md flex-col gap-3 sm:flex-row"
+          >
             <input
               type="email"
               value={email}
@@ -64,7 +72,7 @@ export function NewsletterSection({
               placeholder={placeholder}
               required
               aria-label="Email address for seasonal letter"
-              className="h-12 flex-1 rounded-full border border-border bg-canvas px-5 font-serif text-sm text-ink placeholder:text-ink-faint focus-visible:outline-2 focus-visible:outline-focus"
+              className="border-border h-12 flex-1 rounded-full border bg-canvas px-5 font-serif text-sm text-ink placeholder:text-ink-faint focus-visible:outline-2 focus-visible:outline-focus"
             />
             <Button
               type="submit"

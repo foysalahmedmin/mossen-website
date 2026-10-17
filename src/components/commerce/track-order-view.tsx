@@ -1,11 +1,9 @@
 'use client'
 
-import Link from 'next/link'
 import { useState } from 'react'
-import { ArrowRight, Check, Leaf, MagnifyingGlass, Sparkle } from '@/components/icons'
+import { Check, Leaf, MagnifyingGlass } from '@/components/icons'
 import { Button } from '@/components/ui'
 import { brand } from '@/config/brand'
-import { routes } from '@/config/routes'
 import { formatMoney } from '@/domain'
 import type { Order } from '@/domain'
 import { useHydrated } from '@/stores/hydration'
@@ -76,7 +74,7 @@ export function TrackOrderView() {
       <div className="text-center">
         <div className="flex items-center justify-center gap-2">
           <Leaf size={16} className="text-brand" />
-          <span className="font-mono text-xs uppercase tracking-widest text-ink-soft">
+          <span className="font-mono text-xs tracking-widest text-ink-soft uppercase">
             MOSSEN COURIER TRACKING &middot; CLIMATE DISPATCH
           </span>
         </div>
@@ -89,11 +87,14 @@ export function TrackOrderView() {
       </div>
 
       {/* Lookup Form */}
-      <div className="soft-panel mx-auto mt-8 max-w-2xl rounded-[32px] bg-surface/90 border border-river/30 p-6 sm:p-8">
+      <div className="soft-panel mx-auto mt-8 max-w-2xl rounded-[32px] border border-river/30 bg-surface/90 p-6 sm:p-8">
         <form onSubmit={handleSearch} className="space-y-4">
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <div>
-              <label htmlFor="orderNum" className="mb-1 block font-mono text-xs uppercase tracking-wider text-ink-soft">
+              <label
+                htmlFor="orderNum"
+                className="mb-1 block font-mono text-xs tracking-wider text-ink-soft uppercase"
+              >
                 Order Number *
               </label>
               <input
@@ -103,12 +104,15 @@ export function TrackOrderView() {
                 value={orderNumberInput}
                 onChange={(e) => setOrderNumberInput(e.target.value)}
                 placeholder="e.g. MSN-10842"
-                className="w-full rounded-[16px] bg-canvas border border-river/40 p-3 font-mono text-xs uppercase text-ink placeholder:text-ink-faint focus:border-ink focus:outline-none"
+                className="w-full rounded-[16px] border border-river/40 bg-canvas p-3 font-mono text-xs text-ink uppercase placeholder:text-ink-faint focus:border-ink focus:outline-none"
               />
             </div>
 
             <div>
-              <label htmlFor="email" className="mb-1 block font-mono text-xs uppercase tracking-wider text-ink-soft">
+              <label
+                htmlFor="email"
+                className="mb-1 block font-mono text-xs tracking-wider text-ink-soft uppercase"
+              >
                 Customer Email (Optional)
               </label>
               <input
@@ -117,7 +121,7 @@ export function TrackOrderView() {
                 value={emailInput}
                 onChange={(e) => setEmailInput(e.target.value)}
                 placeholder="patron@example.com"
-                className="w-full rounded-[16px] bg-canvas border border-river/40 p-3 font-text text-sm text-ink placeholder:text-ink-faint focus:border-ink focus:outline-none"
+                className="w-full rounded-[16px] border border-river/40 bg-canvas p-3 font-text text-sm text-ink placeholder:text-ink-faint focus:border-ink focus:outline-none"
               />
             </div>
           </div>
@@ -131,7 +135,7 @@ export function TrackOrderView() {
         {/* Quick select from recent orders */}
         {hydrated && orders.length > 0 ? (
           <div className="mt-6 border-t border-river/30 pt-4">
-            <span className="block font-mono text-[10px] uppercase tracking-wider text-ink-soft">
+            <span className="block font-mono text-[10px] tracking-wider text-ink-soft uppercase">
               Recent Studio Orders in Storage:
             </span>
             <div className="mt-2 flex flex-wrap gap-2">
@@ -140,7 +144,7 @@ export function TrackOrderView() {
                   key={o.id}
                   type="button"
                   onClick={() => handleSelectRecent(o)}
-                  className="rounded-full bg-canvas border border-river/40 px-3 py-1 font-mono text-xs text-ink hover:border-ink"
+                  className="rounded-full border border-river/40 bg-canvas px-3 py-1 font-mono text-xs text-ink hover:border-ink"
                 >
                   {o.number} ({o.status})
                 </button>
@@ -152,28 +156,31 @@ export function TrackOrderView() {
 
       {/* Result Section */}
       {searchAttempted && !searchedOrder ? (
-        <div className="soft-panel mx-auto mt-8 max-w-2xl rounded-[32px] bg-surface/90 border border-river/30 p-8 text-center">
+        <div className="soft-panel mx-auto mt-8 max-w-2xl rounded-[32px] border border-river/30 bg-surface/90 p-8 text-center">
           <h2 className="font-display text-xl font-normal text-ink">Order Not Found</h2>
           <p className="mt-2 font-text text-sm text-ink-soft">
-            We could not find an order matching <strong className="text-ink">{orderNumberInput}</strong>.
-            Please verify the number on your confirmation email.
+            We could not find an order matching{' '}
+            <strong className="text-ink">{orderNumberInput}</strong>. Please verify the number on
+            your confirmation email.
           </p>
         </div>
       ) : null}
 
       {searchedOrder ? (
-        <div className="soft-panel mx-auto mt-8 max-w-3xl rounded-[36px] bg-surface/90 border border-river/30 p-6 sm:p-10 space-y-8 shadow-sm">
+        <div className="soft-panel mx-auto mt-8 max-w-3xl space-y-8 rounded-[36px] border border-river/30 bg-surface/90 p-6 shadow-sm sm:p-10">
           {/* Header */}
           <div className="flex flex-col justify-between gap-4 border-b border-river/30 pb-6 sm:flex-row sm:items-center">
             <div>
-              <span className="font-mono text-xs uppercase tracking-widest text-ink-soft">
+              <span className="font-mono text-xs tracking-widest text-ink-soft uppercase">
                 CARRIER TRACKING DETAILS
               </span>
-              <p className="font-mono text-2xl font-bold tracking-wider text-ink">{searchedOrder.number}</p>
+              <p className="font-mono text-2xl font-bold tracking-wider text-ink">
+                {searchedOrder.number}
+              </p>
             </div>
-            <div className="rounded-full bg-canvas border border-river/40 px-4 py-1.5 text-right">
-              <span className="font-mono text-[10px] uppercase text-ink-soft">STATUS: </span>
-              <span className="font-mono text-xs font-semibold uppercase text-brand">
+            <div className="rounded-full border border-river/40 bg-canvas px-4 py-1.5 text-right">
+              <span className="font-mono text-[10px] text-ink-soft uppercase">STATUS: </span>
+              <span className="font-mono text-xs font-semibold text-brand uppercase">
                 {searchedOrder.status.toUpperCase()}
               </span>
             </div>
@@ -181,7 +188,7 @@ export function TrackOrderView() {
 
           {/* Progress Timeline */}
           <div>
-            <h3 className="mb-6 font-mono text-xs uppercase tracking-wider text-ink-soft">
+            <h3 className="mb-6 font-mono text-xs tracking-wider text-ink-soft uppercase">
               Fulfillment Journey
             </h3>
             <div className="relative">
@@ -192,12 +199,15 @@ export function TrackOrderView() {
                   const isCurrent = idx === stepIndex
 
                   return (
-                    <div key={s.id} className="relative flex flex-col items-start sm:items-center text-left sm:text-center">
+                    <div
+                      key={s.id}
+                      className="relative flex flex-col items-start text-left sm:items-center sm:text-center"
+                    >
                       <div
                         className={`flex h-10 w-10 items-center justify-center rounded-full font-mono text-xs font-semibold transition-all ${
                           isCompleted
                             ? 'bg-brand text-on-brand shadow-sm'
-                            : 'bg-canvas border border-river/40 text-ink-faint'
+                            : 'border border-river/40 bg-canvas text-ink-faint'
                         }`}
                       >
                         {isCompleted ? <Check size={18} /> : idx + 1}
@@ -218,8 +228,8 @@ export function TrackOrderView() {
           </div>
 
           {/* Details Grid */}
-          <div className="grid grid-cols-1 gap-6 border-t border-river/30 pt-6 sm:grid-cols-2 font-mono text-xs uppercase">
-            <div className="rounded-[24px] bg-canvas/70 border border-river/30 p-5 space-y-1">
+          <div className="grid grid-cols-1 gap-6 border-t border-river/30 pt-6 font-mono text-xs uppercase sm:grid-cols-2">
+            <div className="space-y-1 rounded-[24px] border border-river/30 bg-canvas/70 p-5">
               <span className="font-semibold text-ink">DELIVERY SANCTUARY</span>
               <p className="text-ink">{searchedOrder.address.name}</p>
               <p className="text-ink-soft">{searchedOrder.address.line1}</p>
@@ -228,24 +238,37 @@ export function TrackOrderView() {
               </p>
             </div>
 
-            <div className="rounded-[24px] bg-canvas/70 border border-river/30 p-5 space-y-1">
+            <div className="space-y-1 rounded-[24px] border border-river/30 bg-canvas/70 p-5">
               <span className="font-semibold text-ink">LOGISTICS SPEC</span>
-              <p className="text-ink">Method: {searchedOrder.shippingMethod.name.toUpperCase()} FREIGHT</p>
-              <p className="text-ink-soft">Items: {searchedOrder.lines.reduce((a, b) => a + b.quantity, 0)} pieces</p>
-              <p className="text-ink-soft">Total: {formatMoney(searchedOrder.totals.total, MONEY)}</p>
+              <p className="text-ink">
+                Method: {searchedOrder.shippingMethod.name.toUpperCase()} FREIGHT
+              </p>
+              <p className="text-ink-soft">
+                Items: {searchedOrder.lines.reduce((a, b) => a + b.quantity, 0)} pieces
+              </p>
+              <p className="text-ink-soft">
+                Total: {formatMoney(searchedOrder.totals.total, MONEY)}
+              </p>
             </div>
           </div>
 
           {/* Items */}
           <div className="border-t border-river/30 pt-6">
-            <h4 className="font-mono text-xs uppercase tracking-wider text-ink-soft">Ordered Garments</h4>
+            <h4 className="font-mono text-xs tracking-wider text-ink-soft uppercase">
+              Ordered Garments
+            </h4>
             <div className="mt-4 space-y-2">
               {searchedOrder.lines.map((l) => (
-                <div key={l.variantId} className="flex items-center justify-between rounded-[18px] bg-canvas/60 border border-river/20 p-3 font-mono text-xs uppercase">
+                <div
+                  key={l.variantId}
+                  className="flex items-center justify-between rounded-[18px] border border-river/20 bg-canvas/60 p-3 font-mono text-xs uppercase"
+                >
                   <span className="text-ink">
                     {l.title} × {l.quantity}
                   </span>
-                  <span className="font-semibold text-ink">{formatMoney(l.unitPrice * l.quantity, MONEY)}</span>
+                  <span className="font-semibold text-ink">
+                    {formatMoney(l.unitPrice * l.quantity, MONEY)}
+                  </span>
                 </div>
               ))}
             </div>

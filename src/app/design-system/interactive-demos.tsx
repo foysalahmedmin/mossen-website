@@ -1,16 +1,9 @@
 'use client'
 
 import { useState } from 'react'
-import {
-  Accordion,
-  Button,
-  Dialog,
-  OptionPicker,
-  QuantityStepper,
-  TextField,
-} from '@/components/ui'
-import { Check, Leaf, Sparkle, X } from '@/components/icons'
-import { Bloom, PageFade, useVineProgress } from '@/lib/motion'
+import { Accordion, Button, Dialog, OptionPicker, QuantityStepper } from '@/components/ui'
+import { Check, Leaf } from '@/components/icons'
+import { Bloom, useVineProgress } from '@/lib/motion'
 import { MenuSheet, RefineSheet, Vine } from '@/components/layout'
 
 export function SelectionControlsDemo() {

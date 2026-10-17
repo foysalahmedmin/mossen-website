@@ -86,19 +86,20 @@ export function ContactView() {
     <div className="mx-auto max-w-6xl px-4 py-12 md:py-16">
       {/* Header */}
       <div className="mb-12 text-center">
-        <span className="inline-flex items-center gap-1.5 rounded-full bg-brand/10 px-3 py-1 font-mono text-xs font-semibold uppercase tracking-wider text-brand">
+        <span className="inline-flex items-center gap-1.5 rounded-full bg-brand/10 px-3 py-1 font-mono text-xs font-semibold tracking-wider text-brand uppercase">
           <Sparkle size={12} />
           Client Concierge & Care Sanctuary
         </span>
-        <h1 className="mt-3 font-display text-4xl md:text-5xl font-normal tracking-tight text-ink">
+        <h1 className="mt-3 font-display text-4xl font-normal tracking-tight text-ink md:text-5xl">
           Quiet Concierge & Care
         </h1>
-        <p className="mx-auto mt-4 max-w-2xl font-text text-base md:text-lg text-ink-soft">
-          We welcome your questions regarding our natural dye recipes, Baltic linen care, garment mending, and order tracking.
+        <p className="mx-auto mt-4 max-w-2xl font-text text-base text-ink-soft md:text-lg">
+          We welcome your questions regarding our natural dye recipes, Baltic linen care, garment
+          mending, and order tracking.
         </p>
       </div>
 
-      <div className="grid gap-12 lg:grid-cols-12 items-start">
+      <div className="grid items-start gap-12 lg:grid-cols-12">
         {/* Form Card */}
         <div className="lg:col-span-7">
           <div className="rounded-[32px] border border-stone-200/80 bg-[#fbf9f5] p-8 shadow-sm md:p-10">
@@ -107,14 +108,17 @@ export function ContactView() {
                 <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-emerald-100 text-emerald-700">
                   <Check size={32} />
                 </div>
-                <h2 className="font-display text-2xl md:text-3xl font-normal text-ink">
+                <h2 className="font-display text-2xl font-normal text-ink md:text-3xl">
                   Inquiry Received with Warmth
                 </h2>
-                <p className="mt-2 font-mono text-xs uppercase tracking-wider text-brand font-semibold">
+                <p className="mt-2 font-mono text-xs font-semibold tracking-wider text-brand uppercase">
                   Reference: {ticketId}
                 </p>
-                <p className="mx-auto mt-4 max-w-md font-text text-sm md:text-base leading-relaxed text-ink-soft">
-                  Thank you for writing to us, {form.name}. Our atelier staff has received your inquiry and will send a thoughtful reply to <span className="font-semibold text-ink">{form.email}</span> within one business day.
+                <p className="mx-auto mt-4 max-w-md font-text text-sm leading-relaxed text-ink-soft md:text-base">
+                  Thank you for writing to us, {form.name}. Our atelier staff has received your
+                  inquiry and will send a thoughtful reply to{' '}
+                  <span className="font-semibold text-ink">{form.email}</span> within one business
+                  day.
                 </p>
 
                 <div className="mt-8">
@@ -156,7 +160,10 @@ export function ContactView() {
 
                 <div className="grid gap-4 md:grid-cols-2">
                   <div className="flex flex-col gap-1.5">
-                    <label htmlFor="topic-select-mos" className="font-text text-sm font-medium text-ink">
+                    <label
+                      htmlFor="topic-select-mos"
+                      className="font-text text-sm font-medium text-ink"
+                    >
                       Subject Matter
                     </label>
                     <select
@@ -183,7 +190,10 @@ export function ContactView() {
                 </div>
 
                 <div className="flex flex-col gap-1.5">
-                  <label htmlFor="message-input-mos" className="font-text text-sm font-medium text-ink">
+                  <label
+                    htmlFor="message-input-mos"
+                    className="font-text text-sm font-medium text-ink"
+                  >
                     Your Thoughts or Inquiry
                   </label>
                   <textarea
@@ -218,12 +228,10 @@ export function ContactView() {
         {/* Studio Contacts Side Card */}
         <div className="space-y-6 lg:col-span-5">
           <div className="rounded-[32px] border border-stone-200/80 bg-[#fbf9f5] p-8 shadow-sm">
-            <h3 className="font-display text-lg font-normal text-ink">
-              Direct Atelier Sanctuary
-            </h3>
+            <h3 className="font-display text-lg font-normal text-ink">Direct Atelier Sanctuary</h3>
             <ul className="mt-5 space-y-4 font-text text-sm">
               <li className="flex flex-col">
-                <span className="font-mono text-xs uppercase text-ink-faint">Client Concierge</span>
+                <span className="font-mono text-xs text-ink-faint uppercase">Client Concierge</span>
                 <a
                   href={`mailto:concierge@${brand.id}-atelier.com`}
                   className="mt-1 font-semibold text-brand hover:underline"
@@ -232,13 +240,14 @@ export function ContactView() {
                 </a>
               </li>
               <li className="flex flex-col">
-                <span className="font-mono text-xs uppercase text-ink-faint">Telephone</span>
+                <span className="font-mono text-xs text-ink-faint uppercase">Telephone</span>
                 <span className="mt-1 text-ink">+46 8 555 4120</span>
               </li>
               <li className="flex flex-col">
-                <span className="font-mono text-xs uppercase text-ink-faint">Studio Hours</span>
+                <span className="font-mono text-xs text-ink-faint uppercase">Studio Hours</span>
                 <span className="mt-1 text-ink-soft">
-                  Tuesday – Saturday: 10:00 – 18:00 CET<br />
+                  Tuesday – Saturday: 10:00 – 18:00 CET
+                  <br />
                   Sunday – Monday: Resting with the meadow
                 </span>
               </li>
@@ -250,7 +259,8 @@ export function ContactView() {
               Gamla Stan Sanctuary Visits
             </h3>
             <p className="mt-3 font-text text-sm leading-relaxed text-ink-soft">
-              Private fitting chamber sessions and tea consultations are available by gentle appointment at Prästgatan 44, Stockholm.
+              Private fitting chamber sessions and tea consultations are available by gentle
+              appointment at Prästgatan 44, Stockholm.
             </p>
           </div>
         </div>

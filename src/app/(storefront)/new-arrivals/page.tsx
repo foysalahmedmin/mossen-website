@@ -20,7 +20,11 @@ export default async function NewArrivalsPage({ searchParams }: NewArrivalsPageP
   const result = await services.catalog.listProducts(query)
 
   return (
-    <Suspense fallback={<div className="min-h-[400px] animate-pulse rounded-[32px] border border-border bg-surface" />}>
+    <Suspense
+      fallback={
+        <div className="border-border min-h-[400px] animate-pulse rounded-[32px] border bg-surface" />
+      }
+    >
       <ProductListView
         products={result.page.items}
         total={result.page.total}

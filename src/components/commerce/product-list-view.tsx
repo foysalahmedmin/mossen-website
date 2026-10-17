@@ -115,14 +115,14 @@ export function ProductListView({
   const totalPages = Math.ceil(total / query.pageSize)
 
   return (
-    <div className="space-y-8 pb-16">
+    <div className="page-container space-y-8 pb-16">
       {/* Header */}
-      <div className="space-y-3 border-b border-border pb-6">
-        <h1 className="font-display text-3xl md:text-5xl font-extrabold tracking-tight text-ink">
+      <div className="border-border space-y-3 border-b pb-6">
+        <h1 className="font-display text-3xl font-extrabold tracking-tight text-ink md:text-5xl">
           {title}
         </h1>
         {description ? (
-          <p className="max-w-2xl font-text text-sm md:text-base text-ink-soft leading-relaxed">
+          <p className="max-w-2xl font-text text-sm leading-relaxed text-ink-soft md:text-base">
             {description}
           </p>
         ) : null}
@@ -139,7 +139,7 @@ export function ProductListView({
               id="sort-select"
               value={query.sort}
               onChange={(e) => navigateWith({ sort: e.target.value as SortKey })}
-              className="h-10 rounded-full border border-border bg-surface px-4 font-serif text-xs text-ink focus-visible:outline-2 focus-visible:outline-focus cursor-pointer"
+              className="border-border h-10 cursor-pointer rounded-full border bg-surface px-4 font-serif text-xs text-ink focus-visible:outline-2 focus-visible:outline-focus"
             >
               {SORT_OPTIONS.map((opt) => (
                 <option key={opt.value} value={opt.value} className="bg-surface text-ink">
@@ -162,9 +162,9 @@ export function ProductListView({
       ) : null}
 
       {/* Main Grid & Filters Layout */}
-      <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 items-start">
+      <div className="grid grid-cols-1 items-start gap-8 lg:grid-cols-4">
         {/* Desktop Filters Sidebar */}
-        <aside className="hidden lg:block lg:col-span-1 sticky top-24">
+        <aside className="sticky top-24 hidden lg:col-span-1 lg:block">
           <FilterPanel
             facets={facets}
             query={query}
@@ -176,25 +176,32 @@ export function ProductListView({
         </aside>
 
         {/* Product Grid Area */}
-        <div className={cn('lg:col-span-3 space-y-8 transition-opacity duration-200', isPending && 'opacity-60')}>
+        <div
+          className={cn(
+            'space-y-8 transition-opacity duration-200 lg:col-span-3',
+            isPending && 'opacity-60',
+          )}
+        >
           {products.length === 0 ? (
-            <div className="rounded-[32px] border border-border bg-surface p-12 text-center space-y-4">
+            <div className="border-border space-y-4 rounded-[32px] border bg-surface p-12 text-center">
               <h2 className="font-display text-xl font-bold text-ink">No Garments Found</h2>
-              <p className="font-text text-sm text-ink-soft max-w-md mx-auto">
-                No natural pieces match your specific parameter selection. Clear the filters to explore the complete atelier.
+              <p className="mx-auto max-w-md font-text text-sm text-ink-soft">
+                No natural pieces match your specific parameter selection. Clear the filters to
+                explore the complete atelier.
               </p>
-              <Button variant="secondary" size="md" onClick={handleClearAll} className="rounded-full px-6 font-serif text-xs">
+              <Button
+                variant="secondary"
+                size="md"
+                onClick={handleClearAll}
+                className="rounded-full px-6 font-serif text-xs"
+              >
                 Clear all filters
               </Button>
             </div>
           ) : (
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
+            <div className="grid grid-cols-2 gap-4 md:grid-cols-3 md:gap-6">
               {products.map((product, idx) => (
-                <ConnectedProductCard
-                  key={product.id}
-                  product={product}
-                  priority={idx < 4}
-                />
+                <ConnectedProductCard key={product.id} product={product} priority={idx < 4} />
               ))}
             </div>
           )}

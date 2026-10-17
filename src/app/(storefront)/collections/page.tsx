@@ -17,22 +17,23 @@ export default async function CollectionsPage() {
   )
 
   return (
-    <div className="space-y-10 pb-16">
-      <div className="space-y-2 border-b border-border pb-6">
-        <h1 className="font-display text-3xl md:text-5xl font-extrabold tracking-tight text-ink">
+    <div className="page-container space-y-10 pb-16">
+      <div className="border-border space-y-2 border-b pb-6">
+        <h1 className="font-display text-3xl font-extrabold tracking-tight text-ink md:text-5xl">
           Seasonal Collections
         </h1>
-        <p className="max-w-2xl font-text text-sm md:text-base text-ink-soft leading-relaxed">
-          Small-batch artisanal capsules inspired by Baltic coastal mist, wild forest lichen, and hand-loomed silence.
+        <p className="max-w-2xl font-text text-sm leading-relaxed text-ink-soft md:text-base">
+          Small-batch artisanal capsules inspired by Baltic coastal mist, wild forest lichen, and
+          hand-loomed silence.
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
         {collectionsWithCovers.map((coll) => (
           <Link
             key={coll.slug}
             href={`/collections/${coll.slug}`}
-            className="group relative flex flex-col overflow-hidden rounded-[32px] border border-border bg-surface p-3.5 transition-all duration-300 hover:-translate-y-1.5 shadow-sm"
+            className="group border-border relative flex flex-col overflow-hidden rounded-[32px] border bg-surface p-3.5 shadow-sm transition-all duration-300 hover:-translate-y-1.5"
           >
             <div className="relative aspect-[16/10] w-full overflow-hidden rounded-[24px] bg-canvas">
               {coll.cover ? (
@@ -51,18 +52,18 @@ export default async function CollectionsPage() {
               )}
               <div className="absolute inset-0 bg-gradient-to-t from-canvas/80 via-transparent to-transparent" />
               <div className="absolute top-4 right-4">
-                <span className="rounded-full border border-border bg-surface px-3 py-1 font-serif text-xs text-ink shadow-sm">
+                <span className="border-border rounded-full border bg-surface px-3 py-1 font-serif text-xs text-ink shadow-sm">
                   Capsule
                 </span>
               </div>
             </div>
 
-            <div className="mt-4 flex flex-1 flex-col justify-between px-1.5 pb-1 space-y-3">
+            <div className="mt-4 flex flex-1 flex-col justify-between space-y-3 px-1.5 pb-1">
               <div>
-                <h2 className="font-display text-xl font-bold tracking-tight text-ink group-hover:text-brand transition">
+                <h2 className="font-display text-xl font-bold tracking-tight text-ink transition group-hover:text-brand">
                   {coll.name}
                 </h2>
-                <p className="mt-1 line-clamp-2 font-text text-xs md:text-sm text-ink-soft leading-relaxed">
+                <p className="mt-1 line-clamp-2 font-text text-xs leading-relaxed text-ink-soft md:text-sm">
                   {coll.description}
                 </p>
               </div>

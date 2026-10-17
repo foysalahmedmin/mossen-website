@@ -1,14 +1,13 @@
 'use client'
 
+import Image from 'next/image'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
 import { useState } from 'react'
-import { ArrowRight, Check, Leaf, Plus, ShoppingBag, Sparkle, Trash, User } from '@/components/icons'
+import { Check, Leaf, Plus, User } from '@/components/icons'
 import { Button } from '@/components/ui'
 import { brand } from '@/config/brand'
 import { routes } from '@/config/routes'
 import { formatMoney } from '@/domain'
-import type { Address } from '@/domain'
 import { useHydrated } from '@/stores/hydration'
 import { useOrdersStore } from '@/stores/orders-store'
 import { useSessionStore } from '@/stores/session-store'
@@ -22,26 +21,29 @@ function AuthGuard({ children }: { children: React.ReactNode }) {
 
   if (!hydrated) {
     return (
-      <div className="soft-panel mx-auto max-w-md rounded-[32px] bg-surface/90 border border-river/30 p-10 text-center">
+      <div className="soft-panel mx-auto max-w-md rounded-[32px] border border-river/30 bg-surface/90 p-10 text-center">
         <div className="mx-auto h-8 w-8 animate-spin rounded-full border-2 border-ink border-t-transparent" />
-        <p className="mt-4 font-mono text-xs uppercase tracking-widest text-ink-soft">Loading Sanctuary...</p>
+        <h1 className="sr-only">Account</h1>
+        <p className="mt-4 font-mono text-xs tracking-widest text-ink-soft uppercase">
+          Loading Sanctuary...
+        </p>
       </div>
     )
   }
 
   if (!isAuthenticated) {
     return (
-      <div className="soft-panel mx-auto max-w-md rounded-[36px] bg-surface/90 border border-river/30 p-8 text-center shadow-sm">
-        <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-canvas border border-river/40 text-ink">
+      <div className="soft-panel mx-auto max-w-md rounded-[36px] border border-river/30 bg-surface/90 p-8 text-center shadow-sm">
+        <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full border border-river/40 bg-canvas text-ink">
           <User size={28} />
         </div>
         <div className="flex items-center justify-center gap-2">
           <Leaf size={16} className="text-brand" />
-          <span className="font-mono text-xs uppercase tracking-widest text-ink-soft">
+          <span className="font-mono text-xs tracking-widest text-ink-soft uppercase">
             SANCTUARY ACCESS
           </span>
         </div>
-        <h2 className="mt-2 font-display text-2xl font-normal text-ink">Sign In Required</h2>
+        <h1 className="mt-2 font-display text-2xl font-normal text-ink">Sign In Required</h1>
         <p className="mt-2 font-text text-sm text-ink-soft">
           Sign in to your patron account or activate rapid demo access to view your quiet orders.
         </p>
@@ -77,11 +79,11 @@ export function AccountDashboardView() {
     <AuthGuard>
       <div className="space-y-8">
         {/* Welcome Header */}
-        <div className="soft-panel flex flex-col justify-between gap-4 rounded-[32px] bg-surface/90 border border-river/30 p-8 sm:flex-row sm:items-center shadow-sm">
+        <div className="soft-panel flex flex-col justify-between gap-4 rounded-[32px] border border-river/30 bg-surface/90 p-8 shadow-sm sm:flex-row sm:items-center">
           <div>
             <div className="flex items-center gap-2">
               <Leaf size={16} className="text-brand" />
-              <span className="font-mono text-xs uppercase tracking-widest text-ink-soft">
+              <span className="font-mono text-xs tracking-widest text-ink-soft uppercase">
                 MOSSEN PATRON PROFILE
               </span>
             </div>
@@ -98,20 +100,20 @@ export function AccountDashboardView() {
         </div>
 
         {/* Stats Grid */}
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-3 font-mono text-xs uppercase">
-          <div className="soft-panel rounded-[28px] bg-surface/90 border border-river/30 p-6 shadow-sm">
+        <div className="grid grid-cols-1 gap-6 font-mono text-xs uppercase sm:grid-cols-3">
+          <div className="soft-panel rounded-[28px] border border-river/30 bg-surface/90 p-6 shadow-sm">
             <span className="text-ink-soft">Quiet Orders</span>
             <p className="mt-2 font-display text-3xl font-normal text-ink">{orders.length}</p>
             <p className="mt-1 text-[11px] text-ink-soft">Lifetime verified orders</p>
           </div>
 
-          <div className="soft-panel rounded-[28px] bg-surface/90 border border-river/30 p-6 shadow-sm">
+          <div className="soft-panel rounded-[28px] border border-river/30 bg-surface/90 p-6 shadow-sm">
             <span className="text-ink-soft">Patron Standing</span>
             <p className="mt-2 font-display text-3xl font-normal text-ink">Botanical Tier</p>
             <p className="mt-1 text-[11px] text-ink-soft">Complimentary climate freight</p>
           </div>
 
-          <div className="soft-panel rounded-[28px] bg-surface/90 border border-river/30 p-6 shadow-sm">
+          <div className="soft-panel rounded-[28px] border border-river/30 bg-surface/90 p-6 shadow-sm">
             <span className="text-ink-soft">Saved Destinations</span>
             <p className="mt-2 font-display text-3xl font-normal text-ink">{addresses.length}</p>
             <p className="mt-1 text-[11px] text-ink-soft">Active sanctuaries</p>
@@ -121,10 +123,13 @@ export function AccountDashboardView() {
         {/* Two-Column Overview */}
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
           {/* Recent Order */}
-          <div className="soft-panel rounded-[32px] bg-surface/90 border border-river/30 p-6 sm:p-8 space-y-4 shadow-sm">
+          <div className="soft-panel space-y-4 rounded-[32px] border border-river/30 bg-surface/90 p-6 shadow-sm sm:p-8">
             <div className="flex items-center justify-between border-b border-river/30 pb-4">
               <h2 className="font-display text-xl font-normal text-ink">Latest Order</h2>
-              <Link href={routes.orders} className="font-mono text-xs text-brand hover:underline uppercase">
+              <Link
+                href={routes.orders}
+                className="font-mono text-xs text-brand uppercase hover:underline"
+              >
                 View All ({orders.length}) &rarr;
               </Link>
             </div>
@@ -136,12 +141,12 @@ export function AccountDashboardView() {
                     <span className="text-[10px] text-ink-soft">ORDER NUMBER</span>
                     <p className="font-bold text-ink">{latestOrder.number}</p>
                   </div>
-                  <span className="rounded-full bg-canvas border border-river/40 px-3 py-1 text-[10px] font-semibold text-brand">
+                  <span className="rounded-full border border-river/40 bg-canvas px-3 py-1 text-[10px] font-semibold text-brand">
                     {latestOrder.status.toUpperCase()}
                   </span>
                 </div>
 
-                <div className="rounded-[20px] bg-canvas/70 border border-river/30 p-3 space-y-2">
+                <div className="space-y-2 rounded-[20px] border border-river/30 bg-canvas/70 p-3">
                   {latestOrder.lines.map((l) => (
                     <div key={l.variantId} className="flex justify-between">
                       <span className="text-ink">
@@ -156,7 +161,9 @@ export function AccountDashboardView() {
 
                 <div className="flex items-center justify-between border-t border-river/30 pt-3">
                   <span className="text-ink-soft">Total Captured:</span>
-                  <span className="font-bold text-ink">{formatMoney(latestOrder.totals.total, MONEY)}</span>
+                  <span className="font-bold text-ink">
+                    {formatMoney(latestOrder.totals.total, MONEY)}
+                  </span>
                 </div>
 
                 <div className="pt-2">
@@ -176,16 +183,19 @@ export function AccountDashboardView() {
           </div>
 
           {/* Primary Address */}
-          <div className="soft-panel rounded-[32px] bg-surface/90 border border-river/30 p-6 sm:p-8 space-y-4 shadow-sm">
+          <div className="soft-panel space-y-4 rounded-[32px] border border-river/30 bg-surface/90 p-6 shadow-sm sm:p-8">
             <div className="flex items-center justify-between border-b border-river/30 pb-4">
               <h2 className="font-display text-xl font-normal text-ink">Primary Sanctuary</h2>
-              <Link href={routes.addresses} className="font-mono text-xs text-brand hover:underline uppercase">
+              <Link
+                href={routes.addresses}
+                className="font-mono text-xs text-brand uppercase hover:underline"
+              >
                 Manage Sanctuaries ({addresses.length}) &rarr;
               </Link>
             </div>
 
             {defaultAddr ? (
-              <div className="rounded-[24px] bg-canvas/70 border border-river/30 p-5 font-mono text-xs uppercase space-y-1">
+              <div className="space-y-1 rounded-[24px] border border-river/30 bg-canvas/70 p-5 font-mono text-xs uppercase">
                 <div className="flex items-center justify-between">
                   <span className="font-semibold text-ink">{defaultAddr.name}</span>
                   {defaultAddr.isDefault ? (
@@ -194,14 +204,14 @@ export function AccountDashboardView() {
                     </span>
                   ) : null}
                 </div>
-                <p className="text-ink-soft pt-2">{defaultAddr.line1}</p>
+                <p className="pt-2 text-ink-soft">{defaultAddr.line1}</p>
                 {defaultAddr.line2 ? <p className="text-ink-soft">{defaultAddr.line2}</p> : null}
                 <p className="text-ink-soft">
                   {defaultAddr.city}, {defaultAddr.region} {defaultAddr.postcode}
                 </p>
                 <p className="text-ink-soft">{defaultAddr.country}</p>
                 {defaultAddr.phone ? (
-                  <p className="text-ink-soft pt-2">Phone: {defaultAddr.phone}</p>
+                  <p className="pt-2 text-ink-soft">Phone: {defaultAddr.phone}</p>
                 ) : null}
               </div>
             ) : (
@@ -229,7 +239,7 @@ export function AccountOrdersView() {
           <div>
             <div className="flex items-center gap-2">
               <Leaf size={16} className="text-brand" />
-              <span className="font-mono text-xs uppercase tracking-widest text-ink-soft">
+              <span className="font-mono text-xs tracking-widest text-ink-soft uppercase">
                 MOSSEN ORDER ARCHIVE
               </span>
             </div>
@@ -243,11 +253,16 @@ export function AccountOrdersView() {
         </div>
 
         {orders.length === 0 ? (
-          <div className="soft-panel rounded-[32px] bg-surface/90 border border-river/30 p-12 text-center shadow-sm">
-            <span className="font-mono text-xs uppercase tracking-widest text-brand">Zero Orders</span>
-            <h2 className="mt-2 font-display text-2xl font-normal text-ink">No Orders Placed Yet</h2>
+          <div className="soft-panel rounded-[32px] border border-river/30 bg-surface/90 p-12 text-center shadow-sm">
+            <span className="font-mono text-xs tracking-widest text-brand uppercase">
+              Zero Orders
+            </span>
+            <h2 className="mt-2 font-display text-2xl font-normal text-ink">
+              No Orders Placed Yet
+            </h2>
             <p className="mt-2 font-text text-sm text-ink-soft">
-              When you order natural pieces, your receipt, progress journey, and tracking telemetry will appear here.
+              When you order natural pieces, your receipt, progress journey, and tracking telemetry
+              will appear here.
             </p>
             <div className="mt-6">
               <Button asChild>
@@ -260,7 +275,7 @@ export function AccountOrdersView() {
             {orders.map((order) => (
               <div
                 key={order.id}
-                className="soft-panel rounded-[28px] bg-surface/90 border border-river/30 p-6 transition-all hover:border-river font-mono text-xs uppercase space-y-4 shadow-sm"
+                className="soft-panel space-y-4 rounded-[28px] border border-river/30 bg-surface/90 p-6 font-mono text-xs uppercase shadow-sm transition-all hover:border-river"
               >
                 <div className="flex flex-col justify-between gap-2 border-b border-river/30 pb-4 sm:flex-row sm:items-center">
                   <div>
@@ -271,7 +286,7 @@ export function AccountOrdersView() {
                     </span>
                   </div>
                   <div className="flex items-center gap-3">
-                    <span className="rounded-full bg-canvas border border-river/40 px-3 py-1 font-semibold text-brand">
+                    <span className="rounded-full border border-river/40 bg-canvas px-3 py-1 font-semibold text-brand">
                       {order.status.toUpperCase()}
                     </span>
                     <Button asChild size="sm" variant="secondary">
@@ -292,7 +307,7 @@ export function AccountOrdersView() {
                     </ul>
                   </div>
 
-                  <div className="sm:text-right space-y-1">
+                  <div className="space-y-1 sm:text-right">
                     <span className="text-[10px] text-ink-soft">TOTAL BILLED</span>
                     <p className="text-base font-semibold text-ink">
                       {formatMoney(order.totals.total, MONEY)}
@@ -322,7 +337,7 @@ export function AccountOrderDetailView({ id }: { id: string }) {
           <div>
             <Link
               href={routes.orders}
-              className="font-mono text-xs uppercase tracking-wider text-ink-soft hover:text-ink"
+              className="font-mono text-xs tracking-wider text-ink-soft uppercase hover:text-ink"
             >
               &larr; Return to Orders
             </Link>
@@ -331,52 +346,66 @@ export function AccountOrderDetailView({ id }: { id: string }) {
             </h1>
           </div>
           {order ? (
-            <span className="rounded-full bg-canvas border border-river/40 px-3 py-1 font-mono text-xs font-semibold uppercase text-brand">
+            <span className="rounded-full border border-river/40 bg-canvas px-3 py-1 font-mono text-xs font-semibold text-brand uppercase">
               {order.status.toUpperCase()}
             </span>
           ) : null}
         </div>
 
         {!order ? (
-          <div className="soft-panel rounded-[32px] bg-surface/90 border border-river/30 p-12 text-center font-mono text-xs text-ink-soft uppercase">
+          <div className="soft-panel rounded-[32px] border border-river/30 bg-surface/90 p-12 text-center font-mono text-xs text-ink-soft uppercase">
             Order receipt not found in storage.
           </div>
         ) : (
-          <div className="soft-panel rounded-[36px] bg-surface/90 border border-river/30 p-8 space-y-8 font-mono text-xs uppercase shadow-sm">
+          <div className="soft-panel space-y-8 rounded-[36px] border border-river/30 bg-surface/90 p-8 font-mono text-xs uppercase shadow-sm">
             {/* Header info */}
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-3 border-b border-river/30 pb-6">
+            <div className="grid grid-cols-1 gap-4 border-b border-river/30 pb-6 sm:grid-cols-3">
               <div>
                 <span className="text-[10px] text-ink-soft">ORDER NUMBER</span>
                 <p className="font-bold text-ink">{order.number}</p>
               </div>
               <div>
                 <span className="text-[10px] text-ink-soft">DATE PLACED</span>
-                <p className="font-bold text-ink">{new Date(order.createdAt).toLocaleDateString()}</p>
+                <p className="font-bold text-ink">
+                  {new Date(order.createdAt).toLocaleDateString()}
+                </p>
               </div>
               <div>
                 <span className="text-[10px] text-ink-soft">DELIVERY METHOD</span>
-                <p className="font-bold text-ink">{order.shippingMethod.name.toUpperCase()} FREIGHT</p>
+                <p className="font-bold text-ink">
+                  {order.shippingMethod.name.toUpperCase()} FREIGHT
+                </p>
               </div>
             </div>
 
             {/* Line items */}
             <div>
-              <h2 className="text-xs font-semibold text-ink tracking-wider">Garments & Accessories</h2>
+              <h2 className="text-xs font-semibold tracking-wider text-ink">
+                Garments & Accessories
+              </h2>
               <ul className="mt-4 divide-y divide-river/30">
                 {order.lines.map((l) => (
                   <li key={l.variantId} className="flex items-center gap-4 py-3">
                     {l.image ? (
-                      <div className="h-14 w-12 shrink-0 overflow-hidden rounded-[14px] bg-canvas border border-river/30">
-                        <img src={l.image} alt={l.title} className="h-full w-full object-cover" />
+                      <div className="relative h-14 w-12 shrink-0 overflow-hidden rounded-[14px] border border-river/30 bg-canvas">
+                        <Image
+                          src={l.image}
+                          alt={l.title}
+                          fill
+                          sizes="64px"
+                          className="h-full w-full object-cover"
+                        />
                       </div>
                     ) : null}
-                    <div className="flex-1 min-w-0">
+                    <div className="min-w-0 flex-1">
                       <p className="font-display text-sm font-medium text-ink">{l.title}</p>
                       <p className="text-[10px] text-ink-soft">
                         Qty {l.quantity} • {Object.values(l.options).join(' / ')}
                       </p>
                     </div>
-                    <span className="font-semibold text-ink">{formatMoney(l.unitPrice * l.quantity, MONEY)}</span>
+                    <span className="font-semibold text-ink">
+                      {formatMoney(l.unitPrice * l.quantity, MONEY)}
+                    </span>
                   </li>
                 ))}
               </ul>
@@ -384,7 +413,7 @@ export function AccountOrderDetailView({ id }: { id: string }) {
 
             {/* Address & Payment */}
             <div className="grid grid-cols-1 gap-6 border-t border-river/30 pt-6 sm:grid-cols-2">
-              <div className="rounded-[24px] bg-canvas/70 border border-river/30 p-4 space-y-1">
+              <div className="space-y-1 rounded-[24px] border border-river/30 bg-canvas/70 p-4">
                 <span className="font-semibold text-ink">DESTINATION</span>
                 <p className="text-ink">{order.address.name}</p>
                 <p className="text-ink-soft">{order.address.line1}</p>
@@ -393,7 +422,7 @@ export function AccountOrderDetailView({ id }: { id: string }) {
                 </p>
               </div>
 
-              <div className="rounded-[24px] bg-canvas/70 border border-river/30 p-4 space-y-1">
+              <div className="space-y-1 rounded-[24px] border border-river/30 bg-canvas/70 p-4">
                 <span className="font-semibold text-ink">FINANCIAL SUMMARY</span>
                 <div className="flex justify-between text-ink-soft">
                   <span>Subtotal</span>
@@ -403,7 +432,7 @@ export function AccountOrderDetailView({ id }: { id: string }) {
                   <span>Delivery</span>
                   <span>{formatMoney(order.totals.shipping, MONEY)}</span>
                 </div>
-                <div className="flex justify-between border-t border-river/30 pt-1 text-ink font-semibold">
+                <div className="flex justify-between border-t border-river/30 pt-1 font-semibold text-ink">
                   <span>Total</span>
                   <span>{formatMoney(order.totals.total, MONEY)}</span>
                 </div>
@@ -460,7 +489,7 @@ export function AccountAddressesView() {
           <div>
             <div className="flex items-center gap-2">
               <Leaf size={16} className="text-brand" />
-              <span className="font-mono text-xs uppercase tracking-widest text-ink-soft">
+              <span className="font-mono text-xs tracking-widest text-ink-soft uppercase">
                 DELIVERY DESTINATIONS
               </span>
             </div>
@@ -475,78 +504,116 @@ export function AccountAddressesView() {
         </div>
 
         {isAdding ? (
-          <div className="soft-panel rounded-[32px] bg-surface/90 border border-river/30 p-6 sm:p-8 shadow-sm">
+          <div className="soft-panel rounded-[32px] border border-river/30 bg-surface/90 p-6 shadow-sm sm:p-8">
             <h2 className="font-display text-xl font-normal text-ink">Add New Sanctuary</h2>
             <form onSubmit={handleCreate} className="mt-4 space-y-4">
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                 <div>
-                  <label className="mb-1 block font-mono text-xs uppercase tracking-wider text-ink-soft">
+                  <label
+                    htmlFor="account-sanctuary-recipient-name"
+                    className="mb-1 block font-mono text-xs tracking-wider text-ink-soft uppercase"
+                  >
                     Sanctuary / Recipient Name *
                   </label>
                   <input
+                    id="account-sanctuary-recipient-name"
                     type="text"
                     required
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     placeholder="e.g. Astrid Lindgren"
-                    className="w-full rounded-[16px] bg-canvas border border-river/40 p-3 font-text text-sm text-ink placeholder:text-ink-faint focus:border-ink focus:outline-none"
+                    className="w-full rounded-[16px] border border-river/40 bg-canvas p-3 font-text text-sm text-ink placeholder:text-ink-faint focus:border-ink focus:outline-none"
                   />
                 </div>
                 <div>
-                  <label className="mb-1 block font-mono text-xs uppercase tracking-wider text-ink-soft">
+                  <label
+                    htmlFor="account-street-address"
+                    className="mb-1 block font-mono text-xs tracking-wider text-ink-soft uppercase"
+                  >
                     Street Address *
                   </label>
                   <input
+                    id="account-street-address"
                     type="text"
                     required
                     value={line1}
                     onChange={(e) => setLine1(e.target.value)}
                     placeholder="e.g. Fjordvej 42"
-                    className="w-full rounded-[16px] bg-canvas border border-river/40 p-3 font-text text-sm text-ink placeholder:text-ink-faint focus:border-ink focus:outline-none"
+                    className="w-full rounded-[16px] border border-river/40 bg-canvas p-3 font-text text-sm text-ink placeholder:text-ink-faint focus:border-ink focus:outline-none"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
                 <div>
-                  <label className="mb-1 block font-mono text-xs uppercase tracking-wider text-ink-soft">
+                  <label
+                    htmlFor="account-city"
+                    className="mb-1 block font-mono text-xs tracking-wider text-ink-soft uppercase"
+                  >
                     City *
                   </label>
                   <input
+                    id="account-city"
                     type="text"
                     required
                     value={city}
                     onChange={(e) => setCity(e.target.value)}
                     placeholder="Copenhagen"
-                    className="w-full rounded-[16px] bg-canvas border border-river/40 p-3 font-text text-sm text-ink placeholder:text-ink-faint focus:border-ink focus:outline-none"
+                    className="w-full rounded-[16px] border border-river/40 bg-canvas p-3 font-text text-sm text-ink placeholder:text-ink-faint focus:border-ink focus:outline-none"
                   />
                 </div>
                 <div>
-                  <label className="mb-1 block font-mono text-xs uppercase tracking-wider text-ink-soft">
+                  <label
+                    htmlFor="account-region-state"
+                    className="mb-1 block font-mono text-xs tracking-wider text-ink-soft uppercase"
+                  >
                     Region / State *
                   </label>
                   <input
+                    id="account-region-state"
                     type="text"
                     required
                     value={region}
                     onChange={(e) => setRegion(e.target.value)}
                     placeholder="Capital Region"
-                    className="w-full rounded-[16px] bg-canvas border border-river/40 p-3 font-text text-sm text-ink placeholder:text-ink-faint focus:border-ink focus:outline-none"
+                    className="w-full rounded-[16px] border border-river/40 bg-canvas p-3 font-text text-sm text-ink placeholder:text-ink-faint focus:border-ink focus:outline-none"
                   />
                 </div>
                 <div>
-                  <label className="mb-1 block font-mono text-xs uppercase tracking-wider text-ink-soft">
+                  <label
+                    htmlFor="account-postal-code"
+                    className="mb-1 block font-mono text-xs tracking-wider text-ink-soft uppercase"
+                  >
                     Postal Code *
                   </label>
                   <input
+                    id="account-postal-code"
                     type="text"
                     required
                     value={postcode}
                     onChange={(e) => setPostcode(e.target.value)}
                     placeholder="1050"
-                    className="w-full rounded-[16px] bg-canvas border border-river/40 p-3 font-mono text-xs text-ink placeholder:text-ink-faint focus:border-ink focus:outline-none"
+                    className="w-full rounded-[16px] border border-river/40 bg-canvas p-3 font-mono text-xs text-ink placeholder:text-ink-faint focus:border-ink focus:outline-none"
                   />
                 </div>
+              </div>
+
+              <div>
+                <label
+                  htmlFor="account-country"
+                  className="mb-1 block font-mono text-xs tracking-wider text-ink-soft uppercase"
+                >
+                  Country *
+                </label>
+                <input
+                  id="account-country"
+                  type="text"
+                  required
+                  value={country}
+                  onChange={(e) => setCountry(e.target.value)}
+                  placeholder="Germany"
+                  className="w-full rounded-[16px] border border-river/40 bg-canvas p-3 font-mono text-xs text-ink placeholder:text-ink-faint focus:border-ink focus:outline-none"
+                />
               </div>
 
               <div className="flex items-center gap-2 pt-2">
@@ -557,7 +624,10 @@ export function AccountAddressesView() {
                   onChange={(e) => setIsDefault(e.target.checked)}
                   className="h-4 w-4 rounded accent-brand"
                 />
-                <label htmlFor="def" className="font-mono text-xs text-ink-soft uppercase cursor-pointer">
+                <label
+                  htmlFor="def"
+                  className="cursor-pointer font-mono text-xs text-ink-soft uppercase"
+                >
                   Set as primary sanctuary destination
                 </label>
               </div>
@@ -566,7 +636,12 @@ export function AccountAddressesView() {
                 <Button type="submit" size="sm">
                   Save Sanctuary
                 </Button>
-                <Button type="button" variant="secondary" size="sm" onClick={() => setIsAdding(false)}>
+                <Button
+                  type="button"
+                  variant="secondary"
+                  size="sm"
+                  onClick={() => setIsAdding(false)}
+                >
                   Cancel
                 </Button>
               </div>
@@ -578,7 +653,7 @@ export function AccountAddressesView() {
           {addresses.map((addr) => (
             <div
               key={addr.id}
-              className={`soft-panel rounded-[28px] bg-surface/90 border border-river/30 p-6 font-mono text-xs uppercase space-y-3 shadow-sm ${
+              className={`soft-panel space-y-3 rounded-[28px] border border-river/30 bg-surface/90 p-6 font-mono text-xs uppercase shadow-sm ${
                 addr.isDefault ? 'border-2 border-brand' : ''
               }`}
             >
@@ -591,7 +666,7 @@ export function AccountAddressesView() {
                 ) : null}
               </div>
 
-              <div className="text-ink-soft space-y-0.5">
+              <div className="space-y-0.5 text-ink-soft">
                 <p>{addr.line1}</p>
                 {addr.line2 ? <p>{addr.line2}</p> : null}
                 <p>
@@ -605,7 +680,7 @@ export function AccountAddressesView() {
                   <button
                     type="button"
                     onClick={() => setDefaultAddress(addr.id!)}
-                    className="text-[11px] text-brand hover:underline font-semibold"
+                    className="text-[11px] font-semibold text-brand hover:underline"
                   >
                     Set as Primary
                   </button>
@@ -618,7 +693,7 @@ export function AccountAddressesView() {
                   <button
                     type="button"
                     onClick={() => deleteAddress(addr.id!)}
-                    className="text-danger hover:underline text-[11px]"
+                    className="text-[11px] text-danger hover:underline"
                   >
                     Delete
                   </button>
@@ -649,21 +724,19 @@ export function AccountProfileView() {
 
   return (
     <AuthGuard>
-      <div className="soft-panel max-w-2xl rounded-[32px] bg-surface/90 border border-river/30 p-8 space-y-6 shadow-sm">
+      <div className="soft-panel max-w-2xl space-y-6 rounded-[32px] border border-river/30 bg-surface/90 p-8 shadow-sm">
         <div className="border-b border-river/30 pb-4">
           <div className="flex items-center gap-2">
             <Leaf size={16} className="text-brand" />
-            <span className="font-mono text-xs uppercase tracking-widest text-ink-soft">
+            <span className="font-mono text-xs tracking-widest text-ink-soft uppercase">
               PATRON SPECIFICATION
             </span>
           </div>
-          <h1 className="mt-1 font-display text-3xl font-normal text-ink">
-            Profile Preferences
-          </h1>
+          <h1 className="mt-1 font-display text-3xl font-normal text-ink">Profile Preferences</h1>
         </div>
 
         {saved ? (
-          <div className="rounded-[16px] bg-canvas border border-river/30 p-3 font-mono text-xs font-semibold uppercase text-brand flex items-center gap-2">
+          <div className="flex items-center gap-2 rounded-[16px] border border-river/30 bg-canvas p-3 font-mono text-xs font-semibold text-brand uppercase">
             <Check size={16} />
             Preferences updated in sanctuary registry.
           </div>
@@ -671,40 +744,52 @@ export function AccountProfileView() {
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="mb-1 block font-mono text-xs uppercase tracking-wider text-ink-soft">
+            <label
+              htmlFor="account-registered-email-immutable"
+              className="mb-1 block font-mono text-xs tracking-wider text-ink-soft uppercase"
+            >
               Registered Email (Immutable)
             </label>
             <input
+              id="account-registered-email-immutable"
               type="email"
               disabled
               value={customer?.email ?? ''}
-              className="w-full rounded-[16px] bg-canvas/50 border border-river/30 p-3 font-text text-sm text-ink-faint cursor-not-allowed"
+              className="w-full cursor-not-allowed rounded-[16px] border border-river/30 bg-canvas/50 p-3 font-text text-sm text-ink-faint"
             />
           </div>
 
           <div>
-            <label className="mb-1 block font-mono text-xs uppercase tracking-wider text-ink-soft">
+            <label
+              htmlFor="account-full-name"
+              className="mb-1 block font-mono text-xs tracking-wider text-ink-soft uppercase"
+            >
               Full Name
             </label>
             <input
+              id="account-full-name"
               type="text"
               required
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="w-full rounded-[16px] bg-canvas border border-river/40 p-3 font-text text-sm text-ink focus:border-ink focus:outline-none"
+              className="w-full rounded-[16px] border border-river/40 bg-canvas p-3 font-text text-sm text-ink focus:border-ink focus:outline-none"
             />
           </div>
 
           <div>
-            <label className="mb-1 block font-mono text-xs uppercase tracking-wider text-ink-soft">
+            <label
+              htmlFor="account-phone-number"
+              className="mb-1 block font-mono text-xs tracking-wider text-ink-soft uppercase"
+            >
               Phone Number
             </label>
             <input
+              id="account-phone-number"
               type="tel"
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
               placeholder="+45 20 12 34 56"
-              className="w-full rounded-[16px] bg-canvas border border-river/40 p-3 font-text text-sm text-ink focus:border-ink focus:outline-none"
+              className="w-full rounded-[16px] border border-river/40 bg-canvas p-3 font-text text-sm text-ink focus:border-ink focus:outline-none"
             />
           </div>
 

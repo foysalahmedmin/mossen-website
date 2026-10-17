@@ -28,41 +28,49 @@ export default async function HomePage() {
   ).filter((post): post is JournalPost => post !== null)
 
   return (
-    <div className="space-y-16 md:space-y-28 pb-16">
+    <div className="page-container space-y-16 pb-16 md:space-y-28">
       {/* 1. Hero Section */}
       <section aria-label="Brand statement" className="relative overflow-hidden pt-4 md:pt-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-          <div className="lg:col-span-7 space-y-6">
-            <div className="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-4 py-1.5 font-serif text-xs text-brand">
+        <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-12 lg:gap-12">
+          <div className="space-y-6 lg:col-span-7">
+            <div className="border-border inline-flex items-center gap-2 rounded-full border bg-surface px-4 py-1.5 font-serif text-xs text-brand">
               <Leaf size={14} className="text-brand" />
               <span>{home.hero.eyecatch}</span>
             </div>
 
-            <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-ink leading-[1.08]">
+            <h1 className="font-display text-4xl leading-[1.08] font-extrabold tracking-tight text-ink sm:text-5xl lg:text-6xl">
               {home.hero.headline}
             </h1>
 
-            <p className="max-w-xl font-text text-base md:text-lg text-ink-soft leading-relaxed">
+            <p className="max-w-xl font-text text-base leading-relaxed text-ink-soft md:text-lg">
               {home.hero.body}
             </p>
 
-            <div className="pt-2 flex flex-wrap items-center gap-4">
+            <div className="flex flex-wrap items-center gap-4 pt-2">
               <Link href={home.hero.cta.href}>
-                <Button variant="primary" size="lg" className="rounded-full px-8 font-serif text-sm shadow-sm">
+                <Button
+                  variant="primary"
+                  size="lg"
+                  className="rounded-full px-8 font-serif text-sm shadow-sm"
+                >
                   <span>{home.hero.cta.label}</span>
                   <ArrowRight size={16} className="ml-2" />
                 </Button>
               </Link>
               <Link href="/collections">
-                <Button variant="secondary" size="lg" className="rounded-full px-7 font-serif text-sm">
+                <Button
+                  variant="secondary"
+                  size="lg"
+                  className="rounded-full px-7 font-serif text-sm"
+                >
                   Atelier Collections
                 </Button>
               </Link>
             </div>
           </div>
 
-          <div className="lg:col-span-5 relative">
-            <div className="rounded-[36px] border border-border bg-surface p-3 shadow-lg">
+          <div className="relative lg:col-span-5">
+            <div className="border-border rounded-[36px] border bg-surface p-3 shadow-lg">
               <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[26px]">
                 <Image
                   src={home.hero.media.src}
@@ -81,31 +89,30 @@ export default async function HomePage() {
 
       {/* 2. Featured Rail */}
       <section aria-labelledby="featured-heading" className="space-y-8">
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+        <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
           <div>
-            <h2 id="featured-heading" className="font-display text-2xl md:text-3xl font-bold tracking-tight text-ink">
+            <h2
+              id="featured-heading"
+              className="font-display text-2xl font-bold tracking-tight text-ink md:text-3xl"
+            >
               {home.featuredRail.title}
             </h2>
-            <p className="mt-1 font-text text-sm md:text-base text-ink-soft">
+            <p className="mt-1 font-text text-sm text-ink-soft md:text-base">
               {home.featuredRail.subtitle}
             </p>
           </div>
           <Link
             href="/shop"
-            className="group inline-flex items-center gap-1.5 font-serif text-xs font-semibold text-ink hover:text-brand transition"
+            className="group inline-flex items-center gap-1.5 font-serif text-xs font-semibold text-ink transition hover:text-brand"
           >
             <span>All Atelier Pieces</span>
             <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />
           </Link>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+        <div className="grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-6">
           {featuredProducts.map((product, idx) => (
-            <ConnectedProductCard
-              key={product.id}
-              product={product}
-              priority={idx < 2}
-            />
+            <ConnectedProductCard key={product.id} product={product} priority={idx < 2} />
           ))}
         </div>
       </section>
@@ -113,20 +120,23 @@ export default async function HomePage() {
       {/* 3. Category Entry Points */}
       <section aria-labelledby="categories-heading" className="space-y-8">
         <div>
-          <h2 id="categories-heading" className="font-display text-2xl md:text-3xl font-bold tracking-tight text-ink">
+          <h2
+            id="categories-heading"
+            className="font-display text-2xl font-bold tracking-tight text-ink md:text-3xl"
+          >
             Craft Disciplines
           </h2>
-          <p className="mt-1 font-text text-sm md:text-base text-ink-soft">
+          <p className="mt-1 font-text text-sm text-ink-soft md:text-base">
             Raw unbleached linen garments, gotland wool knitwear, and hand-cast pebble jewelry
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
           {home.categories.map((cat) => (
             <Link
               key={cat.slug}
               href={`/shop/${cat.slug}`}
-              className="group relative flex flex-col overflow-hidden rounded-[32px] border border-border bg-surface p-3 transition-all duration-300 hover:-translate-y-1 shadow-sm"
+              className="group border-border relative flex flex-col overflow-hidden rounded-[32px] border bg-surface p-3 shadow-sm transition-all duration-300 hover:-translate-y-1"
             >
               <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[22px] bg-canvas">
                 <Image
@@ -138,9 +148,9 @@ export default async function HomePage() {
                   className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-canvas/80 via-transparent to-transparent" />
-                <div className="absolute bottom-4 left-4 right-4 text-ink">
+                <div className="absolute right-4 bottom-4 left-4 text-ink">
                   <h3 className="font-display text-xl font-bold tracking-tight">{cat.title}</h3>
-                  <p className="font-serif text-xs text-ink-soft mt-0.5">{cat.subtitle}</p>
+                  <p className="mt-0.5 font-serif text-xs text-ink-soft">{cat.subtitle}</p>
                 </div>
               </div>
             </Link>
@@ -151,10 +161,10 @@ export default async function HomePage() {
       {/* 4. Editorial Spotlight */}
       <section
         aria-labelledby="editorial-heading"
-        className="relative overflow-hidden rounded-[36px] border border-border bg-surface p-6 md:p-12 shadow-sm"
+        className="border-border relative overflow-hidden rounded-[36px] border bg-surface p-6 shadow-sm md:p-12"
       >
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-          <div className="lg:col-span-5 relative aspect-[4/3] lg:aspect-square w-full overflow-hidden rounded-[26px]">
+        <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-12">
+          <div className="relative aspect-[4/3] w-full overflow-hidden rounded-[26px] lg:col-span-5 lg:aspect-square">
             <Image
               src={home.editorial.media.src}
               alt={home.editorial.media.alt}
@@ -165,25 +175,30 @@ export default async function HomePage() {
             />
           </div>
 
-          <div className="lg:col-span-7 space-y-6">
-            <span className="font-serif text-xs text-brand">
-              Field Chronicle
-            </span>
-            <h2 id="editorial-heading" className="font-display text-2xl md:text-3xl font-bold tracking-tight text-ink">
+          <div className="space-y-6 lg:col-span-7">
+            <span className="font-serif text-xs text-brand">Field Chronicle</span>
+            <h2
+              id="editorial-heading"
+              className="font-display text-2xl font-bold tracking-tight text-ink md:text-3xl"
+            >
               {home.editorial.title}
             </h2>
             {home.editorial.quote ? (
-              <blockquote className="border-l-2 border-brand pl-4 font-serif text-base italic text-ink/90">
+              <blockquote className="border-l-2 border-brand pl-4 font-serif text-base text-ink/90 italic">
                 &ldquo;{home.editorial.quote}&rdquo;
               </blockquote>
             ) : null}
-            <p className="font-text text-sm md:text-base text-ink-soft leading-relaxed">
+            <p className="font-text text-sm leading-relaxed text-ink-soft md:text-base">
               {home.editorial.body}
             </p>
             {home.editorial.cta ? (
               <div>
                 <Link href={home.editorial.cta.href}>
-                  <Button variant="secondary" size="md" className="rounded-full px-6 font-serif text-xs">
+                  <Button
+                    variant="secondary"
+                    size="md"
+                    className="rounded-full px-6 font-serif text-xs"
+                  >
                     <span>{home.editorial.cta.label}</span>
                     <ArrowRight size={14} className="ml-1.5" />
                   </Button>
@@ -197,31 +212,32 @@ export default async function HomePage() {
       {/* 5. Mirror Try Explainer */}
       <section
         aria-labelledby="explainer-heading"
-        className="relative overflow-hidden rounded-[36px] border border-border bg-surface p-8 md:p-14 space-y-10 shadow-sm"
+        className="border-border relative space-y-10 overflow-hidden rounded-[36px] border bg-surface p-8 shadow-sm md:p-14"
       >
         <div className="max-w-2xl space-y-2">
-          <span className="font-serif text-xs text-brand">
-            Virtual Natural Fitting
-          </span>
-          <h2 id="explainer-heading" className="font-display text-2xl md:text-3xl font-bold tracking-tight text-ink">
+          <span className="font-serif text-xs text-brand">Virtual Natural Fitting</span>
+          <h2
+            id="explainer-heading"
+            className="font-display text-2xl font-bold tracking-tight text-ink md:text-3xl"
+          >
             {home.mirrorTryExplainer.title}
           </h2>
-          <p className="font-text text-sm md:text-base text-ink-soft">
+          <p className="font-text text-sm text-ink-soft md:text-base">
             {home.mirrorTryExplainer.subtitle}
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
           {home.mirrorTryExplainer.steps.map((step) => (
             <div
               key={step.step}
-              className="rounded-[26px] border border-border bg-canvas p-6 space-y-3 relative overflow-hidden"
+              className="border-border relative space-y-3 overflow-hidden rounded-[26px] border bg-canvas p-6"
             >
-              <div className="flex h-10 w-10 items-center justify-center rounded-full border border-border bg-surface font-serif text-sm font-semibold text-brand">
+              <div className="border-border flex h-10 w-10 items-center justify-center rounded-full border bg-surface font-serif text-sm font-semibold text-brand">
                 0{step.step}
               </div>
               <h3 className="font-display text-base font-bold text-ink">{step.title}</h3>
-              <p className="font-text text-xs md:text-sm text-ink-soft leading-relaxed">
+              <p className="font-text text-xs leading-relaxed text-ink-soft md:text-sm">
                 {step.description}
               </p>
             </div>
@@ -230,7 +246,11 @@ export default async function HomePage() {
 
         <div className="pt-2">
           <Link href="/shop">
-            <Button variant="primary" size="md" className="rounded-full px-7 font-serif text-sm shadow-sm">
+            <Button
+              variant="primary"
+              size="md"
+              className="rounded-full px-7 font-serif text-sm shadow-sm"
+            >
               <span>{home.mirrorTryExplainer.cta.label}</span>
               <ArrowRight size={14} className="ml-1.5" />
             </Button>
@@ -241,24 +261,27 @@ export default async function HomePage() {
       {/* 6. Journal Teasers */}
       <section aria-labelledby="journal-heading" className="space-y-8">
         <div className="flex items-center justify-between">
-          <h2 id="journal-heading" className="font-display text-2xl md:text-3xl font-bold tracking-tight text-ink">
+          <h2
+            id="journal-heading"
+            className="font-display text-2xl font-bold tracking-tight text-ink md:text-3xl"
+          >
             {home.journalTeasers.title}
           </h2>
           <Link
             href="/journal"
-            className="group inline-flex items-center gap-1.5 font-serif text-xs font-semibold text-ink hover:text-brand transition"
+            className="group inline-flex items-center gap-1.5 font-serif text-xs font-semibold text-ink transition hover:text-brand"
           >
             <span>All Field Notes</span>
             <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />
           </Link>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
           {teaserPosts.map((post) => (
             <Link
               key={post.slug}
               href={`/journal/${post.slug}`}
-              className="group relative flex flex-col overflow-hidden rounded-[32px] border border-border bg-surface p-4 transition-all duration-300 hover:-translate-y-1 shadow-sm"
+              className="group border-border relative flex flex-col overflow-hidden rounded-[32px] border bg-surface p-4 shadow-sm transition-all duration-300 hover:-translate-y-1"
             >
               <div className="relative aspect-[16/9] w-full overflow-hidden rounded-[24px] bg-canvas">
                 <Image
@@ -274,10 +297,10 @@ export default async function HomePage() {
                 <span className="font-serif text-xs text-ink-soft">
                   {post.readingMinutes} min read
                 </span>
-                <h3 className="font-display text-lg font-bold text-ink group-hover:text-brand transition">
+                <h3 className="font-display text-lg font-bold text-ink transition group-hover:text-brand">
                   {post.title}
                 </h3>
-                <p className="line-clamp-2 font-text text-xs md:text-sm text-ink-soft leading-relaxed">
+                <p className="line-clamp-2 font-text text-xs leading-relaxed text-ink-soft md:text-sm">
                   {post.excerpt}
                 </p>
               </div>
