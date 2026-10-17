@@ -7,6 +7,7 @@ import { Footer } from '@/components/layout/footer'
 import { MenuSheet } from '@/components/layout/menu-sheet'
 import { OrganicSearchSheet } from '@/components/layout/organic-search-sheet'
 import { UnrollingBasketSheet } from '@/components/layout/unrolling-basket-sheet'
+import { PageFade } from '@/lib/motion'
 import { useCartStore } from '@/stores/cart-store'
 import { useUiStore } from '@/stores/ui-store'
 import { useWishlistStore } from '@/stores/wishlist-store'
@@ -28,7 +29,7 @@ export default function StorefrontLayout({ children }: { children: React.ReactNo
         onOpenSearch={() => openPanel('search')}
       />
       <main id="main-content" tabIndex={-1} className="flex-1 focus:outline-none">
-        {children}
+        <PageFade>{children}</PageFade>
       </main>
       <Footer />
       <MenuSheet open={menuOpen} onOpenChange={setMenuOpen} />
