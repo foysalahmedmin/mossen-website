@@ -53,21 +53,23 @@ export function CheckoutView() {
   // Pre-fill from session once hydrated
   useEffect(() => {
     if (!hydrated) return
-    if (customer) {
-      setEmail(customer.email)
-      setName(customer.name)
-      setCardholderName(customer.name)
-    }
-    if (defaultAddress) {
-      setName(defaultAddress.name)
-      setLine1(defaultAddress.line1)
-      setLine2(defaultAddress.line2 ?? '')
-      setCity(defaultAddress.city)
-      setRegion(defaultAddress.region)
-      setPostcode(defaultAddress.postcode)
-      setCountry(defaultAddress.country)
-      setPhone(defaultAddress.phone ?? '')
-    }
+    Promise.resolve().then(() => {
+      if (customer) {
+        setEmail(customer.email)
+        setName(customer.name)
+        setCardholderName(customer.name)
+      }
+      if (defaultAddress) {
+        setName(defaultAddress.name)
+        setLine1(defaultAddress.line1)
+        setLine2(defaultAddress.line2 ?? '')
+        setCity(defaultAddress.city)
+        setRegion(defaultAddress.region)
+        setPostcode(defaultAddress.postcode)
+        setCountry(defaultAddress.country)
+        setPhone(defaultAddress.phone ?? '')
+      }
+    })
   }, [hydrated, customer, defaultAddress])
 
   // Recalculate quote

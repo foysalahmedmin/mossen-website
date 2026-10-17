@@ -174,7 +174,7 @@ export default async function HomePage() {
             </h2>
             {home.editorial.quote ? (
               <blockquote className="border-l-2 border-brand pl-4 font-serif text-base italic text-ink/90">
-                "{home.editorial.quote}"
+                &ldquo;{home.editorial.quote}&rdquo;
               </blockquote>
             ) : null}
             <p className="font-text text-sm md:text-base text-ink-soft leading-relaxed">

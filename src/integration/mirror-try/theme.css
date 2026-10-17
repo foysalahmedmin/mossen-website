@@ -1,14 +1,32 @@
 /**
  * MOSSEN Mirror Try Theme: "The Window"
- * In Phase 2: only the trigger button is themed.
- * Treatment: Lichen pebble chip with moss-deep text and organic lift.
+ * Aesthetics: Arch-shaped window frame, natural linen paper backdrop,
+ * lichen pebble-shaped controls, gentle organic bloom transition.
  */
 
+:root {
+  --mt-surface: #f5f4ef;
+  --mt-surface-card: #f9f8f4;
+  --mt-ink: #243825;
+  --mt-ink-muted: #536354;
+  --mt-accent: #c5d4b8;
+  --mt-accent-hover: #b6c8a7;
+  --mt-moss-deep: #1d2e1e;
+  --mt-radius-arch: 180px 180px 24px 24px;
+  --mt-radius-window: 24px;
+  --mt-radius-pebble: 28px 38px 30px 42px / 38px 28px 44px 32px;
+  --mt-float: 0 16px 36px -8px rgb(36 56 37 / 0.12), 0 0 0 1px rgb(36 56 37 / 0.06);
+  --mt-float-sm: 0 4px 14px -2px rgb(36 56 37 / 0.08), 0 0 0 1px rgb(36 56 37 / 0.05);
+  --mt-ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --mt-duration: 380ms;
+}
+
+/* 1. Trigger Button */
 [data-mt-part='trigger'] {
-  background: var(--color-accent, #c5d4b8);
-  color: var(--color-moss-deep, #243825);
-  border-radius: var(--shape-pebble, 28px 38px 30px 42px / 38px 28px 44px 32px);
-  box-shadow: var(--float-sm);
+  background: var(--mt-accent);
+  color: var(--mt-moss-deep);
+  border-radius: var(--mt-radius-pebble);
+  box-shadow: var(--mt-float-sm);
   font-family: var(--font-mono, monospace);
   font-weight: 600;
   font-size: 0.75rem;
@@ -20,16 +38,17 @@
   gap: 0.5rem;
   cursor: pointer;
   user-select: none;
+  border: none;
   transition:
-    transform 400ms cubic-bezier(0.2, 0.7, 0.2, 1),
-    box-shadow 400ms cubic-bezier(0.2, 0.7, 0.2, 1),
-    background 300ms ease;
+    transform var(--mt-duration) var(--mt-ease),
+    box-shadow var(--mt-duration) var(--mt-ease),
+    background 240ms ease;
 }
 
 [data-mt-part='trigger']:hover {
   transform: translateY(-2px) scale(1.02);
-  box-shadow: var(--float);
-  background: #ccdcb0;
+  box-shadow: var(--mt-float);
+  background: var(--mt-accent-hover);
 }
 
 [data-mt-part='trigger']:active,
@@ -38,12 +57,371 @@
 }
 
 [data-mt-part='trigger']:focus-visible {
-  outline: 2px solid var(--color-focus, #2d484e);
+  outline: 2px solid var(--mt-moss-deep);
   outline-offset: 2px;
 }
 
-@media (forced-colors: active) {
-  [data-mt-part='trigger'] {
-    border: 1px solid CanvasText !important;
+/* 2. Modal Overlay */
+[data-mt-part='overlay'] {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: rgb(36 56 37 / 0.4);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  animation: mt-linen-fade 320ms var(--mt-ease);
+}
+
+@keyframes mt-linen-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* 3. Modal Panel ("The Window" Sanctuary) */
+[data-mt-part='panel'] {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 101;
+  width: min(94vw, 1060px);
+  max-height: 90vh;
+  overflow-y: auto;
+  border-radius: var(--mt-radius-window);
+  background: var(--mt-surface-card);
+  border: 1px solid rgb(36 56 37 / 0.1);
+  box-shadow: 0 24px 60px -12px rgb(29 46 30 / 0.22), 0 0 0 1px rgb(255 255 255 / 0.8);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  animation: mt-window-bloom 360ms var(--mt-ease);
+}
+
+@keyframes mt-window-bloom {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -48%) scale(0.96);
   }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+/* 4. Botanical Header */
+[data-mt-part='header'] {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgb(36 56 37 / 0.08);
+}
+
+.mt-header-copy .mt-title {
+  font-family: var(--font-serif, Georgia, serif);
+  font-size: 1.375rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--mt-moss-deep);
+}
+
+.mt-header-copy .mt-subtitle {
+  font-size: 0.8125rem;
+  color: var(--mt-ink-muted);
+}
+
+[data-mt-part='close'] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--mt-surface);
+  border: 1px solid rgb(36 56 37 / 0.12);
+  color: var(--mt-moss-deep);
+  cursor: pointer;
+  transition: all 200ms ease;
+}
+
+[data-mt-part='close']:hover {
+  background: var(--mt-accent);
+  transform: rotate(90deg);
+}
+
+/* 5. Grid Layout */
+.mt-content-body {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.75rem;
+}
+
+@media (min-width: 768px) {
+  .mt-content-body {
+    grid-template-columns: 1.15fr 0.85fr;
+  }
+}
+
+/* 6. Viewport ("The Arch Window") */
+[data-mt-part='viewport'] {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  min-height: 460px;
+  max-height: 600px;
+  border-radius: var(--mt-radius-arch);
+  overflow: hidden;
+  background: linear-gradient(180deg, #e7ebd9 0%, #edf1e4 40%, #f4f7ed 100%);
+  border: 2px solid rgb(255 255 255 / 0.9);
+  box-shadow: inset 0 4px 16px rgb(36 56 37 / 0.06), 0 8px 24px -6px rgb(36 56 37 / 0.1);
+}
+
+/* Serene Bloom Flash */
+[data-mt-part='viewport'].is-flashing::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: #fdfcf7;
+  z-index: 50;
+  animation: mt-bloom-flash 160ms ease-out;
+}
+
+@keyframes mt-bloom-flash {
+  0% { opacity: 0.95; }
+  100% { opacity: 0; }
+}
+
+/* Gentle Bloom Outline Sweep */
+.mt-scan-sweep {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, transparent 0%, #a4bd94 30%, #c5d4b8 50%, #8ea87d 70%, transparent 100%);
+  box-shadow: 0 0 16px 3px rgb(197 212 184 / 0.7);
+  z-index: 10;
+  pointer-events: none;
+  animation: mt-bloom-sweep 5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@keyframes mt-bloom-sweep {
+  0% { top: 8%; opacity: 0; }
+  25% { opacity: 0.9; }
+  75% { opacity: 0.9; }
+  100% { top: 92%; opacity: 0; }
+}
+
+/* 7. Controls Panel */
+[data-mt-part='controls'] {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+/* Mode Switcher Tabs */
+[data-mt-part='mode-selector'] {
+  display: flex;
+  gap: 0.5rem;
+  background: #edece4;
+  padding: 0.375rem;
+  border-radius: 9999px;
+}
+
+.mt-mode-tab {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.375rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 9999px;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--mt-ink-muted);
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  transition: all 200ms ease;
+}
+
+.mt-mode-tab.is-active {
+  background: #ffffff;
+  color: var(--mt-moss-deep);
+  box-shadow: 0 2px 6px rgb(36 56 37 / 0.08);
+}
+
+/* Model Selector Pebbles */
+.mt-section-label {
+  display: block;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--mt-ink-muted);
+  margin-bottom: 0.5rem;
+}
+
+.mt-model-pills {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+}
+
+.mt-model-pill {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.6rem 0.25rem;
+  border-radius: var(--mt-radius-pebble);
+  background: #ffffff;
+  border: 1px solid rgb(36 56 37 / 0.08);
+  box-shadow: var(--mt-float-sm);
+  cursor: pointer;
+  transition: all 240ms var(--mt-ease);
+}
+
+.mt-model-pill.is-active {
+  background: var(--mt-accent);
+  border-color: var(--mt-moss-deep);
+  transform: translateY(-2px);
+}
+
+.mt-model-name {
+  font-family: var(--font-serif, Georgia, serif);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--mt-moss-deep);
+}
+
+.mt-model-height {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.625rem;
+  color: var(--mt-ink-muted);
+}
+
+/* Size Recommendation Badge */
+[data-mt-part='size'] {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  margin-top: 0.5rem;
+  padding: 0.375rem 0.75rem;
+  border-radius: 9999px;
+  background: rgb(197 212 184 / 0.3);
+  color: var(--mt-moss-deep);
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+/* Variant Chips */
+.mt-variant-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.mt-variant-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.4rem 0.85rem;
+  border-radius: 9999px;
+  background: #ffffff;
+  border: 1px solid rgb(36 56 37 / 0.1);
+  font-family: var(--font-mono, monospace);
+  font-size: 0.75rem;
+  color: var(--mt-moss-deep);
+  cursor: pointer;
+  transition: all 180ms ease;
+}
+
+.mt-variant-chip.is-active {
+  background: var(--mt-moss-deep);
+  color: #ffffff;
+  border-color: var(--mt-moss-deep);
+}
+
+/* Capture Look Button */
+[data-mt-part='capture'] .mt-capture-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.625rem;
+  border-radius: 9999px;
+  background: #ffffff;
+  border: 1px solid rgb(36 56 37 / 0.12);
+  color: var(--mt-moss-deep);
+  font-family: var(--font-mono, monospace);
+  font-weight: 600;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 200ms ease;
+}
+
+[data-mt-part='capture'] .mt-capture-btn:hover {
+  background: var(--mt-accent);
+  transform: translateY(-1px);
+}
+
+/* Primary Action: ADD TO BASKET */
+.mt-btn-primary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.85rem 1.5rem;
+  border-radius: 9999px;
+  background: var(--mt-moss-deep);
+  color: #ffffff;
+  border: none;
+  font-family: var(--font-serif, Georgia, serif);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  box-shadow: 0 4px 16px -2px rgb(36 56 37 / 0.3);
+  cursor: pointer;
+  transition: all var(--mt-duration) var(--mt-ease);
+}
+
+.mt-btn-primary:hover {
+  background: #2f4830;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px -2px rgb(36 56 37 / 0.4);
+}
+
+.mt-btn-ghost {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--mt-ink-muted);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+}
+
+.mt-btn-ghost:hover {
+  color: var(--mt-moss-deep);
+}
+
+.mt-btn-secondary,
+.mt-btn-sm,
+.mt-btn-block {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.6875rem;
+  border-radius: 9999px;
+  background: #ffffff;
+  border: 1px solid rgb(36 56 37 / 0.1);
+  color: var(--mt-moss-deep);
+  padding: 0.4rem 0.75rem;
+  cursor: pointer;
 }
