@@ -9,11 +9,25 @@ import { brand } from '@/config/brand'
 import { routes } from '@/config/routes'
 import { formatMoney } from '@/domain'
 import { quoteCartAction } from '@/features/cart/actions'
-import type { Quote } from '@/features/cart/quote'
+import type { Quote, QuoteLine } from '@/features/cart/quote'
+import { TryOnTrigger } from '@/integration/mirror-try'
 import { useCartStore } from '@/stores/cart-store'
 import { useHydrated } from '@/stores/hydration'
 
 const MONEY = { currency: brand.currency, locale: brand.locale }
+
+/** Describes a cart line to the Mirror Try plugin; the cart already knows what each line is. */
+const tryOnProductOf = (line: QuoteLine) => ({
+  id: line.productId,
+  slug: line.slug,
+  name: line.name,
+  category: line.category,
+  subcategory: line.subcategory,
+  media: [line.image],
+  variants: [
+    { id: line.variantId, sku: line.variantId, options: line.options, stock: line.quantity },
+  ],
+})
 
 const LABELS = {
   quantity: { group: 'Quantity', decrease: 'Decrease quantity', increase: 'Increase quantity' },
@@ -82,9 +96,11 @@ export function CartView() {
   if (!hydrated) {
     return (
       <div className="mx-auto min-h-[60vh] max-w-5xl px-4 py-20 text-center sm:px-6 lg:px-8">
-        <div className="soft-panel mx-auto max-w-md rounded-[32px] bg-surface/90 border border-river/30 p-12">
-          <div className="h-8 w-8 animate-spin rounded-full border-2 border-ink border-t-transparent mx-auto" />
-          <p className="mt-4 font-mono text-xs uppercase tracking-widest text-ink-soft">Preparing Basket...</p>
+        <div className="soft-panel mx-auto max-w-md rounded-[32px] border border-river/30 bg-surface/90 p-12">
+          <div className="mx-auto h-8 w-8 animate-spin rounded-full border-2 border-ink border-t-transparent" />
+          <p className="mt-4 font-mono text-xs tracking-widest text-ink-soft uppercase">
+            Preparing Basket...
+          </p>
         </div>
       </div>
     )
@@ -100,16 +116,19 @@ export function CartView() {
   if (!hasItems) {
     return (
       <div className="mx-auto min-h-[60vh] max-w-5xl px-4 py-20 text-center sm:px-6 lg:px-8">
-        <div className="soft-panel mx-auto max-w-xl rounded-[36px] bg-surface/90 border border-river/30 p-12 shadow-sm">
-          <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-canvas border border-river/40">
+        <div className="soft-panel mx-auto max-w-xl rounded-[36px] border border-river/30 bg-surface/90 p-12 shadow-sm">
+          <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full border border-river/40 bg-canvas">
             <ShoppingBag size={36} className="text-ink-soft" />
           </div>
-          <span className="font-mono text-xs uppercase tracking-widest text-brand">Quiet Sanctuary</span>
+          <span className="font-mono text-xs tracking-widest text-brand uppercase">
+            Quiet Sanctuary
+          </span>
           <h1 className="mt-2 font-display text-3xl font-normal text-ink sm:text-4xl">
             Your Basket is Empty
           </h1>
           <p className="mt-4 font-text text-sm leading-relaxed text-ink-soft sm:text-base">
-            Discover unbleached organic linens, hand-spun woolens, and raw silk silhouettes crafted in harmony with nature.
+            Discover unbleached organic linens, hand-spun woolens, and raw silk silhouettes crafted
+            in harmony with nature.
           </p>
           <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <Button asChild size="lg">
@@ -134,7 +153,7 @@ export function CartView() {
         <div>
           <div className="flex items-center gap-2">
             <Leaf size={16} className="text-brand" />
-            <span className="font-mono text-xs uppercase tracking-widest text-ink-soft">
+            <span className="font-mono text-xs tracking-widest text-ink-soft uppercase">
               {itemCount} {itemCount === 1 ? 'PIECE' : 'PIECES'} IN SANCTUARY
             </span>
           </div>
@@ -144,14 +163,14 @@ export function CartView() {
         </div>
         <Link
           href={routes.shop}
-          className="font-mono text-xs uppercase tracking-wider text-ink-soft hover:text-ink transition-colors"
+          className="font-mono text-xs tracking-wider text-ink-soft uppercase transition-colors hover:text-ink"
         >
           &larr; Continue Exploring
         </Link>
       </div>
 
       {/* Sustainable Carbon-Neutral Freight Bar */}
-      <div className="soft-panel mb-8 rounded-[24px] bg-surface/90 border border-river/30 p-5">
+      <div className="soft-panel mb-8 rounded-[24px] border border-river/30 bg-surface/90 p-5">
         <div className="flex items-center justify-between font-mono text-xs uppercase">
           <span className="flex items-center gap-2 text-ink">
             <Sparkle size={14} className="text-brand" />
@@ -159,7 +178,8 @@ export function CartView() {
               <span className="font-medium text-ink">Carbon-Neutral Climate Freight Unlocked</span>
             ) : (
               <span>
-                Add <strong className="text-ink">{formatMoney(freeRemaining, MONEY)}</strong> for Free Carbon-Neutral Shipping
+                Add <strong className="text-ink">{formatMoney(freeRemaining, MONEY)}</strong> for
+                Free Carbon-Neutral Shipping
               </span>
             )}
           </span>
@@ -176,16 +196,25 @@ export function CartView() {
       <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:items-start">
         {/* Basket Lines Column */}
         <div className="lg:col-span-7">
-          <ul className="space-y-4" aria-label="Basket items list">
+          <ul className="space-y-4" aria-label="Basket items list" aria-busy={loading}>
             {quote?.lines.map((line) => (
               <CartLine
                 key={line.variantId}
                 line={line}
-                href={routes.product(line.productId)}
+                href={routes.product(line.slug)}
                 money={MONEY}
                 onQuantityChange={(vId, qty) => setQuantity(vId, qty)}
                 onRemove={(vId) => remove(vId)}
                 labels={LABELS}
+                extra={
+                  <TryOnTrigger
+                    product={tryOnProductOf(line)}
+                    variantId={line.variantId}
+                    source="cart"
+                    label="Mirror Try"
+                    className="text-xs text-ink-soft underline underline-offset-4 hover:text-ink"
+                  />
+                }
               />
             )) ?? (
               <li className="soft-panel p-8 text-center font-mono text-xs text-ink-soft">
@@ -197,53 +226,60 @@ export function CartView() {
 
         {/* Order Summary Column */}
         <div className="lg:col-span-5">
-          <div className="soft-panel sticky top-24 rounded-[32px] bg-surface/90 border border-river/30 p-6 space-y-6">
+          <div className="soft-panel sticky top-24 space-y-6 rounded-[32px] border border-river/30 bg-surface/90 p-6">
             <div className="border-b border-river/30 pb-4">
-              <span className="font-mono text-[11px] uppercase tracking-wider text-ink-soft">SUMMARY</span>
+              <span className="font-mono text-[11px] tracking-wider text-ink-soft uppercase">
+                SUMMARY
+              </span>
               <h2 className="mt-1 font-display text-2xl font-normal text-ink">Basket Totals</h2>
             </div>
 
             {/* Shipping Method Selector */}
             <div className="space-y-2">
-              <label className="block font-mono text-xs uppercase tracking-wider text-ink-soft">
+              <label className="block font-mono text-xs tracking-wider text-ink-soft uppercase">
                 Delivery Velocity
               </label>
               <div className="grid grid-cols-2 gap-2">
                 <button
                   type="button"
                   onClick={() => setShippingMethodId('standard')}
-                  className={`p-3 text-left rounded-[20px] border transition-all ${
+                  className={`rounded-[20px] border p-3 text-left transition-all ${
                     shippingMethodId === 'standard'
-                      ? 'bg-canvas border-ink text-ink font-medium shadow-sm'
+                      ? 'border-ink bg-canvas font-medium text-ink shadow-sm'
                       : 'border-river/30 text-ink-soft hover:border-river'
                   }`}
                 >
                   <div className="font-mono text-xs uppercase">Standard Quiet</div>
-                  <div className="font-mono text-[11px] text-ink-soft mt-1">3–5 days</div>
+                  <div className="mt-1 font-mono text-[11px] text-ink-soft">3–5 days</div>
                 </button>
                 <button
                   type="button"
                   onClick={() => setShippingMethodId('express')}
-                  className={`p-3 text-left rounded-[20px] border transition-all ${
+                  className={`rounded-[20px] border p-3 text-left transition-all ${
                     shippingMethodId === 'express'
-                      ? 'bg-canvas border-ink text-ink font-medium shadow-sm'
+                      ? 'border-ink bg-canvas font-medium text-ink shadow-sm'
                       : 'border-river/30 text-ink-soft hover:border-river'
                   }`}
                 >
                   <div className="font-mono text-xs uppercase">Priority Courier</div>
-                  <div className="font-mono text-[11px] text-ink-soft mt-1">1–2 days</div>
+                  <div className="mt-1 font-mono text-[11px] text-ink-soft">1–2 days</div>
                 </button>
               </div>
             </div>
 
             {/* Promo Code Form */}
             <div className="space-y-2">
-              <label htmlFor="promo" className="block font-mono text-xs uppercase tracking-wider text-ink-soft">
+              <label
+                htmlFor="promo"
+                className="block font-mono text-xs tracking-wider text-ink-soft uppercase"
+              >
                 Botanical Courtesy Code
               </label>
               {appliedPromo ? (
-                <div className="flex items-center justify-between rounded-[16px] bg-canvas border border-river/30 px-3 py-2">
-                  <span className="font-mono text-xs uppercase text-brand font-semibold">{appliedPromo} APPLIED</span>
+                <div className="flex items-center justify-between rounded-[16px] border border-river/30 bg-canvas px-3 py-2">
+                  <span className="font-mono text-xs font-semibold text-brand uppercase">
+                    {appliedPromo} APPLIED
+                  </span>
                   <button
                     type="button"
                     onClick={handleRemovePromo}
@@ -260,7 +296,7 @@ export function CartView() {
                     value={promoInput}
                     onChange={(e) => setPromoInput(e.target.value)}
                     placeholder="E.G. SILENCE10"
-                    className="flex-1 rounded-[16px] bg-canvas border border-river/40 px-3 py-2 font-mono text-xs uppercase text-ink placeholder:text-ink-faint focus:border-ink focus:outline-none"
+                    className="flex-1 rounded-[16px] border border-river/40 bg-canvas px-3 py-2 font-mono text-xs text-ink uppercase placeholder:text-ink-faint focus:border-ink focus:outline-none"
                   />
                   <Button type="submit" size="sm" variant="secondary">
                     Apply
@@ -302,7 +338,9 @@ export function CartView() {
 
               <div className="flex justify-between border-t border-river/30 pt-3 text-sm font-semibold text-ink">
                 <span>Total Amount</span>
-                <span className="font-display text-xl">{formatMoney(quote?.totals.total ?? subtotal, MONEY)}</span>
+                <span className="font-display text-xl">
+                  {formatMoney(quote?.totals.total ?? subtotal, MONEY)}
+                </span>
               </div>
             </div>
 

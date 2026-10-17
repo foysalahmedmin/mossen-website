@@ -2,7 +2,6 @@
 
 import { useState } from 'react'
 import { CartLine, FilterPanel, Gallery, ProductCard, ReviewSummary } from '@/components/commerce'
-import { Price } from '@/components/ui'
 import { TryOnTrigger } from '@/integration/mirror-try'
 import type { Product } from '@/domain'
 import { DEFAULT_QUERY } from '@/domain'
@@ -83,6 +82,8 @@ const sampleQuoteLine: QuoteLine = {
   productId: demoProduct.id,
   variantId: 'v1',
   slug: demoProduct.slug,
+  category: demoProduct.category,
+  subcategory: demoProduct.subcategory,
   name: demoProduct.name,
   image: demoProduct.media[0]!,
   options: { Color: 'Lichen', Size: 'M' },
@@ -95,6 +96,8 @@ const outOfStockLine: QuoteLine = {
   productId: demoProduct.id,
   variantId: 'v2',
   slug: demoProduct.slug,
+  category: demoProduct.category,
+  subcategory: demoProduct.subcategory,
   name: 'Merino Wool Knit',
   image: demoProduct.media[0]!,
   options: { Color: 'Sand', Size: 'L' },
