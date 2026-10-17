@@ -1,0 +1,49 @@
+/**
+ * MOSSEN Mirror Try Theme: "The Window"
+ * In Phase 2: only the trigger button is themed.
+ * Treatment: Lichen pebble chip with moss-deep text and organic lift.
+ */
+
+[data-mt-part='trigger'] {
+  background: var(--color-accent, #c5d4b8);
+  color: var(--color-moss-deep, #243825);
+  border-radius: var(--shape-pebble, 28px 38px 30px 42px / 38px 28px 44px 32px);
+  box-shadow: var(--float-sm);
+  font-family: var(--font-mono, monospace);
+  font-weight: 600;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.625rem 1.25rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  user-select: none;
+  transition:
+    transform 400ms cubic-bezier(0.2, 0.7, 0.2, 1),
+    box-shadow 400ms cubic-bezier(0.2, 0.7, 0.2, 1),
+    background 300ms ease;
+}
+
+[data-mt-part='trigger']:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: var(--float);
+  background: #ccdcb0;
+}
+
+[data-mt-part='trigger']:active,
+[data-mt-part='trigger'][data-state='active'] {
+  transform: translateY(0) scale(1);
+}
+
+[data-mt-part='trigger']:focus-visible {
+  outline: 2px solid var(--color-focus, #2d484e);
+  outline-offset: 2px;
+}
+
+@media (forced-colors: active) {
+  [data-mt-part='trigger'] {
+    border: 1px solid CanvasText !important;
+  }
+}
