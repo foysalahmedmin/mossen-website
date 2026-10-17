@@ -11,7 +11,7 @@ export const pages: Record<PageId, PageContent> = {
   sale: { title: 'Sale', description: 'Selected pieces at a reduced price.' },
   'new-arrivals': { title: 'New in', description: 'The latest arrivals.' },
   lookbook: { title: 'Lookbook', description: 'The season, styled.' },
-  cart: { title: 'Bag', description: 'Review the pieces in your bag.' },
+  cart: { title: 'Basket', description: 'Review the pieces in your basket.' },
   checkout: { title: 'Checkout', description: 'Delivery, payment and review.' },
   'checkout-success': {
     title: 'Order confirmed',

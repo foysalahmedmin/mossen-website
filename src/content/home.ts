@@ -7,8 +7,8 @@ export const home: HomeContent = {
     body: 'Clothing shaped by hand from unbleached flax, raw pasture wool, and organic botanical dye baths. Designed to breathe and age with grace.',
     cta: { label: 'Browse the atelier', href: '/shop' },
     media: {
-      src: '/images/products/unbleached-linen-smock-1.webp',
-      alt: 'Model in Unbleached Linen Smock standing quietly in a misty birch woodland',
+      src: '/images/products/mossen/p-201-front.webp',
+      alt: 'Model in Unbleached Linen Forager Smock standing quietly in a misty birch woodland',
       width: 1920,
       height: 1080,
     },
@@ -17,10 +17,10 @@ export const home: HomeContent = {
     title: 'From the Birch Atelier',
     subtitle: 'Quiet upper-body silhouettes crafted for soft natural drape',
     productSlugs: [
-      'unbleached-linen-smock',
-      'boiled-birch-wool-sweater',
-      'lichen-field-jacket',
-      'raw-silk-slub-tee',
+      'unbleached-linen-forager-smock',
+      'lichen-dyed-silk-tunic',
+      'gotland-fleece-cable-sweater',
+      'raw-wool-duffle-coat',
     ],
   },
   categories: [
@@ -29,8 +29,8 @@ export const home: HomeContent = {
       title: 'Clothing',
       subtitle: 'Raw linen, wild wool & smocks',
       media: {
-        src: '/images/products/lichen-jacket-1.webp',
-        alt: 'Waxed heavy linen field jacket detail',
+        src: '/images/products/mossen/p-217-front.webp',
+        alt: 'Raw wool duffle coat with horn toggle closures',
         width: 800,
         height: 1067,
       },
@@ -38,10 +38,10 @@ export const home: HomeContent = {
     {
       slug: 'accessories',
       title: 'Accessories',
-      subtitle: 'Raw canvas & birch-tanned pouches',
+      subtitle: 'Vegetable-tanned leather & hand-loomed silk',
       media: {
-        src: '/images/products/canvas-market-tote-1.webp',
-        alt: 'Heavy unbleached canvas market tote',
+        src: '/images/products/mossen/p-228-front.webp',
+        alt: 'Heavy vegetable-tanned leather market tote bag',
         width: 800,
         height: 1067,
       },
@@ -49,26 +49,26 @@ export const home: HomeContent = {
     {
       slug: 'jewelry',
       title: 'Jewelry',
-      subtitle: 'River pebble silver & hand-cast twigs',
+      subtitle: 'Cast pinecone silver & unrefined bronze',
       media: {
-        src: '/images/products/pebble-silver-ring-1.webp',
-        alt: 'Cast river pebble silver ring on weathered birch wood',
+        src: '/images/products/mossen/p-233-front.webp',
+        alt: 'Hand-cast pinecone textured silver signet ring',
         width: 800,
         height: 1067,
       },
     },
   ],
   editorial: {
-    title: 'Dyeing with Forest Lichen',
-    body: 'Harvested only from fallen birch bark after spring storms, our lichen dye bath ferments slowly for eight weeks, imparting a subtle mineral-green hue that cannot be synthesised.',
+    title: 'The Living Botanical Palette',
+    body: 'Harvested from wild madder roots, black walnut hulls, and coastal lichen, our botanical dye baths ferment slowly in wooden vats, imparting living tones that evolve with ambient light.',
     quote: 'True luxury is the quiet presence of time.',
     media: {
-      src: '/images/products/lichen-cardigan-1.webp',
-      alt: 'Skeins of pasture wool drying after a natural lichen dye bath',
+      src: '/images/journal/mossen/botanical-dye.webp',
+      alt: 'Copper dye vat simmering with crushed wild madder roots revealing rich terracotta red broth',
       width: 1200,
       height: 800,
     },
-    cta: { label: 'Read our field journal', href: '/journal/dyeing-with-forest-lichen' },
+    cta: { label: 'Read our field journal', href: '/journal/botanical-dye-vats' },
   },
   mirrorTryExplainer: {
     title: 'Fitting Within The Birch Frame',
@@ -77,7 +77,7 @@ export const home: HomeContent = {
       {
         step: 1,
         title: 'Choose Piece',
-        description: 'Select an unbleached smock, boiled wool knit, or storm coat.',
+        description: 'Select an unbleached smock, cable sweater, or raw wool coat.',
       },
       {
         step: 2,
@@ -94,7 +94,7 @@ export const home: HomeContent = {
   },
   journalTeasers: {
     title: 'Field Notes',
-    postSlugs: ['dyeing-with-forest-lichen', 'quiet-life-of-linen'],
+    postSlugs: ['dew-retting-baltic-flax', 'botanical-dye-vats'],
   },
   newsletter: {
     title: 'Seasonal Letter',
