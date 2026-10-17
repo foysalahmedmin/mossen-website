@@ -10,8 +10,16 @@ export default function DesignSystemPage() {
       <section data-ds-section="surfaces" aria-labelledby="ds-surfaces">
         <h2 id="ds-surfaces">Surfaces</h2>
         <div className="flex items-center gap-4">
-          <div className="pebble bg-surface" data-ds-surface="pebble" style={{ width: 100, height: 100 }} />
-          <div className="arch bg-surface" data-ds-surface="arch" style={{ width: 100, height: 140 }} />
+          <div
+            className="pebble bg-surface"
+            data-ds-surface="pebble"
+            style={{ width: 100, height: 100 }}
+          />
+          <div
+            className="arch bg-surface"
+            data-ds-surface="arch"
+            style={{ width: 100, height: 140 }}
+          />
         </div>
       </section>
       <section data-ds-section="forms" aria-labelledby="ds-forms">

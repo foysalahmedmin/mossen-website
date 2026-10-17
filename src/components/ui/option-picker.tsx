@@ -1,6 +1,7 @@
 'use client'
 
 import { RadioGroup } from 'radix-ui'
+import { cn } from '@/lib/cn'
 
 export interface PickerOption {
   value: string
@@ -15,12 +16,24 @@ export interface OptionPickerProps {
   options: PickerOption[]
   value?: string
   onValueChange?: (value: string) => void
+  className?: string
 }
 
 /** Single choice from a few options (sizes, colours, materials). Arrow keys move the selection. */
-export function OptionPicker({ label, options, value, onValueChange }: OptionPickerProps) {
+export function OptionPicker({
+  label,
+  options,
+  value,
+  onValueChange,
+  className,
+}: OptionPickerProps) {
   return (
-    <RadioGroup.Root aria-label={label} value={value} onValueChange={onValueChange}>
+    <RadioGroup.Root
+      aria-label={label}
+      value={value}
+      onValueChange={onValueChange}
+      className={cn('flex flex-wrap gap-3', className)}
+    >
       {options.map((option) => (
         <RadioGroup.Item
           key={option.value}
@@ -28,8 +41,30 @@ export function OptionPicker({ label, options, value, onValueChange }: OptionPic
           disabled={option.unavailable}
           aria-label={option.label}
           style={option.swatch ? { ['--swatch' as string]: option.swatch } : undefined}
+          className={cn(
+            'pebble flex h-[54px] w-[54px] cursor-pointer items-center justify-center border border-border-strong/40 bg-surface font-mono text-xs font-semibold text-ink transition-all duration-300 select-none',
+            'hover:border-brand/50',
+            'data-[state=checked]:border-brand data-[state=checked]:bg-brand data-[state=checked]:text-on-brand data-[state=checked]:shadow-[var(--float-sm)]',
+            'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus',
+            option.unavailable &&
+              'border-sink/60 hover:border-sink/60 relative cursor-not-allowed border-dashed opacity-40',
+          )}
         >
-          {option.swatch ? null : option.label}
+          {option.unavailable && (
+            <span
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-x-0 top-1/2 h-px scale-125 -rotate-45 bg-ink-faint"
+            />
+          )}
+          {option.swatch ? (
+            <span
+              aria-hidden="true"
+              className="h-5 w-5 rounded-full border border-black/15 shadow-inner"
+              style={{ backgroundColor: option.swatch }}
+            />
+          ) : (
+            option.label
+          )}
         </RadioGroup.Item>
       ))}
     </RadioGroup.Root>

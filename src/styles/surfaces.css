@@ -79,7 +79,8 @@
 
   /* Text link whose underline draws in. */
   .link-draw {
-    background: linear-gradient(var(--color-brand), var(--color-brand)) left bottom / 0 1px no-repeat;
+    background: linear-gradient(var(--color-brand), var(--color-brand)) left bottom / 0 1px
+      no-repeat;
     transition: background-size 400ms cubic-bezier(0.2, 0.7, 0.2, 1);
   }
   .link-draw:hover,
