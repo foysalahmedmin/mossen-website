@@ -4,7 +4,8 @@ export const categories: Category[] = [
   {
     slug: 'clothing',
     name: 'Clothing',
-    description: 'Raw unbleached linen, undyed British wool, lichen dyes, and tactile botanical layers.',
+    description:
+      'Raw unbleached linen, undyed British wool, lichen dyes, and tactile botanical layers.',
     subcategories: [
       { slug: 'tops', name: 'Tops & Smocks' },
       { slug: 'knitwear', name: 'Knitwear' },
@@ -17,7 +18,8 @@ export const categories: Category[] = [
   {
     slug: 'accessories',
     name: 'Accessories',
-    description: 'Hand-loomed wild silk scarves, vegetable-tanned field totes, and boiled wool beanies.',
+    description:
+      'Hand-loomed wild silk scarves, vegetable-tanned field totes, and boiled wool beanies.',
     subcategories: [
       { slug: 'bags', name: 'Bags & Totes' },
       { slug: 'scarves', name: 'Scarves' },

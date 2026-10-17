@@ -21,11 +21,7 @@ export const stores: Store[] = [
     city: 'Stockholm',
     country: 'Sweden',
     phone: '+46 8 611 20 40',
-    hours: [
-      'Monday – Friday: 10:30 – 18:30',
-      'Saturday: 11:00 – 17:00',
-      'Sunday: 12:00 – 16:00',
-    ],
+    hours: ['Monday – Friday: 10:30 – 18:30', 'Saturday: 11:00 – 17:00', 'Sunday: 12:00 – 16:00'],
   },
   {
     id: 's-kyoto-botanical',
@@ -34,9 +30,6 @@ export const stores: Store[] = [
     city: 'Kyoto',
     country: 'Japan',
     phone: '+81 75 221 8890',
-    hours: [
-      'Wednesday – Monday: 11:00 – 19:00',
-      'Tuesday: Closed for Garden Rest',
-    ],
+    hours: ['Wednesday – Monday: 11:00 – 19:00', 'Tuesday: Closed for Garden Rest'],
   },
 ]

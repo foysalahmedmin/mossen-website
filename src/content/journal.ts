@@ -4,12 +4,13 @@ export const journal: JournalPost[] = [
   {
     slug: 'dew-retting-baltic-flax',
     title: 'The Alchemy of Dew Retting: How Baltic Rain and Morning Mist Yield Living Linen',
-    excerpt: 'Before flax fibers can be spun into our signature heavyweight linen, harvested stalks lie in Lithuanian fields for four weeks, letting moisture and soil microbes gently free the cellulose bast.',
+    excerpt:
+      'Before flax fibers can be spun into our signature heavyweight linen, harvested stalks lie in Lithuanian fields for four weeks, letting moisture and soil microbes gently free the cellulose bast.',
     publishedAt: '2026-02-14T08:30:00Z',
     readingMinutes: 6,
     cover: {
       src: '/images/journal/mossen/dew-retting.webp',
-      alt: 'Cut golden flax stalks laid in parallel swathes across Baltic meadows under morning autumn mist',
+      alt: 'Close view of the front of an unbleached linen duster coat',
       width: 1600,
       height: 1000,
     },
@@ -22,12 +23,13 @@ export const journal: JournalPost[] = [
   {
     slug: 'gotland-fleece-and-lanolin',
     title: 'Gotland Fleece and Lanolin: The Self-Cleaning Architecture of Island Wool',
-    excerpt: 'Sheared from heritage Gotland sheep grazing wild juniper hills, our untreated wool garments repel drizzle and breathe naturally without synthetic coatings.',
+    excerpt:
+      'Sheared from heritage Gotland sheep grazing wild juniper hills, our untreated wool garments repel drizzle and breathe naturally without synthetic coatings.',
     publishedAt: '2026-02-05T10:00:00Z',
     readingMinutes: 5,
     cover: {
       src: '/images/journal/mossen/gotland-wool.webp',
-      alt: 'Close-up macro of raw Gotland sheep fleece showing natural silver curls and protective wax sheath',
+      alt: 'Close view of the neckline of a Gotland fleece sweater',
       width: 1600,
       height: 1000,
     },
@@ -40,12 +42,13 @@ export const journal: JournalPost[] = [
   {
     slug: 'botanical-dye-vats',
     title: 'The Living Color Palette: Extracting Madder Root, Walnut Hulls, and Bog Lichen',
-    excerpt: 'Why plant-dyed textiles possess a luminous vibrational frequency that synthetic petroleum pigments can never replicate.',
+    excerpt:
+      'Why plant-dyed textiles possess a luminous vibrational frequency that synthetic petroleum pigments can never replicate.',
     publishedAt: '2026-01-28T13:00:00Z',
     readingMinutes: 7,
     cover: {
       src: '/images/journal/mossen/botanical-dye.webp',
-      alt: 'Copper dye vat simmering with crushed wild madder roots revealing rich terracotta red broth',
+      alt: 'Close view of the collar of a botanical indigo hemp overshirt',
       width: 1600,
       height: 1000,
     },
@@ -58,12 +61,13 @@ export const journal: JournalPost[] = [
   {
     slug: 'the-art-of-unbleached-slubs',
     title: 'The Art of the Slub: Why Fiber Imperfection is the Ultimate Luxury',
-    excerpt: 'In an age of hyper-uniform synthetic filaments, we deliberately celebrate the irregular flax nodes and organic slubs created by heritage shuttle looms.',
+    excerpt:
+      'In an age of hyper-uniform synthetic filaments, we deliberately celebrate the irregular flax nodes and organic slubs created by heritage shuttle looms.',
     publishedAt: '2026-01-19T09:15:00Z',
     readingMinutes: 4,
     cover: {
       src: '/images/journal/mossen/linen-slub.webp',
-      alt: 'Extreme macro texture of raw Baltic unbleached linen fabric highlighting irregular natural yarn slubs',
+      alt: 'Close view of the front of a raw slub cotton field shirt',
       width: 1600,
       height: 1000,
     },
@@ -76,12 +80,13 @@ export const journal: JournalPost[] = [
   {
     slug: 'vegetable-tanning-tarnsjo',
     title: 'Bark and Water: The Six-Month Rhythm of Scandinavian Vegetable Tanned Leather',
-    excerpt: 'Deep inside the Swedish forest, Master Tanners use mimosa bark and river currents to cure leather that ages into golden amber.',
+    excerpt:
+      'Deep inside the Swedish forest, Master Tanners use mimosa bark and river currents to cure leather that ages into golden amber.',
     publishedAt: '2026-01-10T11:45:00Z',
     readingMinutes: 6,
     cover: {
       src: '/images/journal/mossen/vegetable-leather.webp',
-      alt: 'Heavy vegetable-tanned leather hides hanging from spruce racks in historic wooden tannery attic',
+      alt: 'A vegetable-tanned leather tote seen up close',
       width: 1600,
       height: 1000,
     },
@@ -94,12 +99,13 @@ export const journal: JournalPost[] = [
   {
     slug: 'slow-luxury-manifesto',
     title: 'The Slow Luxury Manifesto: Dressing with Quiet Reverence for the Seasons',
-    excerpt: 'Why releasing only two seasonal offerings each year allows our design studio to focus on permanence, repairability, and harmony with the Earth.',
+    excerpt:
+      'Why releasing only two seasonal offerings each year allows our design studio to focus on permanence, repairability, and harmony with the Earth.',
     publishedAt: '2026-01-02T15:00:00Z',
     readingMinutes: 5,
     cover: {
       src: '/images/journal/mossen/slow-luxury.webp',
-      alt: 'Quiet Nordic studio table with linen garment cuttings, dried botanicals, and hand-carved horn toggles',
+      alt: 'Close view of the neck and placket of an unbleached linen smock',
       width: 1600,
       height: 1000,
     },

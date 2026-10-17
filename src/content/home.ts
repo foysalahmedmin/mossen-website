@@ -7,8 +7,8 @@ export const home: HomeContent = {
     body: 'Clothing shaped by hand from unbleached flax, raw pasture wool, and organic botanical dye baths. Designed to breathe and age with grace.',
     cta: { label: 'Browse the atelier', href: '/shop' },
     media: {
-      src: '/images/products/mossen/p-201-front.webp',
-      alt: 'Model in Unbleached Linen Forager Smock standing quietly in a misty birch woodland',
+      src: '/images/home/hero.webp',
+      alt: 'A wool duffle coat, a linen smock and a knit, laid out on a soft moss-grey backdrop with a branch',
       width: 1920,
       height: 1080,
     },
@@ -29,8 +29,8 @@ export const home: HomeContent = {
       title: 'Clothing',
       subtitle: 'Raw linen, wild wool & smocks',
       media: {
-        src: '/images/products/mossen/p-217-front.webp',
-        alt: 'Raw wool duffle coat with horn toggle closures',
+        src: '/images/home/category-clothing.webp',
+        alt: 'A raw wool duffle coat in peat brown on a soft moss-grey backdrop',
         width: 800,
         height: 1067,
       },
@@ -40,8 +40,8 @@ export const home: HomeContent = {
       title: 'Accessories',
       subtitle: 'Vegetable-tanned leather & hand-loomed silk',
       media: {
-        src: '/images/products/mossen/p-228-front.webp',
-        alt: 'Heavy vegetable-tanned leather market tote bag',
+        src: '/images/home/category-accessories.webp',
+        alt: 'A vegetable-tanned tote bag above a wool beanie on a soft moss-grey backdrop',
         width: 800,
         height: 1067,
       },
@@ -51,8 +51,8 @@ export const home: HomeContent = {
       title: 'Jewelry',
       subtitle: 'Cast pinecone silver & unrefined bronze',
       media: {
-        src: '/images/products/mossen/p-233-front.webp',
-        alt: 'Hand-cast pinecone textured silver signet ring',
+        src: '/images/home/category-jewelry.webp',
+        alt: 'A pinecone silver signet ring above a bronze lichen pendant on a soft moss-grey backdrop',
         width: 800,
         height: 1067,
       },
@@ -63,8 +63,8 @@ export const home: HomeContent = {
     body: 'Harvested from wild madder roots, black walnut hulls, and coastal lichen, our botanical dye baths ferment slowly in wooden vats, imparting living tones that evolve with ambient light.',
     quote: 'True luxury is the quiet presence of time.',
     media: {
-      src: '/images/journal/mossen/botanical-dye.webp',
-      alt: 'Copper dye vat simmering with crushed wild madder roots revealing rich terracotta red broth',
+      src: '/images/home/editorial.webp',
+      alt: 'Close view of the collar and buttons of a botanical indigo hemp overshirt',
       width: 1200,
       height: 800,
     },
@@ -98,7 +98,8 @@ export const home: HomeContent = {
   },
   newsletter: {
     title: 'Seasonal Letter',
-    description: 'Reflections from the woodland studio, seasonal harvests, and small-batch dye release notices.',
+    description:
+      'Reflections from the woodland studio, seasonal harvests, and small-batch dye release notices.',
     placeholder: 'Enter your email address',
     cta: 'Receive Letters',
   },
