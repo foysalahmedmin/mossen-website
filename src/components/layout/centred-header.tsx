@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Heart, Leaf, MagnifyingGlass, ShoppingBag } from '@/components/icons'
+import { Heart, Leaf, MagnifyingGlass, ShoppingBag, User } from '@/components/icons'
 import { cn } from '@/lib/cn'
 
 export interface CentredHeaderProps {
@@ -10,6 +10,7 @@ export interface CentredHeaderProps {
   wishlistCount?: number
   onOpenMenu?: () => void
   onOpenBasket?: () => void
+  onOpenSearch?: () => void
   className?: string
 }
 
@@ -18,6 +19,7 @@ export function CentredHeader({
   wishlistCount = 0,
   onOpenMenu,
   onOpenBasket,
+  onOpenSearch,
   className,
 }: CentredHeaderProps) {
   const pathname = usePathname()
@@ -115,13 +117,24 @@ export function CentredHeader({
           </nav>
 
           <div className="flex items-center gap-3">
-            <Link
-              href="/search"
-              aria-label="Search"
-              className="pebble flex h-10 w-10 items-center justify-center border border-border-strong/30 bg-surface/70 text-ink transition-all hover:bg-surface focus-visible:outline-2 focus-visible:outline-focus"
-            >
-              <MagnifyingGlass size={18} aria-hidden="true" />
-            </Link>
+            {onOpenSearch ? (
+              <button
+                type="button"
+                onClick={onOpenSearch}
+                aria-label="Search"
+                className="pebble flex h-10 w-10 items-center justify-center border border-border-strong/30 bg-surface/70 text-ink transition-all hover:bg-surface focus-visible:outline-2 focus-visible:outline-focus"
+              >
+                <MagnifyingGlass size={18} aria-hidden="true" />
+              </button>
+            ) : (
+              <Link
+                href="/search"
+                aria-label="Search"
+                className="pebble flex h-10 w-10 items-center justify-center border border-border-strong/30 bg-surface/70 text-ink transition-all hover:bg-surface focus-visible:outline-2 focus-visible:outline-focus"
+              >
+                <MagnifyingGlass size={18} aria-hidden="true" />
+              </Link>
+            )}
 
             <Link
               href="/wishlist"
@@ -134,6 +147,14 @@ export function CentredHeader({
                   {wishlistCount}
                 </span>
               ) : null}
+            </Link>
+
+            <Link
+              href="/account"
+              aria-label="Account"
+              className="pebble hidden h-10 w-10 items-center justify-center border border-border-strong/30 bg-surface/70 text-ink transition-all hover:bg-surface focus-visible:outline-2 focus-visible:outline-focus sm:flex"
+            >
+              <User size={18} aria-hidden="true" />
             </Link>
 
             {onOpenBasket ? (

@@ -1,3 +1,39 @@
-export default function Layout({ children }: { children: React.ReactNode }) {
-  return <main id="main">{children}</main>
+'use client'
+
+import { useState } from 'react'
+import { AnnouncementBar } from '@/components/layout/announcement-bar'
+import { CentredHeader } from '@/components/layout/centred-header'
+import { Footer } from '@/components/layout/footer'
+import { MenuSheet } from '@/components/layout/menu-sheet'
+import { OrganicSearchSheet } from '@/components/layout/organic-search-sheet'
+import { UnrollingBasketSheet } from '@/components/layout/unrolling-basket-sheet'
+import { useCartStore } from '@/stores/cart-store'
+import { useUiStore } from '@/stores/ui-store'
+import { useWishlistStore } from '@/stores/wishlist-store'
+
+export default function StorefrontLayout({ children }: { children: React.ReactNode }) {
+  const [menuOpen, setMenuOpen] = useState(false)
+  const cartCount = useCartStore((s) => s.lines.reduce((sum, l) => sum + l.quantity, 0))
+  const wishlistCount = useWishlistStore((s) => s.productIds.length)
+  const openPanel = useUiStore((s) => s.openPanel)
+
+  return (
+    <div className="flex min-h-screen flex-col bg-canvas text-ink">
+      <AnnouncementBar />
+      <CentredHeader
+        cartCount={cartCount}
+        wishlistCount={wishlistCount}
+        onOpenMenu={() => setMenuOpen(true)}
+        onOpenBasket={() => openPanel('cart')}
+        onOpenSearch={() => openPanel('search')}
+      />
+      <main id="main-content" tabIndex={-1} className="flex-1 focus:outline-none">
+        {children}
+      </main>
+      <Footer />
+      <MenuSheet open={menuOpen} onOpenChange={setMenuOpen} />
+      <OrganicSearchSheet />
+      <UnrollingBasketSheet />
+    </div>
+  )
 }
