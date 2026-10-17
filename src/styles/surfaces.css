@@ -1,0 +1,110 @@
+/* MOSSEN surfaces: pebbles, arches, leaves, soft green shadows and a little grain. */
+
+@layer base {
+  :root {
+    --float-sm: 0 10px 24px -12px rgb(54 66 46 / 0.45);
+    --float: 0 24px 40px -22px rgb(32 39 30 / 0.5);
+    --float-lg: 0 30px 60px -36px rgb(32 39 30 / 0.5);
+    /* A 220px tile of fractal noise, tinted green-grey. */
+    --grain: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .2  0 0 0 0 .25  0 0 0 0 .18  0 0 0 .55 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  }
+
+  /* One fixed overlay for the whole site. It never blocks clicks and never covers text with colour. */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: var(--grain);
+    opacity: var(--grain-opacity, 0.22);
+    mix-blend-mode: multiply;
+    pointer-events: none;
+    z-index: 50;
+  }
+}
+
+@layer components {
+  /* Shapes. Never use a plain border-radius for an image or a panel. */
+  .pebble {
+    border-radius: var(--r-pebble);
+  }
+  .pebble-2 {
+    border-radius: var(--r-pebble-2);
+  }
+  .pebble-3 {
+    border-radius: var(--r-pebble-3);
+  }
+  .arch {
+    border-radius: var(--r-arch);
+  }
+  .leaf {
+    border-radius: var(--r-leaf);
+  }
+  .soft-panel {
+    border-radius: var(--r-soft);
+    background: var(--color-surface);
+    box-shadow: var(--float-lg);
+  }
+
+  .float-sm {
+    box-shadow: var(--float-sm);
+  }
+  .float {
+    box-shadow: var(--float);
+  }
+  .float-lg {
+    box-shadow: var(--float-lg);
+  }
+
+  /* An image mask gets its own grain so it feels printed, not pasted. */
+  .grain-mask {
+    position: relative;
+    overflow: hidden;
+  }
+  .grain-mask::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: var(--grain);
+    opacity: 0.45;
+    mix-blend-mode: multiply;
+    pointer-events: none;
+  }
+
+  /* Field outline: 1.5px at the strong border colour, a different radius per corner. */
+  .outline-field {
+    border: 1.5px solid var(--color-border-strong);
+    border-radius: 22px 28px 22px 26px;
+    background: transparent;
+  }
+
+  /* Text link whose underline draws in. */
+  .link-draw {
+    background: linear-gradient(var(--color-brand), var(--color-brand)) left bottom / 0 1px no-repeat;
+    transition: background-size 400ms cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+  .link-draw:hover,
+  .link-draw:focus-visible {
+    background-size: 100% 1px;
+  }
+
+  /* Hand-drawn wavy divider: <svg class="wavy-divider" viewBox="0 0 1000 22" preserveAspectRatio="none"><path d="…"/></svg> */
+  .wavy-divider {
+    width: 100%;
+    height: 22px;
+  }
+  .wavy-divider path {
+    fill: none;
+    stroke: var(--color-river);
+    stroke-width: 1.2;
+  }
+}
+
+@media (forced-colors: active) {
+  body::after {
+    display: none;
+  }
+  .soft-panel,
+  .outline-field {
+    border: 1px solid CanvasText;
+  }
+}
