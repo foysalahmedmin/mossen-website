@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { Suspense, useState } from 'react'
 import { AnnouncementBar } from '@/components/layout/announcement-bar'
 import { CentredHeader } from '@/components/layout/centred-header'
 import { Footer } from '@/components/layout/footer'
@@ -21,13 +21,15 @@ export default function StorefrontLayout({ children }: { children: React.ReactNo
   return (
     <div className="flex min-h-screen flex-col bg-canvas text-ink">
       <AnnouncementBar />
-      <CentredHeader
-        cartCount={cartCount}
-        wishlistCount={wishlistCount}
-        onOpenMenu={() => setMenuOpen(true)}
-        onOpenBasket={() => openPanel('cart')}
-        onOpenSearch={() => openPanel('search')}
-      />
+      <Suspense fallback={<div className="h-20 w-full border-b border-river/25 bg-canvas/90" />}>
+        <CentredHeader
+          cartCount={cartCount}
+          wishlistCount={wishlistCount}
+          onOpenMenu={() => setMenuOpen(true)}
+          onOpenBasket={() => openPanel('cart')}
+          onOpenSearch={() => openPanel('search')}
+        />
+      </Suspense>
       <main id="main-content" tabIndex={-1} className="flex-1 focus:outline-none">
         <PageFade>{children}</PageFade>
       </main>
