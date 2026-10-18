@@ -5,7 +5,7 @@ export const home: HomeContent = {
     eyecatch: 'Wear the quiet.',
     headline: 'Botanical garments woven from unbleached linen and wild forest moss.',
     body: 'Clothing shaped by hand from unbleached flax, raw pasture wool, and organic botanical dye baths. Designed to breathe and age with grace.',
-    cta: { label: 'Browse the atelier', href: '/shop' },
+    cta: { label: 'Shop the collection', href: '/shop' },
     media: {
       src: '/images/home/hero.webp',
       alt: 'A wool duffle coat, a linen smock and a knit, laid out on a soft moss-grey backdrop with a branch',
@@ -14,8 +14,8 @@ export const home: HomeContent = {
     },
   },
   featuredRail: {
-    title: 'From the Birch Atelier',
-    subtitle: 'Quiet upper-body silhouettes crafted for soft natural drape',
+    title: 'Made slowly',
+    subtitle: 'Quiet upper-body pieces, cut for a soft natural drape.',
     productSlugs: [
       'unbleached-linen-forager-smock',
       'lichen-dyed-silk-tunic',
@@ -71,26 +71,26 @@ export const home: HomeContent = {
     cta: { label: 'Read our field journal', href: '/journal/botanical-dye-vats' },
   },
   mirrorTryExplainer: {
-    title: 'Fitting Within The Birch Frame',
-    subtitle: 'Experience organic garment drape and soft shoulder volume before ordering',
+    title: 'See how it falls before you order',
+    subtitle: 'Preview the drape and the soft shoulder of each piece on your own proportions.',
     steps: [
       {
         step: 1,
-        title: 'Choose Piece',
-        description: 'Select an unbleached smock, cable sweater, or raw wool coat.',
+        title: 'Choose a piece',
+        description: 'Pick a smock, a cable sweater or a raw wool coat.',
       },
       {
         step: 2,
-        title: 'Enter Birch Frame',
-        description: 'Our natural drape simulator honors the organic texture of flax and raw wool.',
+        title: 'Open the fitting window',
+        description: 'The preview respects the texture of flax and raw wool.',
       },
       {
         step: 3,
-        title: 'Settle Silhouette',
-        description: 'Observe natural ease and movement across gentle daylight.',
+        title: 'Watch it settle',
+        description: 'See the ease and movement in soft daylight.',
       },
     ],
-    cta: { label: 'Step into The Birch Frame' },
+    cta: { label: 'Open Mirror Try' },
   },
   journalTeasers: {
     title: 'Field Notes',
@@ -100,7 +100,7 @@ export const home: HomeContent = {
     title: 'Seasonal Letter',
     description:
       'Reflections from the woodland studio, seasonal harvests, and small-batch dye release notices.',
-    placeholder: 'Enter your email address',
-    cta: 'Receive Letters',
+    placeholder: 'Email address',
+    cta: 'Subscribe',
   },
 }

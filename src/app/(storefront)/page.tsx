@@ -2,7 +2,8 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { ConnectedProductCard } from '@/components/commerce/connected-product-card'
 import { NewsletterSection } from '@/components/commerce/newsletter-section'
-import { ArrowRight, Star } from '@/components/icons'
+import { Carousel } from '@/components/home/carousel'
+import { ArrowRight, Leaf, Star } from '@/components/icons'
 import { Button } from '@/components/ui'
 import type { JournalPost, Product, Review } from '@/domain'
 import { Reveal } from '@/lib/motion'
@@ -15,64 +16,35 @@ function SectionHeading({
   id,
   title,
   subtitle,
-  href,
-  hrefLabel,
   center = false,
 }: {
   id: string
   title: string
   subtitle?: string
-  href?: string
-  hrefLabel?: string
   center?: boolean
 }) {
   return (
-    <div
-      className={`flex flex-col gap-4 pb-10 md:pb-12 ${center ? 'items-center text-center' : 'sm:flex-row sm:items-end sm:justify-between'}`}
-    >
-      <div>
-        <h2
-          id={id}
-          className="font-display text-3xl leading-tight font-normal tracking-tight text-ink md:text-5xl"
-        >
-          {title}
-        </h2>
-        {subtitle ? (
-          <p
-            className={`mt-3 max-w-lg text-sm text-ink-soft md:text-base ${center ? 'mx-auto' : ''}`}
-          >
-            {subtitle}
-          </p>
-        ) : null}
-      </div>
-      {href && hrefLabel ? (
-        <Link
-          href={href}
-          className="link-draw group inline-flex shrink-0 items-center gap-2 pb-1 text-sm text-ink"
-        >
-          {hrefLabel}
-          <ArrowRight
-            size={14}
-            aria-hidden="true"
-            className="transition-transform group-hover:translate-x-1"
-          />
-        </Link>
-      ) : null}
+    <div className={center ? 'mx-auto max-w-xl pb-10 text-center md:pb-14' : 'max-w-xl'}>
+      <h2
+        id={id}
+        className="font-display text-3xl leading-tight font-normal tracking-tight text-ink md:text-5xl"
+      >
+        {title}
+      </h2>
+      {subtitle ? <p className="mt-3 text-sm text-ink-soft md:text-base">{subtitle}</p> : null}
     </div>
   )
 }
 
 export default async function HomePage() {
-  const [home, lookbook] = await Promise.all([
+  const [home, lookbook, edit] = await Promise.all([
     services.content.getHome(),
     services.content.getLookbook(),
+    services.catalog.listProducts({ category: 'clothing', sort: 'featured', pageSize: 8 }),
   ])
 
-  const featuredProducts = (
-    await Promise.all(
-      home.featuredRail.productSlugs.map((slug) => services.catalog.getProduct(slug)),
-    )
-  ).filter((p): p is Product => p !== null)
+  const editProducts = edit.page.items
+  const [leftPiece, rightPiece] = [editProducts[1], editProducts[2]]
 
   const teaserPosts = (
     await Promise.all(
@@ -82,90 +54,148 @@ export default async function HomePage() {
 
   const reviewPicks = (
     await Promise.all(
-      featuredProducts.slice(0, 3).map(async (product) => {
+      editProducts.slice(0, 3).map(async (product) => {
         const review = (await services.catalog.listReviews(product.id)).find((r) => r.rating === 5)
         return review ? { review, product } : null
       }),
     )
   ).filter((pick): pick is { review: Review; product: Product } => pick !== null)
+  const [lead, ...others] = reviewPicks
+
+  const [firstPost, secondPost] = teaserPosts
+  const looks = lookbook.looks.slice(0, 3)
+  const lookCols = [
+    'col-span-12 sm:col-span-5',
+    'col-span-6 sm:col-span-4 sm:mt-20',
+    'col-span-6 sm:col-span-3 sm:mt-8',
+  ]
+  const lookAspect = ['aspect-4/5', 'aspect-3/4', 'aspect-square']
 
   return (
     <div>
-      {/* Hero: a quiet headline, one tall photograph */}
-      <section aria-label="Brand statement" className="page-container py-10 md:py-16">
-        <div className="grid items-center gap-10 lg:grid-cols-12 lg:gap-16">
-          <div className="lg:col-span-6">
-            <p className="mossen-rise text-sm text-ink-soft">{home.hero.eyecatch}</p>
-            <h1
-              className="mossen-rise mt-5 font-display text-5xl leading-[1.02] font-normal tracking-tight text-balance text-ink sm:text-6xl xl:text-7xl"
-              style={{ ['--delay' as string]: '120ms' }}
-            >
-              {home.hero.headline}
-            </h1>
-            <p
-              className="mossen-rise mt-6 max-w-md text-base leading-relaxed text-ink-soft md:text-lg"
-              style={{ ['--delay' as string]: '260ms' }}
-            >
-              {home.hero.body}
-            </p>
-            <div
-              className="mossen-rise mt-9 flex flex-wrap items-center gap-x-7 gap-y-3"
-              style={{ ['--delay' as string]: '380ms' }}
-            >
-              <Button asChild size="lg">
-                <Link href={home.hero.cta.href}>
-                  {home.hero.cta.label}
-                  <ArrowRight size={16} aria-hidden="true" />
-                </Link>
-              </Button>
-              <Link href="/collections" className="link-draw pb-1 text-sm text-ink">
-                Collections
+      {/* Hero: centred words, then three pictures at different heights */}
+      <section aria-label="Brand statement" className="page-container pt-12 pb-16 md:pt-20">
+        <div className="mx-auto max-w-3xl text-center">
+          <p className="mossen-rise flex items-center justify-center gap-2 text-sm text-ink-soft">
+            <Leaf size={16} aria-hidden="true" className="text-brand" />
+            {home.hero.eyecatch}
+          </p>
+          <h1
+            className="mossen-rise mt-5 font-display text-5xl leading-[1.04] font-normal tracking-tight text-balance text-ink sm:text-6xl xl:text-7xl"
+            style={{ ['--delay' as string]: '120ms' }}
+          >
+            {home.hero.headline}
+          </h1>
+          <p
+            className="mossen-rise mx-auto mt-6 max-w-xl text-base leading-relaxed text-ink-soft md:text-lg"
+            style={{ ['--delay' as string]: '260ms' }}
+          >
+            {home.hero.body}
+          </p>
+          <div
+            className="mossen-rise mt-9 flex flex-wrap items-center justify-center gap-x-7 gap-y-3"
+            style={{ ['--delay' as string]: '380ms' }}
+          >
+            <Button asChild size="lg">
+              <Link href={home.hero.cta.href}>
+                {home.hero.cta.label}
+                <ArrowRight size={16} aria-hidden="true" />
               </Link>
-            </div>
+            </Button>
+            <Link href="/collections" className="link-draw pb-1 text-sm text-ink">
+              Collections
+            </Link>
           </div>
-          <div className="mossen-bloom relative aspect-[4/5] overflow-hidden rounded-md bg-surface lg:col-span-6">
+        </div>
+
+        <div className="mossen-bloom mt-14 grid grid-cols-12 items-start gap-4 md:mt-20 md:gap-8">
+          {leftPiece ? (
+            <Link
+              href={`/products/${leftPiece.slug}`}
+              className="group col-span-3 mt-16 hidden md:block"
+            >
+              <span className="relative block aspect-3/4 overflow-hidden rounded-md bg-surface">
+                <Image
+                  src={leftPiece.media[0]!.src}
+                  alt={leftPiece.media[0]!.alt}
+                  fill
+                  sizes="25vw"
+                  className="object-cover transition-transform duration-1000 ease-out group-hover:scale-[1.04]"
+                />
+              </span>
+              <span className="mt-3 block text-sm text-ink">{leftPiece.name}</span>
+            </Link>
+          ) : null}
+          <div className="relative col-span-12 aspect-4/5 overflow-hidden rounded-md bg-surface md:col-span-6 md:aspect-5/6">
             <Image
               src={home.hero.media.src}
               alt={home.hero.media.alt}
               fill
               priority
-              sizes="(min-width: 1024px) 50vw, 100vw"
+              sizes="(min-width: 768px) 50vw, 100vw"
               className="object-cover"
             />
           </div>
+          {rightPiece ? (
+            <Link
+              href={`/products/${rightPiece.slug}`}
+              className="group col-span-3 mt-32 hidden md:block"
+            >
+              <span className="relative block aspect-3/4 overflow-hidden rounded-md bg-surface">
+                <Image
+                  src={rightPiece.media[0]!.src}
+                  alt={rightPiece.media[0]!.alt}
+                  fill
+                  sizes="25vw"
+                  className="object-cover transition-transform duration-1000 ease-out group-hover:scale-[1.04]"
+                />
+              </span>
+              <span className="mt-3 block text-sm text-ink">{rightPiece.name}</span>
+            </Link>
+          ) : null}
         </div>
       </section>
 
-      {/* Featured pieces */}
-      <section aria-labelledby="featured-heading" className="page-container py-16 md:py-24">
-        <Reveal>
-          <SectionHeading
-            id="featured-heading"
-            title={home.featuredRail.title}
-            subtitle={home.featuredRail.subtitle}
-            href="/shop"
-            hrefLabel="Shop all"
-          />
-        </Reveal>
-        <ul className="grid grid-cols-2 gap-x-3 gap-y-8 md:grid-cols-4 md:gap-x-6">
-          {featuredProducts.map((product, idx) => (
-            <Reveal as="li" key={product.id} delay={idx * 80} className="flex">
-              <ConnectedProductCard product={product} priority={idx < 2} className="w-full" />
-            </Reveal>
+      {/* Featured: a row you move with the arrows or a swipe */}
+      <section aria-labelledby="featured-heading" className="page-container pb-16 md:pb-24">
+        <Carousel
+          label="pieces"
+          heading={
+            <SectionHeading
+              id="featured-heading"
+              title={home.featuredRail.title}
+              subtitle={home.featuredRail.subtitle}
+            />
+          }
+          action={
+            <Link href="/shop" className="link-draw hidden pb-1 text-sm text-ink sm:inline-flex">
+              Shop all
+            </Link>
+          }
+        >
+          {editProducts.map((product, idx) => (
+            <li key={product.id} className="flex w-[64vw] shrink-0 snap-start sm:w-68 lg:w-74">
+              <ConnectedProductCard product={product} priority={idx < 3} className="w-full" />
+            </li>
           ))}
-        </ul>
+        </Carousel>
       </section>
 
-      {/* Categories: three portraits, captions beneath on the linen */}
-      <section aria-labelledby="categories-heading" className="page-container pb-16 md:pb-24">
+      {/* Categories: three portraits, the middle one set lower */}
+      <section aria-labelledby="categories-heading" className="page-container pb-16 md:pb-28">
         <Reveal>
           <SectionHeading id="categories-heading" title="Shop by category" center />
         </Reveal>
-        <ul className="grid grid-cols-1 gap-8 md:grid-cols-3 md:gap-6">
+        <ul className="grid grid-cols-1 gap-10 md:grid-cols-3 md:gap-8">
           {home.categories.map((cat, idx) => (
-            <Reveal as="li" key={cat.slug} delay={idx * 90}>
+            <Reveal
+              as="li"
+              key={cat.slug}
+              delay={idx * 90}
+              className={idx === 1 ? 'md:mt-16' : undefined}
+            >
               <Link href={`/shop/${cat.slug}`} className="group block">
-                <span className="relative block aspect-[4/5] overflow-hidden rounded-md bg-surface">
+                <span className="relative block aspect-4/5 overflow-hidden rounded-md bg-surface">
                   <Image
                     src={cat.media.src}
                     alt={cat.media.alt}
@@ -174,16 +204,9 @@ export default async function HomePage() {
                     className="object-cover transition-transform duration-1000 ease-out group-hover:scale-[1.04]"
                   />
                 </span>
-                <span className="mt-4 flex items-baseline justify-between gap-4">
-                  <span>
-                    <span className="block font-display text-2xl text-ink">{cat.title}</span>
-                    <span className="mt-1 block text-sm text-ink-soft">{cat.subtitle}</span>
-                  </span>
-                  <ArrowRight
-                    size={18}
-                    aria-hidden="true"
-                    className="shrink-0 text-ink transition-transform group-hover:translate-x-1"
-                  />
+                <span className="mt-5 block text-center">
+                  <span className="block font-display text-2xl text-ink">{cat.title}</span>
+                  <span className="mt-1 block text-sm text-ink-soft">{cat.subtitle}</span>
                 </span>
               </Link>
             </Reveal>
@@ -191,10 +214,22 @@ export default async function HomePage() {
         </ul>
       </section>
 
-      {/* Editorial: a deep moss band, copy left, picture right */}
-      <section aria-labelledby="editorial-heading" className="bg-moss-deep text-on-brand">
-        <div className="grid md:grid-cols-2">
-          <Reveal className="flex flex-col justify-center gap-6 px-6 py-14 md:px-14 md:py-20 lg:px-24">
+      {/* Editorial: a moss band the picture climbs out of */}
+      <section
+        aria-labelledby="editorial-heading"
+        className="relative my-12 bg-moss-deep text-on-brand md:my-40"
+      >
+        <div className="page-container grid items-center gap-10 py-14 md:grid-cols-12 md:gap-16 md:py-14">
+          <div className="relative aspect-3/4 overflow-hidden rounded-md md:col-span-5 md:-my-48">
+            <Image
+              src={home.editorial.media.src}
+              alt={home.editorial.media.alt}
+              fill
+              sizes="(min-width: 768px) 40vw, 100vw"
+              className="object-cover"
+            />
+          </div>
+          <Reveal className="flex flex-col gap-6 md:col-span-7 md:pl-6">
             <h2
               id="editorial-heading"
               className="font-display text-3xl leading-tight font-normal tracking-tight md:text-5xl"
@@ -202,11 +237,11 @@ export default async function HomePage() {
               {home.editorial.title}
             </h2>
             {home.editorial.quote ? (
-              <blockquote className="max-w-md font-display text-xl leading-snug text-on-brand/90 italic md:text-2xl">
+              <blockquote className="max-w-lg font-display text-xl leading-snug text-on-brand/90 italic md:text-3xl">
                 &ldquo;{home.editorial.quote}&rdquo;
               </blockquote>
             ) : null}
-            <p className="max-w-md text-sm leading-relaxed text-on-brand/70 md:text-base">
+            <p className="max-w-lg text-sm leading-relaxed text-on-brand/70 md:text-base">
               {home.editorial.body}
             </p>
             {home.editorial.cta ? (
@@ -223,54 +258,53 @@ export default async function HomePage() {
               </Link>
             ) : null}
           </Reveal>
-          <div className="relative aspect-[4/3] md:aspect-auto md:min-h-[38rem]">
-            <Image
-              src={home.editorial.media.src}
-              alt={home.editorial.media.alt}
-              fill
-              sizes="(min-width: 768px) 50vw, 100vw"
-              className="object-cover"
-            />
-          </div>
         </div>
       </section>
 
-      {/* Lookbook: a row you can drag sideways */}
-      <section aria-labelledby="lookbook-heading" className="py-16 md:py-24">
-        <div className="page-container">
-          <Reveal>
+      {/* Lookbook: three pictures of different sizes, like prints on a wall */}
+      <section aria-labelledby="lookbook-heading" className="page-container pb-16 md:pb-24">
+        <Reveal>
+          <div className="flex flex-wrap items-end justify-between gap-6 pb-10 md:pb-14">
             <SectionHeading
               id="lookbook-heading"
               title={lookbook.title}
               subtitle={lookbook.season}
-              href="/lookbook"
-              hrefLabel="Open lookbook"
             />
-          </Reveal>
-        </div>
-        <ul className="flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-4 sm:px-6 lg:px-[max(2.5rem,calc((100vw-1180px)/2+2.5rem))]">
-          {lookbook.looks.slice(0, 3).map((look) => (
-            <li key={look.id} className="w-[72vw] shrink-0 snap-start sm:w-[24rem]">
+            <Link href="/lookbook" className="link-draw pb-1 text-sm text-ink">
+              Open lookbook
+            </Link>
+          </div>
+        </Reveal>
+        <ul className="grid grid-cols-12 items-start gap-4 md:gap-8">
+          {looks.map((look, idx) => (
+            <Reveal
+              as="li"
+              key={look.id}
+              delay={idx * 100}
+              className={lookCols[idx] ?? 'col-span-12'}
+            >
               <Link href="/lookbook" className="group block">
-                <span className="relative block aspect-[3/4] overflow-hidden rounded-md bg-surface">
+                <span
+                  className={`relative block overflow-hidden rounded-md bg-surface ${lookAspect[idx] ?? 'aspect-square'}`}
+                >
                   <Image
                     src={look.media.src}
                     alt={look.media.alt}
                     fill
-                    sizes="(min-width: 640px) 24rem, 72vw"
+                    sizes="(min-width: 640px) 40vw, 100vw"
                     className="object-cover transition-transform duration-1000 ease-out group-hover:scale-[1.04]"
                   />
                 </span>
-                <span className="mt-3 block text-sm text-ink">
+                <span className="mt-3 block font-display text-lg text-ink">
                   {look.title.replace(/^Look \d+\s*[—-]\s*/, '')}
                 </span>
               </Link>
-            </li>
+            </Reveal>
           ))}
         </ul>
       </section>
 
-      {/* Mirror Try: centred, three short steps */}
+      {/* Mirror Try: three round numbers on one thin line */}
       <section aria-labelledby="explainer-heading" className="bg-surface">
         <div className="page-container py-16 text-center md:py-24">
           <Reveal>
@@ -281,14 +315,20 @@ export default async function HomePage() {
               center
             />
           </Reveal>
-          <ol className="mx-auto grid max-w-4xl gap-10 text-left sm:grid-cols-3">
+          <ol className="relative mx-auto grid max-w-4xl gap-12 sm:grid-cols-3">
+            <span
+              aria-hidden="true"
+              className="absolute top-7 right-[16%] left-[16%] hidden border-t border-dashed border-ink/30 sm:block"
+            />
             {home.mirrorTryExplainer.steps.map((step, idx) => (
-              <Reveal as="li" key={step.step} delay={idx * 100}>
-                <span className="font-display text-3xl text-ink-faint tabular-nums">
-                  {String(step.step).padStart(2, '0')}
+              <Reveal as="li" key={step.step} delay={idx * 100} className="relative">
+                <span className="relative mx-auto flex h-14 w-14 items-center justify-center rounded-full border border-ink/30 bg-surface font-display text-2xl text-ink tabular-nums">
+                  {step.step}
                 </span>
-                <h3 className="mt-3 text-base font-medium text-ink">{step.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-ink-soft">{step.description}</p>
+                <h3 className="mt-5 font-display text-xl text-ink">{step.title}</h3>
+                <p className="mx-auto mt-2 max-w-[16rem] text-sm leading-relaxed text-ink-soft">
+                  {step.description}
+                </p>
               </Reveal>
             ))}
           </ol>
@@ -301,102 +341,136 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* Reviews: real quotes from the catalogue */}
-      {reviewPicks.length > 0 ? (
-        <section aria-labelledby="reviews-heading" className="page-container pt-16 md:pt-24">
-          <Reveal>
-            <SectionHeading id="reviews-heading" title="What customers say" />
+      {/* Reviews: one quote given room, two more beneath it */}
+      {lead ? (
+        <section
+          aria-labelledby="reviews-heading"
+          className="page-container py-16 text-center md:py-28"
+        >
+          <h2 id="reviews-heading" className="sr-only">
+            What customers say
+          </h2>
+          <Reveal className="mx-auto max-w-3xl">
+            <div
+              role="img"
+              aria-label={`${lead.review.rating} out of 5 stars`}
+              className="flex justify-center gap-1"
+            >
+              {Array.from({ length: lead.review.rating }, (_, i) => (
+                <Star key={i} size={16} weight="fill" aria-hidden="true" className="text-brand" />
+              ))}
+            </div>
+            <blockquote className="mt-6 font-display text-3xl leading-snug font-normal text-balance text-ink italic md:text-5xl">
+              &ldquo;{lead.review.title}&rdquo;
+            </blockquote>
+            <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-ink-soft">
+              {lead.review.body}
+            </p>
+            <p className="mt-6 text-sm text-ink-soft">
+              {lead.review.author}
+              {lead.review.verified ? ' · Verified purchase · ' : ' · '}
+              <Link href={`/products/${lead.product.slug}`} className="link-draw text-ink">
+                {lead.product.name}
+              </Link>
+            </p>
           </Reveal>
-          <ul className="grid gap-10 md:grid-cols-3 md:gap-8">
-            {reviewPicks.map(({ review, product }, idx) => (
-              <Reveal
-                as="li"
-                key={review.id}
-                delay={idx * 120}
-                className="border-t border-ink/40 pt-6"
-              >
-                <div
-                  role="img"
-                  aria-label={`${review.rating} out of 5 stars`}
-                  className="flex gap-0.5"
-                >
-                  {Array.from({ length: review.rating }, (_, i) => (
-                    <Star key={i} size={14} weight="fill" aria-hidden="true" className="text-ink" />
-                  ))}
-                </div>
-                <blockquote className="mt-4 font-display text-2xl leading-snug font-normal text-ink">
-                  &ldquo;{review.title}&rdquo;
-                </blockquote>
-                <p className="mt-3 text-sm leading-relaxed text-ink-soft">{review.body}</p>
-                <p className="mt-5 text-xs text-ink-soft">
-                  {review.author}
-                  {review.verified ? ' · Verified purchase' : ''}
-                </p>
-                <Link
-                  href={`/products/${product.slug}`}
-                  className="mt-1 inline-block text-sm text-ink underline-offset-4 hover:underline"
-                >
-                  {product.name}
-                </Link>
-              </Reveal>
-            ))}
-          </ul>
+          {others.length > 0 ? (
+            <ul className="mx-auto mt-16 grid max-w-4xl gap-10 border-t border-ink/15 pt-10 text-left sm:grid-cols-2">
+              {others.map(({ review, product }, idx) => (
+                <Reveal as="li" key={review.id} delay={idx * 120}>
+                  <p className="font-display text-xl text-ink">&ldquo;{review.title}&rdquo;</p>
+                  <p className="mt-2 line-clamp-3 text-sm leading-relaxed text-ink-soft">
+                    {review.body}
+                  </p>
+                  <p className="mt-3 text-xs text-ink-soft">
+                    {review.author} ·{' '}
+                    <Link href={`/products/${product.slug}`} className="link-draw text-ink">
+                      {product.name}
+                    </Link>
+                  </p>
+                </Reveal>
+              ))}
+            </ul>
+          ) : null}
         </section>
       ) : null}
 
-      {/* Journal */}
-      <section aria-labelledby="journal-heading" className="page-container py-16 md:py-24">
+      {/* Journal: one large story, a second smaller and set lower */}
+      <section aria-labelledby="journal-heading" className="page-container pb-16 md:pb-28">
         <Reveal>
-          <SectionHeading
-            id="journal-heading"
-            title={home.journalTeasers.title}
-            href="/journal"
-            hrefLabel="All stories"
-          />
+          <div className="flex flex-wrap items-end justify-between gap-6 pb-10 md:pb-14">
+            <SectionHeading id="journal-heading" title={home.journalTeasers.title} />
+            <Link href="/journal" className="link-draw pb-1 text-sm text-ink">
+              All stories
+            </Link>
+          </div>
         </Reveal>
-        <ul className="grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-6">
-          {teaserPosts.map((post, idx) => (
-            <Reveal as="li" key={post.slug} delay={idx * 100}>
-              <Link href={`/journal/${post.slug}`} className="group block">
-                <span className="relative block aspect-[16/10] overflow-hidden rounded-md bg-surface">
+        <div className="grid gap-12 md:grid-cols-12 md:gap-10">
+          {firstPost ? (
+            <Reveal className="md:col-span-7">
+              <Link href={`/journal/${firstPost.slug}`} className="group block">
+                <span className="relative block aspect-4/3 overflow-hidden rounded-md bg-surface">
                   <Image
-                    src={post.cover.src}
-                    alt={post.cover.alt}
+                    src={firstPost.cover.src}
+                    alt={firstPost.cover.alt}
                     fill
-                    sizes="(min-width: 768px) 50vw, 100vw"
+                    sizes="(min-width: 768px) 58vw, 100vw"
                     className="object-cover transition-transform duration-1000 ease-out group-hover:scale-[1.03]"
                   />
                 </span>
-                <span className="mt-4 block text-xs text-ink-soft">
-                  {post.readingMinutes} min read
+                <span className="mt-5 block text-xs text-ink-soft">
+                  {firstPost.readingMinutes} min read
                 </span>
-                <span className="mt-1 block font-display text-2xl leading-snug text-ink">
-                  {post.title}
+                <span className="mt-1 block font-display text-3xl leading-snug text-ink">
+                  {firstPost.title}
                 </span>
-                <span className="mt-2 line-clamp-2 block text-sm text-ink-soft">
-                  {post.excerpt}
+                <span className="mt-3 line-clamp-2 block max-w-xl text-sm text-ink-soft">
+                  {firstPost.excerpt}
                 </span>
               </Link>
             </Reveal>
-          ))}
-        </ul>
+          ) : null}
+          {secondPost ? (
+            <Reveal delay={150} className="md:col-span-5 md:mt-28">
+              <Link href={`/journal/${secondPost.slug}`} className="group block">
+                <span className="relative block aspect-4/5 overflow-hidden rounded-md bg-surface">
+                  <Image
+                    src={secondPost.cover.src}
+                    alt={secondPost.cover.alt}
+                    fill
+                    sizes="(min-width: 768px) 40vw, 100vw"
+                    className="object-cover transition-transform duration-1000 ease-out group-hover:scale-[1.03]"
+                  />
+                </span>
+                <span className="mt-5 block text-xs text-ink-soft">
+                  {secondPost.readingMinutes} min read
+                </span>
+                <span className="mt-1 block font-display text-2xl leading-snug text-ink">
+                  {secondPost.title}
+                </span>
+              </Link>
+            </Reveal>
+          ) : null}
+        </div>
       </section>
 
-      {/* The basics, stated once */}
-      <section aria-label="Shipping, returns and payment" className="border-t border-ink/15">
-        <dl className="page-container grid grid-cols-2 gap-x-6 gap-y-8 py-10 md:grid-cols-4 md:py-12">
+      {/* The basics: one line, read like a sentence */}
+      <section aria-label="Delivery, returns and mending" className="page-container pb-16 md:pb-24">
+        <ul className="flex flex-wrap items-center justify-center gap-x-5 gap-y-3 border-y border-ink/15 py-6 font-display text-lg text-ink italic md:text-xl">
           {[
-            ['Free shipping', 'On orders over $150'],
-            ['30-day returns', 'Unworn, with tags attached'],
-            ['Try before you buy', 'Preview the fit with Mirror Try'],
-            ['Secure checkout', 'Encrypted card payment'],
-          ].map(([title, text]) => (
-            <div key={title}>
-              <dt className="text-sm font-medium text-ink">{title}</dt>
-              <dd className="mt-1 text-sm text-ink-soft">{text}</dd>
-            </div>
+            'Free delivery over $150',
+            'Thirty days to return',
+            'Plastic-free packaging',
+            'Mended for life',
+          ].map((item, idx) => (
+            <li key={item} className="flex items-center gap-5">
+              {idx > 0 ? (
+                <Leaf size={14} aria-hidden="true" className="hidden text-brand sm:block" />
+              ) : null}
+              {item}
+            </li>
           ))}
-        </dl>
+        </ul>
       </section>
 
       <NewsletterSection
