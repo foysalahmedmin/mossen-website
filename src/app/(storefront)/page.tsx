@@ -5,6 +5,7 @@ import { NewsletterSection } from '@/components/commerce/newsletter-section'
 import { Carousel } from '@/components/home/carousel'
 import { ArrowRight, Leaf, Star } from '@/components/icons'
 import { Button } from '@/components/ui'
+import { OpenMirrorTry } from '@/integration/mirror-try'
 import type { JournalPost, Product, Review } from '@/domain'
 import { Reveal } from '@/lib/motion'
 import { pageMetadata } from '@/lib/metadata'
@@ -333,10 +334,10 @@ export default async function HomePage() {
             ))}
           </ol>
           <Button asChild className="mt-12">
-            <Link href="/shop">
+            <OpenMirrorTry>
               {home.mirrorTryExplainer.cta.label}
               <ArrowRight size={14} aria-hidden="true" />
-            </Link>
+            </OpenMirrorTry>
           </Button>
         </div>
       </section>

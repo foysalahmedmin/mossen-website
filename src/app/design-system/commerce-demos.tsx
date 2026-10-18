@@ -2,7 +2,8 @@
 
 import { useState } from 'react'
 import { CartLine, FilterPanel, Gallery, ProductCard, ReviewSummary } from '@/components/commerce'
-import { TryOnTrigger } from '@/integration/mirror-try'
+import { Button } from '@/components/ui'
+import { OpenMirrorTry, TryOnTrigger } from '@/integration/mirror-try'
 import type { Product } from '@/domain'
 import { DEFAULT_QUERY } from '@/domain'
 import type { QuoteLine } from '@/features/cart/quote'
@@ -128,7 +129,7 @@ export function CommerceDemos() {
             saved={saved}
             onToggleSaved={() => setSaved(!saved)}
             labels={cardLabels}
-            tryOnSlot={<TryOnTrigger product={demoProduct} source="plp" />}
+            tryOnSlot={<TryOnTrigger product={demoProduct} />}
           />
         </div>
       </div>
@@ -248,17 +249,26 @@ export function CommerceDemos() {
 
 export function MirrorTryDemo() {
   return (
-    <div className="soft-panel space-y-4 bg-surface p-8">
-      <div className="max-w-xl space-y-2">
-        <h3 className="font-display text-xl font-medium text-ink">Mirror Try trigger</h3>
-        <p className="font-text text-sm leading-relaxed text-ink-soft">
-          The trigger a store places on a card or a product page, themed as a small lichen chip with
-          moss text.
-        </p>
-      </div>
-
-      <div className="pt-2">
-        <TryOnTrigger product={demoProduct} source="pdp" />
+    <div className="soft-panel space-y-6 bg-surface p-8">
+      <p className="max-w-xl font-text text-sm leading-relaxed text-ink-soft">
+        The plugin’s own Try on button looks the same in every store. The store only decides where
+        it sits; everything that opens after it belongs to the plugin.
+      </p>
+      <div className="flex flex-wrap items-end gap-8">
+        <div className="space-y-2">
+          <span className="block text-xs text-ink-soft">On a product card</span>
+          <TryOnTrigger product={demoProduct} />
+        </div>
+        <div className="space-y-2">
+          <span className="block text-xs text-ink-soft">On a product page</span>
+          <TryOnTrigger product={demoProduct} size="md" />
+        </div>
+        <div className="space-y-2">
+          <span className="block text-xs text-ink-soft">From store copy, no product</span>
+          <Button asChild variant="secondary">
+            <OpenMirrorTry>Open Mirror Try</OpenMirrorTry>
+          </Button>
+        </div>
       </div>
     </div>
   )

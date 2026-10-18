@@ -54,16 +54,15 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
       </head>
       <body className="bg-canvas font-text text-ink antialiased">
         <SkipLink />
-        <MirrorTryHost>
-          <StoreHydrator />
-          {children}
-        </MirrorTryHost>
+        <StoreHydrator />
+        {children}
         <ToastContainer />
         {/* Analog 35mm grain overlay */}
         <div
           aria-hidden="true"
           className="pointer-events-none fixed inset-0 z-50 [background-image:radial-gradient(#20271e_1px,transparent_1px)] [background-size:16px_16px] opacity-[0.035]"
         />
+        <MirrorTryHost />
       </body>
     </html>
   )

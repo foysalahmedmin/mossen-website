@@ -340,12 +340,7 @@ export function ProductDetailView({
               </Button>
 
               {/* Mirror Try Trigger */}
-              <TryOnTrigger
-                product={product}
-                variantId={selectedVariant.id}
-                source="pdp"
-                className="border-border rounded-md border bg-surface px-5 py-3 font-serif text-xs transition hover:scale-102"
-              />
+              <TryOnTrigger product={product} size="md" />
 
               {/* Wishlist Button */}
               <button

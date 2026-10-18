@@ -19,14 +19,10 @@ const MONEY = { currency: brand.currency, locale: brand.locale }
 /** Describes a cart line to the Mirror Try plugin; the cart already knows what each line is. */
 const tryOnProductOf = (line: QuoteLine) => ({
   id: line.productId,
-  slug: line.slug,
   name: line.name,
   category: line.category,
   subcategory: line.subcategory,
   media: [line.image],
-  variants: [
-    { id: line.variantId, sku: line.variantId, options: line.options, stock: line.quantity },
-  ],
 })
 
 const LABELS = {
@@ -191,15 +187,7 @@ export function CartView() {
                 onQuantityChange={(vId, qty) => setQuantity(vId, qty)}
                 onRemove={(vId) => remove(vId)}
                 labels={LABELS}
-                extra={
-                  <TryOnTrigger
-                    product={tryOnProductOf(line)}
-                    variantId={line.variantId}
-                    source="cart"
-                    label="Mirror Try"
-                    className="text-xs text-ink-soft underline underline-offset-4 hover:text-ink"
-                  />
-                }
+                extra={<TryOnTrigger product={tryOnProductOf(line)} />}
               />
             )) ?? (
               <li className="soft-panel p-8 text-center text-xs text-ink-soft tabular-nums">

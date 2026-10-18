@@ -77,17 +77,17 @@ export const home: HomeContent = {
       {
         step: 1,
         title: 'Choose a piece',
-        description: 'Pick a smock, a cable sweater or a raw wool coat.',
+        description: 'Find Try on under any smock, sweater, coat or skirt.',
       },
       {
         step: 2,
         title: 'Open the fitting window',
-        description: 'The preview respects the texture of flax and raw wool.',
+        description: 'Turn on your camera and let it read your size, or add your own.',
       },
       {
         step: 3,
         title: 'Watch it settle',
-        description: 'See the ease and movement in soft daylight.',
+        description: 'Move a little to see the ease, then save the trial for later.',
       },
     ],
     cta: { label: 'Open Mirror Try' },
