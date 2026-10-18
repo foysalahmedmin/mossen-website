@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from 'react'
 import Link from 'next/link'
-import { ArrowRight, MagnifyingGlass, Sparkle } from '@/components/icons'
+import { ArrowRight, MagnifyingGlass } from '@/components/icons'
 import { Accordion, Button } from '@/components/ui'
 import { routes } from '@/config/routes'
 import type { FaqItem } from '@/domain'
@@ -39,7 +39,7 @@ export function FaqView({ items = [] }: { items: FaqItem[] }) {
         <div className="pt-2">
           <p className="font-text text-sm leading-relaxed text-ink-soft">{item.answer}</p>
           <div className="mt-3">
-            <span className="inline-block rounded-md bg-stone-100 px-3 py-0.5 text-[10px] text-ink-faint tabular-nums">
+            <span className="inline-block rounded-md bg-ink/5 px-3 py-0.5 text-[10px] text-ink-faint tabular-nums">
               Topic: {item.group}
             </span>
           </div>
@@ -49,23 +49,18 @@ export function FaqView({ items = [] }: { items: FaqItem[] }) {
   }, [filteredItems])
 
   return (
-    <div className="mx-auto max-w-5xl px-4 py-12 md:py-16">
+    <div className="page-container py-10 md:py-14">
       {/* Header */}
-      <div className="mb-12 text-center">
-        <span className="inline-flex items-center gap-1.5 rounded-md bg-brand/10 px-3 py-1 text-xs font-semibold text-brand tabular-nums">
-          <Sparkle size={12} />
-          Living Wardrobe Wisdom & FAQ
-        </span>
-        <h1 className="mt-3 font-display text-4xl font-normal tracking-tight text-ink md:text-5xl">
+      <div className="mb-10 max-w-2xl md:mb-14">
+        <h1 className="font-display text-4xl font-normal tracking-tight text-ink md:text-5xl">
           Frequently Asked Questions
         </h1>
-        <p className="mx-auto mt-4 max-w-2xl font-text text-base text-ink-soft md:text-lg">
-          Answers to queries regarding Baltic flax cultivation, natural plant dyes, lanolin wool
-          care, and zero-waste delivery.
+        <p className="mt-4 font-text text-base text-ink-soft md:text-lg">
+          Answers on fibres, dyes, care and delivery.
         </p>
 
         {/* Search Bar */}
-        <div className="relative mx-auto mt-8 max-w-lg">
+        <div className="relative mt-8 max-w-lg">
           <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4 text-ink-faint">
             <MagnifyingGlass size={18} />
           </div>
@@ -73,13 +68,13 @@ export function FaqView({ items = [] }: { items: FaqItem[] }) {
             type="search"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Search questions or fiber topics..."
-            className="h-12 w-full rounded-md border border-stone-200 bg-white pr-5 pl-11 font-text text-sm text-ink placeholder:text-ink-faint focus-visible:outline-2 focus-visible:outline-focus"
+            placeholder="Search questions..."
+            className="h-12 w-full rounded-md border border-ink/10 bg-white pr-5 pl-11 font-text text-sm text-ink placeholder:text-ink-faint focus-visible:outline-2 focus-visible:outline-focus"
           />
         </div>
 
         {/* Category Pills */}
-        <div className="mt-6 flex flex-wrap justify-center gap-2">
+        <div className="mt-6 flex flex-wrap gap-2">
           {groups.map((group) => (
             <button
               key={group}
@@ -87,7 +82,7 @@ export function FaqView({ items = [] }: { items: FaqItem[] }) {
               className={`rounded-md px-4 py-1.5 text-xs font-semibold tabular-nums transition ${
                 selectedGroup === group
                   ? 'bg-brand text-on-brand'
-                  : 'border border-stone-200/70 bg-[#fcfbf7] text-ink-soft hover:bg-white hover:text-ink'
+                  : 'border border-ink/10 bg-surface text-ink-soft hover:bg-white hover:text-ink'
               }`}
             >
               {group}
@@ -97,7 +92,7 @@ export function FaqView({ items = [] }: { items: FaqItem[] }) {
       </div>
 
       {/* Accordion Card */}
-      <div className="rounded-md border border-stone-200/80 bg-[#fbf9f5] p-6 md:p-10">
+      <div className="max-w-3xl">
         <h2 className="sr-only">Questions</h2>
         {accordionItems.length > 0 ? (
           <Accordion items={accordionItems} />
@@ -121,18 +116,17 @@ export function FaqView({ items = [] }: { items: FaqItem[] }) {
       </div>
 
       {/* Sanctuary Banner */}
-      <div className="mt-12 rounded-md border border-stone-200/80 bg-[#fcfbf7] p-8 text-center md:flex md:items-center md:justify-between md:text-left">
+      <div className="mt-16 max-w-3xl border-t border-ink/10 pt-8 md:flex md:items-center md:justify-between">
         <div>
-          <h3 className="font-display text-xl font-normal text-ink">Seeking Personal Guidance?</h3>
+          <h3 className="font-display text-xl font-normal text-ink">Still have a question?</h3>
           <p className="mt-1 font-text text-sm text-ink-soft">
-            Our weaving specialists and client advisers are here to assist with garment care and fit
-            questions.
+            Our team can help with fit, care and anything else.
           </p>
         </div>
         <div className="mt-6 md:mt-0">
           <Button asChild>
             <Link href={routes.contact}>
-              Write to Concierge
+              Contact us
               <ArrowRight size={16} />
             </Link>
           </Button>

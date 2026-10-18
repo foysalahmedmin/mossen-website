@@ -14,8 +14,8 @@ const SECTIONS = [
   {
     heading: '2. Personal Information Collected',
     content: [
-      'Account & Order Data: Name, postal address, email, and transaction archives necessary to fulfill orders and satisfy customs protocols for international delivery.',
-      'Mirror Try Telemetry: Silhouettes and torso anchor calculations within the virtual try-on window are processed strictly in your local device memory during active sessions and disappear upon closing the tab. We never collect or store biometric imagery.',
+      'Account & Order Data: Name, postal address, email, and transaction records necessary to fulfill orders and satisfy customs protocols for international delivery.',
+      'Mirror Try data: Silhouettes and torso anchor calculations within the virtual try-on window are processed strictly in your local device memory during active sessions and disappear upon closing the tab. We never collect or store biometric imagery.',
     ],
   },
   {
@@ -28,7 +28,7 @@ const SECTIONS = [
   {
     heading: '4. Your Consumer Rights & Deletion',
     content: [
-      'Under European and international privacy frameworks (including GDPR), you retain full rights to inspect, correct, or request the permanent erasure of your personal data archive.',
+      'Under European and international privacy frameworks (including GDPR), you retain full rights to inspect, correct, or request the permanent erasure of your personal data.',
       'To make a data request, please send a note to our care desk at concierge@mossen-atelier.com.',
     ],
   },
@@ -38,7 +38,7 @@ export default function PrivacyPage() {
   return (
     <PolicyView
       title="Privacy Policy & Ecological Data Charter"
-      subtitle="Our commitments to non-intrusive data stewardship, cookie privacy, and digital quiet."
+      subtitle="How we handle your data, cookies and privacy."
       lastUpdated="October 2026"
       sections={SECTIONS}
     />

@@ -1,24 +1,20 @@
 'use client'
 
 import Link from 'next/link'
-import { ArrowRight, Sparkle } from '@/components/icons'
+import { ArrowRight } from '@/components/icons'
 import { Button } from '@/components/ui'
 import { routes } from '@/config/routes'
 import type { Store } from '@/domain'
 
 export function StoresView({ stores = [] }: { stores: Store[] }) {
   return (
-    <div className="mx-auto max-w-6xl px-4 py-12 md:py-16">
+    <div className="page-container py-10 md:py-14">
       {/* Header */}
-      <div className="mb-12 text-center">
-        <span className="inline-flex items-center gap-1.5 rounded-md bg-brand/10 px-3 py-1 text-xs font-semibold text-brand tabular-nums">
-          <Sparkle size={12} />
-          Botanical Ateliers & Sanctuaries
-        </span>
-        <h1 className="mt-3 font-display text-4xl font-normal tracking-tight text-ink md:text-5xl">
-          Flagships & Fiber Sanctuaries
+      <div className="mb-10 max-w-2xl md:mb-14">
+        <h1 className="font-display text-4xl font-normal tracking-tight text-ink md:text-5xl">
+          Our studios
         </h1>
-        <p className="mx-auto mt-4 max-w-2xl font-text text-base text-ink-soft md:text-lg">
+        <p className="mt-4 font-text text-base text-ink-soft md:text-lg">
           Visit our quiet studios to touch living Baltic flax, smell raw Gotland fleeces, and
           experience peaceful private fitting sessions with botanical tea.
         </p>
@@ -29,7 +25,7 @@ export function StoresView({ stores = [] }: { stores: Store[] }) {
         {stores.map((store) => (
           <div
             key={store.id}
-            className="flex flex-col justify-between overflow-hidden rounded-md border border-stone-200/80 bg-[#fbf9f5] p-8 transition hover:-translate-y-1"
+            className="flex flex-col justify-between overflow-hidden rounded-md border border-ink/10 bg-surface p-8 transition"
           >
             <div>
               <div className="flex items-center justify-between">
@@ -54,7 +50,7 @@ export function StoresView({ stores = [] }: { stores: Store[] }) {
                 </div>
 
                 <div>
-                  <span className="block text-xs text-ink-faint tabular-nums">Sanctuary Hours</span>
+                  <span className="block text-xs text-ink-faint tabular-nums">Opening hours</span>
                   <ul className="mt-1 space-y-1 text-ink-soft">
                     {store.hours.map((line, idx) => (
                       <li key={idx} className="text-xs leading-relaxed">
@@ -66,7 +62,7 @@ export function StoresView({ stores = [] }: { stores: Store[] }) {
               </div>
             </div>
 
-            <div className="mt-8 border-t border-stone-200/60 pt-6">
+            <div className="mt-8 border-t border-ink/10 pt-6">
               <Button asChild variant="secondary" className="w-full justify-center text-xs">
                 <Link href={routes.contact}>
                   Book Tea & Fitting Session
@@ -79,12 +75,11 @@ export function StoresView({ stores = [] }: { stores: Store[] }) {
       </div>
 
       {/* Tea Consultation Banner */}
-      <div className="mt-16 rounded-md border border-stone-200/80 bg-[#fcfbf7] p-8 text-center md:flex md:items-center md:justify-between md:text-left">
+      <div className="mt-16 rounded-md border border-ink/10 bg-surface p-8 text-center md:flex md:items-center md:justify-between md:text-left">
         <div>
           <h3 className="font-display text-xl font-normal text-ink">Remote Fiber Consultations</h3>
           <p className="mt-1 font-text text-sm text-ink-soft">
-            Unable to visit a sanctuary in person? Connect with our weavers via gentle video
-            appointment to discuss weights, layers, and care.
+            Cannot visit in person? Book a video appointment with one of our weavers.
           </p>
         </div>
         <div className="mt-6 md:mt-0">

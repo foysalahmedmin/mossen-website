@@ -159,9 +159,7 @@ export function OrganicSearchSheet() {
               )}
             </div>
           ) : isSearching ? (
-            <div className="py-12 text-center text-xs text-ink-soft tabular-nums">
-              Searching archive...
-            </div>
+            <div className="py-12 text-center text-xs text-ink-soft tabular-nums">Searching...</div>
           ) : displayedResults.length === 0 ? (
             <div className="py-12 text-center font-text text-sm text-ink-soft">
               No garments or pieces found matching &ldquo;{query}&rdquo;.

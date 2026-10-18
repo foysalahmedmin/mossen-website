@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { ArrowRight, Sparkle } from '@/components/icons'
+import { ArrowRight } from '@/components/icons'
 import { Button } from '@/components/ui'
 import { brand } from '@/config/brand'
 import { routes } from '@/config/routes'
@@ -39,9 +39,9 @@ const TIMELINE = [
   },
   {
     year: '2024',
-    title: 'Flagship & Fitting Sanctuary',
+    title: 'Flagship and fitting room',
     description:
-      'Opened Stockholm Gamla Stan studio featuring quiet fitting chambers and tea consultations.',
+      'Opened the Stockholm Gamla Stan studio, with fitting rooms and tea consultations.',
   },
   {
     year: '2026',
@@ -53,14 +53,10 @@ const TIMELINE = [
 
 export function AboutView() {
   return (
-    <div className="mx-auto max-w-6xl px-4 py-12 md:py-16">
+    <div className="page-container py-10 md:py-14">
       {/* Botanical Paper Hero */}
-      <div className="relative mb-16 overflow-hidden rounded-md border border-stone-200/80 bg-[#fbf9f5] p-8 md:p-14">
+      <div className="relative mb-16 overflow-hidden rounded-md border border-ink/10 bg-surface p-8 md:p-14">
         <div className="max-w-2xl">
-          <span className="mb-4 inline-flex items-center gap-1.5 rounded-md bg-brand/10 px-3 py-1 text-xs font-semibold text-brand tabular-nums">
-            <Sparkle size={12} />
-            Our Philosophy & Living Craft
-          </span>
           <h1 className="font-display text-3xl font-normal tracking-tight text-ink md:text-5xl">
             Garments Rooted in Soil, Weather, and Stillness.
           </h1>
@@ -85,8 +81,7 @@ export function AboutView() {
 
       {/* Pillars Grid */}
       <section className="mb-16">
-        <div className="mb-8 text-center">
-          <span className="text-xs text-ink-faint tabular-nums">Our Commitments</span>
+        <div className="mb-8">
           <h2 className="mt-1 font-display text-2xl font-normal text-ink md:text-3xl">
             Foundations of Slow Craft
           </h2>
@@ -96,7 +91,7 @@ export function AboutView() {
           {PILLARS.map((pillar) => (
             <div
               key={pillar.title}
-              className="rounded-md border border-stone-200/70 bg-[#fcfbf7] p-8 transition hover:-translate-y-1"
+              className="rounded-md border border-ink/10 bg-surface p-8 transition"
             >
               <h3 className="font-display text-lg font-medium text-ink">{pillar.title}</h3>
               <p className="mt-3 font-text text-sm leading-relaxed text-ink-soft">
@@ -108,9 +103,8 @@ export function AboutView() {
       </section>
 
       {/* Living Timeline */}
-      <section className="rounded-md border border-stone-200/80 bg-[#fbf9f5] p-8 md:p-12">
+      <section className="rounded-md border border-ink/10 bg-surface p-8 md:p-12">
         <div className="mb-8">
-          <span className="text-xs text-ink-faint tabular-nums">Our Journey</span>
           <h2 className="mt-1 font-display text-2xl font-normal text-ink">
             Milestones in Regenerative Craft
           </h2>
@@ -118,7 +112,7 @@ export function AboutView() {
 
         <div className="grid gap-8 md:grid-cols-2">
           {TIMELINE.map((item) => (
-            <div key={item.year} className="rounded-md border border-stone-200/60 bg-white/60 p-6">
+            <div key={item.year} className="rounded-md border border-ink/10 bg-white/60 p-6">
               <span className="text-lg font-semibold text-brand tabular-nums">{item.year}</span>
               <h3 className="mt-1 font-display text-base font-medium text-ink">{item.title}</h3>
               <p className="mt-2 font-text text-sm leading-relaxed text-ink-soft">

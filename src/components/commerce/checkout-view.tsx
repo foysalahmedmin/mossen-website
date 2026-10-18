@@ -4,7 +4,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
-import { ArrowRight, Check, Leaf } from '@/components/icons'
+import { ArrowRight, Check } from '@/components/icons'
 import { Button } from '@/components/ui'
 import { brand } from '@/config/brand'
 import { routes } from '@/config/routes'
@@ -154,7 +154,7 @@ export function CheckoutView() {
       })
 
       if (!result.ok || !result.order) {
-        setError(result.error ?? 'Failed to place order. Please review your details.')
+        setError(result.error ?? 'We could not place your order. Check your details and try again.')
         setSubmitting(false)
         return
       }
@@ -169,15 +169,9 @@ export function CheckoutView() {
   }
 
   return (
-    <div className="mx-auto max-w-5xl px-4 py-8 sm:px-6 lg:px-8">
-      <div className="mb-8">
-        <div className="flex items-center gap-2">
-          <Leaf size={16} className="text-brand" />
-          <span className="text-xs text-ink-soft tabular-nums">
-            MOSSEN quiet checkout &middot; Encrypted fulfillment
-          </span>
-        </div>
-        <h1 className="mt-2 font-display text-3xl font-normal text-ink">Order Finalization</h1>
+    <div className="page-container py-10 md:py-14">
+      <div className="mb-10 max-w-2xl md:mb-14">
+        <h1 className="font-display text-3xl font-normal text-ink">Checkout</h1>
       </div>
 
       {error ? (
@@ -190,14 +184,14 @@ export function CheckoutView() {
         {/* Form Column */}
         <div className="lg:col-span-7">
           <form onSubmit={handleSubmit} className="space-y-8">
-            {/* Step 1: Contact Details */}
+            {/* Step 1: Contact details */}
             <div className="soft-panel rounded-md border border-river/30 bg-surface/90 p-6 sm:p-8">
               <div className="flex items-center justify-between border-b border-river/30 pb-4">
                 <div className="flex items-center gap-3">
                   <span className="flex h-7 w-7 items-center justify-center rounded-full border border-river/40 bg-canvas text-xs font-semibold text-ink tabular-nums">
                     01
                   </span>
-                  <h2 className="font-display text-xl font-normal text-ink">Contact Details</h2>
+                  <h2 className="font-display text-xl font-normal text-ink">Contact details</h2>
                 </div>
                 {!customer ? (
                   <Link
@@ -220,7 +214,7 @@ export function CheckoutView() {
                     required
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    placeholder="patron@mossen.studios"
+                    placeholder="you@example.com"
                     className="w-full rounded-md border border-river/40 bg-canvas p-3 font-text text-sm text-ink placeholder:text-ink-faint focus:border-ink focus:outline-none"
                   />
                 </div>
@@ -237,19 +231,19 @@ export function CheckoutView() {
                     htmlFor="newsletter"
                     className="cursor-pointer text-xs text-ink-soft tabular-nums"
                   >
-                    Subscribe to quiet seasonal botanical essays & releases
+                    Email me about new arrivals and offers
                   </label>
                 </div>
               </div>
             </div>
 
-            {/* Step 2: Shipping Destination */}
+            {/* Step 2: Delivery address */}
             <div className="soft-panel rounded-md border border-river/30 bg-surface/90 p-6 sm:p-8">
               <div className="flex items-center gap-3 border-b border-river/30 pb-4">
                 <span className="flex h-7 w-7 items-center justify-center rounded-full border border-river/40 bg-canvas text-xs font-semibold text-ink tabular-nums">
                   02
                 </span>
-                <h2 className="font-display text-xl font-normal text-ink">Delivery Destination</h2>
+                <h2 className="font-display text-xl font-normal text-ink">Delivery address</h2>
               </div>
 
               <div className="mt-6 space-y-4">
@@ -375,7 +369,7 @@ export function CheckoutView() {
 
                 <div>
                   <label htmlFor="phone" className="mb-1 block text-xs text-ink-soft tabular-nums">
-                    Phone (For Sustainable Courier Updates)
+                    Phone (for delivery updates)
                   </label>
                   <input
                     id="phone"
@@ -395,7 +389,7 @@ export function CheckoutView() {
                 <span className="flex h-7 w-7 items-center justify-center rounded-full border border-river/40 bg-canvas text-xs font-semibold text-ink tabular-nums">
                   03
                 </span>
-                <h2 className="font-display text-xl font-normal text-ink">Fulfillment Velocity</h2>
+                <h2 className="font-display text-xl font-normal text-ink">Delivery method</h2>
               </div>
 
               <div className="mt-6 space-y-3">
@@ -416,11 +410,9 @@ export function CheckoutView() {
                       className="accent-brand"
                     />
                     <div>
-                      <p className="font-display text-sm font-medium text-ink">
-                        Standard Quiet Climate Courier
-                      </p>
+                      <p className="font-display text-sm font-medium text-ink">Standard courier</p>
                       <p className="text-[11px] text-ink-soft tabular-nums">
-                        3–5 business days zero-emission electric van
+                        3–5 business days, zero-emission delivery
                       </p>
                     </div>
                   </div>
@@ -446,9 +438,7 @@ export function CheckoutView() {
                       className="accent-brand"
                     />
                     <div>
-                      <p className="font-display text-sm font-medium text-ink">
-                        Priority Botanical Express
-                      </p>
+                      <p className="font-display text-sm font-medium text-ink">Express</p>
                       <p className="text-[11px] text-ink-soft tabular-nums">
                         1–2 business days direct routing
                       </p>
@@ -470,7 +460,7 @@ export function CheckoutView() {
                   </span>
                   <h2 className="font-display text-xl font-normal text-ink">Payment Method</h2>
                 </div>
-                <span className="text-[10px] text-ink-soft tabular-nums">256-bit encrypted</span>
+                <span className="text-[10px] text-ink-soft tabular-nums">Secure payment</span>
               </div>
 
               <div className="mt-6 space-y-4">
@@ -545,7 +535,7 @@ export function CheckoutView() {
             </div>
 
             <Button type="submit" size="lg" loading={submitting} className="w-full">
-              {submitting ? 'Confirming Order...' : 'Complete Sanctuary Order'}
+              {submitting ? 'Confirming Order...' : 'Place order'}
               <ArrowRight size={18} className="ml-2" />
             </Button>
           </form>
@@ -555,9 +545,8 @@ export function CheckoutView() {
         <div className="lg:col-span-5">
           <div className="soft-panel sticky top-24 space-y-6 rounded-md border border-river/30 bg-surface/90 p-6">
             <div className="border-b border-river/30 pb-4">
-              <span className="text-[11px] text-ink-soft tabular-nums">Order review</span>
               <h2 className="mt-1 font-display text-2xl font-normal text-ink">
-                Summary ({lines.reduce((a, b) => a + b.quantity, 0)} Items)
+                Order summary ({lines.reduce((a, b) => a + b.quantity, 0)} Items)
               </h2>
             </div>
 
@@ -599,7 +588,7 @@ export function CheckoutView() {
                 <span className="text-ink">{formatMoney(quote?.totals.subtotal ?? 0, MONEY)}</span>
               </div>
               <div className="flex justify-between text-ink-soft">
-                <span>Freight</span>
+                <span>Shipping</span>
                 <span className="text-ink">
                   {quote?.totals.shipping === 0
                     ? 'FREE'
@@ -608,7 +597,7 @@ export function CheckoutView() {
               </div>
               {quote?.totals.discount ? (
                 <div className="flex justify-between text-brand">
-                  <span>Courtesy Credit</span>
+                  <span>Discount</span>
                   <span>-{formatMoney(quote.totals.discount, MONEY)}</span>
                 </div>
               ) : null}
@@ -617,7 +606,7 @@ export function CheckoutView() {
                 <span className="text-ink">{formatMoney(quote?.totals.tax ?? 0, MONEY)}</span>
               </div>
               <div className="flex justify-between border-t border-river/30 pt-3 text-base font-semibold text-ink">
-                <span>Total Due</span>
+                <span>Total</span>
                 <span className="font-display text-2xl font-normal">
                   {formatMoney(quote?.totals.total ?? 0, MONEY)}
                 </span>

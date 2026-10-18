@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
-import { ArrowLeft, Sparkle } from '@/components/icons'
+import { ArrowLeft } from '@/components/icons'
 import { routes } from '@/config/routes'
 import type { JournalPost } from '@/domain'
 
@@ -39,7 +39,7 @@ export function JournalPostView({
   })
 
   return (
-    <article className="mx-auto max-w-4xl px-4 py-12 md:py-16">
+    <article className="page-container py-10 md:py-14">
       {/* Navigation */}
       <div className="mb-8">
         <Link
@@ -54,10 +54,6 @@ export function JournalPostView({
       {/* Header */}
       <header className="mb-10">
         <div className="flex items-center gap-3 text-xs text-ink-faint tabular-nums">
-          <span className="inline-flex items-center gap-1 font-semibold text-brand">
-            <Sparkle size={12} />
-            Botanical Essay
-          </span>
           <span>·</span>
           <time dateTime={post.publishedAt}>{publishedDate}</time>
           <span>·</span>
@@ -67,7 +63,7 @@ export function JournalPostView({
           </span>
         </div>
 
-        <h1 className="mt-4 font-display text-3xl leading-tight font-normal tracking-tight text-ink md:text-5xl">
+        <h1 className="font-display text-3xl leading-tight font-normal tracking-tight text-ink md:text-5xl">
           {post.title}
         </h1>
 
@@ -77,7 +73,7 @@ export function JournalPostView({
       </header>
 
       {/* Hero Media */}
-      <div className="relative mb-12 overflow-hidden rounded-md border border-stone-200/80 bg-[#fbf9f5]">
+      <div className="relative mb-12 overflow-hidden rounded-md border border-ink/10 bg-surface">
         <Image
           priority
           src={post.cover.src}
@@ -87,7 +83,7 @@ export function JournalPostView({
           sizes="(min-width: 1024px) 768px, 100vw"
           className="aspect-[16/9] w-full object-cover"
         />
-        <div className="border-t border-stone-200/60 p-3 text-center font-text text-xs text-ink-faint">
+        <div className="border-t border-ink/10 p-3 text-center font-text text-xs text-ink-faint">
           {post.cover.alt}
         </div>
       </div>
@@ -104,24 +100,22 @@ export function JournalPostView({
         ))}
 
         {/* Botanical Pull Quote */}
-        <blockquote className="my-10 rounded-md border-l-4 border-brand bg-[#fcfbf7] p-6 md:p-8">
+        <blockquote className="my-10 rounded-md border-l-4 border-brand bg-surface p-6 md:p-8">
           <p className="font-display text-lg font-normal text-ink italic md:text-xl">
             &ldquo;When linen is retted under morning dew rather than industrial chemicals, it
             retains the breath of the meadow and remembers the earth from which it grew.&rdquo;
           </p>
           <cite className="mt-3 block text-xs text-ink-faint not-italic tabular-nums">
-            — MOSSEN Atelier Journal
+            — MOSSEN Journal
           </cite>
         </blockquote>
       </div>
 
       {/* Related Essays */}
       {relatedPosts.length > 0 && (
-        <section className="mt-20 border-t border-stone-200/80 pt-12">
+        <section className="mt-20 border-t border-ink/10 pt-12">
           <div className="mb-8 flex items-center justify-between">
-            <h2 className="font-display text-2xl font-normal text-ink">
-              Related Botanical Stories
-            </h2>
+            <h2 className="font-display text-2xl font-normal text-ink">More from the journal</h2>
             <Link
               href={routes.journal}
               className="font-text text-sm font-semibold text-brand hover:underline"
@@ -135,16 +129,16 @@ export function JournalPostView({
               <Link
                 key={related.slug}
                 href={routes.journalPost(related.slug)}
-                className="group flex flex-col justify-between overflow-hidden rounded-md border border-stone-200/70 bg-[#fcfbf7] p-5 transition hover:-translate-y-1"
+                className="group flex flex-col justify-between overflow-hidden rounded-md border border-ink/10 bg-surface p-5 transition"
               >
                 <div>
-                  <div className="relative mb-4 aspect-[16/9] overflow-hidden rounded-md bg-stone-100">
+                  <div className="relative mb-4 aspect-[16/9] overflow-hidden rounded-md bg-ink/5">
                     <Image
                       src={related.cover.src}
                       alt={related.cover.alt}
                       fill
                       sizes="(min-width: 1024px) 33vw, 100vw"
-                      className="h-full w-full object-cover transition duration-300 group-hover:scale-105"
+                      className="h-full w-full object-cover transition duration-300 group-hover:scale-[1.03]"
                     />
                   </div>
                   <div className="flex items-center gap-2 text-xs text-ink-faint tabular-nums">

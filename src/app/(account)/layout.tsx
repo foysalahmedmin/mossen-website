@@ -28,16 +28,15 @@ export default function AccountLayout({ children }: { children: React.ReactNode 
         </div>
       </header>
 
-      <main id="main-content" tabIndex={-1} className="flex-1 py-10 focus:outline-none">
-        <div className="mx-auto max-w-5xl px-6">
-          <div className="mb-8">
-            <h2 className="font-display text-3xl font-normal text-ink">My Sanctuary</h2>
-            <p className="mt-1 font-text text-sm text-ink-soft">
-              Manage your orders, saved measurements, and quiet preferences.
-            </p>
-          </div>
+      <main
+        id="main-content"
+        tabIndex={-1}
+        className="flex-1 pt-10 pb-20 focus:outline-none md:pt-14"
+      >
+        <div className="page-container">
+          <p className="mb-6 font-display text-lg text-ink-soft">My account</p>
 
-          <Suspense fallback={<div className="h-10" />}>
+          <Suspense fallback={<div className="mb-8 h-11" />}>
             <AccountNav />
           </Suspense>
 

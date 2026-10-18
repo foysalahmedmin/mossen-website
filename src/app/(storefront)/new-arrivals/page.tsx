@@ -38,7 +38,7 @@ async function NewArrivalsContent({ searchParams }: NewArrivalsPageProps) {
         total={result.page.total}
         facets={result.facets}
         query={query}
-        title="Recent Harvest"
+        title="New arrivals"
         description="Freshly woven garments from the Copenhagen and Kyoto studios: natural madder tunics, raw hemp overshirts, and unbleached linen smocks."
         basePath="/new-arrivals"
       />

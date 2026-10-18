@@ -25,7 +25,7 @@ const galleryLabels = {
 }
 
 const priceLabels = {
-  sale: 'Archive price',
+  sale: 'Sale price',
   original: 'Natural price',
 }
 
@@ -393,7 +393,7 @@ export function ProductDetailView({
                     ? 'Garment Notes'
                     : tab === 'materials'
                       ? 'Natural Fiber & Care'
-                      : 'Careful Dispatch'}
+                      : 'Shipping'}
                 </button>
               ))}
             </div>
@@ -421,9 +421,7 @@ export function ProductDetailView({
                 </div>
               ) : (
                 <div className="space-y-2 font-serif text-xs">
-                  <p>
-                    • Dispatched from Copenhagen atelier in 100% plastic-free seed paper packaging.
-                  </p>
+                  <p>• Ships from Copenhagen in plastic-free seed paper packaging.</p>
                   <p>• Climate priority delivery: 3–5 business days ($8, free over $150).</p>
                   <p>• Express courier: 1–2 business days ($18 flat rate).</p>
                   <p>• Lifetime complimentary mending service at all MOSSEN workshops.</p>
@@ -444,7 +442,7 @@ export function ProductDetailView({
           id="reviews-heading"
           className="font-display text-2xl font-medium tracking-tight text-ink md:text-3xl"
         >
-          Quiet Notes from Wearers
+          What wearers say
         </h2>
 
         <div className="grid grid-cols-1 items-start gap-8 lg:grid-cols-12">
@@ -545,7 +543,7 @@ export function ProductDetailView({
             id="recent-heading"
             className="font-display text-2xl font-medium tracking-tight text-ink md:text-3xl"
           >
-            Recently Contemplated
+            Recently viewed
           </h2>
 
           <div className="grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-6">

@@ -60,7 +60,7 @@ export function UnrollingBasketSheet() {
 
   const itemCount = lines.reduce((acc, l) => acc + l.quantity, 0)
   const subtotal = quote?.totals.subtotal ?? 0
-  const freeThreshold = 7500 // 75.00 in minor units
+  const freeThreshold = 15000 // $150 in minor units
   const freeProgress = Math.min(100, Math.round((subtotal / freeThreshold) * 100))
   const freeRemaining = Math.max(0, freeThreshold - subtotal)
   const vineRatio = freeProgress / 100
@@ -104,8 +104,8 @@ export function UnrollingBasketSheet() {
           <div className="min-w-0 flex-1">
             <p className="font-text text-xs font-medium text-ink">
               {freeRemaining === 0
-                ? 'You have unlocked complimentary carbon-neutral delivery.'
-                : `Add ${formatMoney(freeRemaining, MONEY)} for complimentary delivery.`}
+                ? 'You have unlocked free delivery.'
+                : `Add ${formatMoney(freeRemaining, MONEY)} for free delivery.`}
             </p>
             <div className="mt-1.5 h-1.5 w-full overflow-hidden rounded-md bg-surface">
               <div
@@ -123,14 +123,14 @@ export function UnrollingBasketSheet() {
               <Leaf size={32} className="sway text-brand/50" aria-hidden="true" />
               <p className="mt-3 font-display text-base text-ink">Your basket is empty</p>
               <p className="mt-1 font-text text-xs text-ink-soft">
-                Explore our slow natural edits to add garments.
+                Pieces you add will appear here.
               </p>
               <Link
                 href={routes.shop}
                 onClick={closePanel}
                 className="pebble mt-4 inline-flex items-center gap-2 bg-brand px-5 py-2 text-xs font-medium text-on-brand tabular-nums hover:opacity-90"
               >
-                Explore Garments
+                Shop the collection
               </Link>
             </div>
           ) : (
@@ -217,7 +217,7 @@ export function UnrollingBasketSheet() {
               onClick={closePanel}
               className="pebble mt-4 flex h-12 w-full items-center justify-center bg-brand px-6 text-xs font-medium text-on-brand tabular-nums transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-focus"
             >
-              Proceed to Quiet Checkout
+              Checkout
             </Link>
           </div>
         )}

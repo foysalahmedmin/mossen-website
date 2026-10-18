@@ -19,14 +19,14 @@ const SECTIONS = [
     ],
   },
   {
-    heading: '3. Pricing & Small-Batch Harvests',
+    heading: '3. Pricing and small batches',
     content: [
       'Garment prices are presented in United States Dollars (USD) as indicative artisanal benchmarks. Due to natural crop variations and seasonal dye batches, pieces are subject to limited availability.',
       'Order confirmations generate proof of reservation within our demonstration framework.',
     ],
   },
   {
-    heading: '4. Governing Law & Gentle Resolution',
+    heading: '4. Governing law',
     content: [
       'These Terms of Service and any agreement arising from your use of this storefront shall be governed by and construed in accordance with the laws of Denmark, without regard to conflict of law principles.',
       'Any dispute or inquiry shall be settled amicably or before the competent civil courts of Copenhagen, Denmark.',
@@ -37,7 +37,7 @@ const SECTIONS = [
 export default function TermsPage() {
   return (
     <PolicyView
-      title="Terms of Service & Sanctuary Agreement"
+      title="Terms of service"
       subtitle="Guiding principles, intellectual property rules, and terms of service."
       lastUpdated="October 2026"
       sections={SECTIONS}

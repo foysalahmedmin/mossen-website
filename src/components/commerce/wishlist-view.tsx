@@ -3,7 +3,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
-import { ArrowRight, Heart, Leaf, ShoppingBag, Trash } from '@/components/icons'
+import { ArrowRight, ShoppingBag, Trash } from '@/components/icons'
 import { Button } from '@/components/ui'
 import { brand } from '@/config/brand'
 import { routes } from '@/config/routes'
@@ -92,21 +92,16 @@ export function WishlistView() {
     return (
       <div className="mx-auto min-h-[60vh] max-w-7xl px-4 py-20 text-center sm:px-6 lg:px-8">
         <div className="soft-panel mx-auto max-w-xl rounded-md border border-river/30 bg-surface/90 p-12">
-          <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-md border border-river/40 bg-canvas">
-            <Heart size={36} className="text-ink-soft" />
-          </div>
-          <span className="text-xs text-brand tabular-nums">Quiet Curation</span>
-          <h1 className="mt-2 font-display text-3xl font-normal text-ink sm:text-4xl">
-            Your Wishlist is Empty
+          <h1 className="font-display text-3xl font-normal text-ink sm:text-4xl">
+            Your wishlist is empty
           </h1>
           <p className="mt-4 font-text text-sm leading-relaxed text-ink-soft sm:text-base">
-            Save natural pieces while browsing to reserve your weave in sanctuary memory and test
-            with Mirror Try.
+            Tap the heart on any piece to save it here, then try it on with Mirror Try.
           </p>
           <div className="mt-8">
             <Button asChild size="lg">
               <Link href={routes.shop}>
-                Explore Collection
+                Continue shopping
                 <ArrowRight size={16} className="ml-2" />
               </Link>
             </Button>
@@ -117,15 +112,11 @@ export function WishlistView() {
   }
 
   return (
-    <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+    <div className="page-container py-10 md:py-14">
       {/* Header */}
       <div className="mb-10 flex flex-col justify-between gap-4 border-b border-river/30 pb-6 sm:flex-row sm:items-end">
         <div>
-          <div className="flex items-center gap-2">
-            <Leaf size={16} className="text-brand" />
-            <span className="text-xs text-ink-soft tabular-nums">MOSSEN quiet curation</span>
-          </div>
-          <h1 className="mt-2 font-display text-3xl font-normal text-ink sm:text-4xl">
+          <h1 className="font-display text-3xl font-normal text-ink sm:text-4xl">
             Saved Pieces ({products.length})
           </h1>
         </div>
@@ -144,7 +135,7 @@ export function WishlistView() {
           return (
             <div
               key={product.id}
-              className="soft-panel group relative flex flex-col justify-between overflow-hidden rounded-md border border-river/30 bg-surface/90 p-4 transition-all duration-300 hover:-translate-y-1"
+              className="soft-panel group relative flex flex-col justify-between overflow-hidden rounded-md border border-river/30 bg-surface/90 p-4 transition-all duration-300"
             >
               <div>
                 {/* Media Image */}
@@ -155,7 +146,7 @@ export function WishlistView() {
                       alt={mainImg.alt}
                       fill
                       sizes="(min-width: 1024px) 33vw, 100vw"
-                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
                     />
                   ) : null}
 

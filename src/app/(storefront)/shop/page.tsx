@@ -35,7 +35,7 @@ async function ShopContent({ searchParams }: ShopPageProps) {
         total={result.page.total}
         facets={result.facets}
         query={query}
-        title="Atelier Offerings"
+        title="Shop"
         description="Garments shaped by hand from unbleached Baltic flax linen, raw Gotland island wool, and natural plant dye vats."
         basePath="/shop"
       />

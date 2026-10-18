@@ -10,7 +10,7 @@ export interface AnnouncementBarProps {
 }
 
 export function AnnouncementBar({
-  message = 'Complimentary worldwide carbon-neutral delivery on all orders over £150',
+  message = 'Free carbon-neutral delivery on orders over $150',
   className,
 }: AnnouncementBarProps) {
   const [dismissed, setDismissed] = useState(false)

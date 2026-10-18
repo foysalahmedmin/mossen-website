@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { CartLine } from '@/components/commerce/cart-line'
-import { ArrowRight, Leaf, ShoppingBag, Sparkle } from '@/components/icons'
+import { ArrowRight } from '@/components/icons'
 import { Button } from '@/components/ui'
 import { brand } from '@/config/brand'
 import { routes } from '@/config/routes'
@@ -98,7 +98,7 @@ export function CartView() {
       <div className="mx-auto min-h-[60vh] max-w-5xl px-4 py-20 text-center sm:px-6 lg:px-8">
         <div className="soft-panel mx-auto max-w-md rounded-md border border-river/30 bg-surface/90 p-12">
           <div className="mx-auto h-8 w-8 animate-spin rounded-full border-2 border-ink border-t-transparent" />
-          <p className="mt-4 text-xs text-ink-soft tabular-nums">Preparing Basket...</p>
+          <p className="mt-4 text-xs text-ink-soft tabular-nums">Loading basket...</p>
         </div>
       </div>
     )
@@ -115,12 +115,8 @@ export function CartView() {
     return (
       <div className="mx-auto min-h-[60vh] max-w-5xl px-4 py-20 text-center sm:px-6 lg:px-8">
         <div className="soft-panel mx-auto max-w-xl rounded-md border border-river/30 bg-surface/90 p-12">
-          <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-md border border-river/40 bg-canvas">
-            <ShoppingBag size={36} className="text-ink-soft" />
-          </div>
-          <span className="text-xs text-brand tabular-nums">Quiet Sanctuary</span>
-          <h1 className="mt-2 font-display text-3xl font-normal text-ink sm:text-4xl">
-            Your Basket is Empty
+          <h1 className="font-display text-3xl font-normal text-ink sm:text-4xl">
+            Your basket is empty
           </h1>
           <p className="mt-4 font-text text-sm leading-relaxed text-ink-soft sm:text-base">
             Discover unbleached organic linens, hand-spun woolens, and raw silk silhouettes crafted
@@ -129,7 +125,7 @@ export function CartView() {
           <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <Button asChild size="lg">
               <Link href={routes.shop}>
-                Explore Collection
+                Continue shopping
                 <ArrowRight size={16} className="ml-2" />
               </Link>
             </Button>
@@ -143,18 +139,12 @@ export function CartView() {
   }
 
   return (
-    <div className="mx-auto max-w-5xl px-4 py-8 sm:px-6 lg:px-8">
+    <div className="page-container py-10 md:py-14">
       {/* Header */}
       <div className="mb-8 flex flex-col justify-between gap-4 border-b border-river/30 pb-6 sm:flex-row sm:items-end">
         <div>
-          <div className="flex items-center gap-2">
-            <Leaf size={16} className="text-brand" />
-            <span className="text-xs text-ink-soft tabular-nums">
-              {itemCount} {itemCount === 1 ? 'piece' : 'pieces'} in your basket
-            </span>
-          </div>
-          <h1 className="mt-2 font-display text-3xl font-normal text-ink sm:text-4xl">
-            Shopping Basket
+          <h1 className="font-display text-3xl font-normal text-ink sm:text-4xl">
+            Shopping basket ({itemCount})
           </h1>
         </div>
         <Link
@@ -165,17 +155,16 @@ export function CartView() {
         </Link>
       </div>
 
-      {/* Sustainable Carbon-Neutral Freight Bar */}
+      {/* Sustainable Shipping Bar */}
       <div className="soft-panel mb-8 rounded-md border border-river/30 bg-surface/90 p-5">
         <div className="flex items-center justify-between text-xs tabular-nums">
           <span className="flex items-center gap-2 text-ink">
-            <Sparkle size={14} className="text-brand" />
             {freeRemaining === 0 ? (
-              <span className="font-medium text-ink">Carbon-Neutral Climate Freight Unlocked</span>
+              <span className="font-medium text-ink">Free shipping unlocked</span>
             ) : (
               <span>
                 Add <strong className="text-ink">{formatMoney(freeRemaining, MONEY)}</strong> for
-                Free Carbon-Neutral Shipping
+                free shipping
               </span>
             )}
           </span>
@@ -220,17 +209,16 @@ export function CartView() {
           </ul>
         </div>
 
-        {/* Order Summary Column */}
+        {/* Order summary Column */}
         <div className="lg:col-span-5">
           <div className="soft-panel sticky top-24 space-y-6 rounded-md border border-river/30 bg-surface/90 p-6">
             <div className="border-b border-river/30 pb-4">
-              <span className="text-[11px] text-ink-soft tabular-nums">SUMMARY</span>
-              <h2 className="mt-1 font-display text-2xl font-normal text-ink">Basket Totals</h2>
+              <h2 className="mt-1 font-display text-2xl font-normal text-ink">Order summary</h2>
             </div>
 
             {/* Shipping Method Selector */}
             <div className="space-y-2">
-              <label className="block text-xs text-ink-soft tabular-nums">Delivery Velocity</label>
+              <label className="block text-xs text-ink-soft tabular-nums">Delivery</label>
               <div className="grid grid-cols-2 gap-2">
                 <button
                   type="button"
@@ -241,7 +229,7 @@ export function CartView() {
                       : 'border-river/30 text-ink-soft hover:border-river'
                   }`}
                 >
-                  <div className="text-xs tabular-nums">Standard Quiet</div>
+                  <div className="text-xs tabular-nums">Standard</div>
                   <div className="mt-1 text-[11px] text-ink-soft tabular-nums">3–5 days</div>
                 </button>
                 <button
@@ -253,7 +241,7 @@ export function CartView() {
                       : 'border-river/30 text-ink-soft hover:border-river'
                   }`}
                 >
-                  <div className="text-xs tabular-nums">Priority Courier</div>
+                  <div className="text-xs tabular-nums">Express</div>
                   <div className="mt-1 text-[11px] text-ink-soft tabular-nums">1–2 days</div>
                 </button>
               </div>
@@ -262,7 +250,7 @@ export function CartView() {
             {/* Promo Code Form */}
             <div className="space-y-2">
               <label htmlFor="promo" className="block text-xs text-ink-soft tabular-nums">
-                Botanical Courtesy Code
+                Promo code
               </label>
               {appliedPromo ? (
                 <div className="flex items-center justify-between rounded-md border border-river/30 bg-canvas px-3 py-2">
@@ -303,10 +291,10 @@ export function CartView() {
               </div>
 
               <div className="flex justify-between text-ink-soft">
-                <span>Carbon-Neutral Freight</span>
+                <span>Shipping</span>
                 <span className="text-ink">
                   {quote?.totals.shipping === 0 ? (
-                    <span className="font-semibold text-brand">COMPLIMENTARY</span>
+                    <span className="font-semibold text-brand">Free</span>
                   ) : (
                     formatMoney(quote?.totals.shipping ?? 0, MONEY)
                   )}
@@ -315,7 +303,7 @@ export function CartView() {
 
               {quote?.totals.discount ? (
                 <div className="flex justify-between text-brand">
-                  <span>Courtesy Discount</span>
+                  <span>Discount</span>
                   <span>-{formatMoney(quote.totals.discount, MONEY)}</span>
                 </div>
               ) : null}

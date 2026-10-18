@@ -15,7 +15,7 @@ export function Footer() {
       showToast({ message: 'Please enter a valid email address.', type: 'error' })
       return
     }
-    showToast({ message: 'You are subscribed to the Field Dispatch.', type: 'success' })
+    showToast({ message: 'You are subscribed.', type: 'success' })
     setEmail('')
   }
 
@@ -39,9 +39,9 @@ export function Footer() {
             <div className="pt-2 text-xs text-ink-faint">Slow production · carbon offset</div>
           </div>
 
-          {/* Curations */}
+          {/* Shop */}
           <div>
-            <h3 className="text-sm font-medium text-ink">Curations</h3>
+            <h3 className="text-sm font-medium text-ink">Shop</h3>
             <ul className="mt-4 space-y-2.5 font-text text-sm">
               <li>
                 <Link
@@ -77,15 +77,15 @@ export function Footer() {
               </li>
               <li>
                 <Link href="/lookbook" className="text-ink-soft transition-colors hover:text-ink">
-                  Visual Essays
+                  Lookbook
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Transparency & Care */}
+          {/* About & Care */}
           <div>
-            <h3 className="text-sm font-medium text-ink">Transparency</h3>
+            <h3 className="text-sm font-medium text-ink">About</h3>
             <ul className="mt-4 space-y-2.5 font-text text-sm">
               <li>
                 <Link href="/about" className="text-ink-soft transition-colors hover:text-ink">
@@ -110,22 +110,22 @@ export function Footer() {
                   href="/track-order"
                   className="text-ink-soft transition-colors hover:text-ink"
                 >
-                  Order Inquiries
+                  Contact
                 </Link>
               </li>
               <li>
                 <Link href="/stores" className="text-ink-soft transition-colors hover:text-ink">
-                  Sanctuaries & Studios
+                  Stores
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Field Dispatch (Newsletter) */}
+          {/* Newsletter (Newsletter) */}
           <div>
-            <h3 className="text-sm font-medium text-ink">Field Dispatch</h3>
+            <h3 className="text-sm font-medium text-ink">Newsletter</h3>
             <p className="mt-4 font-text text-sm text-ink-soft">
-              Quiet seasonal dispatches, natural dye essays, and early access to small batches.
+              Seasonal news, natural dye essays and early access to small batches.
             </p>
             <form onSubmit={handleSubscribe} className="mt-4 space-y-2">
               <div className="relative">
@@ -139,7 +139,7 @@ export function Footer() {
                 />
                 <button
                   type="submit"
-                  aria-label="Subscribe to dispatch"
+                  aria-label="Subscribe to the newsletter"
                   className="pebble absolute top-1/2 right-1.5 -translate-y-1/2 bg-brand p-2 text-on-brand transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-focus"
                 >
                   <ArrowRight size={14} aria-hidden="true" />

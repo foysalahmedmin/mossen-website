@@ -3,7 +3,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { useState } from 'react'
-import { Check, Leaf, Plus, User } from '@/components/icons'
+import { Check, Plus } from '@/components/icons'
 import { Button } from '@/components/ui'
 import { brand } from '@/config/brand'
 import { routes } from '@/config/routes'
@@ -24,7 +24,7 @@ function AuthGuard({ children }: { children: React.ReactNode }) {
       <div className="soft-panel mx-auto max-w-md rounded-md border border-river/30 bg-surface/90 p-10 text-center">
         <div className="mx-auto h-8 w-8 animate-spin rounded-full border-2 border-ink border-t-transparent" />
         <h1 className="sr-only">Account</h1>
-        <p className="mt-4 text-xs text-ink-soft tabular-nums">Loading Sanctuary...</p>
+        <p className="mt-4 text-xs text-ink-soft tabular-nums">Loading account...</p>
       </div>
     )
   }
@@ -32,16 +32,9 @@ function AuthGuard({ children }: { children: React.ReactNode }) {
   if (!isAuthenticated) {
     return (
       <div className="soft-panel mx-auto max-w-md rounded-md border border-river/30 bg-surface/90 p-8 text-center">
-        <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-md border border-river/40 bg-canvas text-ink">
-          <User size={28} />
-        </div>
-        <div className="flex items-center justify-center gap-2">
-          <Leaf size={16} className="text-brand" />
-          <span className="text-xs text-ink-soft tabular-nums">Sanctuary access</span>
-        </div>
-        <h1 className="mt-2 font-display text-2xl font-normal text-ink">Sign In Required</h1>
+        <h1 className="font-display text-2xl font-normal text-ink">Sign in required</h1>
         <p className="mt-2 font-text text-sm text-ink-soft">
-          Sign in to your patron account or activate rapid demo access to view your quiet orders.
+          Sign in, or use the demo account, to see your orders and addresses.
         </p>
         <div className="mt-6 flex flex-col gap-3">
           <Button asChild size="lg">
@@ -50,9 +43,9 @@ function AuthGuard({ children }: { children: React.ReactNode }) {
           <Button
             variant="secondary"
             size="lg"
-            onClick={() => login('patron@mossen.studios', 'Astrid Lindgren')}
+            onClick={() => login('astrid.lindgren@example.com', 'Astrid Lindgren')}
           >
-            Quick Demo Login
+            Use demo account
           </Button>
         </div>
       </div>
@@ -75,14 +68,10 @@ export function AccountDashboardView() {
     <AuthGuard>
       <div className="space-y-8">
         {/* Welcome Header */}
-        <div className="soft-panel flex flex-col justify-between gap-4 rounded-md border border-river/30 bg-surface/90 p-8 sm:flex-row sm:items-center">
+        <div className="flex flex-col justify-between gap-4 border-b border-river/30 pb-8 sm:flex-row sm:items-center">
           <div>
-            <div className="flex items-center gap-2">
-              <Leaf size={16} className="text-brand" />
-              <span className="text-xs text-ink-soft tabular-nums">MOSSEN patron profile</span>
-            </div>
-            <h1 className="mt-2 font-display text-3xl font-normal text-ink sm:text-4xl">
-              Welcome back, {customer?.name ?? 'Patron'}
+            <h1 className="font-display text-3xl font-normal text-ink sm:text-4xl">
+              Welcome back, {customer?.name ?? 'there'}
             </h1>
             <p className="mt-1 text-xs text-ink-soft tabular-nums">{customer?.email}</p>
           </div>
@@ -94,23 +83,17 @@ export function AccountDashboardView() {
         </div>
 
         {/* Stats Grid */}
-        <div className="grid grid-cols-1 gap-6 text-xs tabular-nums sm:grid-cols-3">
+        <div className="grid grid-cols-1 gap-6 text-xs tabular-nums sm:grid-cols-2">
           <div className="soft-panel rounded-md border border-river/30 bg-surface/90 p-6">
-            <span className="text-ink-soft">Quiet Orders</span>
+            <span className="text-ink-soft">Orders placed</span>
             <p className="mt-2 font-display text-3xl font-normal text-ink">{orders.length}</p>
-            <p className="mt-1 text-[11px] text-ink-soft">Lifetime verified orders</p>
+            <p className="mt-1 text-[11px] text-ink-soft">Since you joined</p>
           </div>
 
           <div className="soft-panel rounded-md border border-river/30 bg-surface/90 p-6">
-            <span className="text-ink-soft">Patron Standing</span>
-            <p className="mt-2 font-display text-3xl font-normal text-ink">Botanical Tier</p>
-            <p className="mt-1 text-[11px] text-ink-soft">Complimentary climate freight</p>
-          </div>
-
-          <div className="soft-panel rounded-md border border-river/30 bg-surface/90 p-6">
-            <span className="text-ink-soft">Saved Destinations</span>
+            <span className="text-ink-soft">Saved addresses</span>
             <p className="mt-2 font-display text-3xl font-normal text-ink">{addresses.length}</p>
-            <p className="mt-1 text-[11px] text-ink-soft">Active sanctuaries</p>
+            <p className="mt-1 text-[11px] text-ink-soft">Delivery addresses on file</p>
           </div>
         </div>
 
@@ -119,7 +102,7 @@ export function AccountDashboardView() {
           {/* Recent Order */}
           <div className="soft-panel space-y-4 rounded-md border border-river/30 bg-surface/90 p-6 sm:p-8">
             <div className="flex items-center justify-between border-b border-river/30 pb-4">
-              <h2 className="font-display text-xl font-normal text-ink">Latest Order</h2>
+              <h2 className="font-display text-xl font-normal text-ink">Latest order</h2>
               <Link
                 href={routes.orders}
                 className="text-xs text-brand tabular-nums hover:underline"
@@ -168,9 +151,9 @@ export function AccountDashboardView() {
               </div>
             ) : (
               <div className="py-8 text-center text-xs text-ink-soft tabular-nums">
-                <p>No orders recorded yet.</p>
+                <p>No orders yet.</p>
                 <Button asChild size="sm" className="mt-4">
-                  <Link href={routes.shop}>Explore Collection</Link>
+                  <Link href={routes.shop}>Continue shopping</Link>
                 </Button>
               </div>
             )}
@@ -179,12 +162,12 @@ export function AccountDashboardView() {
           {/* Primary Address */}
           <div className="soft-panel space-y-4 rounded-md border border-river/30 bg-surface/90 p-6 sm:p-8">
             <div className="flex items-center justify-between border-b border-river/30 pb-4">
-              <h2 className="font-display text-xl font-normal text-ink">Primary Sanctuary</h2>
+              <h2 className="font-display text-xl font-normal text-ink">Default address</h2>
               <Link
                 href={routes.addresses}
                 className="text-xs text-brand tabular-nums hover:underline"
               >
-                Manage Sanctuaries ({addresses.length}) &rarr;
+                Manage addresses ({addresses.length}) &rarr;
               </Link>
             </div>
 
@@ -194,7 +177,7 @@ export function AccountDashboardView() {
                   <span className="font-semibold text-ink">{defaultAddr.name}</span>
                   {defaultAddr.isDefault ? (
                     <span className="rounded-md bg-river/30 px-2 py-0.5 text-[10px] font-semibold text-brand">
-                      PRIMARY
+                      Default
                     </span>
                   ) : null}
                 </div>
@@ -210,7 +193,7 @@ export function AccountDashboardView() {
               </div>
             ) : (
               <div className="py-8 text-center text-xs text-ink-soft tabular-nums">
-                <p>No primary address recorded.</p>
+                <p>No default address saved.</p>
                 <Button asChild size="sm" className="mt-4">
                   <Link href={routes.addresses}>Add Address</Link>
                 </Button>
@@ -231,32 +214,22 @@ export function AccountOrdersView() {
       <div className="space-y-6">
         <div className="flex items-center justify-between border-b border-river/30 pb-4">
           <div>
-            <div className="flex items-center gap-2">
-              <Leaf size={16} className="text-brand" />
-              <span className="text-xs text-ink-soft tabular-nums">MOSSEN order archive</span>
-            </div>
-            <h1 className="mt-1 font-display text-3xl font-normal text-ink">
-              Orders History ({orders.length})
-            </h1>
+            <h1 className="font-display text-3xl font-normal text-ink">Orders ({orders.length})</h1>
           </div>
           <Button asChild variant="secondary" size="sm">
-            <Link href={routes.trackOrder}>Live Courier Tracking</Link>
+            <Link href={routes.trackOrder}>Track an order</Link>
           </Button>
         </div>
 
         {orders.length === 0 ? (
           <div className="soft-panel rounded-md border border-river/30 bg-surface/90 p-12 text-center">
-            <span className="text-xs text-brand tabular-nums">Zero Orders</span>
-            <h2 className="mt-2 font-display text-2xl font-normal text-ink">
-              No Orders Placed Yet
-            </h2>
+            <h2 className="mt-2 font-display text-2xl font-normal text-ink">No orders yet</h2>
             <p className="mt-2 font-text text-sm text-ink-soft">
-              When you order natural pieces, your receipt, progress journey, and tracking telemetry
-              will appear here.
+              Orders you place will appear here, with tracking.
             </p>
             <div className="mt-6">
               <Button asChild>
-                <Link href={routes.shop}>Explore Collection</Link>
+                <Link href={routes.shop}>Continue shopping</Link>
               </Button>
             </div>
           </div>
@@ -331,7 +304,7 @@ export function AccountOrderDetailView({ id }: { id: string }) {
             >
               &larr; Return to Orders
             </Link>
-            <h1 className="mt-2 font-display text-3xl font-normal text-ink">
+            <h1 className="font-display text-3xl font-normal text-ink">
               Order {order?.number ?? id}
             </h1>
           </div>
@@ -402,7 +375,7 @@ export function AccountOrderDetailView({ id }: { id: string }) {
             {/* Address & Payment */}
             <div className="grid grid-cols-1 gap-6 border-t border-river/30 pt-6 sm:grid-cols-2">
               <div className="space-y-1 rounded-md border border-river/30 bg-canvas/70 p-4">
-                <span className="font-semibold text-ink">DESTINATION</span>
+                <span className="font-semibold text-ink">Delivery address</span>
                 <p className="text-ink">{order.address.name}</p>
                 <p className="text-ink-soft">{order.address.line1}</p>
                 <p className="text-ink-soft">
@@ -411,7 +384,7 @@ export function AccountOrderDetailView({ id }: { id: string }) {
               </div>
 
               <div className="space-y-1 rounded-md border border-river/30 bg-canvas/70 p-4">
-                <span className="font-semibold text-ink">Financial summary</span>
+                <span className="font-semibold text-ink">Payment summary</span>
                 <div className="flex justify-between text-ink-soft">
                   <span>Subtotal</span>
                   <span>{formatMoney(order.totals.subtotal, MONEY)}</span>
@@ -475,23 +448,19 @@ export function AccountAddressesView() {
       <div className="space-y-6">
         <div className="flex items-center justify-between border-b border-river/30 pb-4">
           <div>
-            <div className="flex items-center gap-2">
-              <Leaf size={16} className="text-brand" />
-              <span className="text-xs text-ink-soft tabular-nums">Delivery destinations</span>
-            </div>
-            <h1 className="mt-1 font-display text-3xl font-normal text-ink">
-              Saved Sanctuaries ({addresses.length})
+            <h1 className="font-display text-3xl font-normal text-ink">
+              Addresses ({addresses.length})
             </h1>
           </div>
           <Button size="sm" onClick={() => setIsAdding(!isAdding)}>
             <Plus size={16} className="mr-1.5" />
-            {isAdding ? 'Close Form' : 'Add Sanctuary'}
+            {isAdding ? 'Close Form' : 'Add address'}
           </Button>
         </div>
 
         {isAdding ? (
           <div className="soft-panel rounded-md border border-river/30 bg-surface/90 p-6 sm:p-8">
-            <h2 className="font-display text-xl font-normal text-ink">Add New Sanctuary</h2>
+            <h2 className="font-display text-xl font-normal text-ink">New address</h2>
             <form onSubmit={handleCreate} className="mt-4 space-y-4">
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                 <div>
@@ -499,7 +468,7 @@ export function AccountAddressesView() {
                     htmlFor="account-sanctuary-recipient-name"
                     className="mb-1 block text-xs text-ink-soft tabular-nums"
                   >
-                    Sanctuary / Recipient Name *
+                    Recipient name *
                   </label>
                   <input
                     id="account-sanctuary-recipient-name"
@@ -611,13 +580,13 @@ export function AccountAddressesView() {
                   className="h-4 w-4 rounded accent-brand"
                 />
                 <label htmlFor="def" className="cursor-pointer text-xs text-ink-soft tabular-nums">
-                  Set as primary sanctuary destination
+                  Use as default address
                 </label>
               </div>
 
               <div className="flex gap-3 pt-2">
                 <Button type="submit" size="sm">
-                  Save Sanctuary
+                  Save address
                 </Button>
                 <Button
                   type="button"
@@ -644,7 +613,7 @@ export function AccountAddressesView() {
                 <span className="font-semibold text-ink">{addr.name}</span>
                 {addr.isDefault ? (
                   <span className="rounded-md bg-river/30 px-2.5 py-0.5 text-[10px] font-semibold text-brand">
-                    PRIMARY
+                    Default
                   </span>
                 ) : null}
               </div>
@@ -665,11 +634,11 @@ export function AccountAddressesView() {
                     onClick={() => setDefaultAddress(addr.id!)}
                     className="text-[11px] font-semibold text-brand hover:underline"
                   >
-                    Set as Primary
+                    Set as default
                   </button>
                 ) : (
                   <span className="text-[11px] text-ink-faint">
-                    {addr.isDefault ? 'Primary Sanctuary' : ''}
+                    {addr.isDefault ? 'Default address' : ''}
                   </span>
                 )}
                 {addr.id ? (
@@ -709,17 +678,13 @@ export function AccountProfileView() {
     <AuthGuard>
       <div className="soft-panel max-w-2xl space-y-6 rounded-md border border-river/30 bg-surface/90 p-8">
         <div className="border-b border-river/30 pb-4">
-          <div className="flex items-center gap-2">
-            <Leaf size={16} className="text-brand" />
-            <span className="text-xs text-ink-soft tabular-nums">Patron specification</span>
-          </div>
-          <h1 className="mt-1 font-display text-3xl font-normal text-ink">Profile Preferences</h1>
+          <h1 className="font-display text-3xl font-normal text-ink">Profile</h1>
         </div>
 
         {saved ? (
           <div className="flex items-center gap-2 rounded-md border border-river/30 bg-canvas p-3 text-xs font-semibold text-brand tabular-nums">
             <Check size={16} />
-            Preferences updated in sanctuary registry.
+            Profile saved.
           </div>
         ) : null}
 
@@ -729,7 +694,7 @@ export function AccountProfileView() {
               htmlFor="account-registered-email-immutable"
               className="mb-1 block text-xs text-ink-soft tabular-nums"
             >
-              Registered Email (Immutable)
+              Email address
             </label>
             <input
               id="account-registered-email-immutable"
@@ -776,7 +741,7 @@ export function AccountProfileView() {
 
           <div className="pt-2">
             <Button type="submit" size="md">
-              Save Preferences
+              Save profile
             </Button>
           </div>
         </form>

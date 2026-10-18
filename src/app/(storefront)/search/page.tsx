@@ -25,10 +25,10 @@ async function SearchContent({ searchParams }: SearchPageProps) {
 
   const result = await services.catalog.listProducts(query)
 
-  const title = searchQuery ? `Search: "${searchQuery}"` : 'Atelier Search'
+  const title = searchQuery ? `Search: "${searchQuery}"` : 'Search'
   const description = searchQuery
     ? `Pieces discovered for keyword "${searchQuery}". Use the filters below to refine by garment form, tone, or sizing.`
-    : 'Enter fibers or botanical colors to discover matching pieces across the MOSSEN atelier.'
+    : 'Search by name, fibre or colour.'
 
   return (
     <Suspense

@@ -21,7 +21,7 @@ export default function StorefrontLoading() {
           </div>
         ))}
       </div>
-      <span className="sr-only">Gathering quiet pieces...</span>
+      <span className="sr-only">Loading...</span>
     </div>
   )
 }

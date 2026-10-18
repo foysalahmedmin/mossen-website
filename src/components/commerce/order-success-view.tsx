@@ -3,7 +3,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
-import { ArrowRight, Check, Leaf } from '@/components/icons'
+import { ArrowRight } from '@/components/icons'
 import { Button } from '@/components/ui'
 import { brand } from '@/config/brand'
 import { routes } from '@/config/routes'
@@ -36,14 +36,13 @@ export function OrderConfirmationView() {
     return (
       <div className="mx-auto min-h-[50vh] max-w-xl px-4 py-20 text-center">
         <div className="soft-panel rounded-md border border-river/30 bg-surface/90 p-10">
-          <span className="text-xs text-brand tabular-nums">Order Not Found</span>
-          <h1 className="mt-2 font-display text-2xl font-normal text-ink">Receipt Not Located</h1>
+          <h1 className="font-display text-2xl font-normal text-ink">Order not found</h1>
           <p className="mt-2 font-text text-sm text-ink-soft">
             We could not locate this order receipt. Return to the shop gallery.
           </p>
           <div className="mt-6">
             <Button asChild>
-              <Link href={routes.shop}>Explore Collection</Link>
+              <Link href={routes.shop}>Continue shopping</Link>
             </Button>
           </div>
         </div>
@@ -52,23 +51,14 @@ export function OrderConfirmationView() {
   }
 
   return (
-    <div className="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
+    <div className="page-container py-10 md:py-14">
       {/* Header Status */}
       <div className="text-center">
-        <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-md border border-river/40 bg-canvas">
-          <Check size={32} className="text-brand" />
-        </div>
-        <div className="flex items-center justify-center gap-2">
-          <Leaf size={16} className="text-brand" />
-          <span className="text-xs text-ink-soft tabular-nums">
-            Order confirmed &middot; Sustainable weave initiated
-          </span>
-        </div>
-        <h1 className="mt-2 font-display text-3xl font-normal text-ink sm:text-4xl">
+        <h1 className="font-display text-3xl font-normal text-ink sm:text-4xl">
           Thank you for your order
         </h1>
         <p className="mt-3 font-text text-sm text-ink-soft sm:text-base">
-          A receipt and carrier tracking dispatch have been transmitted to{' '}
+          A receipt and tracking link have been sent to{' '}
           <strong className="text-ink">{order.customerEmail}</strong>.
         </p>
       </div>
@@ -158,14 +148,12 @@ export function OrderConfirmationView() {
           <div className="flex justify-between text-ink-soft">
             <span>Carbon-Neutral Delivery</span>
             <span className="text-ink">
-              {order.totals.shipping === 0
-                ? 'COMPLIMENTARY'
-                : formatMoney(order.totals.shipping, MONEY)}
+              {order.totals.shipping === 0 ? 'Free' : formatMoney(order.totals.shipping, MONEY)}
             </span>
           </div>
           {order.totals.discount ? (
             <div className="flex justify-between text-brand">
-              <span>Courtesy Credit</span>
+              <span>Discount</span>
               <span>-{formatMoney(order.totals.discount, MONEY)}</span>
             </div>
           ) : null}
@@ -184,7 +172,7 @@ export function OrderConfirmationView() {
         {/* Action Buttons */}
         <div className="flex flex-col gap-4 border-t border-river/30 pt-6 sm:flex-row sm:justify-between">
           <Button asChild variant="secondary">
-            <Link href={routes.trackOrder}>Track Order Dispatch &rarr;</Link>
+            <Link href={routes.trackOrder}>Track order &rarr;</Link>
           </Button>
           <Button asChild>
             <Link href={routes.shop}>

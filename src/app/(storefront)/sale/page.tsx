@@ -38,8 +38,8 @@ async function SaleContent({ searchParams }: SalePageProps) {
         total={result.page.total}
         facets={result.facets}
         query={query}
-        title="Seasonal Archive"
-        description="Cherished garments from past seasonal dyeings offered at gentle exchange values."
+        title="Sale"
+        description="Pieces from past seasons, at reduced prices."
         basePath="/sale"
       />
     </Suspense>

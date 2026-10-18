@@ -23,7 +23,7 @@ export function MenuSheet({ open, onOpenChange }: MenuSheetProps) {
     { href: '/sale', label: 'Curated Sale' },
     { href: '/journal', label: 'Field Journal' },
     { href: '/about', label: 'Philosophy & Ethics' },
-    { href: '/stores', label: 'Sanctuaries & Stores' },
+    { href: '/stores', label: 'Stores' },
   ]
 
   return (

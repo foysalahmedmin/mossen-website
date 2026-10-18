@@ -22,7 +22,7 @@ export default function CheckoutLayout({ children }: { children: React.ReactNode
             <Leaf size={18} className="sway text-brand" aria-hidden="true" />
           </Link>
 
-          <div className="text-xs text-ink-soft tabular-nums">Quiet checkout</div>
+          <div className="text-xs text-ink-soft tabular-nums">Checkout</div>
         </div>
       </header>
 
@@ -31,7 +31,7 @@ export default function CheckoutLayout({ children }: { children: React.ReactNode
       </main>
 
       <footer className="border-t border-river/20 py-6 text-center text-xs text-ink-faint tabular-nums">
-        Encrypted 256-bit checkout &middot; &copy; 2026 Mossen Studios
+        &copy; 2026 Mossen Studios
       </footer>
     </div>
   )

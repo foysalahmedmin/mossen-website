@@ -8,14 +8,14 @@ import { TryOnTrigger } from '@/integration/mirror-try'
 import { selectIsSaved, useWishlistStore } from '@/stores/wishlist-store'
 
 const defaultLabels: ProductCardProps['labels'] = {
-  sale: 'Archive price',
+  sale: 'Sale price',
   original: 'Natural price',
   save: 'Save to collection',
   badges: {
-    new: 'New Harvest',
+    new: 'New',
     bestseller: 'Cherished',
     limited: 'Small Batch',
-    sale: 'Archive',
+    sale: 'Sale',
   },
 }
 

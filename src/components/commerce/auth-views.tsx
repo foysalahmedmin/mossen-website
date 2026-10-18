@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
-import { ArrowRight, Check, Leaf, Sparkle } from '@/components/icons'
+import { ArrowRight, Check } from '@/components/icons'
 import { Button } from '@/components/ui'
 import { routes } from '@/config/routes'
 import { useSessionStore } from '@/stores/session-store'
@@ -26,20 +26,16 @@ export function LoginView() {
   }
 
   const handleQuickDemoLogin = () => {
-    login('patron@mossen.studios', 'Astrid Lindgren')
+    login('astrid.lindgren@example.com', 'Astrid Lindgren')
     router.push(routes.account)
   }
 
   return (
     <div className="soft-panel rounded-md border border-river/30 bg-surface/90 p-8 sm:p-10">
       <div className="text-center">
-        <div className="flex items-center justify-center gap-2">
-          <Leaf size={16} className="text-brand" />
-          <span className="text-xs text-ink-soft tabular-nums">MOSSEN patron portal</span>
-        </div>
-        <h1 className="mt-2 font-display text-3xl font-normal text-ink">Sign In</h1>
+        <h1 className="font-display text-3xl font-normal text-ink">Sign in</h1>
         <p className="mt-2 font-text text-sm text-ink-soft">
-          Access your slow-fashion garments, carbon tracking, and quiet preferences.
+          Sign in to see your orders and saved pieces.
         </p>
       </div>
 
@@ -52,21 +48,19 @@ export function LoginView() {
       {/* 1-Click Demo Entry */}
       <div className="mt-6 rounded-md border border-river/40 bg-canvas/80 p-4 text-center">
         <p className="flex items-center justify-center gap-1.5 text-xs font-semibold text-ink tabular-nums">
-          <Sparkle size={14} className="text-brand" />
-          Rapid Evaluation Demo
+          Demo account
         </p>
         <p className="mt-1 font-text text-xs text-ink-soft">
-          Instant patron access as Astrid Lindgren (preloaded with sample orders and sanctuary
-          addresses).
+          Sign in as Astrid Lindgren, with sample orders and addresses.
         </p>
         <Button type="button" size="sm" onClick={handleQuickDemoLogin} className="mt-3 w-full">
-          Quick Demo Login
+          Use demo account
         </Button>
       </div>
 
       <div className="my-6 flex items-center gap-3">
         <div className="h-px flex-1 bg-river/30" />
-        <span className="text-[10px] text-ink-faint tabular-nums">Or Credentials</span>
+        <span className="text-[10px] text-ink-faint tabular-nums">Or use your email</span>
         <div className="h-px flex-1 bg-river/30" />
       </div>
 
@@ -81,7 +75,7 @@ export function LoginView() {
             required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            placeholder="patron@mossen.studios"
+            placeholder="you@example.com"
             className="w-full rounded-md border border-river/40 bg-canvas p-3 font-text text-sm text-ink placeholder:text-ink-faint focus:border-ink focus:outline-none"
           />
         </div>
@@ -110,7 +104,7 @@ export function LoginView() {
         </div>
 
         <Button type="submit" size="md" className="w-full">
-          Sign In to Sanctuary
+          Sign in
           <ArrowRight size={16} className="ml-2" />
         </Button>
       </form>
@@ -148,14 +142,9 @@ export function RegisterView() {
   return (
     <div className="soft-panel rounded-md border border-river/30 bg-surface/90 p-8 sm:p-10">
       <div className="text-center">
-        <div className="flex items-center justify-center gap-2">
-          <Leaf size={16} className="text-brand" />
-          <span className="text-xs text-ink-soft tabular-nums">MOSSEN patron registry</span>
-        </div>
-        <h1 className="mt-2 font-display text-3xl font-normal text-ink">Join the Sanctuary</h1>
+        <h1 className="font-display text-3xl font-normal text-ink">Create an account</h1>
         <p className="mt-2 font-text text-sm text-ink-soft">
-          Create an account to track quiet collections and receive botanical tailoring
-          announcements.
+          Save pieces, check out faster and follow your orders.
         </p>
       </div>
 
@@ -191,7 +180,7 @@ export function RegisterView() {
             required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            placeholder="patron@mossen.studios"
+            placeholder="you@example.com"
             className="w-full rounded-md border border-river/40 bg-canvas p-3 font-text text-sm text-ink placeholder:text-ink-faint focus:border-ink focus:outline-none"
           />
         </div>
@@ -212,7 +201,7 @@ export function RegisterView() {
         </div>
 
         <Button type="submit" size="md" className="w-full">
-          Create Patron Profile
+          Create account
           <ArrowRight size={16} className="ml-2" />
         </Button>
       </form>
@@ -242,13 +231,9 @@ export function ForgotPasswordView() {
   return (
     <div className="soft-panel rounded-md border border-river/30 bg-surface/90 p-8 sm:p-10">
       <div className="text-center">
-        <div className="flex items-center justify-center gap-2">
-          <Leaf size={16} className="text-brand" />
-          <span className="text-xs text-ink-soft tabular-nums">Account recovery</span>
-        </div>
-        <h1 className="mt-2 font-display text-3xl font-normal text-ink">Reset Password</h1>
+        <h1 className="font-display text-3xl font-normal text-ink">Reset password</h1>
         <p className="mt-2 font-text text-sm text-ink-soft">
-          Enter your registered patron email to receive password reset instructions.
+          Enter your email and we will send you a link to reset your password.
         </p>
       </div>
 
@@ -257,10 +242,10 @@ export function ForgotPasswordView() {
           <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-brand text-on-brand">
             <Check size={24} />
           </div>
-          <p className="font-display text-lg font-medium text-ink">Instructions Dispatched</p>
+          <p className="font-display text-lg font-medium text-ink">Check your email</p>
           <p className="font-text text-sm text-ink-soft">
-            If an account exists for <strong className="text-ink">{email}</strong>, a reset link has
-            been dispatched to your inbox.
+            If an account exists for <strong className="text-ink">{email}</strong>, we have sent a
+            password reset link to your inbox.
           </p>
           <div className="pt-2">
             <Button asChild variant="secondary" size="sm">
@@ -272,7 +257,7 @@ export function ForgotPasswordView() {
         <form onSubmit={handleSubmit} className="mt-6 space-y-4">
           <div>
             <label htmlFor="reset-email" className="mb-1 block text-xs text-ink-soft tabular-nums">
-              Patron Email Address
+              Email address
             </label>
             <input
               id="reset-email"
@@ -280,7 +265,7 @@ export function ForgotPasswordView() {
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="patron@mossen.studios"
+              placeholder="you@example.com"
               className="w-full rounded-md border border-river/40 bg-canvas p-3 font-text text-sm text-ink placeholder:text-ink-faint focus:border-ink focus:outline-none"
             />
           </div>

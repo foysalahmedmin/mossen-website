@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { ArrowRight, Check, Sparkle } from '@/components/icons'
+import { ArrowRight } from '@/components/icons'
 import { Button, TextField } from '@/components/ui'
 import { brand } from '@/config/brand'
 
@@ -22,10 +22,10 @@ interface FormErrors {
 
 const TOPICS = [
   { value: 'order', label: 'Order Inquiry & Delivery Status' },
-  { value: 'fitting', label: 'Natural Fiber & Botanical Sizing Advice' },
+  { value: 'fitting', label: 'Sizing and fibre advice' },
   { value: 'care', label: 'Linen Care, Mending & Lanolin Revival' },
   { value: 'press', label: 'Press, Collaborations & Farm Visits' },
-  { value: 'other', label: 'General Sanctuary Inquiry' },
+  { value: 'other', label: 'General question' },
 ]
 
 export function ContactView() {
@@ -83,33 +83,25 @@ export function ContactView() {
   }
 
   return (
-    <div className="mx-auto max-w-6xl px-4 py-12 md:py-16">
+    <div className="page-container py-10 md:py-14">
       {/* Header */}
-      <div className="mb-12 text-center">
-        <span className="inline-flex items-center gap-1.5 rounded-md bg-brand/10 px-3 py-1 text-xs font-semibold text-brand tabular-nums">
-          <Sparkle size={12} />
-          Client Concierge & Care Sanctuary
-        </span>
-        <h1 className="mt-3 font-display text-4xl font-normal tracking-tight text-ink md:text-5xl">
-          Quiet Concierge & Care
+      <div className="mb-10 max-w-2xl md:mb-14">
+        <h1 className="font-display text-4xl font-normal tracking-tight text-ink md:text-5xl">
+          Contact us
         </h1>
-        <p className="mx-auto mt-4 max-w-2xl font-text text-base text-ink-soft md:text-lg">
-          We welcome your questions regarding our natural dye recipes, Baltic linen care, garment
-          mending, and order tracking.
+        <p className="mt-4 font-text text-base text-ink-soft md:text-lg">
+          Questions about sizing, care or an order? Write to our Stockholm studio.
         </p>
       </div>
 
       <div className="grid items-start gap-12 lg:grid-cols-12">
         {/* Form Card */}
         <div className="lg:col-span-7">
-          <div className="rounded-md border border-stone-200/80 bg-[#fbf9f5] p-8 md:p-10">
+          <div className="rounded-md border border-ink/10 bg-surface p-8 md:p-10">
             {submitted ? (
               <div className="py-6 text-center" role="status">
-                <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-md bg-emerald-100 text-emerald-700">
-                  <Check size={32} />
-                </div>
                 <h2 className="font-display text-2xl font-normal text-ink md:text-3xl">
-                  Inquiry Received with Warmth
+                  Message received
                 </h2>
                 <p className="mt-2 text-xs font-semibold text-brand tabular-nums">
                   Reference: {ticketId}
@@ -130,9 +122,7 @@ export function ContactView() {
             ) : (
               <form onSubmit={handleSubmit} noValidate className="space-y-6">
                 <div>
-                  <h2 className="font-display text-xl font-normal text-ink">
-                    Write to Our Atelier
-                  </h2>
+                  <h2 className="font-display text-xl font-normal text-ink">Send us a message</h2>
                   <p className="mt-1 font-text text-xs text-ink-soft">
                     Every message is personally read and answered from our Stockholm studio.
                   </p>
@@ -164,13 +154,13 @@ export function ContactView() {
                       htmlFor="topic-select-mos"
                       className="font-text text-sm font-medium text-ink"
                     >
-                      Subject Matter
+                      Topic
                     </label>
                     <select
                       id="topic-select-mos"
                       value={form.topic}
                       onChange={(e) => setForm({ ...form, topic: e.target.value })}
-                      className="h-12 w-full rounded-md border border-stone-200 bg-white px-4 font-text text-sm text-ink focus-visible:outline-2 focus-visible:outline-focus"
+                      className="h-12 w-full rounded-md border border-ink/10 bg-white px-4 font-text text-sm text-ink focus-visible:outline-2 focus-visible:outline-focus"
                     >
                       {TOPICS.map((t) => (
                         <option key={t.value} value={t.value}>
@@ -194,15 +184,15 @@ export function ContactView() {
                     htmlFor="message-input-mos"
                     className="font-text text-sm font-medium text-ink"
                   >
-                    Your Thoughts or Inquiry
+                    Message
                   </label>
                   <textarea
                     id="message-input-mos"
                     rows={5}
                     value={form.message}
                     onChange={(e) => setForm({ ...form, message: e.target.value })}
-                    placeholder="How may our weavers and natural dyers assist with your wardrobe?"
-                    className="w-full rounded-md border border-stone-200 bg-white p-4 font-text text-sm text-ink placeholder:text-ink-faint focus-visible:outline-2 focus-visible:outline-focus"
+                    placeholder="How can we help?"
+                    className="w-full rounded-md border border-ink/10 bg-white p-4 font-text text-sm text-ink placeholder:text-ink-faint focus-visible:outline-2 focus-visible:outline-focus"
                   />
                   {errors.message ? (
                     <p className="font-text text-xs text-danger" role="alert">
@@ -217,7 +207,7 @@ export function ContactView() {
                   disabled={isSubmitting}
                   className="w-full justify-center"
                 >
-                  {isSubmitting ? 'Sending to Atelier...' : 'Submit Inquiry'}
+                  {isSubmitting ? 'Sending...' : 'Send message'}
                   <ArrowRight size={16} />
                 </Button>
               </form>
@@ -227,8 +217,8 @@ export function ContactView() {
 
         {/* Studio Contacts Side Card */}
         <div className="space-y-6 lg:col-span-5">
-          <div className="rounded-md border border-stone-200/80 bg-[#fbf9f5] p-8">
-            <h3 className="font-display text-lg font-normal text-ink">Direct Atelier Sanctuary</h3>
+          <div className="rounded-md border border-ink/10 bg-surface p-8">
+            <h3 className="font-display text-lg font-normal text-ink">Contact details</h3>
             <ul className="mt-5 space-y-4 font-text text-sm">
               <li className="flex flex-col">
                 <span className="text-xs text-ink-faint tabular-nums">Client Concierge</span>
@@ -254,13 +244,11 @@ export function ContactView() {
             </ul>
           </div>
 
-          <div className="rounded-md border border-stone-200/80 bg-[#fbf9f5] p-8">
-            <h3 className="font-display text-lg font-normal text-ink">
-              Gamla Stan Sanctuary Visits
-            </h3>
+          <div className="rounded-md border border-ink/10 bg-surface p-8">
+            <h3 className="font-display text-lg font-normal text-ink">Visit us in Gamla Stan</h3>
             <p className="mt-3 font-text text-sm leading-relaxed text-ink-soft">
-              Private fitting chamber sessions and tea consultations are available by gentle
-              appointment at Prästgatan 44, Stockholm.
+              Fitting sessions and tea consultations are available by appointment at Prästgatan 44,
+              Stockholm.
             </p>
           </div>
         </div>

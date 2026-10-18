@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { Check, Leaf, MagnifyingGlass } from '@/components/icons'
+import { Check, MagnifyingGlass } from '@/components/icons'
 import { Button } from '@/components/ui'
 import { brand } from '@/config/brand'
 import { formatMoney } from '@/domain'
@@ -14,8 +14,8 @@ const MONEY = { currency: brand.currency, locale: brand.locale }
 const STEPS = [
   { id: 'confirmed', label: 'Order Confirmed', desc: 'Garment pattern reserved & allocated' },
   { id: 'processing', label: 'Studio Weaving', desc: 'Hand-tailoring & eco-wash finishing' },
-  { id: 'shipped', label: 'Carbon-Neutral Transit', desc: 'Zero-emission courier dispatched' },
-  { id: 'delivered', label: 'Received', desc: 'Delivered quietly at your sanctuary' },
+  { id: 'shipped', label: 'On its way', desc: 'With the courier' },
+  { id: 'delivered', label: 'Received', desc: 'Delivered to your door' },
 ]
 
 export function TrackOrderView() {
@@ -69,20 +69,12 @@ export function TrackOrderView() {
   }
 
   return (
-    <div className="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
+    <div className="page-container py-10 md:py-14">
       {/* Title */}
       <div className="text-center">
-        <div className="flex items-center justify-center gap-2">
-          <Leaf size={16} className="text-brand" />
-          <span className="text-xs text-ink-soft tabular-nums">
-            MOSSEN courier tracking &middot; Climate dispatch
-          </span>
-        </div>
-        <h1 className="mt-2 font-display text-3xl font-normal text-ink sm:text-4xl">
-          Track Your Order
-        </h1>
+        <h1 className="font-display text-3xl font-normal text-ink sm:text-4xl">Track your order</h1>
         <p className="mt-3 font-text text-sm text-ink-soft sm:text-base">
-          Follow your natural-fibre pieces on their sustainable, low-emission journey to your door.
+          Enter your order number and the email you used at checkout.
         </p>
       </div>
 
@@ -107,14 +99,14 @@ export function TrackOrderView() {
 
             <div>
               <label htmlFor="email" className="mb-1 block text-xs text-ink-soft tabular-nums">
-                Customer Email (Optional)
+                Email (optional)
               </label>
               <input
                 id="email"
                 type="email"
                 value={emailInput}
                 onChange={(e) => setEmailInput(e.target.value)}
-                placeholder="patron@example.com"
+                placeholder="you@example.com"
                 className="w-full rounded-md border border-river/40 bg-canvas p-3 font-text text-sm text-ink placeholder:text-ink-faint focus:border-ink focus:outline-none"
               />
             </div>
@@ -122,7 +114,7 @@ export function TrackOrderView() {
 
           <Button type="submit" size="md" className="w-full">
             <MagnifyingGlass size={16} className="mr-2" />
-            Check Courier Status
+            Track order
           </Button>
         </form>
 
@@ -218,7 +210,7 @@ export function TrackOrderView() {
           {/* Details Grid */}
           <div className="grid grid-cols-1 gap-6 border-t border-river/30 pt-6 text-xs tabular-nums sm:grid-cols-2">
             <div className="space-y-1 rounded-md border border-river/30 bg-canvas/70 p-5">
-              <span className="font-semibold text-ink">Delivery sanctuary</span>
+              <span className="font-semibold text-ink">Delivery address</span>
               <p className="text-ink">{searchedOrder.address.name}</p>
               <p className="text-ink-soft">{searchedOrder.address.line1}</p>
               <p className="text-ink-soft">
