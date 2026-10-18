@@ -79,6 +79,7 @@ export function JournalPostView({
       {/* Hero Media */}
       <div className="relative mb-12 overflow-hidden rounded-[32px] border border-stone-200/80 bg-[#fbf9f5] shadow-sm">
         <Image
+          priority
           src={post.cover.src}
           alt={post.cover.alt}
           width={post.cover.width}
