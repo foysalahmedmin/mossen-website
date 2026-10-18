@@ -69,6 +69,7 @@ export function JournalView({ posts }: { posts: JournalPost[] }) {
                 <div className="flex items-center gap-4 text-xs text-ink-faint tabular-nums">
                   <time dateTime={featured.publishedAt}>
                     {new Date(featured.publishedAt).toLocaleDateString('en-US', {
+                      timeZone: 'UTC',
                       month: 'long',
                       day: 'numeric',
                       year: 'numeric',
@@ -132,6 +133,7 @@ export function JournalView({ posts }: { posts: JournalPost[] }) {
               <div className="flex items-center gap-2 text-xs text-ink-faint tabular-nums">
                 <time dateTime={post.publishedAt}>
                   {new Date(post.publishedAt).toLocaleDateString('en-US', {
+                    timeZone: 'UTC',
                     month: 'short',
                     day: 'numeric',
                   })}
