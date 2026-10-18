@@ -20,7 +20,15 @@ export async function generateMetadata({ params }: CategoryPageProps) {
   }
 }
 
-export default async function CategoryPage({ params, searchParams }: CategoryPageProps) {
+export default function CategoryPage(props: CategoryPageProps) {
+  return (
+    <Suspense fallback={<div className="min-h-[60vh] animate-pulse" aria-busy="true" />}>
+      <CategoryContent {...props} />
+    </Suspense>
+  )
+}
+
+async function CategoryContent({ params, searchParams }: CategoryPageProps) {
   const { category: slug } = await params
   const cat = await services.catalog.getCategory(slug)
   if (!cat) notFound()

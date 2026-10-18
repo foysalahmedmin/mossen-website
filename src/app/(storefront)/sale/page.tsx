@@ -10,7 +10,15 @@ interface SalePageProps {
   searchParams: Promise<Record<string, string | string[] | undefined>>
 }
 
-export default async function SalePage({ searchParams }: SalePageProps) {
+export default function SalePage(props: SalePageProps) {
+  return (
+    <Suspense fallback={<div className="min-h-[60vh] animate-pulse" aria-busy="true" />}>
+      <SaleContent {...props} />
+    </Suspense>
+  )
+}
+
+async function SaleContent({ searchParams }: SalePageProps) {
   const rawParams = await searchParams
   const query = parseProductQuery({
     ...rawParams,

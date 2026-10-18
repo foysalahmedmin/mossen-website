@@ -10,7 +10,15 @@ interface ShopPageProps {
   searchParams: Promise<Record<string, string | string[] | undefined>>
 }
 
-export default async function ShopPage({ searchParams }: ShopPageProps) {
+export default function ShopPage(props: ShopPageProps) {
+  return (
+    <Suspense fallback={<div className="min-h-[60vh] animate-pulse" aria-busy="true" />}>
+      <ShopContent {...props} />
+    </Suspense>
+  )
+}
+
+async function ShopContent({ searchParams }: ShopPageProps) {
   const rawParams = await searchParams
   const query = parseProductQuery(rawParams)
 
