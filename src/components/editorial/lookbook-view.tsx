@@ -29,7 +29,7 @@ export function LookbookView({
     <div className="mx-auto max-w-7xl px-4 py-12 md:py-16">
       {/* Editorial Header */}
       <div className="mb-12 text-center">
-        <span className="inline-flex items-center gap-1.5 rounded-full bg-brand/10 px-3 py-1 font-mono text-xs font-semibold tracking-wider text-brand uppercase">
+        <span className="inline-flex items-center gap-1.5 rounded-md bg-brand/10 px-3 py-1 text-xs font-semibold text-brand tabular-nums">
           <Sparkle size={12} />
           {lookbook.season} Collection
         </span>
@@ -46,9 +46,9 @@ export function LookbookView({
             <button
               key={look.id}
               onClick={() => setActiveLookIndex(idx)}
-              className={`rounded-full px-5 py-2 font-mono text-xs font-semibold tracking-wider uppercase transition ${
+              className={`rounded-md px-5 py-2 text-xs font-semibold tabular-nums transition ${
                 activeLookIndex === idx
-                  ? 'bg-brand text-on-brand shadow-sm'
+                  ? 'bg-brand text-on-brand'
                   : 'border border-stone-200/70 bg-[#fcfbf7] text-ink-soft hover:bg-white hover:text-ink'
               }`}
             >
@@ -62,8 +62,8 @@ export function LookbookView({
       {currentLook && (
         <section className="mb-20 grid items-start gap-8 lg:grid-cols-12">
           {/* Main Visual with Arch Frame */}
-          <div className="relative overflow-hidden rounded-[32px] border border-stone-200/80 bg-[#fbf9f5] p-3 shadow-sm lg:col-span-7">
-            <div className="relative aspect-[3/4] overflow-hidden rounded-[24px] bg-stone-100">
+          <div className="relative overflow-hidden rounded-md border border-stone-200/80 bg-[#fbf9f5] p-3 lg:col-span-7">
+            <div className="relative aspect-[3/4] overflow-hidden rounded-md bg-stone-100">
               <Image
                 priority
                 src={currentLook.media.src}
@@ -74,10 +74,8 @@ export function LookbookView({
               />
 
               {/* Floating Look Note */}
-              <div className="absolute bottom-6 left-6 max-w-xs rounded-[20px] border border-stone-200/80 bg-white/90 p-4 shadow-sm backdrop-blur-md">
-                <span className="font-mono text-xs font-semibold tracking-wider text-brand uppercase">
-                  Active Look
-                </span>
+              <div className="absolute bottom-6 left-6 max-w-xs rounded-md border border-stone-200/80 bg-white/90 p-4 backdrop-blur-md">
+                <span className="text-xs font-semibold text-brand tabular-nums">Active Look</span>
                 <p className="mt-1 font-display text-sm font-normal text-ink">
                   {currentLook.title}
                 </p>
@@ -90,7 +88,7 @@ export function LookbookView({
 
           {/* Shoppable Products Side Rail */}
           <div className="flex flex-col gap-6 lg:col-span-5">
-            <div className="rounded-[32px] border border-stone-200/80 bg-[#fbf9f5] p-6 shadow-sm">
+            <div className="rounded-md border border-stone-200/80 bg-[#fbf9f5] p-6">
               <div className="flex items-center justify-between border-b border-stone-200/60 pb-4">
                 <div>
                   <h2 className="font-display text-xl font-normal text-ink">Pieces in This Look</h2>
@@ -112,7 +110,7 @@ export function LookbookView({
                 {currentProducts.map((product) => (
                   <div
                     key={product.id}
-                    className="overflow-hidden rounded-[24px] border border-stone-200/60 bg-white p-3 shadow-sm transition hover:shadow-md"
+                    className="overflow-hidden rounded-md border border-stone-200/60 bg-white p-3 transition"
                   >
                     <ConnectedProductCard product={product} />
                   </div>
@@ -142,10 +140,10 @@ export function LookbookView({
                 setActiveLookIndex(idx)
                 window.scrollTo({ top: 0, behavior: 'smooth' })
               }}
-              className="group flex cursor-pointer flex-col justify-between overflow-hidden rounded-[28px] border border-stone-200/70 bg-[#fcfbf7] p-4 shadow-sm transition hover:-translate-y-1 hover:shadow-md"
+              className="group flex cursor-pointer flex-col justify-between overflow-hidden rounded-md border border-stone-200/70 bg-[#fcfbf7] p-4 transition hover:-translate-y-1"
             >
               <div>
-                <div className="relative mb-4 aspect-[3/4] overflow-hidden rounded-[20px] bg-stone-100">
+                <div className="relative mb-4 aspect-[3/4] overflow-hidden rounded-md bg-stone-100">
                   <Image
                     src={look.media.src}
                     alt={look.media.alt}
@@ -155,7 +153,7 @@ export function LookbookView({
                   />
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="font-mono text-xs font-semibold text-brand uppercase">
+                  <span className="text-xs font-semibold text-brand tabular-nums">
                     Look {String(idx + 1).padStart(2, '0')}
                   </span>
                   <span className="font-text text-xs text-ink-faint">

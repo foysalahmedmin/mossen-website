@@ -23,7 +23,7 @@ export function AccountNav() {
             key={link.href}
             href={link.href}
             className={cn(
-              'pebble px-4 py-2 font-mono text-xs font-semibold tracking-wider transition-all focus-visible:outline-2 focus-visible:outline-focus',
+              'pebble px-4 py-2 text-xs font-medium tabular-nums transition-all focus-visible:outline-2 focus-visible:outline-focus',
               isActive
                 ? 'border border-brand bg-brand text-on-brand'
                 : 'border border-border-strong/30 bg-surface/70 text-ink-soft hover:bg-surface hover:text-ink',

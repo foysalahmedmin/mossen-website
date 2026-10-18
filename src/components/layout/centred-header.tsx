@@ -67,7 +67,7 @@ export function CentredHeader({
                   key={link.href}
                   href={link.href}
                   className={cn(
-                    'link-draw font-mono text-xs font-semibold tracking-widest uppercase transition-colors',
+                    'link-draw text-sm transition-colors',
                     isActive ? 'text-brand' : 'text-ink-soft hover:text-ink',
                   )}
                 >
@@ -106,7 +106,7 @@ export function CentredHeader({
                   key={link.href}
                   href={link.href}
                   className={cn(
-                    'link-draw font-mono text-xs font-semibold tracking-widest uppercase transition-colors',
+                    'link-draw text-sm transition-colors',
                     isActive ? 'text-brand' : 'text-ink-soft hover:text-ink',
                   )}
                 >
@@ -143,7 +143,7 @@ export function CentredHeader({
             >
               <Heart size={18} aria-hidden="true" />
               {wishlistCount > 0 ? (
-                <span className="absolute -top-1 -right-1 flex h-4 min-w-4 items-center justify-center rounded-full bg-brand px-1 font-mono text-[9px] font-bold text-on-brand">
+                <span className="absolute -top-1 -right-1 flex h-4 min-w-4 items-center justify-center rounded-full bg-brand px-1 text-[9px] font-medium text-on-brand tabular-nums">
                   {wishlistCount}
                 </span>
               ) : null}
@@ -166,7 +166,7 @@ export function CentredHeader({
               >
                 <ShoppingBag size={18} aria-hidden="true" />
                 {cartCount > 0 ? (
-                  <span className="absolute -top-1 -right-1 flex h-4 min-w-4 items-center justify-center rounded-full bg-brand px-1 font-mono text-[9px] font-bold text-on-brand">
+                  <span className="absolute -top-1 -right-1 flex h-4 min-w-4 items-center justify-center rounded-full bg-brand px-1 text-[9px] font-medium text-on-brand tabular-nums">
                     {cartCount}
                   </span>
                 ) : null}
@@ -179,7 +179,7 @@ export function CentredHeader({
               >
                 <ShoppingBag size={18} aria-hidden="true" />
                 {cartCount > 0 ? (
-                  <span className="absolute -top-1 -right-1 flex h-4 min-w-4 items-center justify-center rounded-full bg-brand px-1 font-mono text-[9px] font-bold text-on-brand">
+                  <span className="absolute -top-1 -right-1 flex h-4 min-w-4 items-center justify-center rounded-full bg-brand px-1 text-[9px] font-medium text-on-brand tabular-nums">
                     {cartCount}
                   </span>
                 ) : null}

@@ -8,10 +8,10 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
         <div className="mx-auto flex max-w-6xl items-center justify-between">
           <Link
             href="/"
-            className="flex items-center gap-1.5 font-mono text-xs font-semibold tracking-wider text-ink-soft hover:text-ink focus-visible:outline-2 focus-visible:outline-focus"
+            className="flex items-center gap-1.5 text-xs font-semibold text-ink-soft tabular-nums hover:text-ink focus-visible:outline-2 focus-visible:outline-focus"
           >
             <ArrowLeft size={16} aria-hidden="true" />
-            <span>RETURN TO STORE</span>
+            <span>Return to store</span>
           </Link>
 
           <Link
@@ -32,8 +32,8 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
         <div className="w-full max-w-md">{children}</div>
       </main>
 
-      <footer className="py-6 text-center font-mono text-xs text-ink-faint">
-        &copy; 2026 MOSSEN STUDIOS &middot; SECURE AUTHENTICATION
+      <footer className="py-6 text-center text-xs text-ink-faint tabular-nums">
+        &copy; 2026 MOSSEN studios &middot; Secure authentication
       </footer>
     </div>
   )

@@ -8,10 +8,10 @@ export default function CheckoutLayout({ children }: { children: React.ReactNode
         <div className="mx-auto flex max-w-5xl items-center justify-between">
           <Link
             href="/cart"
-            className="flex items-center gap-1.5 font-mono text-xs font-semibold tracking-wider text-ink-soft hover:text-ink focus-visible:outline-2 focus-visible:outline-focus"
+            className="flex items-center gap-1.5 text-xs font-semibold text-ink-soft tabular-nums hover:text-ink focus-visible:outline-2 focus-visible:outline-focus"
           >
             <ArrowLeft size={16} aria-hidden="true" />
-            <span>RETURN TO BASKET</span>
+            <span>Return to basket</span>
           </Link>
 
           <Link
@@ -22,7 +22,7 @@ export default function CheckoutLayout({ children }: { children: React.ReactNode
             <Leaf size={18} className="sway text-brand" aria-hidden="true" />
           </Link>
 
-          <div className="font-mono text-xs text-ink-soft">QUIET CHECKOUT</div>
+          <div className="text-xs text-ink-soft tabular-nums">Quiet checkout</div>
         </div>
       </header>
 
@@ -30,8 +30,8 @@ export default function CheckoutLayout({ children }: { children: React.ReactNode
         <div className="mx-auto max-w-5xl px-6">{children}</div>
       </main>
 
-      <footer className="border-t border-river/20 py-6 text-center font-mono text-xs text-ink-faint">
-        ENCRYPTED 256-BIT CHECKOUT &middot; &copy; 2026 MOSSEN STUDIOS
+      <footer className="border-t border-river/20 py-6 text-center text-xs text-ink-faint tabular-nums">
+        Encrypted 256-bit checkout &middot; &copy; 2026 Mossen Studios
       </footer>
     </div>
   )

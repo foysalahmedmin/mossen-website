@@ -23,7 +23,7 @@ export function CartLine({
   return (
     <li
       className={cn(
-        'soft-panel flex flex-col items-start justify-between gap-4 rounded-[28px] bg-surface/80 p-4 transition-all sm:flex-row sm:items-center md:p-5',
+        'soft-panel flex flex-col items-start justify-between gap-4 rounded-md bg-surface/80 p-4 transition-all sm:flex-row sm:items-center md:p-5',
         className,
       )}
     >
@@ -48,14 +48,14 @@ export function CartLine({
           >
             {line.name}
           </Link>
-          <p className="font-mono text-xs tracking-wider text-ink-soft uppercase">
+          <p className="text-xs text-ink-soft tabular-nums">
             {Object.values(line.options).join(' · ')}
           </p>
           {unavailable ? (
-            <p className="font-mono text-xs font-medium text-danger">{labels.outOfStock}</p>
+            <p className="text-xs font-medium text-danger tabular-nums">{labels.outOfStock}</p>
           ) : null}
           {line.issue === 'limited-stock' ? (
-            <p className="font-mono text-xs font-medium text-amber-800">{labels.limitedStock}</p>
+            <p className="text-xs font-medium text-amber-800 tabular-nums">{labels.limitedStock}</p>
           ) : null}
         </div>
       </div>
@@ -69,7 +69,7 @@ export function CartLine({
           />
         )}
 
-        <div className="min-w-[5rem] text-right font-mono text-sm font-semibold text-ink sm:text-base">
+        <div className="min-w-[5rem] text-right text-sm font-semibold text-ink tabular-nums sm:text-base">
           {formatMoney(line.lineTotal, money)}
         </div>
 

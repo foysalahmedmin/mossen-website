@@ -30,7 +30,7 @@ async function SaleContent({ searchParams }: SalePageProps) {
   return (
     <Suspense
       fallback={
-        <div className="border-border min-h-[400px] animate-pulse rounded-[32px] border bg-surface" />
+        <div className="border-border min-h-[400px] animate-pulse rounded-md border bg-surface" />
       }
     >
       <ProductListView

@@ -1,26 +1,79 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { ArrowRight, Leaf } from '@/components/icons'
 import { ConnectedProductCard } from '@/components/commerce/connected-product-card'
 import { NewsletterSection } from '@/components/commerce/newsletter-section'
+import { ArrowRight } from '@/components/icons'
 import { Button } from '@/components/ui'
 import type { JournalPost, Product } from '@/domain'
+import { Reveal } from '@/lib/motion'
 import { pageMetadata } from '@/lib/metadata'
 import { services } from '@/services'
 
 export const generateMetadata = () => pageMetadata('home')
 
-export default async function HomePage() {
-  const home = await services.content.getHome()
+function SectionHeading({
+  id,
+  title,
+  subtitle,
+  href,
+  hrefLabel,
+  center = false,
+}: {
+  id: string
+  title: string
+  subtitle?: string
+  href?: string
+  hrefLabel?: string
+  center?: boolean
+}) {
+  return (
+    <div
+      className={`flex flex-col gap-4 pb-10 md:pb-12 ${center ? 'items-center text-center' : 'sm:flex-row sm:items-end sm:justify-between'}`}
+    >
+      <div>
+        <h2
+          id={id}
+          className="font-display text-3xl leading-tight font-normal tracking-tight text-ink md:text-5xl"
+        >
+          {title}
+        </h2>
+        {subtitle ? (
+          <p
+            className={`mt-3 max-w-lg text-sm text-ink-soft md:text-base ${center ? 'mx-auto' : ''}`}
+          >
+            {subtitle}
+          </p>
+        ) : null}
+      </div>
+      {href && hrefLabel ? (
+        <Link
+          href={href}
+          className="link-draw group inline-flex shrink-0 items-center gap-2 pb-1 text-sm text-ink"
+        >
+          {hrefLabel}
+          <ArrowRight
+            size={14}
+            aria-hidden="true"
+            className="transition-transform group-hover:translate-x-1"
+          />
+        </Link>
+      ) : null}
+    </div>
+  )
+}
 
-  // Fetch featured products
+export default async function HomePage() {
+  const [home, lookbook] = await Promise.all([
+    services.content.getHome(),
+    services.content.getLookbook(),
+  ])
+
   const featuredProducts = (
     await Promise.all(
       home.featuredRail.productSlugs.map((slug) => services.catalog.getProduct(slug)),
     )
   ).filter((p): p is Product => p !== null)
 
-  // Fetch journal teasers
   const teaserPosts = (
     await Promise.all(
       home.journalTeasers.postSlugs.map((slug) => services.content.getJournalPost(slug)),
@@ -28,288 +81,255 @@ export default async function HomePage() {
   ).filter((post): post is JournalPost => post !== null)
 
   return (
-    <div className="page-container space-y-16 pb-16 md:space-y-28">
-      {/* 1. Hero Section */}
-      <section aria-label="Brand statement" className="relative overflow-hidden pt-4 md:pt-8">
-        <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-12 lg:gap-12">
-          <div className="space-y-6 lg:col-span-7">
-            <div className="border-border inline-flex items-center gap-2 rounded-full border bg-surface px-4 py-1.5 font-serif text-xs text-brand">
-              <Leaf size={14} className="text-brand" />
-              <span>{home.hero.eyecatch}</span>
-            </div>
-
-            <h1 className="font-display text-4xl leading-[1.08] font-extrabold tracking-tight text-ink sm:text-5xl lg:text-6xl">
+    <div>
+      {/* Hero: a quiet headline, one tall photograph */}
+      <section aria-label="Brand statement" className="page-container py-10 md:py-16">
+        <div className="grid items-center gap-10 lg:grid-cols-12 lg:gap-16">
+          <div className="lg:col-span-6">
+            <p className="mossen-rise text-sm text-ink-soft">{home.hero.eyecatch}</p>
+            <h1
+              className="mossen-rise mt-5 font-display text-5xl leading-[1.02] font-normal tracking-tight text-balance text-ink sm:text-6xl xl:text-7xl"
+              style={{ ['--delay' as string]: '120ms' }}
+            >
               {home.hero.headline}
             </h1>
-
-            <p className="max-w-xl font-text text-base leading-relaxed text-ink-soft md:text-lg">
+            <p
+              className="mossen-rise mt-6 max-w-md text-base leading-relaxed text-ink-soft md:text-lg"
+              style={{ ['--delay' as string]: '260ms' }}
+            >
               {home.hero.body}
             </p>
-
-            <div className="flex flex-wrap items-center gap-4 pt-2">
-              <Link href={home.hero.cta.href}>
-                <Button
-                  variant="primary"
-                  size="lg"
-                  className="rounded-full px-8 font-serif text-sm shadow-sm"
-                >
-                  <span>{home.hero.cta.label}</span>
-                  <ArrowRight size={16} className="ml-2" />
-                </Button>
-              </Link>
-              <Link href="/collections">
-                <Button
-                  variant="secondary"
-                  size="lg"
-                  className="rounded-full px-7 font-serif text-sm"
-                >
-                  Atelier Collections
-                </Button>
+            <div
+              className="mossen-rise mt-9 flex flex-wrap items-center gap-x-7 gap-y-3"
+              style={{ ['--delay' as string]: '380ms' }}
+            >
+              <Button asChild size="lg">
+                <Link href={home.hero.cta.href}>
+                  {home.hero.cta.label}
+                  <ArrowRight size={16} aria-hidden="true" />
+                </Link>
+              </Button>
+              <Link href="/collections" className="link-draw pb-1 text-sm text-ink">
+                Collections
               </Link>
             </div>
           </div>
-
-          <div className="relative lg:col-span-5">
-            <div className="border-border rounded-[36px] border bg-surface p-3 shadow-lg">
-              <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[26px]">
-                <Image
-                  src={home.hero.media.src}
-                  alt={home.hero.media.alt}
-                  width={home.hero.media.width}
-                  height={home.hero.media.height}
-                  priority
-                  sizes="(min-width: 1024px) 40vw, 90vw"
-                  className="h-full w-full object-cover"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 2. Featured Rail */}
-      <section aria-labelledby="featured-heading" className="space-y-8">
-        <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
-          <div>
-            <h2
-              id="featured-heading"
-              className="font-display text-2xl font-bold tracking-tight text-ink md:text-3xl"
-            >
-              {home.featuredRail.title}
-            </h2>
-            <p className="mt-1 font-text text-sm text-ink-soft md:text-base">
-              {home.featuredRail.subtitle}
-            </p>
-          </div>
-          <Link
-            href="/shop"
-            className="group inline-flex items-center gap-1.5 font-serif text-xs font-semibold text-ink transition hover:text-brand"
-          >
-            <span>All Atelier Pieces</span>
-            <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />
-          </Link>
-        </div>
-
-        <div className="grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-6">
-          {featuredProducts.map((product, idx) => (
-            <ConnectedProductCard key={product.id} product={product} priority={idx < 2} />
-          ))}
-        </div>
-      </section>
-
-      {/* 3. Category Entry Points */}
-      <section aria-labelledby="categories-heading" className="space-y-8">
-        <div>
-          <h2
-            id="categories-heading"
-            className="font-display text-2xl font-bold tracking-tight text-ink md:text-3xl"
-          >
-            Craft Disciplines
-          </h2>
-          <p className="mt-1 font-text text-sm text-ink-soft md:text-base">
-            Raw unbleached linen garments, gotland wool knitwear, and hand-cast pebble jewelry
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-          {home.categories.map((cat) => (
-            <Link
-              key={cat.slug}
-              href={`/shop/${cat.slug}`}
-              className="group border-border relative flex flex-col overflow-hidden rounded-[32px] border bg-surface p-3 shadow-sm transition-all duration-300 hover:-translate-y-1"
-            >
-              <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[22px] bg-canvas">
-                <Image
-                  src={cat.media.src}
-                  alt={cat.media.alt}
-                  width={cat.media.width}
-                  height={cat.media.height}
-                  sizes="(min-width: 768px) 33vw, 90vw"
-                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-canvas/80 via-transparent to-transparent" />
-                <div className="absolute right-4 bottom-4 left-4 text-ink">
-                  <h3 className="font-display text-xl font-bold tracking-tight">{cat.title}</h3>
-                  <p className="mt-0.5 font-serif text-xs text-ink-soft">{cat.subtitle}</p>
-                </div>
-              </div>
-            </Link>
-          ))}
-        </div>
-      </section>
-
-      {/* 4. Editorial Spotlight */}
-      <section
-        aria-labelledby="editorial-heading"
-        className="border-border relative overflow-hidden rounded-[36px] border bg-surface p-6 shadow-sm md:p-12"
-      >
-        <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-12">
-          <div className="relative aspect-[4/3] w-full overflow-hidden rounded-[26px] lg:col-span-5 lg:aspect-square">
+          <div className="mossen-bloom relative aspect-[4/5] overflow-hidden rounded-md bg-surface lg:col-span-6">
             <Image
-              src={home.editorial.media.src}
-              alt={home.editorial.media.alt}
-              width={home.editorial.media.width}
-              height={home.editorial.media.height}
-              sizes="(min-width: 1024px) 40vw, 90vw"
-              className="h-full w-full object-cover"
+              src={home.hero.media.src}
+              alt={home.hero.media.alt}
+              fill
+              priority
+              sizes="(min-width: 1024px) 50vw, 100vw"
+              className="object-cover"
             />
           </div>
+        </div>
+      </section>
 
-          <div className="space-y-6 lg:col-span-7">
-            <span className="font-serif text-xs text-brand">Field Chronicle</span>
+      {/* Featured pieces */}
+      <section aria-labelledby="featured-heading" className="page-container py-16 md:py-24">
+        <Reveal>
+          <SectionHeading
+            id="featured-heading"
+            title={home.featuredRail.title}
+            subtitle={home.featuredRail.subtitle}
+            href="/shop"
+            hrefLabel="Shop all"
+          />
+        </Reveal>
+        <ul className="grid grid-cols-2 gap-x-3 gap-y-8 md:grid-cols-4 md:gap-x-6">
+          {featuredProducts.map((product, idx) => (
+            <Reveal as="li" key={product.id} delay={idx * 80} className="flex">
+              <ConnectedProductCard product={product} priority={idx < 2} className="w-full" />
+            </Reveal>
+          ))}
+        </ul>
+      </section>
+
+      {/* Categories: three portraits, captions beneath on the linen */}
+      <section aria-labelledby="categories-heading" className="page-container pb-16 md:pb-24">
+        <Reveal>
+          <SectionHeading id="categories-heading" title="Shop by category" center />
+        </Reveal>
+        <ul className="grid grid-cols-1 gap-8 md:grid-cols-3 md:gap-6">
+          {home.categories.map((cat, idx) => (
+            <Reveal as="li" key={cat.slug} delay={idx * 90}>
+              <Link href={`/shop/${cat.slug}`} className="group block">
+                <span className="relative block aspect-[4/5] overflow-hidden rounded-md bg-surface">
+                  <Image
+                    src={cat.media.src}
+                    alt={cat.media.alt}
+                    fill
+                    sizes="(min-width: 768px) 33vw, 100vw"
+                    className="object-cover transition-transform duration-1000 ease-out group-hover:scale-[1.04]"
+                  />
+                </span>
+                <span className="mt-4 flex items-baseline justify-between gap-4">
+                  <span>
+                    <span className="block font-display text-2xl text-ink">{cat.title}</span>
+                    <span className="mt-1 block text-sm text-ink-soft">{cat.subtitle}</span>
+                  </span>
+                  <ArrowRight
+                    size={18}
+                    aria-hidden="true"
+                    className="shrink-0 text-ink transition-transform group-hover:translate-x-1"
+                  />
+                </span>
+              </Link>
+            </Reveal>
+          ))}
+        </ul>
+      </section>
+
+      {/* Editorial: a deep moss band, copy left, picture right */}
+      <section aria-labelledby="editorial-heading" className="bg-moss-deep text-on-brand">
+        <div className="grid md:grid-cols-2">
+          <Reveal className="flex flex-col justify-center gap-6 px-6 py-14 md:px-14 md:py-20 lg:px-24">
             <h2
               id="editorial-heading"
-              className="font-display text-2xl font-bold tracking-tight text-ink md:text-3xl"
+              className="font-display text-3xl leading-tight font-normal tracking-tight md:text-5xl"
             >
               {home.editorial.title}
             </h2>
             {home.editorial.quote ? (
-              <blockquote className="border-l-2 border-brand pl-4 font-serif text-base text-ink/90 italic">
+              <blockquote className="max-w-md font-display text-xl leading-snug text-on-brand/90 italic md:text-2xl">
                 &ldquo;{home.editorial.quote}&rdquo;
               </blockquote>
             ) : null}
-            <p className="font-text text-sm leading-relaxed text-ink-soft md:text-base">
+            <p className="max-w-md text-sm leading-relaxed text-on-brand/70 md:text-base">
               {home.editorial.body}
             </p>
             {home.editorial.cta ? (
-              <div>
-                <Link href={home.editorial.cta.href}>
-                  <Button
-                    variant="secondary"
-                    size="md"
-                    className="rounded-full px-6 font-serif text-xs"
-                  >
-                    <span>{home.editorial.cta.label}</span>
-                    <ArrowRight size={14} className="ml-1.5" />
-                  </Button>
-                </Link>
-              </div>
+              <Link
+                href={home.editorial.cta.href}
+                className="group inline-flex w-fit items-center gap-2 border-b border-on-brand/50 pb-1 text-sm text-on-brand hover:border-on-brand"
+              >
+                {home.editorial.cta.label}
+                <ArrowRight
+                  size={14}
+                  aria-hidden="true"
+                  className="transition-transform group-hover:translate-x-1"
+                />
+              </Link>
             ) : null}
+          </Reveal>
+          <div className="relative aspect-[4/3] md:aspect-auto md:min-h-[38rem]">
+            <Image
+              src={home.editorial.media.src}
+              alt={home.editorial.media.alt}
+              fill
+              sizes="(min-width: 768px) 50vw, 100vw"
+              className="object-cover"
+            />
           </div>
         </div>
       </section>
 
-      {/* 5. Mirror Try Explainer */}
-      <section
-        aria-labelledby="explainer-heading"
-        className="border-border relative space-y-10 overflow-hidden rounded-[36px] border bg-surface p-8 shadow-sm md:p-14"
-      >
-        <div className="max-w-2xl space-y-2">
-          <span className="font-serif text-xs text-brand">Virtual Natural Fitting</span>
-          <h2
-            id="explainer-heading"
-            className="font-display text-2xl font-bold tracking-tight text-ink md:text-3xl"
-          >
-            {home.mirrorTryExplainer.title}
-          </h2>
-          <p className="font-text text-sm text-ink-soft md:text-base">
-            {home.mirrorTryExplainer.subtitle}
-          </p>
+      {/* Lookbook: a row you can drag sideways */}
+      <section aria-labelledby="lookbook-heading" className="py-16 md:py-24">
+        <div className="page-container">
+          <Reveal>
+            <SectionHeading
+              id="lookbook-heading"
+              title={lookbook.title}
+              subtitle={lookbook.season}
+              href="/lookbook"
+              hrefLabel="Open lookbook"
+            />
+          </Reveal>
         </div>
-
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-          {home.mirrorTryExplainer.steps.map((step) => (
-            <div
-              key={step.step}
-              className="border-border relative space-y-3 overflow-hidden rounded-[26px] border bg-canvas p-6"
-            >
-              <div className="border-border flex h-10 w-10 items-center justify-center rounded-full border bg-surface font-serif text-sm font-semibold text-brand">
-                0{step.step}
-              </div>
-              <h3 className="font-display text-base font-bold text-ink">{step.title}</h3>
-              <p className="font-text text-xs leading-relaxed text-ink-soft md:text-sm">
-                {step.description}
-              </p>
-            </div>
+        <ul className="flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-4 sm:px-6 lg:px-[max(2.5rem,calc((100vw-1180px)/2+2.5rem))]">
+          {lookbook.looks.slice(0, 3).map((look) => (
+            <li key={look.id} className="w-[72vw] shrink-0 snap-start sm:w-[24rem]">
+              <Link href="/lookbook" className="group block">
+                <span className="relative block aspect-[3/4] overflow-hidden rounded-md bg-surface">
+                  <Image
+                    src={look.media.src}
+                    alt={look.media.alt}
+                    fill
+                    sizes="(min-width: 640px) 24rem, 72vw"
+                    className="object-cover transition-transform duration-1000 ease-out group-hover:scale-[1.04]"
+                  />
+                </span>
+                <span className="mt-3 block text-sm text-ink">
+                  {look.title.replace(/^Look \d+\s*[—-]\s*/, '')}
+                </span>
+              </Link>
+            </li>
           ))}
-        </div>
+        </ul>
+      </section>
 
-        <div className="pt-2">
-          <Link href="/shop">
-            <Button
-              variant="primary"
-              size="md"
-              className="rounded-full px-7 font-serif text-sm shadow-sm"
-            >
-              <span>{home.mirrorTryExplainer.cta.label}</span>
-              <ArrowRight size={14} className="ml-1.5" />
-            </Button>
-          </Link>
+      {/* Mirror Try: centred, three short steps */}
+      <section aria-labelledby="explainer-heading" className="bg-surface">
+        <div className="page-container py-16 text-center md:py-24">
+          <Reveal>
+            <SectionHeading
+              id="explainer-heading"
+              title={home.mirrorTryExplainer.title}
+              subtitle={home.mirrorTryExplainer.subtitle}
+              center
+            />
+          </Reveal>
+          <ol className="mx-auto grid max-w-4xl gap-10 text-left sm:grid-cols-3">
+            {home.mirrorTryExplainer.steps.map((step, idx) => (
+              <Reveal as="li" key={step.step} delay={idx * 100}>
+                <span className="font-display text-3xl text-ink-faint tabular-nums">
+                  {String(step.step).padStart(2, '0')}
+                </span>
+                <h3 className="mt-3 text-base font-medium text-ink">{step.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-ink-soft">{step.description}</p>
+              </Reveal>
+            ))}
+          </ol>
+          <Button asChild className="mt-12">
+            <Link href="/shop">
+              {home.mirrorTryExplainer.cta.label}
+              <ArrowRight size={14} aria-hidden="true" />
+            </Link>
+          </Button>
         </div>
       </section>
 
-      {/* 6. Journal Teasers */}
-      <section aria-labelledby="journal-heading" className="space-y-8">
-        <div className="flex items-center justify-between">
-          <h2
+      {/* Journal */}
+      <section aria-labelledby="journal-heading" className="page-container py-16 md:py-24">
+        <Reveal>
+          <SectionHeading
             id="journal-heading"
-            className="font-display text-2xl font-bold tracking-tight text-ink md:text-3xl"
-          >
-            {home.journalTeasers.title}
-          </h2>
-          <Link
+            title={home.journalTeasers.title}
             href="/journal"
-            className="group inline-flex items-center gap-1.5 font-serif text-xs font-semibold text-ink transition hover:text-brand"
-          >
-            <span>All Field Notes</span>
-            <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />
-          </Link>
-        </div>
-
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-          {teaserPosts.map((post) => (
-            <Link
-              key={post.slug}
-              href={`/journal/${post.slug}`}
-              className="group border-border relative flex flex-col overflow-hidden rounded-[32px] border bg-surface p-4 shadow-sm transition-all duration-300 hover:-translate-y-1"
-            >
-              <div className="relative aspect-[16/9] w-full overflow-hidden rounded-[24px] bg-canvas">
-                <Image
-                  src={post.cover.src}
-                  alt={post.cover.alt}
-                  width={post.cover.width}
-                  height={post.cover.height}
-                  sizes="(min-width: 768px) 50vw, 90vw"
-                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                />
-              </div>
-              <div className="mt-4 space-y-2 px-1">
-                <span className="font-serif text-xs text-ink-soft">
+            hrefLabel="All stories"
+          />
+        </Reveal>
+        <ul className="grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-6">
+          {teaserPosts.map((post, idx) => (
+            <Reveal as="li" key={post.slug} delay={idx * 100}>
+              <Link href={`/journal/${post.slug}`} className="group block">
+                <span className="relative block aspect-[16/10] overflow-hidden rounded-md bg-surface">
+                  <Image
+                    src={post.cover.src}
+                    alt={post.cover.alt}
+                    fill
+                    sizes="(min-width: 768px) 50vw, 100vw"
+                    className="object-cover transition-transform duration-1000 ease-out group-hover:scale-[1.03]"
+                  />
+                </span>
+                <span className="mt-4 block text-xs text-ink-soft">
                   {post.readingMinutes} min read
                 </span>
-                <h3 className="font-display text-lg font-bold text-ink transition group-hover:text-brand">
+                <span className="mt-1 block font-display text-2xl leading-snug text-ink">
                   {post.title}
-                </h3>
-                <p className="line-clamp-2 font-text text-xs leading-relaxed text-ink-soft md:text-sm">
+                </span>
+                <span className="mt-2 line-clamp-2 block text-sm text-ink-soft">
                   {post.excerpt}
-                </p>
-              </div>
-            </Link>
+                </span>
+              </Link>
+            </Reveal>
           ))}
-        </div>
+        </ul>
       </section>
 
-      {/* 7. Newsletter */}
       <NewsletterSection
         title={home.newsletter.title}
         description={home.newsletter.description}

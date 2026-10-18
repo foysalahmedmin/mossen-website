@@ -31,10 +31,7 @@ export function TextField({ label, hint, error, className, ...rest }: TextFieldP
 
   return (
     <div data-invalid={error ? '' : undefined} className="w-full space-y-1.5">
-      <label
-        htmlFor={id}
-        className="block font-mono text-xs font-semibold tracking-wider text-ink-soft uppercase"
-      >
+      <label htmlFor={id} className="block text-xs font-semibold text-ink-soft tabular-nums">
         {label}
       </label>
       <Input
@@ -45,12 +42,12 @@ export function TextField({ label, hint, error, className, ...rest }: TextFieldP
         {...rest}
       />
       {hint ? (
-        <p id={hintId} className="font-mono text-xs text-ink-soft">
+        <p id={hintId} className="text-xs text-ink-soft tabular-nums">
           {hint}
         </p>
       ) : null}
       {error ? (
-        <p id={errorId} role="alert" className="font-mono text-xs font-medium text-danger">
+        <p id={errorId} role="alert" className="text-xs font-medium text-danger tabular-nums">
           {error}
         </p>
       ) : null}

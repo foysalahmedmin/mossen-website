@@ -80,11 +80,9 @@ export function WishlistView() {
   if (!hydrated || loading) {
     return (
       <div className="mx-auto min-h-[50vh] max-w-7xl px-4 py-20 text-center sm:px-6 lg:px-8">
-        <div className="soft-panel mx-auto max-w-sm rounded-[32px] border border-river/30 bg-surface/90 p-8 shadow-sm">
+        <div className="soft-panel mx-auto max-w-sm rounded-md border border-river/30 bg-surface/90 p-8">
           <div className="mx-auto h-8 w-8 animate-spin rounded-full border-2 border-ink border-t-transparent" />
-          <p className="mt-4 font-mono text-xs tracking-widest text-ink-soft uppercase">
-            Loading Saved Pieces...
-          </p>
+          <p className="mt-4 text-xs text-ink-soft tabular-nums">Loading Saved Pieces...</p>
         </div>
       </div>
     )
@@ -93,13 +91,11 @@ export function WishlistView() {
   if (products.length === 0) {
     return (
       <div className="mx-auto min-h-[60vh] max-w-7xl px-4 py-20 text-center sm:px-6 lg:px-8">
-        <div className="soft-panel mx-auto max-w-xl rounded-[36px] border border-river/30 bg-surface/90 p-12 shadow-sm">
-          <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full border border-river/40 bg-canvas">
+        <div className="soft-panel mx-auto max-w-xl rounded-md border border-river/30 bg-surface/90 p-12">
+          <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-md border border-river/40 bg-canvas">
             <Heart size={36} className="text-ink-soft" />
           </div>
-          <span className="font-mono text-xs tracking-widest text-brand uppercase">
-            Quiet Curation
-          </span>
+          <span className="text-xs text-brand tabular-nums">Quiet Curation</span>
           <h1 className="mt-2 font-display text-3xl font-normal text-ink sm:text-4xl">
             Your Wishlist is Empty
           </h1>
@@ -127,9 +123,7 @@ export function WishlistView() {
         <div>
           <div className="flex items-center gap-2">
             <Leaf size={16} className="text-brand" />
-            <span className="font-mono text-xs tracking-widest text-ink-soft uppercase">
-              MOSSEN QUIET CURATION
-            </span>
+            <span className="text-xs text-ink-soft tabular-nums">MOSSEN quiet curation</span>
           </div>
           <h1 className="mt-2 font-display text-3xl font-normal text-ink sm:text-4xl">
             Saved Pieces ({products.length})
@@ -137,7 +131,7 @@ export function WishlistView() {
         </div>
         <Link
           href={routes.shop}
-          className="font-mono text-xs tracking-wider text-ink-soft uppercase transition-colors hover:text-ink"
+          className="text-xs text-ink-soft tabular-nums transition-colors hover:text-ink"
         >
           Continue Exploring &rarr;
         </Link>
@@ -150,11 +144,11 @@ export function WishlistView() {
           return (
             <div
               key={product.id}
-              className="soft-panel group relative flex flex-col justify-between overflow-hidden rounded-[32px] border border-river/30 bg-surface/90 p-4 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md"
+              className="soft-panel group relative flex flex-col justify-between overflow-hidden rounded-md border border-river/30 bg-surface/90 p-4 transition-all duration-300 hover:-translate-y-1"
             >
               <div>
                 {/* Media Image */}
-                <div className="relative aspect-[3/4] w-full overflow-hidden rounded-[24px] border border-river/30 bg-canvas">
+                <div className="relative aspect-[3/4] w-full overflow-hidden rounded-md border border-river/30 bg-canvas">
                   {mainImg ? (
                     <Image
                       src={mainImg.src}
@@ -170,7 +164,7 @@ export function WishlistView() {
                     type="button"
                     onClick={() => toggleWishlist(product.id)}
                     aria-label={`Remove ${product.name} from wishlist`}
-                    className="absolute top-3 right-3 flex h-9 w-9 items-center justify-center rounded-full border border-river/30 bg-surface/90 text-ink-soft shadow-sm transition-colors hover:bg-canvas hover:text-danger"
+                    className="absolute top-3 right-3 flex h-9 w-9 items-center justify-center rounded-full border border-river/30 bg-surface/90 text-ink-soft transition-colors hover:bg-canvas hover:text-danger"
                   >
                     <Trash size={16} />
                   </button>
@@ -178,7 +172,7 @@ export function WishlistView() {
 
                 {/* Details */}
                 <div className="mt-4">
-                  <span className="font-mono text-[10px] tracking-wider text-ink-soft uppercase">
+                  <span className="text-[10px] text-ink-soft tabular-nums">
                     {product.subcategory}
                   </span>
                   <h3 className="mt-1 font-display text-base font-medium text-ink">
@@ -186,7 +180,7 @@ export function WishlistView() {
                       {product.name}
                     </Link>
                   </h3>
-                  <p className="mt-1 font-mono text-sm font-semibold text-ink">
+                  <p className="mt-1 text-sm font-semibold text-ink tabular-nums">
                     {formatMoney(product.price, MONEY)}
                   </p>
                 </div>

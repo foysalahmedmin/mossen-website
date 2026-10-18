@@ -55,9 +55,9 @@ export function AboutView() {
   return (
     <div className="mx-auto max-w-6xl px-4 py-12 md:py-16">
       {/* Botanical Paper Hero */}
-      <div className="relative mb-16 overflow-hidden rounded-[32px] border border-stone-200/80 bg-[#fbf9f5] p-8 shadow-sm md:p-14">
+      <div className="relative mb-16 overflow-hidden rounded-md border border-stone-200/80 bg-[#fbf9f5] p-8 md:p-14">
         <div className="max-w-2xl">
-          <span className="mb-4 inline-flex items-center gap-1.5 rounded-full bg-brand/10 px-3 py-1 font-mono text-xs font-semibold tracking-wider text-brand uppercase">
+          <span className="mb-4 inline-flex items-center gap-1.5 rounded-md bg-brand/10 px-3 py-1 text-xs font-semibold text-brand tabular-nums">
             <Sparkle size={12} />
             Our Philosophy & Living Craft
           </span>
@@ -86,9 +86,7 @@ export function AboutView() {
       {/* Pillars Grid */}
       <section className="mb-16">
         <div className="mb-8 text-center">
-          <span className="font-mono text-xs tracking-wider text-ink-faint uppercase">
-            Our Commitments
-          </span>
+          <span className="text-xs text-ink-faint tabular-nums">Our Commitments</span>
           <h2 className="mt-1 font-display text-2xl font-normal text-ink md:text-3xl">
             Foundations of Slow Craft
           </h2>
@@ -98,7 +96,7 @@ export function AboutView() {
           {PILLARS.map((pillar) => (
             <div
               key={pillar.title}
-              className="rounded-[28px] border border-stone-200/70 bg-[#fcfbf7] p-8 shadow-sm transition hover:-translate-y-1 hover:shadow-md"
+              className="rounded-md border border-stone-200/70 bg-[#fcfbf7] p-8 transition hover:-translate-y-1"
             >
               <h3 className="font-display text-lg font-medium text-ink">{pillar.title}</h3>
               <p className="mt-3 font-text text-sm leading-relaxed text-ink-soft">
@@ -110,11 +108,9 @@ export function AboutView() {
       </section>
 
       {/* Living Timeline */}
-      <section className="rounded-[32px] border border-stone-200/80 bg-[#fbf9f5] p-8 shadow-sm md:p-12">
+      <section className="rounded-md border border-stone-200/80 bg-[#fbf9f5] p-8 md:p-12">
         <div className="mb-8">
-          <span className="font-mono text-xs tracking-wider text-ink-faint uppercase">
-            Our Journey
-          </span>
+          <span className="text-xs text-ink-faint tabular-nums">Our Journey</span>
           <h2 className="mt-1 font-display text-2xl font-normal text-ink">
             Milestones in Regenerative Craft
           </h2>
@@ -122,12 +118,9 @@ export function AboutView() {
 
         <div className="grid gap-8 md:grid-cols-2">
           {TIMELINE.map((item) => (
-            <div
-              key={item.year}
-              className="rounded-[24px] border border-stone-200/60 bg-white/60 p-6"
-            >
-              <span className="font-mono text-lg font-bold text-brand">{item.year}</span>
-              <h3 className="mt-1 font-display text-base font-semibold text-ink">{item.title}</h3>
+            <div key={item.year} className="rounded-md border border-stone-200/60 bg-white/60 p-6">
+              <span className="text-lg font-semibold text-brand tabular-nums">{item.year}</span>
+              <h3 className="mt-1 font-display text-base font-medium text-ink">{item.title}</h3>
               <p className="mt-2 font-text text-sm leading-relaxed text-ink-soft">
                 {item.description}
               </p>

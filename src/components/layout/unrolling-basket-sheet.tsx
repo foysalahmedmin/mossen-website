@@ -76,7 +76,7 @@ export function UnrollingBasketSheet() {
       }}
     >
       <div
-        className="animate-in slide-in-from-right flex h-full w-full max-w-lg flex-col border-l border-border-strong/30 bg-surface/98 p-6 shadow-2xl duration-300 sm:p-8"
+        className="animate-in slide-in-from-right flex h-full w-full max-w-lg flex-col border-l border-border-strong/30 bg-surface/98 p-6 duration-300 sm:p-8"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
@@ -85,7 +85,7 @@ export function UnrollingBasketSheet() {
             <ShoppingBag size={20} className="text-brand" aria-hidden="true" />
             <h2 className="font-display text-xl font-normal text-ink lowercase">
               Your Basket
-              <span className="ml-2 font-mono text-xs text-ink-soft">({itemCount})</span>
+              <span className="ml-2 text-xs text-ink-soft tabular-nums">({itemCount})</span>
             </h2>
           </div>
           <button
@@ -107,7 +107,7 @@ export function UnrollingBasketSheet() {
                 ? 'You have unlocked complimentary carbon-neutral delivery.'
                 : `Add ${formatMoney(freeRemaining, MONEY)} for complimentary delivery.`}
             </p>
-            <div className="mt-1.5 h-1.5 w-full overflow-hidden rounded-full bg-surface">
+            <div className="mt-1.5 h-1.5 w-full overflow-hidden rounded-md bg-surface">
               <div
                 className="h-full bg-brand transition-all duration-500"
                 style={{ width: `${freeProgress}%` }}
@@ -128,7 +128,7 @@ export function UnrollingBasketSheet() {
               <Link
                 href={routes.shop}
                 onClick={closePanel}
-                className="pebble mt-4 inline-flex items-center gap-2 bg-brand px-5 py-2 font-mono text-xs font-medium text-on-brand hover:opacity-90"
+                className="pebble mt-4 inline-flex items-center gap-2 bg-brand px-5 py-2 text-xs font-medium text-on-brand tabular-nums hover:opacity-90"
               >
                 Explore Garments
               </Link>
@@ -165,20 +165,20 @@ export function UnrollingBasketSheet() {
                 type="text"
                 value={promoCode}
                 onChange={(e) => setPromoCode(e.target.value)}
-                placeholder="PROMO CODE (e.g. MOSSEN10)"
+                placeholder="Promo code (e.g. MOSSEN10)"
                 aria-label="Promotional code"
-                className="pebble flex-1 border border-border-strong/30 bg-canvas/60 px-3 py-1.5 font-mono text-xs text-ink uppercase placeholder:text-ink-faint placeholder:normal-case focus:border-brand focus:outline-none"
+                className="pebble flex-1 border border-border-strong/30 bg-canvas/60 px-3 py-1.5 text-xs text-ink tabular-nums placeholder:text-ink-faint placeholder:normal-case focus:border-brand focus:outline-none"
               />
               <button
                 type="button"
-                className="pebble border border-border-strong/40 bg-surface px-4 py-1.5 font-mono text-xs font-semibold text-ink hover:bg-canvas"
+                className="pebble border border-border-strong/40 bg-surface px-4 py-1.5 text-xs font-medium text-ink tabular-nums hover:bg-canvas"
               >
                 Apply
               </button>
             </form>
 
             {quote?.promo && (
-              <p className="mb-2 font-mono text-xs text-brand">
+              <p className="mb-2 text-xs text-brand tabular-nums">
                 Promo {quote.promo.code} applied ({quote.promo.label}).
               </p>
             )}
@@ -215,7 +215,7 @@ export function UnrollingBasketSheet() {
             <Link
               href={routes.checkout}
               onClick={closePanel}
-              className="pebble mt-4 flex h-12 w-full items-center justify-center bg-brand px-6 font-mono text-xs font-semibold tracking-wider text-on-brand uppercase transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-focus"
+              className="pebble mt-4 flex h-12 w-full items-center justify-center bg-brand px-6 text-xs font-medium text-on-brand tabular-nums transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-focus"
             >
               Proceed to Quiet Checkout
             </Link>

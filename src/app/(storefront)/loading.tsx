@@ -16,8 +16,8 @@ export default function StorefrontLoading() {
             className="pebble space-y-4 border border-border-strong/20 bg-surface/40 p-4"
           >
             <div className="pebble aspect-[3/4] w-full bg-surface/80" />
-            <div className="h-4 w-2/3 rounded-full bg-surface/80" />
-            <div className="h-3 w-1/3 rounded-full bg-surface/60" />
+            <div className="h-4 w-2/3 rounded-md bg-surface/80" />
+            <div className="h-3 w-1/3 rounded-md bg-surface/60" />
           </div>
         ))}
       </div>

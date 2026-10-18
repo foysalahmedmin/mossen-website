@@ -96,11 +96,9 @@ export function CartView() {
   if (!hydrated) {
     return (
       <div className="mx-auto min-h-[60vh] max-w-5xl px-4 py-20 text-center sm:px-6 lg:px-8">
-        <div className="soft-panel mx-auto max-w-md rounded-[32px] border border-river/30 bg-surface/90 p-12">
+        <div className="soft-panel mx-auto max-w-md rounded-md border border-river/30 bg-surface/90 p-12">
           <div className="mx-auto h-8 w-8 animate-spin rounded-full border-2 border-ink border-t-transparent" />
-          <p className="mt-4 font-mono text-xs tracking-widest text-ink-soft uppercase">
-            Preparing Basket...
-          </p>
+          <p className="mt-4 text-xs text-ink-soft tabular-nums">Preparing Basket...</p>
         </div>
       </div>
     )
@@ -116,13 +114,11 @@ export function CartView() {
   if (!hasItems) {
     return (
       <div className="mx-auto min-h-[60vh] max-w-5xl px-4 py-20 text-center sm:px-6 lg:px-8">
-        <div className="soft-panel mx-auto max-w-xl rounded-[36px] border border-river/30 bg-surface/90 p-12 shadow-sm">
-          <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full border border-river/40 bg-canvas">
+        <div className="soft-panel mx-auto max-w-xl rounded-md border border-river/30 bg-surface/90 p-12">
+          <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-md border border-river/40 bg-canvas">
             <ShoppingBag size={36} className="text-ink-soft" />
           </div>
-          <span className="font-mono text-xs tracking-widest text-brand uppercase">
-            Quiet Sanctuary
-          </span>
+          <span className="text-xs text-brand tabular-nums">Quiet Sanctuary</span>
           <h1 className="mt-2 font-display text-3xl font-normal text-ink sm:text-4xl">
             Your Basket is Empty
           </h1>
@@ -153,8 +149,8 @@ export function CartView() {
         <div>
           <div className="flex items-center gap-2">
             <Leaf size={16} className="text-brand" />
-            <span className="font-mono text-xs tracking-widest text-ink-soft uppercase">
-              {itemCount} {itemCount === 1 ? 'PIECE' : 'PIECES'} IN SANCTUARY
+            <span className="text-xs text-ink-soft tabular-nums">
+              {itemCount} {itemCount === 1 ? 'piece' : 'pieces'} in your basket
             </span>
           </div>
           <h1 className="mt-2 font-display text-3xl font-normal text-ink sm:text-4xl">
@@ -163,15 +159,15 @@ export function CartView() {
         </div>
         <Link
           href={routes.shop}
-          className="font-mono text-xs tracking-wider text-ink-soft uppercase transition-colors hover:text-ink"
+          className="text-xs text-ink-soft tabular-nums transition-colors hover:text-ink"
         >
           &larr; Continue Exploring
         </Link>
       </div>
 
       {/* Sustainable Carbon-Neutral Freight Bar */}
-      <div className="soft-panel mb-8 rounded-[24px] border border-river/30 bg-surface/90 p-5">
-        <div className="flex items-center justify-between font-mono text-xs uppercase">
+      <div className="soft-panel mb-8 rounded-md border border-river/30 bg-surface/90 p-5">
+        <div className="flex items-center justify-between text-xs tabular-nums">
           <span className="flex items-center gap-2 text-ink">
             <Sparkle size={14} className="text-brand" />
             {freeRemaining === 0 ? (
@@ -185,9 +181,9 @@ export function CartView() {
           </span>
           <span className="font-semibold text-ink">{freeProgress}%</span>
         </div>
-        <div className="mt-3 h-2 w-full overflow-hidden rounded-full bg-river/20 p-0.5">
+        <div className="mt-3 h-2 w-full overflow-hidden rounded-md bg-river/20 p-0.5">
           <div
-            className="h-full rounded-full bg-brand transition-all duration-500"
+            className="h-full rounded-md bg-brand transition-all duration-500"
             style={{ width: `${freeProgress}%` }}
           />
         </div>
@@ -217,7 +213,7 @@ export function CartView() {
                 }
               />
             )) ?? (
-              <li className="soft-panel p-8 text-center font-mono text-xs text-ink-soft">
+              <li className="soft-panel p-8 text-center text-xs text-ink-soft tabular-nums">
                 Refreshing basket...
               </li>
             )}
@@ -226,64 +222,57 @@ export function CartView() {
 
         {/* Order Summary Column */}
         <div className="lg:col-span-5">
-          <div className="soft-panel sticky top-24 space-y-6 rounded-[32px] border border-river/30 bg-surface/90 p-6">
+          <div className="soft-panel sticky top-24 space-y-6 rounded-md border border-river/30 bg-surface/90 p-6">
             <div className="border-b border-river/30 pb-4">
-              <span className="font-mono text-[11px] tracking-wider text-ink-soft uppercase">
-                SUMMARY
-              </span>
+              <span className="text-[11px] text-ink-soft tabular-nums">SUMMARY</span>
               <h2 className="mt-1 font-display text-2xl font-normal text-ink">Basket Totals</h2>
             </div>
 
             {/* Shipping Method Selector */}
             <div className="space-y-2">
-              <label className="block font-mono text-xs tracking-wider text-ink-soft uppercase">
-                Delivery Velocity
-              </label>
+              <label className="block text-xs text-ink-soft tabular-nums">Delivery Velocity</label>
               <div className="grid grid-cols-2 gap-2">
                 <button
                   type="button"
                   onClick={() => setShippingMethodId('standard')}
-                  className={`rounded-[20px] border p-3 text-left transition-all ${
+                  className={`rounded-md border p-3 text-left transition-all ${
                     shippingMethodId === 'standard'
-                      ? 'border-ink bg-canvas font-medium text-ink shadow-sm'
+                      ? 'border-ink bg-canvas font-medium text-ink'
                       : 'border-river/30 text-ink-soft hover:border-river'
                   }`}
                 >
-                  <div className="font-mono text-xs uppercase">Standard Quiet</div>
-                  <div className="mt-1 font-mono text-[11px] text-ink-soft">3–5 days</div>
+                  <div className="text-xs tabular-nums">Standard Quiet</div>
+                  <div className="mt-1 text-[11px] text-ink-soft tabular-nums">3–5 days</div>
                 </button>
                 <button
                   type="button"
                   onClick={() => setShippingMethodId('express')}
-                  className={`rounded-[20px] border p-3 text-left transition-all ${
+                  className={`rounded-md border p-3 text-left transition-all ${
                     shippingMethodId === 'express'
-                      ? 'border-ink bg-canvas font-medium text-ink shadow-sm'
+                      ? 'border-ink bg-canvas font-medium text-ink'
                       : 'border-river/30 text-ink-soft hover:border-river'
                   }`}
                 >
-                  <div className="font-mono text-xs uppercase">Priority Courier</div>
-                  <div className="mt-1 font-mono text-[11px] text-ink-soft">1–2 days</div>
+                  <div className="text-xs tabular-nums">Priority Courier</div>
+                  <div className="mt-1 text-[11px] text-ink-soft tabular-nums">1–2 days</div>
                 </button>
               </div>
             </div>
 
             {/* Promo Code Form */}
             <div className="space-y-2">
-              <label
-                htmlFor="promo"
-                className="block font-mono text-xs tracking-wider text-ink-soft uppercase"
-              >
+              <label htmlFor="promo" className="block text-xs text-ink-soft tabular-nums">
                 Botanical Courtesy Code
               </label>
               {appliedPromo ? (
-                <div className="flex items-center justify-between rounded-[16px] border border-river/30 bg-canvas px-3 py-2">
-                  <span className="font-mono text-xs font-semibold text-brand uppercase">
+                <div className="flex items-center justify-between rounded-md border border-river/30 bg-canvas px-3 py-2">
+                  <span className="text-xs font-semibold text-brand tabular-nums">
                     {appliedPromo} APPLIED
                   </span>
                   <button
                     type="button"
                     onClick={handleRemovePromo}
-                    className="font-mono text-xs text-danger uppercase hover:underline"
+                    className="text-xs text-danger tabular-nums hover:underline"
                   >
                     Remove
                   </button>
@@ -296,18 +285,18 @@ export function CartView() {
                     value={promoInput}
                     onChange={(e) => setPromoInput(e.target.value)}
                     placeholder="E.G. SILENCE10"
-                    className="flex-1 rounded-[16px] border border-river/40 bg-canvas px-3 py-2 font-mono text-xs text-ink uppercase placeholder:text-ink-faint focus:border-ink focus:outline-none"
+                    className="flex-1 rounded-md border border-river/40 bg-canvas px-3 py-2 text-xs text-ink tabular-nums placeholder:text-ink-faint focus:border-ink focus:outline-none"
                   />
                   <Button type="submit" size="sm" variant="secondary">
                     Apply
                   </Button>
                 </form>
               )}
-              {promoError ? <p className="font-mono text-xs text-danger">{promoError}</p> : null}
+              {promoError ? <p className="text-xs text-danger tabular-nums">{promoError}</p> : null}
             </div>
 
             {/* Financials */}
-            <div className="space-y-3 border-t border-river/30 pt-4 font-mono text-xs uppercase">
+            <div className="space-y-3 border-t border-river/30 pt-4 text-xs tabular-nums">
               <div className="flex justify-between text-ink-soft">
                 <span>Subtotal</span>
                 <span className="text-ink">{formatMoney(subtotal, MONEY)}</span>
@@ -352,7 +341,7 @@ export function CartView() {
                   <ArrowRight size={16} className="ml-2" />
                 </Link>
               </Button>
-              <p className="text-center font-mono text-[10px] text-ink-faint uppercase">
+              <p className="text-center text-[10px] text-ink-faint tabular-nums">
                 Ethically tailored &middot; Plastic-free packaging &middot; 30-day returns
               </p>
             </div>

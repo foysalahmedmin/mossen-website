@@ -27,7 +27,7 @@ export function AnnouncementBar({
     >
       <div className="mx-auto flex max-w-7xl items-center justify-center gap-2">
         <Leaf size={14} className="shrink-0 text-brand" aria-hidden="true" />
-        <p className="font-text text-xs tracking-wide text-ink-soft">{message}</p>
+        <p className="font-text text-xs text-ink-soft">{message}</p>
       </div>
 
       <button

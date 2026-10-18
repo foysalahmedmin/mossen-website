@@ -74,8 +74,8 @@ export function TrackOrderView() {
       <div className="text-center">
         <div className="flex items-center justify-center gap-2">
           <Leaf size={16} className="text-brand" />
-          <span className="font-mono text-xs tracking-widest text-ink-soft uppercase">
-            MOSSEN COURIER TRACKING &middot; CLIMATE DISPATCH
+          <span className="text-xs text-ink-soft tabular-nums">
+            MOSSEN courier tracking &middot; Climate dispatch
           </span>
         </div>
         <h1 className="mt-2 font-display text-3xl font-normal text-ink sm:text-4xl">
@@ -87,14 +87,11 @@ export function TrackOrderView() {
       </div>
 
       {/* Lookup Form */}
-      <div className="soft-panel mx-auto mt-8 max-w-2xl rounded-[32px] border border-river/30 bg-surface/90 p-6 sm:p-8">
+      <div className="soft-panel mx-auto mt-8 max-w-2xl rounded-md border border-river/30 bg-surface/90 p-6 sm:p-8">
         <form onSubmit={handleSearch} className="space-y-4">
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <div>
-              <label
-                htmlFor="orderNum"
-                className="mb-1 block font-mono text-xs tracking-wider text-ink-soft uppercase"
-              >
+              <label htmlFor="orderNum" className="mb-1 block text-xs text-ink-soft tabular-nums">
                 Order Number *
               </label>
               <input
@@ -104,15 +101,12 @@ export function TrackOrderView() {
                 value={orderNumberInput}
                 onChange={(e) => setOrderNumberInput(e.target.value)}
                 placeholder="e.g. MSN-10842"
-                className="w-full rounded-[16px] border border-river/40 bg-canvas p-3 font-mono text-xs text-ink uppercase placeholder:text-ink-faint focus:border-ink focus:outline-none"
+                className="w-full rounded-md border border-river/40 bg-canvas p-3 text-xs text-ink tabular-nums placeholder:text-ink-faint focus:border-ink focus:outline-none"
               />
             </div>
 
             <div>
-              <label
-                htmlFor="email"
-                className="mb-1 block font-mono text-xs tracking-wider text-ink-soft uppercase"
-              >
+              <label htmlFor="email" className="mb-1 block text-xs text-ink-soft tabular-nums">
                 Customer Email (Optional)
               </label>
               <input
@@ -121,7 +115,7 @@ export function TrackOrderView() {
                 value={emailInput}
                 onChange={(e) => setEmailInput(e.target.value)}
                 placeholder="patron@example.com"
-                className="w-full rounded-[16px] border border-river/40 bg-canvas p-3 font-text text-sm text-ink placeholder:text-ink-faint focus:border-ink focus:outline-none"
+                className="w-full rounded-md border border-river/40 bg-canvas p-3 font-text text-sm text-ink placeholder:text-ink-faint focus:border-ink focus:outline-none"
               />
             </div>
           </div>
@@ -135,7 +129,7 @@ export function TrackOrderView() {
         {/* Quick select from recent orders */}
         {hydrated && orders.length > 0 ? (
           <div className="mt-6 border-t border-river/30 pt-4">
-            <span className="block font-mono text-[10px] tracking-wider text-ink-soft uppercase">
+            <span className="block text-[10px] text-ink-soft tabular-nums">
               Recent Studio Orders in Storage:
             </span>
             <div className="mt-2 flex flex-wrap gap-2">
@@ -144,7 +138,7 @@ export function TrackOrderView() {
                   key={o.id}
                   type="button"
                   onClick={() => handleSelectRecent(o)}
-                  className="rounded-full border border-river/40 bg-canvas px-3 py-1 font-mono text-xs text-ink hover:border-ink"
+                  className="rounded-md border border-river/40 bg-canvas px-3 py-1 text-xs text-ink tabular-nums hover:border-ink"
                 >
                   {o.number} ({o.status})
                 </button>
@@ -156,7 +150,7 @@ export function TrackOrderView() {
 
       {/* Result Section */}
       {searchAttempted && !searchedOrder ? (
-        <div className="soft-panel mx-auto mt-8 max-w-2xl rounded-[32px] border border-river/30 bg-surface/90 p-8 text-center">
+        <div className="soft-panel mx-auto mt-8 max-w-2xl rounded-md border border-river/30 bg-surface/90 p-8 text-center">
           <h2 className="font-display text-xl font-normal text-ink">Order Not Found</h2>
           <p className="mt-2 font-text text-sm text-ink-soft">
             We could not find an order matching{' '}
@@ -167,20 +161,16 @@ export function TrackOrderView() {
       ) : null}
 
       {searchedOrder ? (
-        <div className="soft-panel mx-auto mt-8 max-w-3xl space-y-8 rounded-[36px] border border-river/30 bg-surface/90 p-6 shadow-sm sm:p-10">
+        <div className="soft-panel mx-auto mt-8 max-w-3xl space-y-8 rounded-md border border-river/30 bg-surface/90 p-6 sm:p-10">
           {/* Header */}
           <div className="flex flex-col justify-between gap-4 border-b border-river/30 pb-6 sm:flex-row sm:items-center">
             <div>
-              <span className="font-mono text-xs tracking-widest text-ink-soft uppercase">
-                CARRIER TRACKING DETAILS
-              </span>
-              <p className="font-mono text-2xl font-bold tracking-wider text-ink">
-                {searchedOrder.number}
-              </p>
+              <span className="text-xs text-ink-soft tabular-nums">Carrier tracking details</span>
+              <p className="text-2xl font-semibold text-ink tabular-nums">{searchedOrder.number}</p>
             </div>
-            <div className="rounded-full border border-river/40 bg-canvas px-4 py-1.5 text-right">
-              <span className="font-mono text-[10px] text-ink-soft uppercase">STATUS: </span>
-              <span className="font-mono text-xs font-semibold text-brand uppercase">
+            <div className="rounded-md border border-river/40 bg-canvas px-4 py-1.5 text-right">
+              <span className="text-[10px] text-ink-soft tabular-nums">STATUS: </span>
+              <span className="text-xs font-semibold text-brand tabular-nums">
                 {searchedOrder.status.toUpperCase()}
               </span>
             </div>
@@ -188,9 +178,7 @@ export function TrackOrderView() {
 
           {/* Progress Timeline */}
           <div>
-            <h3 className="mb-6 font-mono text-xs tracking-wider text-ink-soft uppercase">
-              Fulfillment Journey
-            </h3>
+            <h3 className="mb-6 text-xs text-ink-soft tabular-nums">Fulfillment Journey</h3>
             <div className="relative">
               <div className="grid grid-cols-1 gap-6 sm:grid-cols-4">
                 {STEPS.map((s, idx) => {
@@ -204,9 +192,9 @@ export function TrackOrderView() {
                       className="relative flex flex-col items-start text-left sm:items-center sm:text-center"
                     >
                       <div
-                        className={`flex h-10 w-10 items-center justify-center rounded-full font-mono text-xs font-semibold transition-all ${
+                        className={`flex h-10 w-10 items-center justify-center rounded-full text-xs font-semibold tabular-nums transition-all ${
                           isCompleted
-                            ? 'bg-brand text-on-brand shadow-sm'
+                            ? 'bg-brand text-on-brand'
                             : 'border border-river/40 bg-canvas text-ink-faint'
                         }`}
                       >
@@ -219,7 +207,7 @@ export function TrackOrderView() {
                       >
                         {s.label}
                       </p>
-                      <p className="mt-1 font-mono text-[10px] text-ink-soft uppercase">{s.desc}</p>
+                      <p className="mt-1 text-[10px] text-ink-soft tabular-nums">{s.desc}</p>
                     </div>
                   )
                 })}
@@ -228,9 +216,9 @@ export function TrackOrderView() {
           </div>
 
           {/* Details Grid */}
-          <div className="grid grid-cols-1 gap-6 border-t border-river/30 pt-6 font-mono text-xs uppercase sm:grid-cols-2">
-            <div className="space-y-1 rounded-[24px] border border-river/30 bg-canvas/70 p-5">
-              <span className="font-semibold text-ink">DELIVERY SANCTUARY</span>
+          <div className="grid grid-cols-1 gap-6 border-t border-river/30 pt-6 text-xs tabular-nums sm:grid-cols-2">
+            <div className="space-y-1 rounded-md border border-river/30 bg-canvas/70 p-5">
+              <span className="font-semibold text-ink">Delivery sanctuary</span>
               <p className="text-ink">{searchedOrder.address.name}</p>
               <p className="text-ink-soft">{searchedOrder.address.line1}</p>
               <p className="text-ink-soft">
@@ -238,8 +226,8 @@ export function TrackOrderView() {
               </p>
             </div>
 
-            <div className="space-y-1 rounded-[24px] border border-river/30 bg-canvas/70 p-5">
-              <span className="font-semibold text-ink">LOGISTICS SPEC</span>
+            <div className="space-y-1 rounded-md border border-river/30 bg-canvas/70 p-5">
+              <span className="font-semibold text-ink">Logistics spec</span>
               <p className="text-ink">
                 Method: {searchedOrder.shippingMethod.name.toUpperCase()} FREIGHT
               </p>
@@ -254,14 +242,12 @@ export function TrackOrderView() {
 
           {/* Items */}
           <div className="border-t border-river/30 pt-6">
-            <h4 className="font-mono text-xs tracking-wider text-ink-soft uppercase">
-              Ordered Garments
-            </h4>
+            <h4 className="text-xs text-ink-soft tabular-nums">Ordered Garments</h4>
             <div className="mt-4 space-y-2">
               {searchedOrder.lines.map((l) => (
                 <div
                   key={l.variantId}
-                  className="flex items-center justify-between rounded-[18px] border border-river/20 bg-canvas/60 p-3 font-mono text-xs uppercase"
+                  className="flex items-center justify-between rounded-md border border-river/20 bg-canvas/60 p-3 text-xs tabular-nums"
                 >
                   <span className="text-ink">
                     {l.title} × {l.quantity}

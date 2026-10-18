@@ -31,13 +31,11 @@ export function LoginView() {
   }
 
   return (
-    <div className="soft-panel rounded-[36px] border border-river/30 bg-surface/90 p-8 shadow-sm sm:p-10">
+    <div className="soft-panel rounded-md border border-river/30 bg-surface/90 p-8 sm:p-10">
       <div className="text-center">
         <div className="flex items-center justify-center gap-2">
           <Leaf size={16} className="text-brand" />
-          <span className="font-mono text-xs tracking-widest text-ink-soft uppercase">
-            MOSSEN PATRON PORTAL
-          </span>
+          <span className="text-xs text-ink-soft tabular-nums">MOSSEN patron portal</span>
         </div>
         <h1 className="mt-2 font-display text-3xl font-normal text-ink">Sign In</h1>
         <p className="mt-2 font-text text-sm text-ink-soft">
@@ -46,14 +44,14 @@ export function LoginView() {
       </div>
 
       {error ? (
-        <div className="mt-4 rounded-[16px] border border-danger/40 bg-danger/10 p-3 font-mono text-xs text-danger uppercase">
+        <div className="mt-4 rounded-md border border-danger/40 bg-danger/10 p-3 text-xs text-danger tabular-nums">
           {error}
         </div>
       ) : null}
 
       {/* 1-Click Demo Entry */}
-      <div className="mt-6 rounded-[24px] border border-river/40 bg-canvas/80 p-4 text-center">
-        <p className="flex items-center justify-center gap-1.5 font-mono text-xs font-semibold text-ink uppercase">
+      <div className="mt-6 rounded-md border border-river/40 bg-canvas/80 p-4 text-center">
+        <p className="flex items-center justify-center gap-1.5 text-xs font-semibold text-ink tabular-nums">
           <Sparkle size={14} className="text-brand" />
           Rapid Evaluation Demo
         </p>
@@ -68,16 +66,13 @@ export function LoginView() {
 
       <div className="my-6 flex items-center gap-3">
         <div className="h-px flex-1 bg-river/30" />
-        <span className="font-mono text-[10px] text-ink-faint uppercase">Or Credentials</span>
+        <span className="text-[10px] text-ink-faint tabular-nums">Or Credentials</span>
         <div className="h-px flex-1 bg-river/30" />
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label
-            htmlFor="login-email"
-            className="mb-1 block font-mono text-xs tracking-wider text-ink-soft uppercase"
-          >
+          <label htmlFor="login-email" className="mb-1 block text-xs text-ink-soft tabular-nums">
             Email Address
           </label>
           <input
@@ -87,21 +82,18 @@ export function LoginView() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="patron@mossen.studios"
-            className="w-full rounded-[18px] border border-river/40 bg-canvas p-3 font-text text-sm text-ink placeholder:text-ink-faint focus:border-ink focus:outline-none"
+            className="w-full rounded-md border border-river/40 bg-canvas p-3 font-text text-sm text-ink placeholder:text-ink-faint focus:border-ink focus:outline-none"
           />
         </div>
 
         <div>
           <div className="mb-1 flex items-center justify-between">
-            <label
-              htmlFor="login-pwd"
-              className="block font-mono text-xs tracking-wider text-ink-soft uppercase"
-            >
+            <label htmlFor="login-pwd" className="block text-xs text-ink-soft tabular-nums">
               Password
             </label>
             <Link
               href={routes.forgotPassword}
-              className="font-mono text-[11px] text-brand uppercase hover:underline"
+              className="text-[11px] text-brand tabular-nums hover:underline"
             >
               Forgot Password?
             </Link>
@@ -113,7 +105,7 @@ export function LoginView() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="••••••••••••"
-            className="w-full rounded-[18px] border border-river/40 bg-canvas p-3 font-text text-sm text-ink placeholder:text-ink-faint focus:border-ink focus:outline-none"
+            className="w-full rounded-md border border-river/40 bg-canvas p-3 font-text text-sm text-ink placeholder:text-ink-faint focus:border-ink focus:outline-none"
           />
         </div>
 
@@ -124,7 +116,7 @@ export function LoginView() {
       </form>
 
       <div className="mt-6 border-t border-river/30 pt-4 text-center">
-        <p className="font-mono text-xs text-ink-soft uppercase">
+        <p className="text-xs text-ink-soft tabular-nums">
           New to MOSSEN?{' '}
           <Link href={routes.register} className="font-semibold text-ink hover:underline">
             Create an account &rarr;
@@ -154,13 +146,11 @@ export function RegisterView() {
   }
 
   return (
-    <div className="soft-panel rounded-[36px] border border-river/30 bg-surface/90 p-8 shadow-sm sm:p-10">
+    <div className="soft-panel rounded-md border border-river/30 bg-surface/90 p-8 sm:p-10">
       <div className="text-center">
         <div className="flex items-center justify-center gap-2">
           <Leaf size={16} className="text-brand" />
-          <span className="font-mono text-xs tracking-widest text-ink-soft uppercase">
-            MOSSEN PATRON REGISTRY
-          </span>
+          <span className="text-xs text-ink-soft tabular-nums">MOSSEN patron registry</span>
         </div>
         <h1 className="mt-2 font-display text-3xl font-normal text-ink">Join the Sanctuary</h1>
         <p className="mt-2 font-text text-sm text-ink-soft">
@@ -170,17 +160,14 @@ export function RegisterView() {
       </div>
 
       {error ? (
-        <div className="mt-4 rounded-[16px] border border-danger/40 bg-danger/10 p-3 font-mono text-xs text-danger uppercase">
+        <div className="mt-4 rounded-md border border-danger/40 bg-danger/10 p-3 text-xs text-danger tabular-nums">
           {error}
         </div>
       ) : null}
 
       <form onSubmit={handleSubmit} className="mt-6 space-y-4">
         <div>
-          <label
-            htmlFor="reg-name"
-            className="mb-1 block font-mono text-xs tracking-wider text-ink-soft uppercase"
-          >
+          <label htmlFor="reg-name" className="mb-1 block text-xs text-ink-soft tabular-nums">
             Full Name
           </label>
           <input
@@ -190,15 +177,12 @@ export function RegisterView() {
             value={name}
             onChange={(e) => setName(e.target.value)}
             placeholder="e.g. Astrid Lindgren"
-            className="w-full rounded-[18px] border border-river/40 bg-canvas p-3 font-text text-sm text-ink placeholder:text-ink-faint focus:border-ink focus:outline-none"
+            className="w-full rounded-md border border-river/40 bg-canvas p-3 font-text text-sm text-ink placeholder:text-ink-faint focus:border-ink focus:outline-none"
           />
         </div>
 
         <div>
-          <label
-            htmlFor="reg-email"
-            className="mb-1 block font-mono text-xs tracking-wider text-ink-soft uppercase"
-          >
+          <label htmlFor="reg-email" className="mb-1 block text-xs text-ink-soft tabular-nums">
             Email Address
           </label>
           <input
@@ -208,15 +192,12 @@ export function RegisterView() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="patron@mossen.studios"
-            className="w-full rounded-[18px] border border-river/40 bg-canvas p-3 font-text text-sm text-ink placeholder:text-ink-faint focus:border-ink focus:outline-none"
+            className="w-full rounded-md border border-river/40 bg-canvas p-3 font-text text-sm text-ink placeholder:text-ink-faint focus:border-ink focus:outline-none"
           />
         </div>
 
         <div>
-          <label
-            htmlFor="reg-pwd"
-            className="mb-1 block font-mono text-xs tracking-wider text-ink-soft uppercase"
-          >
+          <label htmlFor="reg-pwd" className="mb-1 block text-xs text-ink-soft tabular-nums">
             Password
           </label>
           <input
@@ -226,7 +207,7 @@ export function RegisterView() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Minimum 8 characters"
-            className="w-full rounded-[18px] border border-river/40 bg-canvas p-3 font-text text-sm text-ink placeholder:text-ink-faint focus:border-ink focus:outline-none"
+            className="w-full rounded-md border border-river/40 bg-canvas p-3 font-text text-sm text-ink placeholder:text-ink-faint focus:border-ink focus:outline-none"
           />
         </div>
 
@@ -237,7 +218,7 @@ export function RegisterView() {
       </form>
 
       <div className="mt-6 border-t border-river/30 pt-4 text-center">
-        <p className="font-mono text-xs text-ink-soft uppercase">
+        <p className="text-xs text-ink-soft tabular-nums">
           Already have an account?{' '}
           <Link href={routes.login} className="font-semibold text-ink hover:underline">
             Sign In &rarr;
@@ -259,13 +240,11 @@ export function ForgotPasswordView() {
   }
 
   return (
-    <div className="soft-panel rounded-[36px] border border-river/30 bg-surface/90 p-8 shadow-sm sm:p-10">
+    <div className="soft-panel rounded-md border border-river/30 bg-surface/90 p-8 sm:p-10">
       <div className="text-center">
         <div className="flex items-center justify-center gap-2">
           <Leaf size={16} className="text-brand" />
-          <span className="font-mono text-xs tracking-widest text-ink-soft uppercase">
-            ACCOUNT RECOVERY
-          </span>
+          <span className="text-xs text-ink-soft tabular-nums">Account recovery</span>
         </div>
         <h1 className="mt-2 font-display text-3xl font-normal text-ink">Reset Password</h1>
         <p className="mt-2 font-text text-sm text-ink-soft">
@@ -274,8 +253,8 @@ export function ForgotPasswordView() {
       </div>
 
       {submitted ? (
-        <div className="mt-6 space-y-3 rounded-[24px] border border-river/40 bg-canvas/80 p-6 text-center">
-          <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-brand text-on-brand shadow-sm">
+        <div className="mt-6 space-y-3 rounded-md border border-river/40 bg-canvas/80 p-6 text-center">
+          <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-brand text-on-brand">
             <Check size={24} />
           </div>
           <p className="font-display text-lg font-medium text-ink">Instructions Dispatched</p>
@@ -292,10 +271,7 @@ export function ForgotPasswordView() {
       ) : (
         <form onSubmit={handleSubmit} className="mt-6 space-y-4">
           <div>
-            <label
-              htmlFor="reset-email"
-              className="mb-1 block font-mono text-xs tracking-wider text-ink-soft uppercase"
-            >
+            <label htmlFor="reset-email" className="mb-1 block text-xs text-ink-soft tabular-nums">
               Patron Email Address
             </label>
             <input
@@ -305,7 +281,7 @@ export function ForgotPasswordView() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="patron@mossen.studios"
-              className="w-full rounded-[18px] border border-river/40 bg-canvas p-3 font-text text-sm text-ink placeholder:text-ink-faint focus:border-ink focus:outline-none"
+              className="w-full rounded-md border border-river/40 bg-canvas p-3 font-text text-sm text-ink placeholder:text-ink-faint focus:border-ink focus:outline-none"
             />
           </div>
 
@@ -314,10 +290,7 @@ export function ForgotPasswordView() {
           </Button>
 
           <div className="border-t border-river/30 pt-4 text-center">
-            <Link
-              href={routes.login}
-              className="font-mono text-xs text-ink-soft uppercase hover:text-ink"
-            >
+            <Link href={routes.login} className="text-xs text-ink-soft tabular-nums hover:text-ink">
               &larr; Return to Sign In
             </Link>
           </div>

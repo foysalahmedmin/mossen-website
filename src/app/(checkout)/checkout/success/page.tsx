@@ -8,7 +8,7 @@ export default function CheckoutSuccessPage() {
   return (
     <Suspense
       fallback={
-        <div className="mx-auto min-h-[50vh] max-w-4xl py-20 text-center font-mono text-xs tracking-widest text-ink-soft uppercase">
+        <div className="mx-auto min-h-[50vh] max-w-4xl py-20 text-center text-xs text-ink-soft tabular-nums">
           Loading order receipt...
         </div>
       }

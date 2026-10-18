@@ -6,81 +6,81 @@ import { ArrowLeft, ArrowRight } from '@/components/icons'
 import { cn } from '@/lib/cn'
 import type { GalleryProps } from './contract'
 
+/** Thumbnails run down the side on wide screens and along the bottom on small ones. */
 export function Gallery({ media, labels, className }: GalleryProps & { className?: string }) {
   const [index, setIndex] = useState(0)
   const current = media[index]!
-
   return (
-    <section aria-label={labels.group} className={cn('space-y-4', className)}>
-      {/* Arch-shaped Gallery Window */}
-      <div className="float-sm relative aspect-[4/5] w-full overflow-hidden rounded-t-[140px] rounded-b-[28px] bg-surface">
+    <section
+      aria-label={labels.group}
+      className={cn('relative flex flex-col gap-3 lg:flex-row-reverse', className)}
+    >
+      <div className="relative aspect-[3/4] w-full overflow-hidden bg-canvas lg:flex-1">
         <Image
+          key={current.src}
           src={current.src}
           alt={current.alt}
           width={current.width}
           height={current.height}
           priority
-          className="h-full w-full object-cover transition-opacity duration-500"
+          sizes="(min-width: 1024px) 45vw, 100vw"
+          className="mossen-fade h-full w-full object-cover"
         />
 
-        {/* Floating Pebble Navigation Buttons */}
-        <div className="pointer-events-none absolute inset-x-4 top-1/2 flex -translate-y-1/2 items-center justify-between">
+        <div className="absolute bottom-3 left-3 z-10 rounded-sm border border-ink/10 bg-surface/90 px-3 py-1.5 backdrop-blur-sm">
+          <p aria-live="polite" className="text-xs text-ink tabular-nums">
+            {labels.position(index + 1, media.length)}
+          </p>
+        </div>
+
+        <div className="absolute right-3 bottom-3 z-10 flex gap-2">
           <button
             type="button"
             aria-label={labels.previous}
             disabled={index === 0}
             onClick={() => setIndex(index - 1)}
-            className="pebble pointer-events-auto flex h-10 w-10 items-center justify-center border border-border-strong/30 bg-surface/90 text-ink backdrop-blur-xs transition-all hover:bg-surface focus-visible:outline-2 focus-visible:outline-focus active:scale-95 disabled:cursor-not-allowed disabled:opacity-30"
+            className="flex h-10 w-10 items-center justify-center rounded-md border border-ink/10 bg-surface/90 text-ink backdrop-blur-sm transition-colors hover:bg-white/90 focus-visible:outline-2 focus-visible:outline-focus disabled:pointer-events-none disabled:opacity-40"
           >
-            <ArrowLeft size={18} aria-hidden="true" />
+            <ArrowLeft size={18} />
           </button>
           <button
             type="button"
             aria-label={labels.next}
             disabled={index === media.length - 1}
             onClick={() => setIndex(index + 1)}
-            className="pebble pointer-events-auto flex h-10 w-10 items-center justify-center border border-border-strong/30 bg-surface/90 text-ink backdrop-blur-xs transition-all hover:bg-surface focus-visible:outline-2 focus-visible:outline-focus active:scale-95 disabled:cursor-not-allowed disabled:opacity-30"
+            className="flex h-10 w-10 items-center justify-center rounded-md border border-ink/10 bg-surface/90 text-ink backdrop-blur-sm transition-colors hover:bg-white/90 focus-visible:outline-2 focus-visible:outline-focus disabled:pointer-events-none disabled:opacity-40"
           >
-            <ArrowRight size={18} aria-hidden="true" />
+            <ArrowRight size={18} />
           </button>
         </div>
       </div>
 
-      {/* Position Readout and Pebble Thumbnail Selectors */}
-      <div className="flex items-center justify-between gap-4 px-2">
-        <p
-          aria-live="polite"
-          className="font-mono text-xs font-semibold tracking-wider text-ink-soft uppercase"
-        >
-          {labels.position(index + 1, media.length)}
-        </p>
-
-        {media.length > 1 ? (
-          <div className="flex items-center gap-2">
-            {media.map((item, i) => {
-              const isActive = i === index
-              return (
-                <button
-                  key={item.src}
-                  type="button"
-                  onClick={() => setIndex(i)}
-                  aria-label={labels.position(i + 1, media.length)}
-                  className={cn(
-                    'pebble h-12 w-10 overflow-hidden border transition-all',
-                    isActive
-                      ? 'border-brand ring-2 ring-brand ring-offset-2'
-                      : 'border-border-strong/40 opacity-70 hover:opacity-100',
-                  )}
-                >
-                  <div className="relative h-full w-full">
-                    <Image src={item.src} alt="" fill className="object-cover" />
-                  </div>
-                </button>
-              )
-            })}
-          </div>
-        ) : null}
-      </div>
+      {media.length > 1 ? (
+        <div className="flex gap-2 overflow-x-auto lg:w-20 lg:flex-col lg:overflow-visible">
+          {media.map((item, i) => (
+            <button
+              key={item.src}
+              type="button"
+              onClick={() => setIndex(i)}
+              aria-label={labels.position(i + 1, media.length)}
+              aria-current={index === i}
+              className={cn(
+                'relative aspect-[3/4] w-16 shrink-0 overflow-hidden border transition-opacity lg:w-full',
+                index === i ? 'border-ink' : 'border-transparent opacity-60 hover:opacity-100',
+              )}
+            >
+              <Image
+                src={item.src}
+                alt=""
+                width={item.width}
+                height={item.height}
+                sizes="80px"
+                className="h-full w-full object-cover"
+              />
+            </button>
+          ))}
+        </div>
+      ) : null}
     </section>
   )
 }

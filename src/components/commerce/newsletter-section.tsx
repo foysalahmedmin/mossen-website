@@ -1,8 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { ArrowRight, Check, Leaf } from '@/components/icons'
-import { Button } from '@/components/ui'
+import { ArrowRight, Check } from '@/components/icons'
 import { cn } from '@/lib/cn'
 
 interface NewsletterSectionProps {
@@ -13,6 +12,7 @@ interface NewsletterSectionProps {
   className?: string
 }
 
+/** A full-width black band: one line of copy, one field. */
 export function NewsletterSection({
   title,
   description,
@@ -27,43 +27,33 @@ export function NewsletterSection({
     e.preventDefault()
     if (!email || !email.includes('@')) return
     setStatus('loading')
-    setTimeout(() => {
-      setStatus('success')
-    }, 400)
+    setTimeout(() => setStatus('success'), 400)
   }
 
   return (
-    <section
-      aria-labelledby="newsletter-heading"
-      className={cn(
-        'border-border relative space-y-4 overflow-hidden rounded-[36px] border bg-surface p-8 text-center md:p-14',
-        className,
-      )}
-    >
-      <div className="mx-auto max-w-2xl space-y-3">
-        <div className="border-border inline-flex items-center gap-2 rounded-full border px-4 py-1 font-serif text-xs text-brand">
-          <Leaf size={14} className="text-brand" />
-          <span>Seasonal Correspondence</span>
+    <section aria-labelledby="newsletter-heading" className={cn('bg-ink text-on-brand', className)}>
+      <div className="page-container grid gap-10 py-16 md:grid-cols-2 md:items-end md:py-24">
+        <div>
+          <h2
+            id="newsletter-heading"
+            className="font-display text-3xl leading-tight font-medium tracking-tight md:text-5xl"
+          >
+            {title}
+          </h2>
+          <p className="mt-4 max-w-md text-sm leading-relaxed text-on-brand/70 md:text-base">
+            {description}
+          </p>
         </div>
-        <h2
-          id="newsletter-heading"
-          className="font-display text-2xl font-bold tracking-tight text-ink md:text-3xl"
-        >
-          {title}
-        </h2>
-        <p className="font-text text-sm leading-relaxed text-ink-soft md:text-base">
-          {description}
-        </p>
 
         {status === 'success' ? (
-          <div className="border-border inline-flex items-center gap-2 rounded-full border bg-canvas px-5 py-2.5 font-serif text-sm text-ink">
-            <Check size={16} className="text-brand" />
-            <span>Thank you. Our seasonal reflection has been reserved for you.</span>
-          </div>
+          <p className="flex items-center gap-2 text-sm text-on-brand" role="status">
+            <Check size={16} aria-hidden="true" />
+            Thank you for subscribing. Your first dispatch is on its way.
+          </p>
         ) : (
           <form
             onSubmit={handleSubmit}
-            className="mx-auto mt-6 flex max-w-md flex-col gap-3 sm:flex-row"
+            className="flex items-end gap-3 border-b border-on-brand/40"
           >
             <input
               type="email"
@@ -71,19 +61,17 @@ export function NewsletterSection({
               onChange={(e) => setEmail(e.target.value)}
               placeholder={placeholder}
               required
-              aria-label="Email address for seasonal letter"
-              className="border-border h-12 flex-1 rounded-full border bg-canvas px-5 font-serif text-sm text-ink placeholder:text-ink-faint focus-visible:outline-2 focus-visible:outline-focus"
+              aria-label="Email address for newsletter"
+              className="h-12 flex-1 bg-transparent text-base text-on-brand placeholder:text-on-brand/50 focus-visible:outline-none"
             />
-            <Button
+            <button
               type="submit"
-              variant="primary"
-              size="md"
-              loading={status === 'loading'}
-              className="h-12 rounded-full px-7 font-serif text-sm"
+              disabled={status === 'loading'}
+              className="mb-2 inline-flex h-9 shrink-0 items-center gap-2 rounded-md bg-on-brand px-4 text-sm font-medium text-ink transition hover:bg-on-brand/85 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-on-brand disabled:opacity-60"
             >
-              <span>{cta}</span>
-              <ArrowRight size={14} className="ml-1.5" />
-            </Button>
+              {cta}
+              <ArrowRight size={14} aria-hidden="true" />
+            </button>
           </form>
         )}
       </div>

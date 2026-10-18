@@ -42,9 +42,9 @@ export function OptionPicker({
           aria-label={option.label}
           style={option.swatch ? { ['--swatch' as string]: option.swatch } : undefined}
           className={cn(
-            'pebble flex h-[54px] w-[54px] cursor-pointer items-center justify-center border border-border-strong/40 bg-surface font-mono text-xs font-semibold text-ink transition-all duration-300 select-none',
+            'pebble flex h-[54px] w-[54px] cursor-pointer items-center justify-center border border-border-strong/40 bg-surface text-xs font-semibold text-ink tabular-nums transition-all duration-300 select-none',
             'hover:border-brand/50',
-            'data-[state=checked]:border-brand data-[state=checked]:bg-brand data-[state=checked]:text-on-brand data-[state=checked]:shadow-[var(--float-sm)]',
+            'data-[state=checked]:border-brand data-[state=checked]:bg-brand data-[state=checked]:text-on-brand',
             'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus',
             option.unavailable &&
               'border-sink/60 hover:border-sink/60 relative cursor-not-allowed border-dashed opacity-40',
@@ -59,7 +59,7 @@ export function OptionPicker({
           {option.swatch ? (
             <span
               aria-hidden="true"
-              className="h-5 w-5 rounded-full border border-black/15 shadow-inner"
+              className="h-5 w-5 rounded-full border border-black/15"
               style={{ backgroundColor: option.swatch }}
             />
           ) : (

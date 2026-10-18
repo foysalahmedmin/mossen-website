@@ -39,7 +39,7 @@ export function FaqView({ items = [] }: { items: FaqItem[] }) {
         <div className="pt-2">
           <p className="font-text text-sm leading-relaxed text-ink-soft">{item.answer}</p>
           <div className="mt-3">
-            <span className="inline-block rounded-full bg-stone-100 px-3 py-0.5 font-mono text-[10px] text-ink-faint uppercase">
+            <span className="inline-block rounded-md bg-stone-100 px-3 py-0.5 text-[10px] text-ink-faint tabular-nums">
               Topic: {item.group}
             </span>
           </div>
@@ -52,7 +52,7 @@ export function FaqView({ items = [] }: { items: FaqItem[] }) {
     <div className="mx-auto max-w-5xl px-4 py-12 md:py-16">
       {/* Header */}
       <div className="mb-12 text-center">
-        <span className="inline-flex items-center gap-1.5 rounded-full bg-brand/10 px-3 py-1 font-mono text-xs font-semibold tracking-wider text-brand uppercase">
+        <span className="inline-flex items-center gap-1.5 rounded-md bg-brand/10 px-3 py-1 text-xs font-semibold text-brand tabular-nums">
           <Sparkle size={12} />
           Living Wardrobe Wisdom & FAQ
         </span>
@@ -74,7 +74,7 @@ export function FaqView({ items = [] }: { items: FaqItem[] }) {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search questions or fiber topics..."
-            className="h-12 w-full rounded-full border border-stone-200 bg-white pr-5 pl-11 font-text text-sm text-ink placeholder:text-ink-faint focus-visible:outline-2 focus-visible:outline-focus"
+            className="h-12 w-full rounded-md border border-stone-200 bg-white pr-5 pl-11 font-text text-sm text-ink placeholder:text-ink-faint focus-visible:outline-2 focus-visible:outline-focus"
           />
         </div>
 
@@ -84,9 +84,9 @@ export function FaqView({ items = [] }: { items: FaqItem[] }) {
             <button
               key={group}
               onClick={() => setSelectedGroup(group)}
-              className={`rounded-full px-4 py-1.5 font-mono text-xs font-semibold tracking-wider uppercase transition ${
+              className={`rounded-md px-4 py-1.5 text-xs font-semibold tabular-nums transition ${
                 selectedGroup === group
-                  ? 'bg-brand text-on-brand shadow-sm'
+                  ? 'bg-brand text-on-brand'
                   : 'border border-stone-200/70 bg-[#fcfbf7] text-ink-soft hover:bg-white hover:text-ink'
               }`}
             >
@@ -97,7 +97,7 @@ export function FaqView({ items = [] }: { items: FaqItem[] }) {
       </div>
 
       {/* Accordion Card */}
-      <div className="rounded-[32px] border border-stone-200/80 bg-[#fbf9f5] p-6 shadow-sm md:p-10">
+      <div className="rounded-md border border-stone-200/80 bg-[#fbf9f5] p-6 md:p-10">
         <h2 className="sr-only">Questions</h2>
         {accordionItems.length > 0 ? (
           <Accordion items={accordionItems} />
@@ -112,7 +112,7 @@ export function FaqView({ items = [] }: { items: FaqItem[] }) {
                 setSearchQuery('')
                 setSelectedGroup('All')
               }}
-              className="mt-4 font-mono text-xs font-semibold tracking-wider text-brand uppercase hover:underline"
+              className="mt-4 text-xs font-semibold text-brand tabular-nums hover:underline"
             >
               Reset Filters
             </button>
@@ -121,7 +121,7 @@ export function FaqView({ items = [] }: { items: FaqItem[] }) {
       </div>
 
       {/* Sanctuary Banner */}
-      <div className="mt-12 rounded-[32px] border border-stone-200/80 bg-[#fcfbf7] p-8 text-center md:flex md:items-center md:justify-between md:text-left">
+      <div className="mt-12 rounded-md border border-stone-200/80 bg-[#fcfbf7] p-8 text-center md:flex md:items-center md:justify-between md:text-left">
         <div>
           <h3 className="font-display text-xl font-normal text-ink">Seeking Personal Guidance?</h3>
           <p className="mt-1 font-text text-sm text-ink-soft">

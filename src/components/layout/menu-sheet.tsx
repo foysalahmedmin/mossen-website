@@ -32,14 +32,12 @@ export function MenuSheet({ open, onOpenChange }: MenuSheetProps) {
       onOpenChange={onOpenChange}
       title="Navigation"
       closeLabel="Close navigation"
-      className="max-w-2xl rounded-t-none rounded-b-[36px] border-b border-river/30 bg-surface p-8 sm:p-10"
+      className="max-w-2xl rounded-t-none rounded-b-md border-b border-river/30 bg-surface p-8 sm:p-10"
     >
       <div className="space-y-8 pt-4">
         {/* Category exploration */}
         <div>
-          <p className="font-mono text-xs font-semibold tracking-wider text-ink-soft uppercase">
-            Categories
-          </p>
+          <p className="text-xs font-medium text-ink-soft tabular-nums">Categories</p>
           <div className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-3">
             {categories.map((cat) => (
               <Link
@@ -51,7 +49,7 @@ export function MenuSheet({ open, onOpenChange }: MenuSheetProps) {
                 <span className="font-display text-lg font-medium text-ink transition-colors group-hover:text-brand">
                   {cat.label}
                 </span>
-                <span className="mt-1 font-mono text-[11px] text-ink-soft">{cat.count}</span>
+                <span className="mt-1 text-[11px] text-ink-soft tabular-nums">{cat.count}</span>
               </Link>
             ))}
           </div>
@@ -59,9 +57,7 @@ export function MenuSheet({ open, onOpenChange }: MenuSheetProps) {
 
         {/* Text links */}
         <div>
-          <p className="font-mono text-xs font-semibold tracking-wider text-ink-soft uppercase">
-            Explore
-          </p>
+          <p className="text-xs font-medium text-ink-soft tabular-nums">Explore</p>
           <ul className="mt-3 grid grid-cols-2 gap-x-6 gap-y-3">
             {links.map((link) => (
               <li key={link.href}>
@@ -80,7 +76,7 @@ export function MenuSheet({ open, onOpenChange }: MenuSheetProps) {
         {/* Footer quote */}
         <div className="flex items-center gap-2 border-t border-river/20 pt-4 text-ink-soft">
           <Leaf size={16} className="text-brand" aria-hidden="true" />
-          <p className="font-mono text-xs italic">Crafted from earth, woven for quiet living.</p>
+          <p className="text-xs italic tabular-nums">Crafted from earth, woven for quiet living.</p>
         </div>
       </div>
     </Dialog>

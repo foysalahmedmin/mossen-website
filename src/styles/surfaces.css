@@ -2,9 +2,9 @@
 
 @layer base {
   :root {
-    --float-sm: 0 10px 24px -12px rgb(54 66 46 / 0.45);
-    --float: 0 24px 40px -22px rgb(32 39 30 / 0.5);
-    --float-lg: 0 30px 60px -36px rgb(32 39 30 / 0.5);
+    --float-sm: none;
+    --float: none;
+    --float-lg: none;
     /* A 220px tile of fractal noise, tinted green-grey. */
     --grain: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .2  0 0 0 0 .25  0 0 0 0 .18  0 0 0 .55 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
   }
@@ -15,7 +15,7 @@
     position: fixed;
     inset: 0;
     background-image: var(--grain);
-    opacity: var(--grain-opacity, 0.22);
+    opacity: var(--grain-opacity, 0.1);
     mix-blend-mode: multiply;
     pointer-events: none;
     z-index: 50;
@@ -42,7 +42,7 @@
   .soft-panel {
     border-radius: var(--r-soft);
     background: var(--color-surface);
-    box-shadow: var(--float-lg);
+    box-shadow: 0 0 0 1px rgb(32 39 30 / 0.08);
   }
 
   .float-sm {
@@ -73,7 +73,7 @@
   /* Field outline: 1.5px at the strong border colour, a different radius per corner. */
   .outline-field {
     border: 1.5px solid var(--color-border-strong);
-    border-radius: 22px 28px 22px 26px;
+    border-radius: 6px;
     background: transparent;
   }
 
@@ -90,6 +90,7 @@
 
   /* Hand-drawn wavy divider: <svg class="wavy-divider" viewBox="0 0 1000 22" preserveAspectRatio="none"><path d="…"/></svg> */
   .wavy-divider {
+    display: none;
     width: 100%;
     height: 22px;
   }

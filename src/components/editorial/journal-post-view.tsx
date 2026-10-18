@@ -53,7 +53,7 @@ export function JournalPostView({
 
       {/* Header */}
       <header className="mb-10">
-        <div className="flex items-center gap-3 font-mono text-xs tracking-wider text-ink-faint uppercase">
+        <div className="flex items-center gap-3 text-xs text-ink-faint tabular-nums">
           <span className="inline-flex items-center gap-1 font-semibold text-brand">
             <Sparkle size={12} />
             Botanical Essay
@@ -77,7 +77,7 @@ export function JournalPostView({
       </header>
 
       {/* Hero Media */}
-      <div className="relative mb-12 overflow-hidden rounded-[32px] border border-stone-200/80 bg-[#fbf9f5] shadow-sm">
+      <div className="relative mb-12 overflow-hidden rounded-md border border-stone-200/80 bg-[#fbf9f5]">
         <Image
           priority
           src={post.cover.src}
@@ -104,12 +104,12 @@ export function JournalPostView({
         ))}
 
         {/* Botanical Pull Quote */}
-        <blockquote className="my-10 rounded-[24px] border-l-4 border-brand bg-[#fcfbf7] p-6 shadow-sm md:p-8">
+        <blockquote className="my-10 rounded-md border-l-4 border-brand bg-[#fcfbf7] p-6 md:p-8">
           <p className="font-display text-lg font-normal text-ink italic md:text-xl">
             &ldquo;When linen is retted under morning dew rather than industrial chemicals, it
             retains the breath of the meadow and remembers the earth from which it grew.&rdquo;
           </p>
-          <cite className="mt-3 block font-mono text-xs tracking-wider text-ink-faint uppercase not-italic">
+          <cite className="mt-3 block text-xs text-ink-faint not-italic tabular-nums">
             — MOSSEN Atelier Journal
           </cite>
         </blockquote>
@@ -135,10 +135,10 @@ export function JournalPostView({
               <Link
                 key={related.slug}
                 href={routes.journalPost(related.slug)}
-                className="group flex flex-col justify-between overflow-hidden rounded-[28px] border border-stone-200/70 bg-[#fcfbf7] p-5 shadow-sm transition hover:-translate-y-1 hover:shadow-md"
+                className="group flex flex-col justify-between overflow-hidden rounded-md border border-stone-200/70 bg-[#fcfbf7] p-5 transition hover:-translate-y-1"
               >
                 <div>
-                  <div className="relative mb-4 aspect-[16/9] overflow-hidden rounded-[20px] bg-stone-100">
+                  <div className="relative mb-4 aspect-[16/9] overflow-hidden rounded-md bg-stone-100">
                     <Image
                       src={related.cover.src}
                       alt={related.cover.alt}
@@ -147,7 +147,7 @@ export function JournalPostView({
                       className="h-full w-full object-cover transition duration-300 group-hover:scale-105"
                     />
                   </div>
-                  <div className="flex items-center gap-2 font-mono text-xs text-ink-faint">
+                  <div className="flex items-center gap-2 text-xs text-ink-faint tabular-nums">
                     <ClockIcon size={12} />
                     <span>{related.readingMinutes} min</span>
                   </div>

@@ -24,7 +24,7 @@ export function PolicyView({
     <div className="mx-auto max-w-4xl px-4 py-12 md:py-16">
       {/* Header */}
       <div className="mb-12">
-        <span className="inline-flex items-center gap-1.5 rounded-full bg-brand/10 px-3 py-1 font-mono text-xs font-semibold tracking-wider text-brand uppercase">
+        <span className="inline-flex items-center gap-1.5 rounded-md bg-brand/10 px-3 py-1 text-xs font-semibold text-brand tabular-nums">
           <Sparkle size={12} />
           Living Ethics & Governance
         </span>
@@ -32,11 +32,11 @@ export function PolicyView({
           {title}
         </h1>
         <p className="mt-3 font-text text-base text-ink-soft md:text-lg">{subtitle}</p>
-        <div className="mt-4 font-mono text-xs text-ink-faint">Published: {lastUpdated}</div>
+        <div className="mt-4 text-xs text-ink-faint tabular-nums">Published: {lastUpdated}</div>
       </div>
 
       {/* Content Sections */}
-      <div className="rounded-[32px] border border-stone-200/80 bg-[#fbf9f5] p-8 shadow-sm md:p-12">
+      <div className="rounded-md border border-stone-200/80 bg-[#fbf9f5] p-8 md:p-12">
         <div className="space-y-10">
           {sections.map((section, idx) => (
             <section key={idx} className="space-y-4">

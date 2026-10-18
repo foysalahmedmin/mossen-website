@@ -92,11 +92,9 @@ export function CheckoutView() {
   if (!hydrated) {
     return (
       <div className="mx-auto min-h-[50vh] max-w-4xl py-20 text-center">
-        <div className="soft-panel mx-auto max-w-sm rounded-[32px] border border-river/30 bg-surface/90 p-8">
+        <div className="soft-panel mx-auto max-w-sm rounded-md border border-river/30 bg-surface/90 p-8">
           <div className="mx-auto h-8 w-8 animate-spin rounded-full border-2 border-ink border-t-transparent" />
-          <p className="mt-4 font-mono text-xs tracking-widest text-ink-soft uppercase">
-            Preparing Checkout...
-          </p>
+          <p className="mt-4 text-xs text-ink-soft tabular-nums">Preparing Checkout...</p>
         </div>
       </div>
     )
@@ -105,7 +103,7 @@ export function CheckoutView() {
   if (lines.length === 0) {
     return (
       <div className="mx-auto min-h-[50vh] max-w-2xl px-4 py-20 text-center">
-        <div className="soft-panel rounded-[36px] border border-river/30 bg-surface/90 p-10">
+        <div className="soft-panel rounded-md border border-river/30 bg-surface/90 p-10">
           <h1 className="font-display text-2xl font-normal text-ink">Your basket is empty</h1>
           <p className="mt-2 text-sm text-ink-soft">
             Add items to your basket before proceeding to checkout.
@@ -175,15 +173,15 @@ export function CheckoutView() {
       <div className="mb-8">
         <div className="flex items-center gap-2">
           <Leaf size={16} className="text-brand" />
-          <span className="font-mono text-xs tracking-widest text-ink-soft uppercase">
-            MOSSEN QUIET CHECKOUT &middot; ENCRYPTED FULFILLMENT
+          <span className="text-xs text-ink-soft tabular-nums">
+            MOSSEN quiet checkout &middot; Encrypted fulfillment
           </span>
         </div>
         <h1 className="mt-2 font-display text-3xl font-normal text-ink">Order Finalization</h1>
       </div>
 
       {error ? (
-        <div className="mb-6 rounded-[20px] border border-danger/40 bg-danger/10 p-4 font-mono text-xs text-danger uppercase">
+        <div className="mb-6 rounded-md border border-danger/40 bg-danger/10 p-4 text-xs text-danger tabular-nums">
           {error}
         </div>
       ) : null}
@@ -193,10 +191,10 @@ export function CheckoutView() {
         <div className="lg:col-span-7">
           <form onSubmit={handleSubmit} className="space-y-8">
             {/* Step 1: Contact Details */}
-            <div className="soft-panel rounded-[32px] border border-river/30 bg-surface/90 p-6 sm:p-8">
+            <div className="soft-panel rounded-md border border-river/30 bg-surface/90 p-6 sm:p-8">
               <div className="flex items-center justify-between border-b border-river/30 pb-4">
                 <div className="flex items-center gap-3">
-                  <span className="flex h-7 w-7 items-center justify-center rounded-full border border-river/40 bg-canvas font-mono text-xs font-semibold text-ink">
+                  <span className="flex h-7 w-7 items-center justify-center rounded-full border border-river/40 bg-canvas text-xs font-semibold text-ink tabular-nums">
                     01
                   </span>
                   <h2 className="font-display text-xl font-normal text-ink">Contact Details</h2>
@@ -204,7 +202,7 @@ export function CheckoutView() {
                 {!customer ? (
                   <Link
                     href={routes.login}
-                    className="font-mono text-xs text-brand uppercase hover:underline"
+                    className="text-xs text-brand tabular-nums hover:underline"
                   >
                     Customer Login &rarr;
                   </Link>
@@ -213,10 +211,7 @@ export function CheckoutView() {
 
               <div className="mt-6 space-y-4">
                 <div>
-                  <label
-                    htmlFor="email"
-                    className="mb-1 block font-mono text-xs tracking-wider text-ink-soft uppercase"
-                  >
+                  <label htmlFor="email" className="mb-1 block text-xs text-ink-soft tabular-nums">
                     Email Address *
                   </label>
                   <input
@@ -226,7 +221,7 @@ export function CheckoutView() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="patron@mossen.studios"
-                    className="w-full rounded-[18px] border border-river/40 bg-canvas p-3 font-text text-sm text-ink placeholder:text-ink-faint focus:border-ink focus:outline-none"
+                    className="w-full rounded-md border border-river/40 bg-canvas p-3 font-text text-sm text-ink placeholder:text-ink-faint focus:border-ink focus:outline-none"
                   />
                 </div>
 
@@ -240,7 +235,7 @@ export function CheckoutView() {
                   />
                   <label
                     htmlFor="newsletter"
-                    className="cursor-pointer font-mono text-xs text-ink-soft uppercase"
+                    className="cursor-pointer text-xs text-ink-soft tabular-nums"
                   >
                     Subscribe to quiet seasonal botanical essays & releases
                   </label>
@@ -249,9 +244,9 @@ export function CheckoutView() {
             </div>
 
             {/* Step 2: Shipping Destination */}
-            <div className="soft-panel rounded-[32px] border border-river/30 bg-surface/90 p-6 sm:p-8">
+            <div className="soft-panel rounded-md border border-river/30 bg-surface/90 p-6 sm:p-8">
               <div className="flex items-center gap-3 border-b border-river/30 pb-4">
-                <span className="flex h-7 w-7 items-center justify-center rounded-full border border-river/40 bg-canvas font-mono text-xs font-semibold text-ink">
+                <span className="flex h-7 w-7 items-center justify-center rounded-full border border-river/40 bg-canvas text-xs font-semibold text-ink tabular-nums">
                   02
                 </span>
                 <h2 className="font-display text-xl font-normal text-ink">Delivery Destination</h2>
@@ -259,10 +254,7 @@ export function CheckoutView() {
 
               <div className="mt-6 space-y-4">
                 <div>
-                  <label
-                    htmlFor="name"
-                    className="mb-1 block font-mono text-xs tracking-wider text-ink-soft uppercase"
-                  >
+                  <label htmlFor="name" className="mb-1 block text-xs text-ink-soft tabular-nums">
                     Recipient Full Name *
                   </label>
                   <input
@@ -272,15 +264,12 @@ export function CheckoutView() {
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     placeholder="e.g. Astrid Lindgren"
-                    className="w-full rounded-[18px] border border-river/40 bg-canvas p-3 font-text text-sm text-ink placeholder:text-ink-faint focus:border-ink focus:outline-none"
+                    className="w-full rounded-md border border-river/40 bg-canvas p-3 font-text text-sm text-ink placeholder:text-ink-faint focus:border-ink focus:outline-none"
                   />
                 </div>
 
                 <div>
-                  <label
-                    htmlFor="line1"
-                    className="mb-1 block font-mono text-xs tracking-wider text-ink-soft uppercase"
-                  >
+                  <label htmlFor="line1" className="mb-1 block text-xs text-ink-soft tabular-nums">
                     Street Address *
                   </label>
                   <input
@@ -290,15 +279,12 @@ export function CheckoutView() {
                     value={line1}
                     onChange={(e) => setLine1(e.target.value)}
                     placeholder="e.g. Fjordvej 42"
-                    className="w-full rounded-[18px] border border-river/40 bg-canvas p-3 font-text text-sm text-ink placeholder:text-ink-faint focus:border-ink focus:outline-none"
+                    className="w-full rounded-md border border-river/40 bg-canvas p-3 font-text text-sm text-ink placeholder:text-ink-faint focus:border-ink focus:outline-none"
                   />
                 </div>
 
                 <div>
-                  <label
-                    htmlFor="line2"
-                    className="mb-1 block font-mono text-xs tracking-wider text-ink-soft uppercase"
-                  >
+                  <label htmlFor="line2" className="mb-1 block text-xs text-ink-soft tabular-nums">
                     Apartment, Suite or Cottage (Optional)
                   </label>
                   <input
@@ -307,16 +293,13 @@ export function CheckoutView() {
                     value={line2}
                     onChange={(e) => setLine2(e.target.value)}
                     placeholder="e.g. 2nd Floor, Garden Wing"
-                    className="w-full rounded-[18px] border border-river/40 bg-canvas p-3 font-text text-sm text-ink placeholder:text-ink-faint focus:border-ink focus:outline-none"
+                    className="w-full rounded-md border border-river/40 bg-canvas p-3 font-text text-sm text-ink placeholder:text-ink-faint focus:border-ink focus:outline-none"
                   />
                 </div>
 
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                   <div>
-                    <label
-                      htmlFor="city"
-                      className="mb-1 block font-mono text-xs tracking-wider text-ink-soft uppercase"
-                    >
+                    <label htmlFor="city" className="mb-1 block text-xs text-ink-soft tabular-nums">
                       City *
                     </label>
                     <input
@@ -326,13 +309,13 @@ export function CheckoutView() {
                       value={city}
                       onChange={(e) => setCity(e.target.value)}
                       placeholder="e.g. Copenhagen"
-                      className="w-full rounded-[18px] border border-river/40 bg-canvas p-3 font-text text-sm text-ink placeholder:text-ink-faint focus:border-ink focus:outline-none"
+                      className="w-full rounded-md border border-river/40 bg-canvas p-3 font-text text-sm text-ink placeholder:text-ink-faint focus:border-ink focus:outline-none"
                     />
                   </div>
                   <div>
                     <label
                       htmlFor="region"
-                      className="mb-1 block font-mono text-xs tracking-wider text-ink-soft uppercase"
+                      className="mb-1 block text-xs text-ink-soft tabular-nums"
                     >
                       State / Region *
                     </label>
@@ -343,7 +326,7 @@ export function CheckoutView() {
                       value={region}
                       onChange={(e) => setRegion(e.target.value)}
                       placeholder="e.g. Capital Region"
-                      className="w-full rounded-[18px] border border-river/40 bg-canvas p-3 font-text text-sm text-ink placeholder:text-ink-faint focus:border-ink focus:outline-none"
+                      className="w-full rounded-md border border-river/40 bg-canvas p-3 font-text text-sm text-ink placeholder:text-ink-faint focus:border-ink focus:outline-none"
                     />
                   </div>
                 </div>
@@ -352,7 +335,7 @@ export function CheckoutView() {
                   <div>
                     <label
                       htmlFor="postcode"
-                      className="mb-1 block font-mono text-xs tracking-wider text-ink-soft uppercase"
+                      className="mb-1 block text-xs text-ink-soft tabular-nums"
                     >
                       Postal Code *
                     </label>
@@ -363,13 +346,13 @@ export function CheckoutView() {
                       value={postcode}
                       onChange={(e) => setPostcode(e.target.value)}
                       placeholder="e.g. 1050"
-                      className="w-full rounded-[18px] border border-river/40 bg-canvas p-3 font-text text-sm text-ink placeholder:text-ink-faint focus:border-ink focus:outline-none"
+                      className="w-full rounded-md border border-river/40 bg-canvas p-3 font-text text-sm text-ink placeholder:text-ink-faint focus:border-ink focus:outline-none"
                     />
                   </div>
                   <div>
                     <label
                       htmlFor="country"
-                      className="mb-1 block font-mono text-xs tracking-wider text-ink-soft uppercase"
+                      className="mb-1 block text-xs text-ink-soft tabular-nums"
                     >
                       Country *
                     </label>
@@ -377,7 +360,7 @@ export function CheckoutView() {
                       id="country"
                       value={country}
                       onChange={(e) => setCountry(e.target.value)}
-                      className="w-full rounded-[18px] border border-river/40 bg-canvas p-3 font-text text-sm text-ink focus:border-ink focus:outline-none"
+                      className="w-full rounded-md border border-river/40 bg-canvas p-3 font-text text-sm text-ink focus:border-ink focus:outline-none"
                     >
                       <option value="Denmark">Denmark</option>
                       <option value="Sweden">Sweden</option>
@@ -391,10 +374,7 @@ export function CheckoutView() {
                 </div>
 
                 <div>
-                  <label
-                    htmlFor="phone"
-                    className="mb-1 block font-mono text-xs tracking-wider text-ink-soft uppercase"
-                  >
+                  <label htmlFor="phone" className="mb-1 block text-xs text-ink-soft tabular-nums">
                     Phone (For Sustainable Courier Updates)
                   </label>
                   <input
@@ -403,16 +383,16 @@ export function CheckoutView() {
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
                     placeholder="+45 20 12 34 56"
-                    className="w-full rounded-[18px] border border-river/40 bg-canvas p-3 font-text text-sm text-ink placeholder:text-ink-faint focus:border-ink focus:outline-none"
+                    className="w-full rounded-md border border-river/40 bg-canvas p-3 font-text text-sm text-ink placeholder:text-ink-faint focus:border-ink focus:outline-none"
                   />
                 </div>
               </div>
             </div>
 
             {/* Step 3: Carbon-Neutral Courier */}
-            <div className="soft-panel rounded-[32px] border border-river/30 bg-surface/90 p-6 sm:p-8">
+            <div className="soft-panel rounded-md border border-river/30 bg-surface/90 p-6 sm:p-8">
               <div className="flex items-center gap-3 border-b border-river/30 pb-4">
-                <span className="flex h-7 w-7 items-center justify-center rounded-full border border-river/40 bg-canvas font-mono text-xs font-semibold text-ink">
+                <span className="flex h-7 w-7 items-center justify-center rounded-full border border-river/40 bg-canvas text-xs font-semibold text-ink tabular-nums">
                   03
                 </span>
                 <h2 className="font-display text-xl font-normal text-ink">Fulfillment Velocity</h2>
@@ -421,9 +401,9 @@ export function CheckoutView() {
               <div className="mt-6 space-y-3">
                 <label
                   onClick={() => setShippingMethodId('standard')}
-                  className={`flex cursor-pointer items-center justify-between rounded-[24px] p-4 transition-all ${
+                  className={`flex cursor-pointer items-center justify-between rounded-md p-4 transition-all ${
                     shippingMethodId === 'standard'
-                      ? 'border-2 border-brand bg-canvas shadow-sm'
+                      ? 'border-2 border-brand bg-canvas'
                       : 'border border-river/30'
                   }`}
                 >
@@ -439,21 +419,21 @@ export function CheckoutView() {
                       <p className="font-display text-sm font-medium text-ink">
                         Standard Quiet Climate Courier
                       </p>
-                      <p className="font-mono text-[11px] text-ink-soft">
+                      <p className="text-[11px] text-ink-soft tabular-nums">
                         3–5 business days zero-emission electric van
                       </p>
                     </div>
                   </div>
-                  <span className="font-mono text-xs font-semibold text-ink">
+                  <span className="text-xs font-semibold text-ink tabular-nums">
                     {quote?.totals.shipping === 0 ? 'FREE' : formatMoney(1500, MONEY)}
                   </span>
                 </label>
 
                 <label
                   onClick={() => setShippingMethodId('express')}
-                  className={`flex cursor-pointer items-center justify-between rounded-[24px] p-4 transition-all ${
+                  className={`flex cursor-pointer items-center justify-between rounded-md p-4 transition-all ${
                     shippingMethodId === 'express'
-                      ? 'border-2 border-brand bg-canvas shadow-sm'
+                      ? 'border-2 border-brand bg-canvas'
                       : 'border border-river/30'
                   }`}
                 >
@@ -469,12 +449,12 @@ export function CheckoutView() {
                       <p className="font-display text-sm font-medium text-ink">
                         Priority Botanical Express
                       </p>
-                      <p className="font-mono text-[11px] text-ink-soft">
+                      <p className="text-[11px] text-ink-soft tabular-nums">
                         1–2 business days direct routing
                       </p>
                     </div>
                   </div>
-                  <span className="font-mono text-xs font-semibold text-ink">
+                  <span className="text-xs font-semibold text-ink tabular-nums">
                     {formatMoney(3500, MONEY)}
                   </span>
                 </label>
@@ -482,24 +462,22 @@ export function CheckoutView() {
             </div>
 
             {/* Step 4: Encrypted Payment */}
-            <div className="soft-panel rounded-[32px] border border-river/30 bg-surface/90 p-6 sm:p-8">
+            <div className="soft-panel rounded-md border border-river/30 bg-surface/90 p-6 sm:p-8">
               <div className="flex items-center justify-between border-b border-river/30 pb-4">
                 <div className="flex items-center gap-3">
-                  <span className="flex h-7 w-7 items-center justify-center rounded-full border border-river/40 bg-canvas font-mono text-xs font-semibold text-ink">
+                  <span className="flex h-7 w-7 items-center justify-center rounded-full border border-river/40 bg-canvas text-xs font-semibold text-ink tabular-nums">
                     04
                   </span>
                   <h2 className="font-display text-xl font-normal text-ink">Payment Method</h2>
                 </div>
-                <span className="font-mono text-[10px] text-ink-soft uppercase">
-                  256-BIT ENCRYPTED
-                </span>
+                <span className="text-[10px] text-ink-soft tabular-nums">256-bit encrypted</span>
               </div>
 
               <div className="mt-6 space-y-4">
                 <div>
                   <label
                     htmlFor="cardholder"
-                    className="mb-1 block font-mono text-xs tracking-wider text-ink-soft uppercase"
+                    className="mb-1 block text-xs text-ink-soft tabular-nums"
                   >
                     Cardholder Name *
                   </label>
@@ -510,14 +488,14 @@ export function CheckoutView() {
                     value={cardholderName}
                     onChange={(e) => setCardholderName(e.target.value)}
                     placeholder="Name as printed on card"
-                    className="w-full rounded-[18px] border border-river/40 bg-canvas p-3 font-text text-sm text-ink placeholder:text-ink-faint focus:border-ink focus:outline-none"
+                    className="w-full rounded-md border border-river/40 bg-canvas p-3 font-text text-sm text-ink placeholder:text-ink-faint focus:border-ink focus:outline-none"
                   />
                 </div>
 
                 <div>
                   <label
                     htmlFor="cardnum"
-                    className="mb-1 block font-mono text-xs tracking-wider text-ink-soft uppercase"
+                    className="mb-1 block text-xs text-ink-soft tabular-nums"
                   >
                     Card Number *
                   </label>
@@ -528,16 +506,13 @@ export function CheckoutView() {
                     value={cardNumber}
                     onChange={(e) => setCardNumber(e.target.value)}
                     placeholder="4242 4242 4242 4242"
-                    className="w-full rounded-[18px] border border-river/40 bg-canvas p-3 font-mono text-xs text-ink uppercase placeholder:text-ink-faint focus:border-ink focus:outline-none"
+                    className="w-full rounded-md border border-river/40 bg-canvas p-3 text-xs text-ink tabular-nums placeholder:text-ink-faint focus:border-ink focus:outline-none"
                   />
                 </div>
 
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label
-                      htmlFor="exp"
-                      className="mb-1 block font-mono text-xs tracking-wider text-ink-soft uppercase"
-                    >
+                    <label htmlFor="exp" className="mb-1 block text-xs text-ink-soft tabular-nums">
                       Expiry Date *
                     </label>
                     <input
@@ -547,15 +522,12 @@ export function CheckoutView() {
                       value={expDate}
                       onChange={(e) => setExpDate(e.target.value)}
                       placeholder="MM/YY"
-                      className="w-full rounded-[18px] border border-river/40 bg-canvas p-3 font-mono text-xs text-ink uppercase placeholder:text-ink-faint focus:border-ink focus:outline-none"
+                      className="w-full rounded-md border border-river/40 bg-canvas p-3 text-xs text-ink tabular-nums placeholder:text-ink-faint focus:border-ink focus:outline-none"
                     />
                   </div>
 
                   <div>
-                    <label
-                      htmlFor="cvv"
-                      className="mb-1 block font-mono text-xs tracking-wider text-ink-soft uppercase"
-                    >
+                    <label htmlFor="cvv" className="mb-1 block text-xs text-ink-soft tabular-nums">
                       Security Code (CVV) *
                     </label>
                     <input
@@ -565,7 +537,7 @@ export function CheckoutView() {
                       value={cvv}
                       onChange={(e) => setCvv(e.target.value)}
                       placeholder="123"
-                      className="w-full rounded-[18px] border border-river/40 bg-canvas p-3 font-mono text-xs text-ink uppercase placeholder:text-ink-faint focus:border-ink focus:outline-none"
+                      className="w-full rounded-md border border-river/40 bg-canvas p-3 text-xs text-ink tabular-nums placeholder:text-ink-faint focus:border-ink focus:outline-none"
                     />
                   </div>
                 </div>
@@ -581,11 +553,9 @@ export function CheckoutView() {
 
         {/* Sidebar Summary */}
         <div className="lg:col-span-5">
-          <div className="soft-panel sticky top-24 space-y-6 rounded-[32px] border border-river/30 bg-surface/90 p-6">
+          <div className="soft-panel sticky top-24 space-y-6 rounded-md border border-river/30 bg-surface/90 p-6">
             <div className="border-b border-river/30 pb-4">
-              <span className="font-mono text-[11px] tracking-wider text-ink-soft uppercase">
-                ORDER REVIEW
-              </span>
+              <span className="text-[11px] text-ink-soft tabular-nums">Order review</span>
               <h2 className="mt-1 font-display text-2xl font-normal text-ink">
                 Summary ({lines.reduce((a, b) => a + b.quantity, 0)} Items)
               </h2>
@@ -596,9 +566,9 @@ export function CheckoutView() {
               {quote?.lines.map((line) => (
                 <div
                   key={line.variantId}
-                  className="flex items-center gap-3 rounded-[20px] border border-river/20 bg-canvas/70 p-2.5"
+                  className="flex items-center gap-3 rounded-md border border-river/20 bg-canvas/70 p-2.5"
                 >
-                  <div className="relative h-14 w-12 shrink-0 overflow-hidden rounded-[12px] bg-surface">
+                  <div className="relative h-14 w-12 shrink-0 overflow-hidden rounded-md bg-surface">
                     <Image
                       src={line.image.src}
                       alt={line.image.alt}
@@ -611,11 +581,11 @@ export function CheckoutView() {
                     <p className="line-clamp-1 font-display text-sm font-medium text-ink">
                       {line.name}
                     </p>
-                    <p className="font-mono text-[10px] text-ink-soft uppercase">
+                    <p className="text-[10px] text-ink-soft tabular-nums">
                       Qty {line.quantity} • {Object.values(line.options).join(' / ')}
                     </p>
                   </div>
-                  <span className="font-mono text-xs font-semibold text-ink">
+                  <span className="text-xs font-semibold text-ink tabular-nums">
                     {formatMoney(line.lineTotal, MONEY)}
                   </span>
                 </div>
@@ -623,7 +593,7 @@ export function CheckoutView() {
             </div>
 
             {/* Financial Ledger */}
-            <div className="space-y-3 border-t border-river/30 pt-4 font-mono text-xs uppercase">
+            <div className="space-y-3 border-t border-river/30 pt-4 text-xs tabular-nums">
               <div className="flex justify-between text-ink-soft">
                 <span>Subtotal</span>
                 <span className="text-ink">{formatMoney(quote?.totals.subtotal ?? 0, MONEY)}</span>
@@ -655,10 +625,10 @@ export function CheckoutView() {
             </div>
 
             {/* Sustainability Guarantee */}
-            <div className="space-y-1 rounded-[20px] border border-river/30 bg-canvas/70 p-4 font-mono text-[11px] text-ink-soft uppercase">
+            <div className="space-y-1 rounded-md border border-river/30 bg-canvas/70 p-4 text-[11px] text-ink-soft tabular-nums">
               <div className="flex items-center gap-1.5 font-semibold text-ink">
                 <Check size={14} className="text-brand" />
-                <span>MOSSEN SUSTAINABLE PLEDGE</span>
+                <span>MOSSEN sustainable pledge</span>
               </div>
               <p>100% natural organic fabrics, biodegradable wrapping, tree planted per order.</p>
             </div>

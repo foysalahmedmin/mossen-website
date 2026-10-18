@@ -86,7 +86,7 @@ export function ContactView() {
     <div className="mx-auto max-w-6xl px-4 py-12 md:py-16">
       {/* Header */}
       <div className="mb-12 text-center">
-        <span className="inline-flex items-center gap-1.5 rounded-full bg-brand/10 px-3 py-1 font-mono text-xs font-semibold tracking-wider text-brand uppercase">
+        <span className="inline-flex items-center gap-1.5 rounded-md bg-brand/10 px-3 py-1 text-xs font-semibold text-brand tabular-nums">
           <Sparkle size={12} />
           Client Concierge & Care Sanctuary
         </span>
@@ -102,16 +102,16 @@ export function ContactView() {
       <div className="grid items-start gap-12 lg:grid-cols-12">
         {/* Form Card */}
         <div className="lg:col-span-7">
-          <div className="rounded-[32px] border border-stone-200/80 bg-[#fbf9f5] p-8 shadow-sm md:p-10">
+          <div className="rounded-md border border-stone-200/80 bg-[#fbf9f5] p-8 md:p-10">
             {submitted ? (
               <div className="py-6 text-center" role="status">
-                <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-emerald-100 text-emerald-700">
+                <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-md bg-emerald-100 text-emerald-700">
                   <Check size={32} />
                 </div>
                 <h2 className="font-display text-2xl font-normal text-ink md:text-3xl">
                   Inquiry Received with Warmth
                 </h2>
-                <p className="mt-2 font-mono text-xs font-semibold tracking-wider text-brand uppercase">
+                <p className="mt-2 text-xs font-semibold text-brand tabular-nums">
                   Reference: {ticketId}
                 </p>
                 <p className="mx-auto mt-4 max-w-md font-text text-sm leading-relaxed text-ink-soft md:text-base">
@@ -170,7 +170,7 @@ export function ContactView() {
                       id="topic-select-mos"
                       value={form.topic}
                       onChange={(e) => setForm({ ...form, topic: e.target.value })}
-                      className="h-12 w-full rounded-[16px] border border-stone-200 bg-white px-4 font-text text-sm text-ink focus-visible:outline-2 focus-visible:outline-focus"
+                      className="h-12 w-full rounded-md border border-stone-200 bg-white px-4 font-text text-sm text-ink focus-visible:outline-2 focus-visible:outline-focus"
                     >
                       {TOPICS.map((t) => (
                         <option key={t.value} value={t.value}>
@@ -202,7 +202,7 @@ export function ContactView() {
                     value={form.message}
                     onChange={(e) => setForm({ ...form, message: e.target.value })}
                     placeholder="How may our weavers and natural dyers assist with your wardrobe?"
-                    className="w-full rounded-[16px] border border-stone-200 bg-white p-4 font-text text-sm text-ink placeholder:text-ink-faint focus-visible:outline-2 focus-visible:outline-focus"
+                    className="w-full rounded-md border border-stone-200 bg-white p-4 font-text text-sm text-ink placeholder:text-ink-faint focus-visible:outline-2 focus-visible:outline-focus"
                   />
                   {errors.message ? (
                     <p className="font-text text-xs text-danger" role="alert">
@@ -227,11 +227,11 @@ export function ContactView() {
 
         {/* Studio Contacts Side Card */}
         <div className="space-y-6 lg:col-span-5">
-          <div className="rounded-[32px] border border-stone-200/80 bg-[#fbf9f5] p-8 shadow-sm">
+          <div className="rounded-md border border-stone-200/80 bg-[#fbf9f5] p-8">
             <h3 className="font-display text-lg font-normal text-ink">Direct Atelier Sanctuary</h3>
             <ul className="mt-5 space-y-4 font-text text-sm">
               <li className="flex flex-col">
-                <span className="font-mono text-xs text-ink-faint uppercase">Client Concierge</span>
+                <span className="text-xs text-ink-faint tabular-nums">Client Concierge</span>
                 <a
                   href={`mailto:concierge@${brand.id}-atelier.com`}
                   className="mt-1 font-semibold text-brand hover:underline"
@@ -240,11 +240,11 @@ export function ContactView() {
                 </a>
               </li>
               <li className="flex flex-col">
-                <span className="font-mono text-xs text-ink-faint uppercase">Telephone</span>
+                <span className="text-xs text-ink-faint tabular-nums">Telephone</span>
                 <span className="mt-1 text-ink">+46 8 555 4120</span>
               </li>
               <li className="flex flex-col">
-                <span className="font-mono text-xs text-ink-faint uppercase">Studio Hours</span>
+                <span className="text-xs text-ink-faint tabular-nums">Studio Hours</span>
                 <span className="mt-1 text-ink-soft">
                   Tuesday – Saturday: 10:00 – 18:00 CET
                   <br />
@@ -254,7 +254,7 @@ export function ContactView() {
             </ul>
           </div>
 
-          <div className="rounded-[32px] border border-stone-200/80 bg-[#fbf9f5] p-8 shadow-sm">
+          <div className="rounded-md border border-stone-200/80 bg-[#fbf9f5] p-8">
             <h3 className="font-display text-lg font-normal text-ink">
               Gamla Stan Sanctuary Visits
             </h3>

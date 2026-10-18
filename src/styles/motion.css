@@ -56,3 +56,52 @@
     animation-duration: 150ms !important;
   }
 }
+
+/* Entrances: slow and soft. */
+@layer utilities {
+  .mossen-rise {
+    animation: mossen-rise 1000ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+    animation-delay: var(--delay, 0ms);
+  }
+  @keyframes mossen-rise {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  .mossen-bloom {
+    animation: mossen-bloom 1400ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  }
+  @keyframes mossen-bloom {
+    from {
+      opacity: 0;
+      transform: scale(0.97);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  .mossen-fade {
+    animation: mossen-fade 600ms ease both;
+  }
+  @keyframes mossen-fade {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .mossen-rise,
+    .mossen-bloom,
+    .mossen-fade {
+      animation: none !important;
+    }
+  }
+}

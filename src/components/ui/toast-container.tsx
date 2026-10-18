@@ -21,7 +21,7 @@ export function ToastContainer() {
         <div
           key={toast.id}
           className={cn(
-            'pebble pointer-events-auto flex items-center justify-between gap-3 border border-border-strong/40 bg-surface/95 px-5 py-3 shadow-lg backdrop-blur-md transition-all',
+            'pebble pointer-events-auto flex items-center justify-between gap-3 border border-border-strong/40 bg-surface/95 px-5 py-3 backdrop-blur-md transition-all',
             'animate-in fade-in slide-in-from-bottom-2 duration-300 motion-reduce:duration-0',
           )}
         >

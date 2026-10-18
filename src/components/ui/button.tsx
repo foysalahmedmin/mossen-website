@@ -12,19 +12,19 @@ const buttonVariants = cva(
     variants: {
       variant: {
         primary: [
-          'rounded-full bg-brand text-on-brand font-medium float-sm',
-          'hover:-translate-y-0.5 hover:scale-[1.015] hover:shadow-[var(--float)]',
+          'rounded-md bg-brand text-on-brand font-medium float-sm',
+          'hover:-translate-y-0.5 hover:scale-[1.015] ',
           'active:translate-y-0 active:scale-100',
         ],
         secondary: [
-          'rounded-full bg-surface text-ink border border-border-strong/40 font-medium float-sm',
+          'rounded-md bg-surface text-ink border border-border-strong/40 font-medium float-sm',
           'hover:bg-surface/80 hover:-translate-y-0.5',
           'active:translate-y-0',
         ],
-        ghost: ['rounded-full bg-transparent text-ink hover:bg-brand/10 font-medium'],
+        ghost: ['rounded-md bg-transparent text-ink hover:bg-brand/10 font-medium'],
       },
       size: {
-        sm: 'h-9 px-4 text-xs font-mono tracking-wider gap-2',
+        sm: 'h-9 px-4 text-xs tabular-nums  gap-2',
         md: 'h-11 px-6 text-sm gap-2.5',
         lg: 'h-13 px-8 text-base gap-3',
       },

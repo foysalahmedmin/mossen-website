@@ -14,7 +14,7 @@ export function Price({ amount, compareAt, currency, locale, labels, className }
   return (
     <span
       data-on-sale={onSale || undefined}
-      className={cn('inline-flex items-center font-mono text-sm tracking-wide text-ink', className)}
+      className={cn('inline-flex items-center text-sm text-ink tabular-nums', className)}
     >
       {onSale ? <VisuallyHidden.Root>{labels.sale} </VisuallyHidden.Root> : null}
       <span className={cn(onSale && 'font-medium text-danger')}>

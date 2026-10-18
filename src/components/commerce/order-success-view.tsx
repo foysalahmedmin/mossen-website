@@ -24,11 +24,9 @@ export function OrderConfirmationView() {
   if (!hydrated) {
     return (
       <div className="mx-auto min-h-[50vh] max-w-4xl py-20 text-center">
-        <div className="soft-panel mx-auto max-w-sm rounded-[32px] border border-river/30 bg-surface/90 p-8">
+        <div className="soft-panel mx-auto max-w-sm rounded-md border border-river/30 bg-surface/90 p-8">
           <div className="mx-auto h-8 w-8 animate-spin rounded-full border-2 border-ink border-t-transparent" />
-          <p className="mt-4 font-mono text-xs tracking-widest text-ink-soft uppercase">
-            Loading Receipt...
-          </p>
+          <p className="mt-4 text-xs text-ink-soft tabular-nums">Loading Receipt...</p>
         </div>
       </div>
     )
@@ -37,10 +35,8 @@ export function OrderConfirmationView() {
   if (!order) {
     return (
       <div className="mx-auto min-h-[50vh] max-w-xl px-4 py-20 text-center">
-        <div className="soft-panel rounded-[36px] border border-river/30 bg-surface/90 p-10">
-          <span className="font-mono text-xs tracking-widest text-brand uppercase">
-            Order Not Found
-          </span>
+        <div className="soft-panel rounded-md border border-river/30 bg-surface/90 p-10">
+          <span className="text-xs text-brand tabular-nums">Order Not Found</span>
           <h1 className="mt-2 font-display text-2xl font-normal text-ink">Receipt Not Located</h1>
           <p className="mt-2 font-text text-sm text-ink-soft">
             We could not locate this order receipt. Return to the shop gallery.
@@ -59,13 +55,13 @@ export function OrderConfirmationView() {
     <div className="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
       {/* Header Status */}
       <div className="text-center">
-        <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full border border-river/40 bg-canvas shadow-sm">
+        <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-md border border-river/40 bg-canvas">
           <Check size={32} className="text-brand" />
         </div>
         <div className="flex items-center justify-center gap-2">
           <Leaf size={16} className="text-brand" />
-          <span className="font-mono text-xs tracking-widest text-ink-soft uppercase">
-            ORDER CONFIRMED &middot; SUSTAINABLE WEAVE INITIATED
+          <span className="text-xs text-ink-soft tabular-nums">
+            Order confirmed &middot; Sustainable weave initiated
           </span>
         </div>
         <h1 className="mt-2 font-display text-3xl font-normal text-ink sm:text-4xl">
@@ -78,16 +74,16 @@ export function OrderConfirmationView() {
       </div>
 
       {/* Main Botanical Receipt Panel */}
-      <div className="soft-panel mt-10 space-y-8 rounded-[36px] border border-river/30 bg-surface/90 p-8 shadow-sm sm:p-10">
+      <div className="soft-panel mt-10 space-y-8 rounded-md border border-river/30 bg-surface/90 p-8 sm:p-10">
         {/* Receipt Header Bar */}
         <div className="flex flex-col justify-between gap-4 border-b border-river/30 pb-6 sm:flex-row sm:items-center">
           <div>
-            <span className="font-mono text-xs text-ink-soft uppercase">ORDER NUMBER</span>
-            <p className="font-mono text-xl font-bold tracking-wider text-ink">{order.number}</p>
+            <span className="text-xs text-ink-soft tabular-nums">Order number</span>
+            <p className="text-xl font-semibold text-ink tabular-nums">{order.number}</p>
           </div>
           <div className="sm:text-right">
-            <span className="font-mono text-xs text-ink-soft uppercase">ORDER DATE</span>
-            <p className="font-mono text-sm text-ink">
+            <span className="text-xs text-ink-soft tabular-nums">Order date</span>
+            <p className="text-sm text-ink tabular-nums">
               {new Date(order.createdAt).toLocaleDateString()}
             </p>
           </div>
@@ -95,14 +91,12 @@ export function OrderConfirmationView() {
 
         {/* Itemized Lines */}
         <div>
-          <h2 className="font-mono text-xs tracking-wider text-ink-soft uppercase">
-            Tailored Pieces
-          </h2>
+          <h2 className="text-xs text-ink-soft tabular-nums">Tailored Pieces</h2>
           <ul className="mt-4 divide-y divide-river/30">
             {order.lines.map((line) => (
               <li key={line.variantId} className="flex items-center gap-4 py-4">
                 {line.image ? (
-                  <div className="relative h-16 w-14 shrink-0 overflow-hidden rounded-[16px] border border-river/30 bg-canvas">
+                  <div className="relative h-16 w-14 shrink-0 overflow-hidden rounded-md border border-river/30 bg-canvas">
                     <Image
                       src={line.image}
                       alt={line.title}
@@ -114,11 +108,11 @@ export function OrderConfirmationView() {
                 ) : null}
                 <div className="min-w-0 flex-1">
                   <p className="font-display text-base font-medium text-ink">{line.title}</p>
-                  <p className="font-mono text-xs text-ink-soft uppercase">
+                  <p className="text-xs text-ink-soft tabular-nums">
                     Qty {line.quantity} • {Object.values(line.options).join(' / ')}
                   </p>
                 </div>
-                <span className="font-mono text-sm font-semibold text-ink">
+                <span className="text-sm font-semibold text-ink tabular-nums">
                   {formatMoney(line.unitPrice * line.quantity, MONEY)}
                 </span>
               </li>
@@ -127,9 +121,9 @@ export function OrderConfirmationView() {
         </div>
 
         {/* Destination & Payment Grid */}
-        <div className="grid grid-cols-1 gap-6 border-t border-river/30 pt-6 font-mono text-xs uppercase sm:grid-cols-2">
-          <div className="space-y-1 rounded-[24px] border border-river/30 bg-canvas/70 p-5">
-            <span className="font-semibold text-ink">DELIVERY DESTINATION</span>
+        <div className="grid grid-cols-1 gap-6 border-t border-river/30 pt-6 text-xs tabular-nums sm:grid-cols-2">
+          <div className="space-y-1 rounded-md border border-river/30 bg-canvas/70 p-5">
+            <span className="font-semibold text-ink">Delivery destination</span>
             <p className="text-ink">{order.address.name}</p>
             <p className="text-ink-soft">{order.address.line1}</p>
             {order.address.line2 ? <p className="text-ink-soft">{order.address.line2}</p> : null}
@@ -139,8 +133,8 @@ export function OrderConfirmationView() {
             <p className="text-ink-soft">{order.address.country}</p>
           </div>
 
-          <div className="space-y-1 rounded-[24px] border border-river/30 bg-canvas/70 p-5">
-            <span className="font-semibold text-ink">PAYMENT DETAILS</span>
+          <div className="space-y-1 rounded-md border border-river/30 bg-canvas/70 p-5">
+            <span className="font-semibold text-ink">Payment details</span>
             <p className="text-ink">
               Card: {order.payment.brand} ending in •••• {order.payment.last4}
             </p>
@@ -156,7 +150,7 @@ export function OrderConfirmationView() {
         </div>
 
         {/* Financial Breakdown */}
-        <div className="space-y-2 border-t border-river/30 pt-6 font-mono text-xs uppercase">
+        <div className="space-y-2 border-t border-river/30 pt-6 text-xs tabular-nums">
           <div className="flex justify-between text-ink-soft">
             <span>Subtotal</span>
             <span className="text-ink">{formatMoney(order.totals.subtotal, MONEY)}</span>

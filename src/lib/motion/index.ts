@@ -3,3 +3,5 @@ export * from './use-reveal'
 export * from './bloom'
 export * from './use-vine-progress'
 export * from './page-fade'
+
+export * from './reveal'

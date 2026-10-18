@@ -21,27 +21,23 @@ function AuthGuard({ children }: { children: React.ReactNode }) {
 
   if (!hydrated) {
     return (
-      <div className="soft-panel mx-auto max-w-md rounded-[32px] border border-river/30 bg-surface/90 p-10 text-center">
+      <div className="soft-panel mx-auto max-w-md rounded-md border border-river/30 bg-surface/90 p-10 text-center">
         <div className="mx-auto h-8 w-8 animate-spin rounded-full border-2 border-ink border-t-transparent" />
         <h1 className="sr-only">Account</h1>
-        <p className="mt-4 font-mono text-xs tracking-widest text-ink-soft uppercase">
-          Loading Sanctuary...
-        </p>
+        <p className="mt-4 text-xs text-ink-soft tabular-nums">Loading Sanctuary...</p>
       </div>
     )
   }
 
   if (!isAuthenticated) {
     return (
-      <div className="soft-panel mx-auto max-w-md rounded-[36px] border border-river/30 bg-surface/90 p-8 text-center shadow-sm">
-        <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full border border-river/40 bg-canvas text-ink">
+      <div className="soft-panel mx-auto max-w-md rounded-md border border-river/30 bg-surface/90 p-8 text-center">
+        <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-md border border-river/40 bg-canvas text-ink">
           <User size={28} />
         </div>
         <div className="flex items-center justify-center gap-2">
           <Leaf size={16} className="text-brand" />
-          <span className="font-mono text-xs tracking-widest text-ink-soft uppercase">
-            SANCTUARY ACCESS
-          </span>
+          <span className="text-xs text-ink-soft tabular-nums">Sanctuary access</span>
         </div>
         <h1 className="mt-2 font-display text-2xl font-normal text-ink">Sign In Required</h1>
         <p className="mt-2 font-text text-sm text-ink-soft">
@@ -79,18 +75,16 @@ export function AccountDashboardView() {
     <AuthGuard>
       <div className="space-y-8">
         {/* Welcome Header */}
-        <div className="soft-panel flex flex-col justify-between gap-4 rounded-[32px] border border-river/30 bg-surface/90 p-8 shadow-sm sm:flex-row sm:items-center">
+        <div className="soft-panel flex flex-col justify-between gap-4 rounded-md border border-river/30 bg-surface/90 p-8 sm:flex-row sm:items-center">
           <div>
             <div className="flex items-center gap-2">
               <Leaf size={16} className="text-brand" />
-              <span className="font-mono text-xs tracking-widest text-ink-soft uppercase">
-                MOSSEN PATRON PROFILE
-              </span>
+              <span className="text-xs text-ink-soft tabular-nums">MOSSEN patron profile</span>
             </div>
             <h1 className="mt-2 font-display text-3xl font-normal text-ink sm:text-4xl">
               Welcome back, {customer?.name ?? 'Patron'}
             </h1>
-            <p className="mt-1 font-mono text-xs text-ink-soft uppercase">{customer?.email}</p>
+            <p className="mt-1 text-xs text-ink-soft tabular-nums">{customer?.email}</p>
           </div>
           <div>
             <Button variant="secondary" size="sm" onClick={logout}>
@@ -100,20 +94,20 @@ export function AccountDashboardView() {
         </div>
 
         {/* Stats Grid */}
-        <div className="grid grid-cols-1 gap-6 font-mono text-xs uppercase sm:grid-cols-3">
-          <div className="soft-panel rounded-[28px] border border-river/30 bg-surface/90 p-6 shadow-sm">
+        <div className="grid grid-cols-1 gap-6 text-xs tabular-nums sm:grid-cols-3">
+          <div className="soft-panel rounded-md border border-river/30 bg-surface/90 p-6">
             <span className="text-ink-soft">Quiet Orders</span>
             <p className="mt-2 font-display text-3xl font-normal text-ink">{orders.length}</p>
             <p className="mt-1 text-[11px] text-ink-soft">Lifetime verified orders</p>
           </div>
 
-          <div className="soft-panel rounded-[28px] border border-river/30 bg-surface/90 p-6 shadow-sm">
+          <div className="soft-panel rounded-md border border-river/30 bg-surface/90 p-6">
             <span className="text-ink-soft">Patron Standing</span>
             <p className="mt-2 font-display text-3xl font-normal text-ink">Botanical Tier</p>
             <p className="mt-1 text-[11px] text-ink-soft">Complimentary climate freight</p>
           </div>
 
-          <div className="soft-panel rounded-[28px] border border-river/30 bg-surface/90 p-6 shadow-sm">
+          <div className="soft-panel rounded-md border border-river/30 bg-surface/90 p-6">
             <span className="text-ink-soft">Saved Destinations</span>
             <p className="mt-2 font-display text-3xl font-normal text-ink">{addresses.length}</p>
             <p className="mt-1 text-[11px] text-ink-soft">Active sanctuaries</p>
@@ -123,30 +117,30 @@ export function AccountDashboardView() {
         {/* Two-Column Overview */}
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
           {/* Recent Order */}
-          <div className="soft-panel space-y-4 rounded-[32px] border border-river/30 bg-surface/90 p-6 shadow-sm sm:p-8">
+          <div className="soft-panel space-y-4 rounded-md border border-river/30 bg-surface/90 p-6 sm:p-8">
             <div className="flex items-center justify-between border-b border-river/30 pb-4">
               <h2 className="font-display text-xl font-normal text-ink">Latest Order</h2>
               <Link
                 href={routes.orders}
-                className="font-mono text-xs text-brand uppercase hover:underline"
+                className="text-xs text-brand tabular-nums hover:underline"
               >
                 View All ({orders.length}) &rarr;
               </Link>
             </div>
 
             {latestOrder ? (
-              <div className="space-y-4 font-mono text-xs uppercase">
+              <div className="space-y-4 text-xs tabular-nums">
                 <div className="flex items-center justify-between">
                   <div>
-                    <span className="text-[10px] text-ink-soft">ORDER NUMBER</span>
-                    <p className="font-bold text-ink">{latestOrder.number}</p>
+                    <span className="text-[10px] text-ink-soft">Order number</span>
+                    <p className="font-semibold text-ink">{latestOrder.number}</p>
                   </div>
-                  <span className="rounded-full border border-river/40 bg-canvas px-3 py-1 text-[10px] font-semibold text-brand">
+                  <span className="rounded-md border border-river/40 bg-canvas px-3 py-1 text-[10px] font-semibold text-brand">
                     {latestOrder.status.toUpperCase()}
                   </span>
                 </div>
 
-                <div className="space-y-2 rounded-[20px] border border-river/30 bg-canvas/70 p-3">
+                <div className="space-y-2 rounded-md border border-river/30 bg-canvas/70 p-3">
                   {latestOrder.lines.map((l) => (
                     <div key={l.variantId} className="flex justify-between">
                       <span className="text-ink">
@@ -161,7 +155,7 @@ export function AccountDashboardView() {
 
                 <div className="flex items-center justify-between border-t border-river/30 pt-3">
                   <span className="text-ink-soft">Total Captured:</span>
-                  <span className="font-bold text-ink">
+                  <span className="font-semibold text-ink">
                     {formatMoney(latestOrder.totals.total, MONEY)}
                   </span>
                 </div>
@@ -173,7 +167,7 @@ export function AccountDashboardView() {
                 </div>
               </div>
             ) : (
-              <div className="py-8 text-center font-mono text-xs text-ink-soft uppercase">
+              <div className="py-8 text-center text-xs text-ink-soft tabular-nums">
                 <p>No orders recorded yet.</p>
                 <Button asChild size="sm" className="mt-4">
                   <Link href={routes.shop}>Explore Collection</Link>
@@ -183,23 +177,23 @@ export function AccountDashboardView() {
           </div>
 
           {/* Primary Address */}
-          <div className="soft-panel space-y-4 rounded-[32px] border border-river/30 bg-surface/90 p-6 shadow-sm sm:p-8">
+          <div className="soft-panel space-y-4 rounded-md border border-river/30 bg-surface/90 p-6 sm:p-8">
             <div className="flex items-center justify-between border-b border-river/30 pb-4">
               <h2 className="font-display text-xl font-normal text-ink">Primary Sanctuary</h2>
               <Link
                 href={routes.addresses}
-                className="font-mono text-xs text-brand uppercase hover:underline"
+                className="text-xs text-brand tabular-nums hover:underline"
               >
                 Manage Sanctuaries ({addresses.length}) &rarr;
               </Link>
             </div>
 
             {defaultAddr ? (
-              <div className="space-y-1 rounded-[24px] border border-river/30 bg-canvas/70 p-5 font-mono text-xs uppercase">
+              <div className="space-y-1 rounded-md border border-river/30 bg-canvas/70 p-5 text-xs tabular-nums">
                 <div className="flex items-center justify-between">
                   <span className="font-semibold text-ink">{defaultAddr.name}</span>
                   {defaultAddr.isDefault ? (
-                    <span className="rounded-full bg-river/30 px-2 py-0.5 text-[10px] font-semibold text-brand">
+                    <span className="rounded-md bg-river/30 px-2 py-0.5 text-[10px] font-semibold text-brand">
                       PRIMARY
                     </span>
                   ) : null}
@@ -215,7 +209,7 @@ export function AccountDashboardView() {
                 ) : null}
               </div>
             ) : (
-              <div className="py-8 text-center font-mono text-xs text-ink-soft uppercase">
+              <div className="py-8 text-center text-xs text-ink-soft tabular-nums">
                 <p>No primary address recorded.</p>
                 <Button asChild size="sm" className="mt-4">
                   <Link href={routes.addresses}>Add Address</Link>
@@ -239,9 +233,7 @@ export function AccountOrdersView() {
           <div>
             <div className="flex items-center gap-2">
               <Leaf size={16} className="text-brand" />
-              <span className="font-mono text-xs tracking-widest text-ink-soft uppercase">
-                MOSSEN ORDER ARCHIVE
-              </span>
+              <span className="text-xs text-ink-soft tabular-nums">MOSSEN order archive</span>
             </div>
             <h1 className="mt-1 font-display text-3xl font-normal text-ink">
               Orders History ({orders.length})
@@ -253,10 +245,8 @@ export function AccountOrdersView() {
         </div>
 
         {orders.length === 0 ? (
-          <div className="soft-panel rounded-[32px] border border-river/30 bg-surface/90 p-12 text-center shadow-sm">
-            <span className="font-mono text-xs tracking-widest text-brand uppercase">
-              Zero Orders
-            </span>
+          <div className="soft-panel rounded-md border border-river/30 bg-surface/90 p-12 text-center">
+            <span className="text-xs text-brand tabular-nums">Zero Orders</span>
             <h2 className="mt-2 font-display text-2xl font-normal text-ink">
               No Orders Placed Yet
             </h2>
@@ -275,18 +265,18 @@ export function AccountOrdersView() {
             {orders.map((order) => (
               <div
                 key={order.id}
-                className="soft-panel space-y-4 rounded-[28px] border border-river/30 bg-surface/90 p-6 font-mono text-xs uppercase shadow-sm transition-all hover:border-river"
+                className="soft-panel space-y-4 rounded-md border border-river/30 bg-surface/90 p-6 text-xs tabular-nums transition-all hover:border-river"
               >
                 <div className="flex flex-col justify-between gap-2 border-b border-river/30 pb-4 sm:flex-row sm:items-center">
                   <div>
-                    <span className="text-[10px] text-ink-soft">ORDER NUMBER</span>
-                    <p className="text-sm font-bold text-ink">{order.number}</p>
+                    <span className="text-[10px] text-ink-soft">Order number</span>
+                    <p className="text-sm font-semibold text-ink">{order.number}</p>
                     <span className="text-[10px] text-ink-soft">
                       {new Date(order.createdAt).toLocaleDateString()}
                     </span>
                   </div>
                   <div className="flex items-center gap-3">
-                    <span className="rounded-full border border-river/40 bg-canvas px-3 py-1 font-semibold text-brand">
+                    <span className="rounded-md border border-river/40 bg-canvas px-3 py-1 font-semibold text-brand">
                       {order.status.toUpperCase()}
                     </span>
                     <Button asChild size="sm" variant="secondary">
@@ -297,7 +287,7 @@ export function AccountOrdersView() {
 
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                   <div className="space-y-1">
-                    <span className="text-[10px] text-ink-soft">ORDERED PIECES</span>
+                    <span className="text-[10px] text-ink-soft">Ordered pieces</span>
                     <ul className="space-y-1">
                       {order.lines.map((l) => (
                         <li key={l.variantId} className="text-ink">
@@ -308,7 +298,7 @@ export function AccountOrdersView() {
                   </div>
 
                   <div className="space-y-1 sm:text-right">
-                    <span className="text-[10px] text-ink-soft">TOTAL BILLED</span>
+                    <span className="text-[10px] text-ink-soft">Total billed</span>
                     <p className="text-base font-semibold text-ink">
                       {formatMoney(order.totals.total, MONEY)}
                     </p>
@@ -337,7 +327,7 @@ export function AccountOrderDetailView({ id }: { id: string }) {
           <div>
             <Link
               href={routes.orders}
-              className="font-mono text-xs tracking-wider text-ink-soft uppercase hover:text-ink"
+              className="text-xs text-ink-soft tabular-nums hover:text-ink"
             >
               &larr; Return to Orders
             </Link>
@@ -346,33 +336,33 @@ export function AccountOrderDetailView({ id }: { id: string }) {
             </h1>
           </div>
           {order ? (
-            <span className="rounded-full border border-river/40 bg-canvas px-3 py-1 font-mono text-xs font-semibold text-brand uppercase">
+            <span className="rounded-md border border-river/40 bg-canvas px-3 py-1 text-xs font-semibold text-brand tabular-nums">
               {order.status.toUpperCase()}
             </span>
           ) : null}
         </div>
 
         {!order ? (
-          <div className="soft-panel rounded-[32px] border border-river/30 bg-surface/90 p-12 text-center font-mono text-xs text-ink-soft uppercase">
+          <div className="soft-panel rounded-md border border-river/30 bg-surface/90 p-12 text-center text-xs text-ink-soft tabular-nums">
             Order receipt not found in storage.
           </div>
         ) : (
-          <div className="soft-panel space-y-8 rounded-[36px] border border-river/30 bg-surface/90 p-8 font-mono text-xs uppercase shadow-sm">
+          <div className="soft-panel space-y-8 rounded-md border border-river/30 bg-surface/90 p-8 text-xs tabular-nums">
             {/* Header info */}
             <div className="grid grid-cols-1 gap-4 border-b border-river/30 pb-6 sm:grid-cols-3">
               <div>
-                <span className="text-[10px] text-ink-soft">ORDER NUMBER</span>
-                <p className="font-bold text-ink">{order.number}</p>
+                <span className="text-[10px] text-ink-soft">Order number</span>
+                <p className="font-semibold text-ink">{order.number}</p>
               </div>
               <div>
-                <span className="text-[10px] text-ink-soft">DATE PLACED</span>
-                <p className="font-bold text-ink">
+                <span className="text-[10px] text-ink-soft">Date placed</span>
+                <p className="font-semibold text-ink">
                   {new Date(order.createdAt).toLocaleDateString()}
                 </p>
               </div>
               <div>
-                <span className="text-[10px] text-ink-soft">DELIVERY METHOD</span>
-                <p className="font-bold text-ink">
+                <span className="text-[10px] text-ink-soft">Delivery method</span>
+                <p className="font-semibold text-ink">
                   {order.shippingMethod.name.toUpperCase()} FREIGHT
                 </p>
               </div>
@@ -380,14 +370,12 @@ export function AccountOrderDetailView({ id }: { id: string }) {
 
             {/* Line items */}
             <div>
-              <h2 className="text-xs font-semibold tracking-wider text-ink">
-                Garments & Accessories
-              </h2>
+              <h2 className="text-xs font-semibold text-ink">Garments & Accessories</h2>
               <ul className="mt-4 divide-y divide-river/30">
                 {order.lines.map((l) => (
                   <li key={l.variantId} className="flex items-center gap-4 py-3">
                     {l.image ? (
-                      <div className="relative h-14 w-12 shrink-0 overflow-hidden rounded-[14px] border border-river/30 bg-canvas">
+                      <div className="relative h-14 w-12 shrink-0 overflow-hidden rounded-md border border-river/30 bg-canvas">
                         <Image
                           src={l.image}
                           alt={l.title}
@@ -413,7 +401,7 @@ export function AccountOrderDetailView({ id }: { id: string }) {
 
             {/* Address & Payment */}
             <div className="grid grid-cols-1 gap-6 border-t border-river/30 pt-6 sm:grid-cols-2">
-              <div className="space-y-1 rounded-[24px] border border-river/30 bg-canvas/70 p-4">
+              <div className="space-y-1 rounded-md border border-river/30 bg-canvas/70 p-4">
                 <span className="font-semibold text-ink">DESTINATION</span>
                 <p className="text-ink">{order.address.name}</p>
                 <p className="text-ink-soft">{order.address.line1}</p>
@@ -422,8 +410,8 @@ export function AccountOrderDetailView({ id }: { id: string }) {
                 </p>
               </div>
 
-              <div className="space-y-1 rounded-[24px] border border-river/30 bg-canvas/70 p-4">
-                <span className="font-semibold text-ink">FINANCIAL SUMMARY</span>
+              <div className="space-y-1 rounded-md border border-river/30 bg-canvas/70 p-4">
+                <span className="font-semibold text-ink">Financial summary</span>
                 <div className="flex justify-between text-ink-soft">
                   <span>Subtotal</span>
                   <span>{formatMoney(order.totals.subtotal, MONEY)}</span>
@@ -489,9 +477,7 @@ export function AccountAddressesView() {
           <div>
             <div className="flex items-center gap-2">
               <Leaf size={16} className="text-brand" />
-              <span className="font-mono text-xs tracking-widest text-ink-soft uppercase">
-                DELIVERY DESTINATIONS
-              </span>
+              <span className="text-xs text-ink-soft tabular-nums">Delivery destinations</span>
             </div>
             <h1 className="mt-1 font-display text-3xl font-normal text-ink">
               Saved Sanctuaries ({addresses.length})
@@ -504,14 +490,14 @@ export function AccountAddressesView() {
         </div>
 
         {isAdding ? (
-          <div className="soft-panel rounded-[32px] border border-river/30 bg-surface/90 p-6 shadow-sm sm:p-8">
+          <div className="soft-panel rounded-md border border-river/30 bg-surface/90 p-6 sm:p-8">
             <h2 className="font-display text-xl font-normal text-ink">Add New Sanctuary</h2>
             <form onSubmit={handleCreate} className="mt-4 space-y-4">
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                 <div>
                   <label
                     htmlFor="account-sanctuary-recipient-name"
-                    className="mb-1 block font-mono text-xs tracking-wider text-ink-soft uppercase"
+                    className="mb-1 block text-xs text-ink-soft tabular-nums"
                   >
                     Sanctuary / Recipient Name *
                   </label>
@@ -522,13 +508,13 @@ export function AccountAddressesView() {
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     placeholder="e.g. Astrid Lindgren"
-                    className="w-full rounded-[16px] border border-river/40 bg-canvas p-3 font-text text-sm text-ink placeholder:text-ink-faint focus:border-ink focus:outline-none"
+                    className="w-full rounded-md border border-river/40 bg-canvas p-3 font-text text-sm text-ink placeholder:text-ink-faint focus:border-ink focus:outline-none"
                   />
                 </div>
                 <div>
                   <label
                     htmlFor="account-street-address"
-                    className="mb-1 block font-mono text-xs tracking-wider text-ink-soft uppercase"
+                    className="mb-1 block text-xs text-ink-soft tabular-nums"
                   >
                     Street Address *
                   </label>
@@ -539,7 +525,7 @@ export function AccountAddressesView() {
                     value={line1}
                     onChange={(e) => setLine1(e.target.value)}
                     placeholder="e.g. Fjordvej 42"
-                    className="w-full rounded-[16px] border border-river/40 bg-canvas p-3 font-text text-sm text-ink placeholder:text-ink-faint focus:border-ink focus:outline-none"
+                    className="w-full rounded-md border border-river/40 bg-canvas p-3 font-text text-sm text-ink placeholder:text-ink-faint focus:border-ink focus:outline-none"
                   />
                 </div>
               </div>
@@ -548,7 +534,7 @@ export function AccountAddressesView() {
                 <div>
                   <label
                     htmlFor="account-city"
-                    className="mb-1 block font-mono text-xs tracking-wider text-ink-soft uppercase"
+                    className="mb-1 block text-xs text-ink-soft tabular-nums"
                   >
                     City *
                   </label>
@@ -559,13 +545,13 @@ export function AccountAddressesView() {
                     value={city}
                     onChange={(e) => setCity(e.target.value)}
                     placeholder="Copenhagen"
-                    className="w-full rounded-[16px] border border-river/40 bg-canvas p-3 font-text text-sm text-ink placeholder:text-ink-faint focus:border-ink focus:outline-none"
+                    className="w-full rounded-md border border-river/40 bg-canvas p-3 font-text text-sm text-ink placeholder:text-ink-faint focus:border-ink focus:outline-none"
                   />
                 </div>
                 <div>
                   <label
                     htmlFor="account-region-state"
-                    className="mb-1 block font-mono text-xs tracking-wider text-ink-soft uppercase"
+                    className="mb-1 block text-xs text-ink-soft tabular-nums"
                   >
                     Region / State *
                   </label>
@@ -576,13 +562,13 @@ export function AccountAddressesView() {
                     value={region}
                     onChange={(e) => setRegion(e.target.value)}
                     placeholder="Capital Region"
-                    className="w-full rounded-[16px] border border-river/40 bg-canvas p-3 font-text text-sm text-ink placeholder:text-ink-faint focus:border-ink focus:outline-none"
+                    className="w-full rounded-md border border-river/40 bg-canvas p-3 font-text text-sm text-ink placeholder:text-ink-faint focus:border-ink focus:outline-none"
                   />
                 </div>
                 <div>
                   <label
                     htmlFor="account-postal-code"
-                    className="mb-1 block font-mono text-xs tracking-wider text-ink-soft uppercase"
+                    className="mb-1 block text-xs text-ink-soft tabular-nums"
                   >
                     Postal Code *
                   </label>
@@ -593,7 +579,7 @@ export function AccountAddressesView() {
                     value={postcode}
                     onChange={(e) => setPostcode(e.target.value)}
                     placeholder="1050"
-                    className="w-full rounded-[16px] border border-river/40 bg-canvas p-3 font-mono text-xs text-ink placeholder:text-ink-faint focus:border-ink focus:outline-none"
+                    className="w-full rounded-md border border-river/40 bg-canvas p-3 text-xs text-ink tabular-nums placeholder:text-ink-faint focus:border-ink focus:outline-none"
                   />
                 </div>
               </div>
@@ -601,7 +587,7 @@ export function AccountAddressesView() {
               <div>
                 <label
                   htmlFor="account-country"
-                  className="mb-1 block font-mono text-xs tracking-wider text-ink-soft uppercase"
+                  className="mb-1 block text-xs text-ink-soft tabular-nums"
                 >
                   Country *
                 </label>
@@ -612,7 +598,7 @@ export function AccountAddressesView() {
                   value={country}
                   onChange={(e) => setCountry(e.target.value)}
                   placeholder="Germany"
-                  className="w-full rounded-[16px] border border-river/40 bg-canvas p-3 font-mono text-xs text-ink placeholder:text-ink-faint focus:border-ink focus:outline-none"
+                  className="w-full rounded-md border border-river/40 bg-canvas p-3 text-xs text-ink tabular-nums placeholder:text-ink-faint focus:border-ink focus:outline-none"
                 />
               </div>
 
@@ -624,10 +610,7 @@ export function AccountAddressesView() {
                   onChange={(e) => setIsDefault(e.target.checked)}
                   className="h-4 w-4 rounded accent-brand"
                 />
-                <label
-                  htmlFor="def"
-                  className="cursor-pointer font-mono text-xs text-ink-soft uppercase"
-                >
+                <label htmlFor="def" className="cursor-pointer text-xs text-ink-soft tabular-nums">
                   Set as primary sanctuary destination
                 </label>
               </div>
@@ -653,14 +636,14 @@ export function AccountAddressesView() {
           {addresses.map((addr) => (
             <div
               key={addr.id}
-              className={`soft-panel space-y-3 rounded-[28px] border border-river/30 bg-surface/90 p-6 font-mono text-xs uppercase shadow-sm ${
+              className={`soft-panel space-y-3 rounded-md border border-river/30 bg-surface/90 p-6 text-xs tabular-nums ${
                 addr.isDefault ? 'border-2 border-brand' : ''
               }`}
             >
               <div className="flex items-center justify-between">
                 <span className="font-semibold text-ink">{addr.name}</span>
                 {addr.isDefault ? (
-                  <span className="rounded-full bg-river/30 px-2.5 py-0.5 text-[10px] font-semibold text-brand">
+                  <span className="rounded-md bg-river/30 px-2.5 py-0.5 text-[10px] font-semibold text-brand">
                     PRIMARY
                   </span>
                 ) : null}
@@ -724,19 +707,17 @@ export function AccountProfileView() {
 
   return (
     <AuthGuard>
-      <div className="soft-panel max-w-2xl space-y-6 rounded-[32px] border border-river/30 bg-surface/90 p-8 shadow-sm">
+      <div className="soft-panel max-w-2xl space-y-6 rounded-md border border-river/30 bg-surface/90 p-8">
         <div className="border-b border-river/30 pb-4">
           <div className="flex items-center gap-2">
             <Leaf size={16} className="text-brand" />
-            <span className="font-mono text-xs tracking-widest text-ink-soft uppercase">
-              PATRON SPECIFICATION
-            </span>
+            <span className="text-xs text-ink-soft tabular-nums">Patron specification</span>
           </div>
           <h1 className="mt-1 font-display text-3xl font-normal text-ink">Profile Preferences</h1>
         </div>
 
         {saved ? (
-          <div className="flex items-center gap-2 rounded-[16px] border border-river/30 bg-canvas p-3 font-mono text-xs font-semibold text-brand uppercase">
+          <div className="flex items-center gap-2 rounded-md border border-river/30 bg-canvas p-3 text-xs font-semibold text-brand tabular-nums">
             <Check size={16} />
             Preferences updated in sanctuary registry.
           </div>
@@ -746,7 +727,7 @@ export function AccountProfileView() {
           <div>
             <label
               htmlFor="account-registered-email-immutable"
-              className="mb-1 block font-mono text-xs tracking-wider text-ink-soft uppercase"
+              className="mb-1 block text-xs text-ink-soft tabular-nums"
             >
               Registered Email (Immutable)
             </label>
@@ -755,14 +736,14 @@ export function AccountProfileView() {
               type="email"
               disabled
               value={customer?.email ?? ''}
-              className="w-full cursor-not-allowed rounded-[16px] border border-river/30 bg-canvas/50 p-3 font-text text-sm text-ink-faint"
+              className="w-full cursor-not-allowed rounded-md border border-river/30 bg-canvas/50 p-3 font-text text-sm text-ink-faint"
             />
           </div>
 
           <div>
             <label
               htmlFor="account-full-name"
-              className="mb-1 block font-mono text-xs tracking-wider text-ink-soft uppercase"
+              className="mb-1 block text-xs text-ink-soft tabular-nums"
             >
               Full Name
             </label>
@@ -772,14 +753,14 @@ export function AccountProfileView() {
               required
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="w-full rounded-[16px] border border-river/40 bg-canvas p-3 font-text text-sm text-ink focus:border-ink focus:outline-none"
+              className="w-full rounded-md border border-river/40 bg-canvas p-3 font-text text-sm text-ink focus:border-ink focus:outline-none"
             />
           </div>
 
           <div>
             <label
               htmlFor="account-phone-number"
-              className="mb-1 block font-mono text-xs tracking-wider text-ink-soft uppercase"
+              className="mb-1 block text-xs text-ink-soft tabular-nums"
             >
               Phone Number
             </label>
@@ -789,7 +770,7 @@ export function AccountProfileView() {
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
               placeholder="+45 20 12 34 56"
-              className="w-full rounded-[16px] border border-river/40 bg-canvas p-3 font-text text-sm text-ink focus:border-ink focus:outline-none"
+              className="w-full rounded-md border border-river/40 bg-canvas p-3 font-text text-sm text-ink focus:border-ink focus:outline-none"
             />
           </div>
 

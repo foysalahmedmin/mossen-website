@@ -10,7 +10,7 @@ export function ShippingReturnsView() {
     <div className="mx-auto max-w-5xl px-4 py-12 md:py-16">
       {/* Header */}
       <div className="mb-12 text-center">
-        <span className="inline-flex items-center gap-1.5 rounded-full bg-brand/10 px-3 py-1 font-mono text-xs font-semibold tracking-wider text-brand uppercase">
+        <span className="inline-flex items-center gap-1.5 rounded-md bg-brand/10 px-3 py-1 text-xs font-semibold text-brand tabular-nums">
           <Sparkle size={12} />
           Mindful Fulfillment & 30-Day Returns
         </span>
@@ -29,12 +29,10 @@ export function ShippingReturnsView() {
           Delivery Options & Timelines
         </h2>
         <div className="grid gap-6 md:grid-cols-3">
-          <div className="rounded-[32px] border border-stone-200/80 bg-[#fbf9f5] p-6 shadow-sm">
-            <span className="font-mono text-xs font-semibold tracking-wider text-brand uppercase">
-              Standard Ground
-            </span>
+          <div className="rounded-md border border-stone-200/80 bg-[#fbf9f5] p-6">
+            <span className="text-xs font-semibold text-brand tabular-nums">Standard Ground</span>
             <div className="my-3 flex items-baseline gap-2">
-              <span className="font-display text-3xl font-bold text-ink">$8</span>
+              <span className="font-display text-3xl font-medium text-ink">$8</span>
               <span className="font-text text-xs text-ink-soft">or Free over $150</span>
             </div>
             <p className="font-text text-sm text-ink-soft">
@@ -52,15 +50,15 @@ export function ShippingReturnsView() {
             </ul>
           </div>
 
-          <div className="relative rounded-[32px] border-2 border-brand/50 bg-[#fcfbf7] p-6 shadow-sm">
-            <span className="absolute -top-3 right-6 rounded-full bg-brand px-3 py-0.5 font-mono text-[10px] font-bold tracking-wider text-on-brand uppercase">
+          <div className="relative rounded-md border-2 border-brand/50 bg-[#fcfbf7] p-6">
+            <span className="absolute -top-3 right-6 rounded-md bg-brand px-3 py-0.5 text-[10px] font-semibold text-on-brand tabular-nums">
               Recommended
             </span>
-            <span className="font-mono text-xs font-semibold tracking-wider text-brand uppercase">
+            <span className="text-xs font-semibold text-brand tabular-nums">
               Express Air Courier
             </span>
             <div className="my-3 flex items-baseline gap-2">
-              <span className="font-display text-3xl font-bold text-ink">$18</span>
+              <span className="font-display text-3xl font-medium text-ink">$18</span>
               <span className="font-text text-xs text-ink-soft">Flat rate</span>
             </div>
             <p className="font-text text-sm text-ink-soft">
@@ -78,12 +76,12 @@ export function ShippingReturnsView() {
             </ul>
           </div>
 
-          <div className="rounded-[32px] border border-stone-200/80 bg-[#fbf9f5] p-6 shadow-sm">
-            <span className="font-mono text-xs font-semibold tracking-wider text-brand uppercase">
+          <div className="rounded-md border border-stone-200/80 bg-[#fbf9f5] p-6">
+            <span className="text-xs font-semibold text-brand tabular-nums">
               International Delivery (DDP)
             </span>
             <div className="my-3 flex items-baseline gap-2">
-              <span className="font-display text-3xl font-bold text-ink">$28</span>
+              <span className="font-display text-3xl font-medium text-ink">$28</span>
               <span className="font-text text-xs text-ink-soft">Duties included</span>
             </div>
             <p className="font-text text-sm text-ink-soft">
@@ -104,11 +102,9 @@ export function ShippingReturnsView() {
       </section>
 
       {/* Returns Policy & Process */}
-      <section className="mb-16 rounded-[32px] border border-stone-200/80 bg-[#fbf9f5] p-8 shadow-sm md:p-12">
+      <section className="mb-16 rounded-md border border-stone-200/80 bg-[#fbf9f5] p-8 md:p-12">
         <div className="max-w-3xl">
-          <span className="font-mono text-xs font-semibold tracking-wider text-brand uppercase">
-            30-Day Living Trial
-          </span>
+          <span className="text-xs font-semibold text-brand tabular-nums">30-Day Living Trial</span>
           <h2 className="mt-2 font-display text-2xl font-normal text-ink md:text-3xl">
             Mindful Returns & Exchanges
           </h2>
@@ -118,16 +114,16 @@ export function ShippingReturnsView() {
           </p>
 
           <div className="mt-8 grid gap-6 sm:grid-cols-3">
-            <div className="rounded-[20px] border border-stone-200/60 bg-white p-4">
-              <span className="font-mono text-xs font-bold text-ink">Step 01</span>
+            <div className="rounded-md border border-stone-200/60 bg-white p-4">
+              <span className="text-xs font-semibold text-ink tabular-nums">Step 01</span>
               <h3 className="mt-1 font-display text-sm font-medium text-ink">Request Return</h3>
               <p className="mt-1 font-text text-xs text-ink-soft">
                 Log into your Account portal to create a prepaid return courier shipping label.
               </p>
             </div>
 
-            <div className="rounded-[20px] border border-stone-200/60 bg-white p-4">
-              <span className="font-mono text-xs font-bold text-ink">Step 02</span>
+            <div className="rounded-md border border-stone-200/60 bg-white p-4">
+              <span className="text-xs font-semibold text-ink tabular-nums">Step 02</span>
               <h3 className="mt-1 font-display text-sm font-medium text-ink">Rewrap Garment</h3>
               <p className="mt-1 font-text text-xs text-ink-soft">
                 Place unworn garments into their reusable organic cotton envelope with wooden tags
@@ -135,8 +131,8 @@ export function ShippingReturnsView() {
               </p>
             </div>
 
-            <div className="rounded-[20px] border border-stone-200/60 bg-white p-4">
-              <span className="font-mono text-xs font-bold text-ink">Step 03</span>
+            <div className="rounded-md border border-stone-200/60 bg-white p-4">
+              <span className="text-xs font-semibold text-ink tabular-nums">Step 03</span>
               <h3 className="mt-1 font-display text-sm font-medium text-ink">Courier Drop-Off</h3>
               <p className="mt-1 font-text text-xs text-ink-soft">
                 Drop off at any authorized parcel shop or book a complimentary doorstep courier
@@ -145,7 +141,7 @@ export function ShippingReturnsView() {
             </div>
           </div>
 
-          <div className="mt-8 rounded-[16px] bg-stone-100/60 p-4 font-text text-xs text-ink-soft">
+          <div className="mt-8 rounded-md bg-stone-100/60 p-4 font-text text-xs text-ink-soft">
             <span className="font-semibold text-ink">Refund Processing:</span> Refunds are credited
             to your original payment method within 48 hours of studio intake and inspection.
           </div>

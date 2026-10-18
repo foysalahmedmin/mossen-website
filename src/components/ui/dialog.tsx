@@ -41,8 +41,14 @@ export function Dialog({
         <RadixDialog.Content
           data-side={side}
           className={cn(
-            'fixed top-1/2 left-1/2 z-50 w-full max-w-lg -translate-x-1/2 -translate-y-1/2',
-            'soft-panel space-y-4 bg-surface p-8 text-ink transition-all duration-400 focus-visible:outline-none sm:p-10',
+            'fixed z-50 bg-surface p-6 text-ink transition-all duration-300 focus-visible:outline-none sm:p-8',
+            {
+              center:
+                'top-1/2 left-1/2 max-h-[90vh] w-[calc(100%-2rem)] max-w-lg -translate-x-1/2 -translate-y-1/2 space-y-4 overflow-y-auto rounded-md',
+              right: 'inset-y-0 right-0 flex h-full w-full max-w-md flex-col gap-4',
+              bottom:
+                'inset-x-0 bottom-0 max-h-[85vh] w-full space-y-4 overflow-y-auto rounded-t-md',
+            }[side],
             className,
           )}
           {...(description ? {} : { 'aria-describedby': undefined })}

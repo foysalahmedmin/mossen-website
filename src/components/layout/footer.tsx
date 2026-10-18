@@ -3,7 +3,6 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { ArrowRight, Leaf } from '@/components/icons'
-import { WavyDivider } from '@/components/layout/wavy-divider'
 import { useToast } from '@/stores/toast-store'
 
 export function Footer() {
@@ -21,10 +20,7 @@ export function Footer() {
   }
 
   return (
-    <footer className="mt-24 border-t border-river/20 bg-surface/80 pt-8 pb-16">
-      {/* Botanical wavy line */}
-      <WavyDivider className="mb-12 opacity-50" />
-
+    <footer className="border-t border-river/20 bg-surface pt-16 pb-12">
       <div className="mx-auto max-w-7xl px-6 sm:px-8">
         <div className="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-4">
           {/* Brand Philosophy */}
@@ -40,16 +36,12 @@ export function Footer() {
               Small-batch slow garments crafted from natural linen, felted wool, and hand-finished
               stone jewelry. Designed to wear quietly with time.
             </p>
-            <div className="pt-2 font-mono text-xs tracking-wider text-ink-faint">
-              SLOW PRODUCTION // CARBON OFFSET
-            </div>
+            <div className="pt-2 text-xs text-ink-faint">Slow production · carbon offset</div>
           </div>
 
           {/* Curations */}
           <div>
-            <h3 className="font-mono text-xs font-semibold tracking-widest text-ink uppercase">
-              Curations
-            </h3>
+            <h3 className="text-sm font-medium text-ink">Curations</h3>
             <ul className="mt-4 space-y-2.5 font-text text-sm">
               <li>
                 <Link
@@ -93,9 +85,7 @@ export function Footer() {
 
           {/* Transparency & Care */}
           <div>
-            <h3 className="font-mono text-xs font-semibold tracking-widest text-ink uppercase">
-              Transparency
-            </h3>
+            <h3 className="text-sm font-medium text-ink">Transparency</h3>
             <ul className="mt-4 space-y-2.5 font-text text-sm">
               <li>
                 <Link href="/about" className="text-ink-soft transition-colors hover:text-ink">
@@ -133,9 +123,7 @@ export function Footer() {
 
           {/* Field Dispatch (Newsletter) */}
           <div>
-            <h3 className="font-mono text-xs font-semibold tracking-widest text-ink uppercase">
-              Field Dispatch
-            </h3>
+            <h3 className="text-sm font-medium text-ink">Field Dispatch</h3>
             <p className="mt-4 font-text text-sm text-ink-soft">
               Quiet seasonal dispatches, natural dye essays, and early access to small batches.
             </p>
@@ -163,10 +151,10 @@ export function Footer() {
 
         {/* Bottom Bar */}
         <div className="mt-16 flex flex-col items-center justify-between gap-4 border-t border-river/20 pt-8 sm:flex-row">
-          <p className="font-mono text-xs text-ink-faint">
-            &copy; 2026 MOSSEN STUDIOS LTD. ALL RIGHTS RESERVED.
+          <p className="text-xs text-ink-faint">
+            &copy; 2026 Mossen Studios Ltd. All rights reserved.
           </p>
-          <div className="flex items-center gap-6 font-mono text-xs text-ink-soft">
+          <div className="flex items-center gap-6 text-xs text-ink-soft tabular-nums">
             <Link href="/privacy" className="hover:text-ink">
               Privacy
             </Link>

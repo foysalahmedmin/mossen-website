@@ -132,7 +132,7 @@ export function ProductDetailView({
     : []
 
   return (
-    <div className="page-container space-y-16 pb-16 md:space-y-24">
+    <div className="page-container space-y-20 pt-6 pb-20 md:space-y-28 md:pt-8">
       {/* Breadcrumb Navigation */}
       <nav aria-label="Breadcrumb" className="font-serif text-xs text-ink-soft">
         <ol className="flex items-center gap-2">
@@ -159,16 +159,14 @@ export function ProductDetailView({
       </nav>
 
       {/* Main Two-Column PDP Section */}
-      <div className="grid grid-cols-1 items-start gap-8 lg:grid-cols-12 lg:gap-14">
+      <div className="grid grid-cols-1 items-start gap-8 lg:grid-cols-12 lg:gap-16">
         {/* Left Column: Gallery */}
-        <div className="sticky top-24 lg:col-span-7">
-          <div className="border-border rounded-[36px] border bg-surface p-4 shadow-sm">
-            <Gallery media={product.media} labels={galleryLabels} />
-          </div>
+        <div className="lg:sticky lg:top-24 lg:col-span-7">
+          <Gallery media={product.media} labels={galleryLabels} />
         </div>
 
         {/* Right Column: Product Info & Actions */}
-        <div className="space-y-6 lg:col-span-5">
+        <div className="space-y-7 lg:col-span-5">
           {/* Badges & Subcategory */}
           <div className="flex flex-wrap items-center gap-2">
             <span className="font-serif text-xs text-brand">{product.subcategory}</span>
@@ -176,7 +174,7 @@ export function ProductDetailView({
               <span
                 key={badge}
                 className={cn(
-                  'rounded-full px-3 py-0.5 font-serif text-[11px] tracking-wide',
+                  'rounded-md px-3 py-0.5 font-serif text-[11px]',
                   badge === 'sale'
                     ? 'bg-danger text-on-danger'
                     : 'border-border border bg-canvas text-ink',
@@ -188,7 +186,7 @@ export function ProductDetailView({
           </div>
 
           {/* Title */}
-          <h1 className="font-display text-3xl font-extrabold tracking-tight text-ink md:text-4xl">
+          <h1 className="font-display text-3xl leading-tight font-medium tracking-tight text-balance text-ink md:text-5xl">
             {product.name}
           </h1>
 
@@ -200,7 +198,7 @@ export function ProductDetailView({
               currency={defaultMoney.currency}
               locale={defaultMoney.locale}
               labels={priceLabels}
-              className="text-2xl font-bold"
+              className="text-xl font-medium"
             />
 
             {product.rating ? (
@@ -245,17 +243,41 @@ export function ProductDetailView({
                   <div className="flex flex-wrap gap-2">
                     {optGroup.values.map((val) => {
                       const isSelected = currentValue === val.value
-
+                      if (optGroup.kind === 'color' && val.swatch) {
+                        return (
+                          <button
+                            key={val.value}
+                            type="button"
+                            aria-label={val.value}
+                            aria-pressed={isSelected}
+                            title={val.value}
+                            onClick={() => handleOptionChange(optGroup.key, val.value)}
+                            className={cn(
+                              'flex h-9 w-9 items-center justify-center rounded-[50%] border transition-all focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus',
+                              isSelected
+                                ? 'border-ink ring-1 ring-ink ring-offset-2'
+                                : 'border-ink/25',
+                            )}
+                          >
+                            <span
+                              aria-hidden="true"
+                              className="h-full w-full rounded-[50%]"
+                              style={{ backgroundColor: val.swatch }}
+                            />
+                          </button>
+                        )
+                      }
                       return (
                         <button
                           key={val.value}
                           type="button"
+                          aria-pressed={isSelected}
                           onClick={() => handleOptionChange(optGroup.key, val.value)}
                           className={cn(
-                            'h-10 min-w-10 rounded-full border px-4 font-serif text-xs transition-all duration-200 focus-visible:outline-2 focus-visible:outline-focus',
+                            'h-11 min-w-12 rounded-sm border px-4 text-sm tabular-nums transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus',
                             isSelected
-                              ? 'scale-102 border-brand bg-brand text-on-brand shadow-sm'
-                              : 'border-border bg-canvas text-ink hover:border-brand',
+                              ? 'border-ink bg-ink text-on-brand'
+                              : 'border-ink/20 text-ink hover:border-ink',
                           )}
                         >
                           {val.value}
@@ -274,7 +296,7 @@ export function ProductDetailView({
               <label htmlFor="pdp-quantity" className="font-serif text-xs font-semibold text-ink">
                 Quantity:
               </label>
-              <div className="border-border flex items-center rounded-full border bg-surface p-1">
+              <div className="border-border flex items-center rounded-md border bg-surface p-1">
                 <button
                   type="button"
                   disabled={quantity <= 1}
@@ -283,7 +305,7 @@ export function ProductDetailView({
                 >
                   -
                 </button>
-                <span className="w-8 text-center font-serif text-xs font-bold text-ink">
+                <span className="w-8 text-center font-serif text-xs font-semibold text-ink">
                   {quantity}
                 </span>
                 <button
@@ -298,13 +320,13 @@ export function ProductDetailView({
             </div>
 
             {/* Action Buttons Row */}
-            <div className="flex flex-wrap items-center gap-3 pt-2">
+            <div className="flex flex-wrap items-center gap-3 pt-2 [&>:first-child]:basis-full">
               <Button
                 variant="primary"
                 size="lg"
                 disabled={isOutOfStock}
                 onClick={handleAddToBasket}
-                className="flex-1 rounded-full font-serif text-sm shadow-sm"
+                className="flex-1 rounded-md font-serif text-sm"
               >
                 {justAdded ? (
                   <span className="flex items-center justify-center gap-2">
@@ -322,7 +344,7 @@ export function ProductDetailView({
                 product={product}
                 variantId={selectedVariant.id}
                 source="pdp"
-                className="border-border rounded-full border bg-surface px-5 py-3 font-serif text-xs shadow-sm transition hover:scale-102"
+                className="border-border rounded-md border bg-surface px-5 py-3 font-serif text-xs transition hover:scale-102"
               />
 
               {/* Wishlist Button */}
@@ -353,7 +375,7 @@ export function ProductDetailView({
           </div>
 
           {/* Tabs Section */}
-          <div className="border-border space-y-4 rounded-[28px] border bg-surface p-6">
+          <div className="border-border space-y-4 rounded-md border bg-surface p-6">
             <div className="border-border flex gap-4 border-b pb-2">
               {(['details', 'materials', 'shipping'] as const).map((tab) => (
                 <button
@@ -420,13 +442,13 @@ export function ProductDetailView({
       >
         <h2
           id="reviews-heading"
-          className="font-display text-2xl font-bold tracking-tight text-ink md:text-3xl"
+          className="font-display text-2xl font-medium tracking-tight text-ink md:text-3xl"
         >
           Quiet Notes from Wearers
         </h2>
 
         <div className="grid grid-cols-1 items-start gap-8 lg:grid-cols-12">
-          <div className="border-border sticky top-24 rounded-[28px] border bg-surface p-6 lg:col-span-5">
+          <div className="lg:sticky lg:top-24 lg:col-span-5">
             <ReviewSummary
               rating={product.rating ?? { average: 5, count: reviews.length }}
               distribution={distribution}
@@ -443,11 +465,11 @@ export function ProductDetailView({
             {reviews.map((rev) => (
               <div
                 key={rev.id}
-                className="border-border space-y-2.5 rounded-[24px] border bg-surface p-5"
+                className="border-border space-y-2.5 rounded-md border bg-surface p-5"
               >
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <span className="font-serif text-xs font-bold text-ink">{rev.author}</span>
+                    <span className="font-serif text-xs font-semibold text-ink">{rev.author}</span>
                     {rev.verified ? (
                       <span className="inline-flex items-center gap-1 font-serif text-[10px] text-brand">
                         <Leaf size={10} /> Verified Wearer
@@ -474,7 +496,7 @@ export function ProductDetailView({
                   ))}
                 </div>
 
-                <h3 className="font-display text-sm font-bold text-ink">{rev.title}</h3>
+                <h3 className="font-display text-sm font-medium text-ink">{rev.title}</h3>
                 <p className="font-text text-xs leading-relaxed text-ink-soft">{rev.body}</p>
               </div>
             ))}
@@ -492,7 +514,7 @@ export function ProductDetailView({
             <div>
               <h2
                 id="related-heading"
-                className="font-display text-2xl font-bold tracking-tight text-ink md:text-3xl"
+                className="font-display text-2xl font-medium tracking-tight text-ink md:text-3xl"
               >
                 Harmonious Pieces
               </h2>
@@ -521,7 +543,7 @@ export function ProductDetailView({
         <section aria-labelledby="recent-heading" className="border-border space-y-8 border-t pt-8">
           <h2
             id="recent-heading"
-            className="font-display text-2xl font-bold tracking-tight text-ink md:text-3xl"
+            className="font-display text-2xl font-medium tracking-tight text-ink md:text-3xl"
           >
             Recently Contemplated
           </h2>

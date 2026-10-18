@@ -86,7 +86,7 @@ export function OrganicSearchSheet() {
         if (e.target === e.currentTarget) handleClose()
       }}
     >
-      <div className="pebble w-full max-w-3xl border border-border-strong/30 bg-surface/98 p-6 shadow-2xl sm:p-8">
+      <div className="pebble w-full max-w-3xl border border-border-strong/30 bg-surface/98 p-6 sm:p-8">
         {/* Search Input Bar */}
         <div className="flex items-center gap-4 border-b border-river/30 pb-4">
           <MagnifyingGlass size={24} className="shrink-0 text-brand" aria-hidden="true" />
@@ -125,7 +125,7 @@ export function OrganicSearchSheet() {
             <div>
               {recentSearches.length > 0 ? (
                 <div>
-                  <div className="flex items-center justify-between pb-2 font-mono text-xs tracking-wider text-ink-soft uppercase">
+                  <div className="flex items-center justify-between pb-2 text-xs text-ink-soft tabular-nums">
                     <span>Recent Searches</span>
                     <button
                       type="button"
@@ -159,8 +159,8 @@ export function OrganicSearchSheet() {
               )}
             </div>
           ) : isSearching ? (
-            <div className="py-12 text-center font-mono text-xs tracking-wider text-ink-soft">
-              SEARCHING ARCHIVE...
+            <div className="py-12 text-center text-xs text-ink-soft tabular-nums">
+              Searching archive...
             </div>
           ) : displayedResults.length === 0 ? (
             <div className="py-12 text-center font-text text-sm text-ink-soft">
@@ -190,8 +190,8 @@ export function OrganicSearchSheet() {
                     <p className="truncate font-display text-sm font-medium text-ink transition-colors group-hover:text-brand">
                       {product.name}
                     </p>
-                    <p className="font-mono text-xs text-ink-soft uppercase">{product.category}</p>
-                    <div className="mt-1 font-mono text-xs font-semibold text-brand">
+                    <p className="text-xs text-ink-soft tabular-nums">{product.category}</p>
+                    <div className="mt-1 text-xs font-medium text-brand tabular-nums">
                       {formatMoney(product.price, MONEY)}
                     </div>
                   </div>

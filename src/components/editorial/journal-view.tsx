@@ -43,7 +43,7 @@ export function JournalView({ posts }: { posts: JournalPost[] }) {
     <div className="mx-auto max-w-6xl px-4 py-12 md:py-16">
       {/* Header */}
       <div className="mb-12 text-center md:text-left">
-        <span className="inline-flex items-center gap-1.5 rounded-full bg-brand/10 px-3 py-1 font-mono text-xs font-semibold tracking-wider text-brand uppercase">
+        <span className="inline-flex items-center gap-1.5 rounded-md bg-brand/10 px-3 py-1 text-xs font-semibold text-brand tabular-nums">
           <Sparkle size={12} />
           Botanical Essays & Fiber Wisdom
         </span>
@@ -58,7 +58,7 @@ export function JournalView({ posts }: { posts: JournalPost[] }) {
 
       {/* Featured Hero Article */}
       {featured && (
-        <article className="mb-16 overflow-hidden rounded-[32px] border border-stone-200/80 bg-[#fbf9f5] shadow-sm transition hover:shadow-md">
+        <article className="mb-16 overflow-hidden rounded-md border border-stone-200/80 bg-[#fbf9f5] transition">
           <div className="grid md:grid-cols-2">
             <div className="relative aspect-[4/3] overflow-hidden bg-stone-100 md:aspect-auto">
               <Image
@@ -72,7 +72,7 @@ export function JournalView({ posts }: { posts: JournalPost[] }) {
             </div>
             <div className="flex flex-col justify-between p-8 md:p-12">
               <div>
-                <div className="flex items-center gap-4 font-mono text-xs text-ink-faint uppercase">
+                <div className="flex items-center gap-4 text-xs text-ink-faint tabular-nums">
                   <time dateTime={featured.publishedAt}>
                     {new Date(featured.publishedAt).toLocaleDateString('en-US', {
                       month: 'long',
@@ -119,12 +119,12 @@ export function JournalView({ posts }: { posts: JournalPost[] }) {
         {rest.map((post) => (
           <article
             key={post.slug}
-            className="flex flex-col justify-between overflow-hidden rounded-[28px] border border-stone-200/70 bg-[#fcfbf7] p-5 shadow-sm transition hover:-translate-y-1 hover:shadow-md"
+            className="flex flex-col justify-between overflow-hidden rounded-md border border-stone-200/70 bg-[#fcfbf7] p-5 transition hover:-translate-y-1"
           >
             <div>
               <Link
                 href={routes.journalPost(post.slug)}
-                className="relative mb-4 block aspect-[16/10] overflow-hidden rounded-[20px] bg-stone-100"
+                className="relative mb-4 block aspect-[16/10] overflow-hidden rounded-md bg-stone-100"
               >
                 <Image
                   src={post.cover.src}
@@ -135,7 +135,7 @@ export function JournalView({ posts }: { posts: JournalPost[] }) {
                 />
               </Link>
 
-              <div className="flex items-center gap-2 font-mono text-xs text-ink-faint">
+              <div className="flex items-center gap-2 text-xs text-ink-faint tabular-nums">
                 <time dateTime={post.publishedAt}>
                   {new Date(post.publishedAt).toLocaleDateString('en-US', {
                     month: 'short',

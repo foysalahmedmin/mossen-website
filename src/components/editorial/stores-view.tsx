@@ -11,7 +11,7 @@ export function StoresView({ stores = [] }: { stores: Store[] }) {
     <div className="mx-auto max-w-6xl px-4 py-12 md:py-16">
       {/* Header */}
       <div className="mb-12 text-center">
-        <span className="inline-flex items-center gap-1.5 rounded-full bg-brand/10 px-3 py-1 font-mono text-xs font-semibold tracking-wider text-brand uppercase">
+        <span className="inline-flex items-center gap-1.5 rounded-md bg-brand/10 px-3 py-1 text-xs font-semibold text-brand tabular-nums">
           <Sparkle size={12} />
           Botanical Ateliers & Sanctuaries
         </span>
@@ -29,21 +29,19 @@ export function StoresView({ stores = [] }: { stores: Store[] }) {
         {stores.map((store) => (
           <div
             key={store.id}
-            className="flex flex-col justify-between overflow-hidden rounded-[32px] border border-stone-200/80 bg-[#fbf9f5] p-8 shadow-sm transition hover:-translate-y-1 hover:shadow-md"
+            className="flex flex-col justify-between overflow-hidden rounded-md border border-stone-200/80 bg-[#fbf9f5] p-8 transition hover:-translate-y-1"
           >
             <div>
               <div className="flex items-center justify-between">
-                <span className="font-mono text-xs font-semibold tracking-wider text-brand uppercase">
-                  {store.city}
-                </span>
-                <span className="font-mono text-xs text-ink-faint">{store.country}</span>
+                <span className="text-xs font-semibold text-brand tabular-nums">{store.city}</span>
+                <span className="text-xs text-ink-faint tabular-nums">{store.country}</span>
               </div>
 
               <h2 className="mt-3 font-display text-2xl font-normal text-ink">{store.name}</h2>
 
               <div className="mt-6 space-y-4 font-text text-sm">
                 <div>
-                  <span className="block font-mono text-xs text-ink-faint uppercase">Address</span>
+                  <span className="block text-xs text-ink-faint tabular-nums">Address</span>
                   <p className="mt-1 font-medium text-ink">{store.address}</p>
                   <p className="text-ink-soft">
                     {store.city}, {store.country}
@@ -51,16 +49,12 @@ export function StoresView({ stores = [] }: { stores: Store[] }) {
                 </div>
 
                 <div>
-                  <span className="block font-mono text-xs text-ink-faint uppercase">
-                    Telephone
-                  </span>
+                  <span className="block text-xs text-ink-faint tabular-nums">Telephone</span>
                   <p className="mt-1 text-ink">{store.phone}</p>
                 </div>
 
                 <div>
-                  <span className="block font-mono text-xs text-ink-faint uppercase">
-                    Sanctuary Hours
-                  </span>
+                  <span className="block text-xs text-ink-faint tabular-nums">Sanctuary Hours</span>
                   <ul className="mt-1 space-y-1 text-ink-soft">
                     {store.hours.map((line, idx) => (
                       <li key={idx} className="text-xs leading-relaxed">
@@ -85,7 +79,7 @@ export function StoresView({ stores = [] }: { stores: Store[] }) {
       </div>
 
       {/* Tea Consultation Banner */}
-      <div className="mt-16 rounded-[32px] border border-stone-200/80 bg-[#fcfbf7] p-8 text-center md:flex md:items-center md:justify-between md:text-left">
+      <div className="mt-16 rounded-md border border-stone-200/80 bg-[#fcfbf7] p-8 text-center md:flex md:items-center md:justify-between md:text-left">
         <div>
           <h3 className="font-display text-xl font-normal text-ink">Remote Fiber Consultations</h3>
           <p className="mt-1 font-text text-sm text-ink-soft">
