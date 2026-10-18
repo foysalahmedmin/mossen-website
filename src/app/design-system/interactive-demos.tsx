@@ -17,9 +17,7 @@ export function SelectionControlsDemo() {
     <div className="space-y-8">
       {/* 54px Pebble Option Picker */}
       <div className="space-y-3">
-        <h4 className="font-mono text-xs font-semibold tracking-wider text-ink-soft uppercase">
-          Option Picker (54px Pebbles)
-        </h4>
+        <h4 className="text-xs text-ink-soft">Option keys</h4>
         <OptionPicker
           label="Size selection"
           value={size}
@@ -36,9 +34,7 @@ export function SelectionControlsDemo() {
 
       {/* Colour Swatches */}
       <div className="space-y-3">
-        <h4 className="font-mono text-xs font-semibold tracking-wider text-ink-soft uppercase">
-          Colour Swatches (Pebble Chips)
-        </h4>
+        <h4 className="text-xs text-ink-soft">Colour swatches</h4>
         <OptionPicker
           label="Colour selection"
           value={color}
@@ -54,9 +50,7 @@ export function SelectionControlsDemo() {
 
       {/* Quantity Stepper */}
       <div className="space-y-3">
-        <h4 className="font-mono text-xs font-semibold tracking-wider text-ink-soft uppercase">
-          Quantity Stepper (Pebble Buttons & Mono Readout)
-        </h4>
+        <h4 className="text-xs text-ink-soft">Quantity stepper</h4>
         <QuantityStepper
           value={qty}
           onChange={setQty}
@@ -72,20 +66,16 @@ export function SelectionControlsDemo() {
 
       {/* Switches & Checkboxes */}
       <div className="grid grid-cols-1 gap-6 pt-2 sm:grid-cols-2">
-        <div className="soft-panel flex items-center justify-between rounded-[28px] bg-surface p-5">
+        <div className="soft-panel flex items-center justify-between bg-surface p-5">
           <div>
-            <span className="block font-display text-base font-medium text-ink">
-              Organic Toggle
-            </span>
-            <span className="font-mono text-xs text-ink-soft">
-              {switchOn ? 'Active' : 'Inactive'}
-            </span>
+            <span className="block font-display text-base font-medium text-ink">Toggle</span>
+            <span className="text-xs text-ink-soft">{switchOn ? 'Active' : 'Inactive'}</span>
           </div>
 
           <button
             type="button"
             role="switch"
-            aria-label="Organic switch"
+            aria-label="Switch"
             aria-checked={switchOn}
             onClick={() => setSwitchOn(!switchOn)}
             className="relative flex h-7 w-14 cursor-pointer items-center rounded-full border border-border-strong/40 bg-canvas/60 p-1 transition-colors focus-visible:outline-2 focus-visible:outline-focus"
@@ -98,14 +88,10 @@ export function SelectionControlsDemo() {
           </button>
         </div>
 
-        <div className="soft-panel flex items-center justify-between rounded-[28px] bg-surface p-5">
+        <div className="soft-panel flex items-center justify-between bg-surface p-5">
           <div>
-            <span className="block font-display text-base font-medium text-ink">
-              Pebble Checkbox
-            </span>
-            <span className="font-mono text-xs text-ink-soft">
-              {checked ? 'Selected' : 'Unselected'}
-            </span>
+            <span className="block font-display text-base font-medium text-ink">Checkbox</span>
+            <span className="text-xs text-ink-soft">{checked ? 'Selected' : 'Unselected'}</span>
           </div>
 
           <label className="pebble flex h-8 w-8 cursor-pointer items-center justify-center border border-border-strong/40 bg-canvas/60 transition-all">
@@ -116,7 +102,7 @@ export function SelectionControlsDemo() {
               className="sr-only"
             />
             {checked ? <Check size={16} className="text-brand" aria-hidden="true" /> : null}
-            <span className="sr-only">Toggle organic checkbox</span>
+            <span className="sr-only">Checkbox</span>
           </label>
         </div>
       </div>
@@ -135,14 +121,14 @@ export function OverlayDemos() {
         <Button onClick={() => setDialogOpen(true)}>Open dialog</Button>
 
         <Button variant="secondary" onClick={() => setMenuOpen(true)}>
-          Open unrolling menu
+          Open basket
         </Button>
 
         <RefineSheet triggerLabel="Open refine drawer">
           <div className="space-y-4 py-4">
-            <h4 className="font-display text-lg font-medium text-ink">Refine Collection</h4>
+            <h4 className="font-display text-lg font-medium text-ink">Filters</h4>
             <p className="font-text text-sm text-ink-soft">
-              Calm drawer unrolling from the bottom with soft rounded corners.
+              A calm drawer that opens from the bottom.
             </p>
           </div>
         </RefineSheet>
@@ -152,7 +138,7 @@ export function OverlayDemos() {
         open={dialogOpen}
         onOpenChange={setDialogOpen}
         title="Example dialog"
-        description="A calm modal panel framed by birch surfaces and soft fog scrim."
+        description="A calm panel on a fog scrim."
         closeLabel="Close dialog"
       >
         <div className="space-y-4 pt-2">
@@ -161,7 +147,7 @@ export function OverlayDemos() {
             pebble close button. Escape returns focus cleanly.
           </p>
           <div className="flex justify-end pt-4">
-            <Button onClick={() => setDialogOpen(false)}>Acknowledge</Button>
+            <Button onClick={() => setDialogOpen(false)}>OK</Button>
           </div>
         </div>
       </Dialog>
@@ -169,27 +155,25 @@ export function OverlayDemos() {
       <MenuSheet open={menuOpen} onOpenChange={setMenuOpen} />
 
       {/* Accordion specimen */}
-      <div className="soft-panel rounded-[32px] bg-surface p-6 sm:p-8">
-        <h4 className="mb-4 font-mono text-xs font-semibold tracking-wider text-ink-soft uppercase">
-          Organic Accordion
-        </h4>
+      <div className="soft-panel bg-surface p-6 sm:p-8">
+        <h4 className="mb-4 text-xs text-ink-soft">Accordion</h4>
         <Accordion
           items={[
             {
               value: 'materials',
-              title: 'Botanical Dyes & Pure Linens',
+              title: 'Plant dyes and pure linen',
               content:
                 'Every fabric is sourced from European flax grown without synthetic pesticides. Dyed using madder root and walnut husks.',
             },
             {
               value: 'care',
-              title: 'Gentle Garment Care',
+              title: 'Garment care',
               content:
                 'Wash gently in cold water with plant-based soaps. Air dry away from harsh direct midday light to preserve natural plant pigments.',
             },
             {
               value: 'provenance',
-              title: 'Ethical Weaving Sanctuaries',
+              title: 'Where it is woven',
               content:
                 'Cut and tailored in small family ateliers in northern Portugal where artisans are compensated fairly.',
             },
@@ -203,23 +187,21 @@ export function OverlayDemos() {
 export function FeedbackDemos() {
   return (
     <div className="space-y-8">
-      {/* Pebble Badges */}
+      {/* Badges */}
       <div className="space-y-3">
-        <h4 className="font-mono text-xs font-semibold tracking-wider text-ink-soft uppercase">
-          Pebble Badges
-        </h4>
+        <h4 className="text-xs text-ink-soft">Badges</h4>
         <div className="flex flex-wrap items-center gap-3">
-          <span className="pebble border border-border-strong/30 bg-surface px-3 py-1 font-mono text-[10px] font-semibold tracking-wider text-ink uppercase">
+          <span className="pebble border border-border-strong/30 bg-surface px-3 py-1 font-mono text-[10px] font-medium text-ink">
             New
           </span>
-          <span className="pebble border border-border-strong/30 bg-surface px-3 py-1 font-mono text-[10px] font-semibold tracking-wider text-ink uppercase">
+          <span className="pebble border border-border-strong/30 bg-surface px-3 py-1 font-mono text-[10px] font-medium text-ink">
             Bestseller
           </span>
-          <span className="pebble border border-border-strong/30 bg-surface px-3 py-1 font-mono text-[10px] font-semibold tracking-wider text-ink uppercase">
+          <span className="pebble border border-border-strong/30 bg-surface px-3 py-1 font-mono text-[10px] font-medium text-ink">
             Limited
           </span>
           {/* Sale: rowan text on birch (not white on rowan) */}
-          <span className="pebble border border-border-strong/30 bg-surface px-3 py-1 font-mono text-[10px] font-semibold tracking-wider text-danger uppercase">
+          <span className="pebble border border-border-strong/30 bg-surface px-3 py-1 font-mono text-[10px] font-medium text-danger">
             Sale
           </span>
         </div>
@@ -227,20 +209,16 @@ export function FeedbackDemos() {
 
       {/* Toast Specimen */}
       <div className="space-y-3">
-        <h4 className="font-mono text-xs font-semibold tracking-wider text-ink-soft uppercase">
-          Toast Notification (Birch Pebble)
-        </h4>
+        <h4 className="text-xs text-ink-soft">Toast</h4>
         <div className="pebble float-sm inline-flex items-center gap-3 border border-border-strong/30 bg-surface px-5 py-3 text-ink">
           <Leaf size={18} className="text-brand" aria-hidden="true" />
-          <span className="font-text text-sm">Garment added to your unrolling basket</span>
+          <span className="font-text text-sm">Added to your basket</span>
         </div>
       </div>
 
       {/* Skeletons with 2.4s breathing opacity */}
       <div className="space-y-3">
-        <h4 className="font-mono text-xs font-semibold tracking-wider text-ink-soft uppercase">
-          Skeletons (Fog Pebble with Slow 2.4s Breathing Opacity)
-        </h4>
+        <h4 className="text-xs text-ink-soft">Skeleton, breathing over 2.4s</h4>
         <div className="flex items-center gap-4">
           <div className="pebble h-20 w-20 animate-pulse bg-river/20" />
           <div className="space-y-2">
@@ -261,39 +239,35 @@ export function MotionDemos() {
     <div className="space-y-8">
       <div className="flex flex-wrap items-center gap-4">
         <Button variant="secondary" onClick={() => setBloomKey((k) => k + 1)}>
-          Replay Bloom Animation
+          Replay bloom
         </Button>
       </div>
 
       <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
         {/* Bloom */}
-        <div className="soft-panel space-y-3 rounded-[28px] bg-surface p-5">
-          <h4 className="font-mono text-xs font-semibold tracking-wider text-ink-soft uppercase">
-            Image Bloom (0.96 → 1, 800ms)
-          </h4>
-          <Bloom key={bloomKey} className="aspect-square w-full rounded-[24px] bg-canvas">
+        <div className="soft-panel space-y-3 bg-surface p-5">
+          <h4 className="text-xs text-ink-soft">Bloom: 0.96 to 1 over 800ms</h4>
+          <Bloom key={bloomKey} className="aspect-square w-full bg-canvas">
             <div className="flex h-full w-full items-center justify-center font-display text-sm font-medium text-ink">
-              Blooming Container
+              Blooming picture
             </div>
           </Bloom>
         </div>
 
         {/* Swaying Leaf */}
-        <div className="soft-panel space-y-3 rounded-[28px] bg-surface p-5">
-          <h4 className="font-mono text-xs font-semibold tracking-wider text-ink-soft uppercase">
-            Idle Leaf Sway (±2° on 8s Loop)
-          </h4>
-          <div className="flex aspect-square w-full items-center justify-center rounded-[24px] bg-canvas/60">
+        <div className="soft-panel space-y-3 bg-surface p-5">
+          <h4 className="text-xs text-ink-soft">Leaf sway: ±2° over 8s</h4>
+          <div className="flex aspect-square w-full items-center justify-center bg-canvas/60">
             <Leaf size={48} className="sway text-brand" aria-hidden="true" />
           </div>
         </div>
 
         {/* Vine Growth */}
-        <div className="soft-panel space-y-3 rounded-[28px] bg-surface p-5">
-          <h4 className="font-mono text-xs font-semibold tracking-wider text-ink-soft uppercase">
+        <div className="soft-panel space-y-3 bg-surface p-5">
+          <h4 className="text-xs text-ink-soft">
             Growing Vine ({Math.round(vineProgress * 100)}% progress)
           </h4>
-          <div className="flex aspect-square w-full items-center justify-center rounded-[24px] bg-canvas/60">
+          <div className="flex aspect-square w-full items-center justify-center bg-canvas/60">
             <Vine segments={3} progress={vineProgress} />
           </div>
         </div>

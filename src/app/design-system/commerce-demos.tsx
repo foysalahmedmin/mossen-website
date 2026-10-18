@@ -19,11 +19,11 @@ const cardLabels = {
 const demoProduct: Product = {
   id: 'prod-ds-1',
   slug: 'longline-coat',
-  name: 'Longline Coat',
+  name: 'Raw Wool Duffle Coat',
   category: 'clothing',
   subcategory: 'outerwear',
-  summary: 'Architectural tailored wool coat with structured shoulders.',
-  description: 'Precision-cut industrial longline coat crafted from premium heavy wool.',
+  summary: 'A tailored wool coat with soft shoulders.',
+  description: 'A longline coat cut from heavy wool.',
   details: [
     'Structured silhouette with sharp notch lapels',
     'Concealed horn button placket',
@@ -35,14 +35,14 @@ const demoProduct: Product = {
   compareAtPrice: 52000,
   media: [
     {
-      src: '/images/placeholder.svg',
-      alt: 'Longline Coat, front',
+      src: '/images/products/mossen/p-201-front.webp',
+      alt: 'Raw Wool Duffle Coat, front',
       width: 1200,
       height: 1500,
     },
     {
-      src: '/images/placeholder.svg',
-      alt: 'Longline Coat, back',
+      src: '/images/products/mossen/p-201-front.webp',
+      alt: 'Raw Wool Duffle Coat, back',
       width: 1200,
       height: 1500,
     },
@@ -98,7 +98,7 @@ const outOfStockLine: QuoteLine = {
   slug: demoProduct.slug,
   category: demoProduct.category,
   subcategory: demoProduct.subcategory,
-  name: 'Merino Wool Knit',
+  name: 'Gotland Fleece Cable Sweater',
   image: demoProduct.media[0]!,
   options: { Color: 'Sand', Size: 'L' },
   quantity: 0,
@@ -115,9 +115,9 @@ export function CommerceDemos() {
     <div className="space-y-12">
       {/* Product Cards Grid */}
       <div className="space-y-4">
-        <h3 className="font-display text-xl font-medium text-ink">Product Card (Mask as Card)</h3>
+        <h3 className="font-display text-xl font-medium text-ink">Product card</h3>
         <p className="font-text text-sm text-ink-soft">
-          No outer container box. The organic shape mask is the card, typography sits below.
+          The picture runs edge to edge; the name and price sit below it.
         </p>
 
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
@@ -135,7 +135,7 @@ export function CommerceDemos() {
 
       {/* Cart Lines */}
       <div className="space-y-4">
-        <h3 className="font-display text-xl font-medium text-ink">Cart Lines (Soft Panel List)</h3>
+        <h3 className="font-display text-xl font-medium text-ink">Cart lines</h3>
         <ul role="list" className="space-y-4">
           <CartLine
             line={sampleQuoteLine}
@@ -177,7 +177,7 @@ export function CommerceDemos() {
 
       {/* Filter Panel */}
       <div className="space-y-4">
-        <h3 className="font-display text-xl font-medium text-ink">Refine Filter Panel</h3>
+        <h3 className="font-display text-xl font-medium text-ink">Filter panel</h3>
         <FilterPanel
           facets={{
             subcategories: [
@@ -199,7 +199,7 @@ export function CommerceDemos() {
           onChange={(patch) => setFilterQuery((prev) => ({ ...prev, ...patch }))}
           onClear={() => setFilterQuery(DEFAULT_QUERY)}
           labels={{
-            title: 'Refine Pieces',
+            title: 'Filters',
             subcategory: 'Category',
             size: 'Size',
             colour: 'Colour',
@@ -214,7 +214,7 @@ export function CommerceDemos() {
 
       {/* Arch Gallery */}
       <div className="space-y-4">
-        <h3 className="font-display text-xl font-medium text-ink">Arch Gallery (Pebble Nav)</h3>
+        <h3 className="font-display text-xl font-medium text-ink">Gallery</h3>
         <div className="max-w-md">
           <Gallery
             media={demoProduct.media}
@@ -230,15 +230,15 @@ export function CommerceDemos() {
 
       {/* Review Summary */}
       <div className="space-y-4">
-        <h3 className="font-display text-xl font-medium text-ink">Review Summary (Moss Fill)</h3>
+        <h3 className="font-display text-xl font-medium text-ink">Review summary</h3>
         <ReviewSummary
           rating={demoProduct.rating}
           distribution={{ 5: 18, 4: 4, 3: 2, 2: 0, 1: 0 }}
           labels={{
-            heading: 'Atelier Feedback',
-            count: (cnt) => `Based on ${cnt} artisan reviews`,
+            heading: 'Customer reviews',
+            count: (cnt) => `${cnt} reviews`,
             outOf: (avg) => `${avg} / 5`,
-            stars: (st, cnt) => `${st} stars: ${cnt} patrons`,
+            stars: (st, cnt) => `${st} stars: ${cnt} reviews`,
           }}
         />
       </div>
@@ -248,12 +248,12 @@ export function CommerceDemos() {
 
 export function MirrorTryDemo() {
   return (
-    <div className="soft-panel space-y-4 rounded-[32px] bg-surface p-8">
+    <div className="soft-panel space-y-4 bg-surface p-8">
       <div className="max-w-xl space-y-2">
-        <h3 className="font-display text-xl font-medium text-ink">The Window (Mirror Try)</h3>
+        <h3 className="font-display text-xl font-medium text-ink">Mirror Try trigger</h3>
         <p className="font-text text-sm leading-relaxed text-ink-soft">
-          In Phase 2, the trigger button is themed as an organic lichen pebble chip with moss-deep
-          text, lifting 2px on hover. The full arch window frame lands in Phase 7.
+          The trigger a store places on a card or a product page, themed as a small lichen chip with
+          moss text.
         </p>
       </div>
 
